@@ -29,10 +29,12 @@ public class LoginController implements ActionListener {
     private LoginView vista;
     private UsuarioDao dao;
     private ViewPrincipal prin;
+    Usuario usu;
 
-    public LoginController(LoginView vista,ViewPrincipal principal) {
+    public LoginController(LoginView vista,ViewPrincipal principal,Usuario usuario) {
         
         this.prin = principal;
+        this.usu = usuario;
 
         this.vista = vista;
         this.dao = new UsuarioDao();
@@ -48,18 +50,26 @@ public class LoginController implements ActionListener {
 
             String correo = vista.getTxCorreo().getText();
             String contraseña = vista.getTxContraseña().getText();
-            Usuario usuario = dao.iniciarSesion(correo, contraseña);
+            
+            Usuario us = dao.iniciarSesion(correo, contraseña);
 
-            if(usuario != null) {
-
+            if(us != null) {
+                
+                usu.setApellido(us.getApellido());
+                usu.setContraseña(us.getContraseña());
+                usu.setCorreo(us.getCorreo());
+                usu.setIdUsuario(us.getIdUsuario());
+                usu.setNombre(us.getNombre());
+                usu.setRol(us.getRol());
+                
                 JOptionPane.showMessageDialog(
                         null,
-                        "Bienvenido " + usuario.getNombre());
+                        "Bienvenido " + us.getNombre());
                 vista.setVisible(false);
                 prin.setVisible(true);
                 prin.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-                if(usuario.getRol().equals("ADMINISTRADOR")) {
+                if(us.getRol().equals("ADMINISTRADOR")) {
 
                     JOptionPane.showMessageDialog(
                             null,

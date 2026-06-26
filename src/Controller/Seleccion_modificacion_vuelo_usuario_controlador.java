@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import Model.Ticket;
 import Model.Ticket_dao;
 import Model.Usuario;
 import View.Seleccion_de_vuelo_usuarioRegistrado_view;
@@ -18,13 +19,15 @@ public class Seleccion_modificacion_vuelo_usuario_controlador {
     
     Seleccion_de_vuelo_usuarioRegistrado_view vista = new Seleccion_de_vuelo_usuarioRegistrado_view();
     Ticket_dao dao = new Ticket_dao();
+    Ticket ticket;
+    Usuario usua;
     Usuario usu = new Usuario();
     
     
-    public Seleccion_modificacion_vuelo_usuario_controlador(Seleccion_de_vuelo_usuarioRegistrado_view vista, Ticket_dao dao, Usuario usu) {
+    public Seleccion_modificacion_vuelo_usuario_controlador(Seleccion_de_vuelo_usuarioRegistrado_view vista, Usuario usu, Ticket ticket) {
         this.vista = vista;
-        this.dao = dao;
-        this.usu = usu;
+        this.usua = usu;
+        this.ticket = ticket;
 
     
     vista.SetVuelos(dao.getTotalVuelos(usu));

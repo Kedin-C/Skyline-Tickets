@@ -29,13 +29,10 @@ public class Ticket_dao {
         con = conectar.getConection();
         ps = con.prepareStatement(sql);
         ps.setInt(1, usuario.getIdUsuario());
+        rs = ps.executeQuery();
         
         if(rs.next())
             r = rs.getInt(1);
-            
-
-           
-                
                  } catch (Exception e) {
             
             JOptionPane.showMessageDialog(null, "error en la confirmacion del ticket", e.toString(), JOptionPane.ERROR_MESSAGE);
@@ -57,7 +54,7 @@ public class Ticket_dao {
     }
     
     
-    public List getTotalVuelos(int total,Usuario usuario){
+    public List getTotalVuelosList(int total,Usuario usuario){
         
         List<Ticket> ticket = new ArrayList<Ticket>();
         
@@ -67,12 +64,14 @@ public class Ticket_dao {
         try {
         con = conectar.getConection();
         ps = con.prepareStatement(sql);
+        JOptionPane.showMessageDialog(null, "ID usuario: " + usuario.getIdUsuario());
         ps.setInt(1, usuario.getIdUsuario());
         
+        rs = ps.executeQuery();
         
-        Ticket ticket_res = new Ticket();
+        
         while(rs.next()){
-            for(int i = 0; i < total; i++){
+            Ticket ticket_res = new Ticket();
             
             ticket_res.setId(rs.getInt("id_ticket"));
             ticket_res.setOrigen(rs.getString("origen"));
@@ -81,7 +80,7 @@ public class Ticket_dao {
             ticket.add(ticket_res);
             
         }  
-        }
+        
                 
                  } catch (Exception e) {
             

@@ -24,6 +24,7 @@ public class UsuarioDao {
 
     Conexion conectar = Conexion.getObject();
     Connection con;
+    ResultSet rs;
     
     public boolean registrarUsuario(Usuario usuario){
 
@@ -66,7 +67,8 @@ public class UsuarioDao {
         ps.setString(1, correo);
         ps.setString(2, contraseña);
 
-        ResultSet rs = ps.executeQuery();
+        rs = ps.executeQuery();
+        
 
         if(rs.next()){
 

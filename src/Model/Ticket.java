@@ -53,6 +53,11 @@ public class Ticket {
     public String getDestino(){
         return this.destino;
     }
+    
+    @Override
+    public String toString(){
+    return this.Id + " " + this.tipo_vuelo + " " + this.destino + " " +this.origen;
+    }
 
     
 }

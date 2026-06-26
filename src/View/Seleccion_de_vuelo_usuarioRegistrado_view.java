@@ -15,6 +15,7 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -102,24 +103,24 @@ private String destino_vuelta_ticket5;
 
 
 //ticket 1
-private String text_ticket1_1 = "Ida: "+origen_ida_ticket1+" → "+destino_ida_ticket1;
-private String text_ticket1_2 = "Vuelta: "+origen_vuelta_ticket1+" → "+destino_vuelta_ticket1;
+private String text_ticket1_1;
+private String text_ticket1_2;
 
 //ticket 2
-private String text_ticket2_1 = "Ida: "+origen_ida_ticket2+" → "+destino_ida_ticket2;
-private String text_ticket2_2 = "Vuelta: "+origen_vuelta_ticket2+" → "+destino_vuelta_ticket2;
+private String text_ticket2_1;
+private String text_ticket2_2;
 
 //ticket 3
-private String text_ticket3_1 = "Ida: "+origen_ida_ticket3+" → "+destino_ida_ticket3;
-private String text_ticket3_2 = "Vuelta: "+origen_vuelta_ticket3+" → "+destino_vuelta_ticket3;
+private String text_ticket3_1;
+private String text_ticket3_2;
 
 //ticket 4
-private String text_ticket4_1 = "Ida: "+origen_ida_ticket4+" → "+destino_ida_ticket4;
-private String text_ticket4_2 = "Vuelta: "+origen_vuelta_ticket4+" → "+destino_vuelta_ticket4;
+private String text_ticket4_1;
+private String text_ticket4_2;
 
 //ticket 5
-private String text_ticket5_1 = "Ida: "+origen_ida_ticket5+" → "+destino_ida_ticket5;
-private String text_ticket5_2 = "Vuelta: "+origen_vuelta_ticket5+" → "+destino_vuelta_ticket5;
+private String text_ticket5_1;
+private String text_ticket5_2;
 
 
     public Seleccion_de_vuelo_usuarioRegistrado_view(){
@@ -203,36 +204,36 @@ private String text_ticket5_2 = "Vuelta: "+origen_vuelta_ticket5+" → "+destino
     
     
     //ticket 1 textos
-    tipo = new JLabel(tipo_vuelo_ticket1);
-    vuelo_ida = new JLabel(text_ticket1_1);
-    vuelo_vuelta = new JLabel(text_ticket1_2);
+    tipo = new JLabel();
+    vuelo_ida = new JLabel();
+    vuelo_vuelta = new JLabel();
     select1 = new JButton("Modificar");
     
     //ticket 2 textos
-    tipo2 = new JLabel(tipo_vuelo_ticket2);
-    vuelo_ida2 = new JLabel(text_ticket2_1);
-    vuelo_vuelta2 = new JLabel(text_ticket2_2);
+    tipo2 = new JLabel();
+    vuelo_ida2 = new JLabel();
+    vuelo_vuelta2 = new JLabel();
     select2 = new JButton("Modificar");
     
     
     //ticket 3 textos
-    tipo3 = new JLabel(tipo_vuelo_ticket3);
-    vuelo_ida3 = new JLabel(text_ticket3_1);
-    vuelo_vuelta3 = new JLabel(text_ticket3_2);
+    tipo3 = new JLabel();
+    vuelo_ida3 = new JLabel();
+    vuelo_vuelta3 = new JLabel();
     select3 = new JButton("Modificar");
     
     
     //ticket 4 textos 
-    tipo4 = new JLabel(tipo_vuelo_ticket4);
-    vuelo_ida4 = new JLabel(text_ticket4_1);
-    vuelo_vuelta4 = new JLabel(text_ticket4_2);
+    tipo4 = new JLabel();
+    vuelo_ida4 = new JLabel();
+    vuelo_vuelta4 = new JLabel();
     select4 = new JButton("Modificar");
     
     
     //tickets 5 textos
-    tipo5 = new JLabel(tipo_vuelo_ticket5);
-    vuelo_ida5 = new JLabel(text_ticket5_1);
-    vuelo_vuelta5 = new JLabel(text_ticket5_2);
+    tipo5 = new JLabel();
+    vuelo_ida5 = new JLabel();
+    vuelo_vuelta5 = new JLabel();
     select5 = new JButton("Modificar");
     
     
@@ -242,7 +243,7 @@ private String text_ticket5_2 = "Vuelta: "+origen_vuelta_ticket5+" → "+destino
     vuelo_ida.setForeground(Color.WHITE);
     vuelo_vuelta.setFont(new Font("Arial",Font.BOLD,15));
     vuelo_vuelta.setForeground(Color.WHITE);
-    tipo.setFont(new Font("Arial",Font.BOLD,25));
+    tipo.setFont(new Font("Arial",Font.BOLD,20));
     tipo.setForeground(Color.WHITE);
     
     select1.setPreferredSize(new Dimension(200,30));
@@ -253,7 +254,7 @@ private String text_ticket5_2 = "Vuelta: "+origen_vuelta_ticket5+" → "+destino
     vuelo_ida2.setForeground(Color.WHITE);
     vuelo_vuelta2.setFont(new Font("Arial",Font.BOLD,15));
     vuelo_vuelta2.setForeground(Color.WHITE);
-    tipo2.setFont(new Font("Arial",Font.BOLD,25));
+    tipo2.setFont(new Font("Arial",Font.BOLD,20));
     tipo2.setForeground(Color.WHITE);
     
     select2.setPreferredSize(new Dimension(200,30));
@@ -264,7 +265,7 @@ private String text_ticket5_2 = "Vuelta: "+origen_vuelta_ticket5+" → "+destino
     vuelo_ida3.setForeground(Color.WHITE);
     vuelo_vuelta3.setFont(new Font("Arial",Font.BOLD,15));
     vuelo_vuelta3.setForeground(Color.WHITE);
-    tipo3.setFont(new Font("Arial",Font.BOLD,25));
+    tipo3.setFont(new Font("Arial",Font.BOLD,20));
     tipo3.setForeground(Color.WHITE);
     
     select3.setPreferredSize(new Dimension(200,30));
@@ -275,7 +276,7 @@ private String text_ticket5_2 = "Vuelta: "+origen_vuelta_ticket5+" → "+destino
     vuelo_ida4.setForeground(Color.WHITE);
     vuelo_vuelta4.setFont(new Font("Arial",Font.BOLD,15));
     vuelo_vuelta4.setForeground(Color.WHITE);
-    tipo4.setFont(new Font("Arial",Font.BOLD,25));
+    tipo4.setFont(new Font("Arial",Font.BOLD,20));
     tipo4.setForeground(Color.WHITE);
     
     select4.setPreferredSize(new Dimension(200,30));
@@ -286,7 +287,7 @@ private String text_ticket5_2 = "Vuelta: "+origen_vuelta_ticket5+" → "+destino
     vuelo_ida5.setForeground(Color.WHITE);
     vuelo_vuelta5.setFont(new Font("Arial",Font.BOLD,15));
     vuelo_vuelta5.setForeground(Color.WHITE);
-    tipo5.setFont(new Font("Arial",Font.BOLD,25));
+    tipo5.setFont(new Font("Arial",Font.BOLD,20));
     tipo5.setForeground(Color.WHITE);
     
     select5.setPreferredSize(new Dimension(200,30));
@@ -457,38 +458,110 @@ private String text_ticket5_2 = "Vuelta: "+origen_vuelta_ticket5+" → "+destino
         
         for (int i = 0; i < ticket.size(); i++) {
             
+
             if(i == 0){
             tipo_vuelo_ticket1 = ticket.get(i).getTipo_vuelo();
             origen_ida_ticket1 = ticket.get(i).getOrigen();
             destino_ida_ticket1 = ticket.get(i).getDestino();
-//            origen_vuelta_ticket1 = ticket.get(i).getOrigen_vuelta();
-//            destino_vuelta_ticket1 = ticket.get(i).getDestino_vuelta();
+            origen_vuelta_ticket1 = ticket.get(i).getDestino();
+            destino_vuelta_ticket1 = ticket.get(i).getOrigen();
             }else if(i == 1){
             tipo_vuelo_ticket2 = ticket.get(i).getTipo_vuelo();
             origen_ida_ticket2 = ticket.get(i).getOrigen();
             destino_ida_ticket2 = ticket.get(i).getDestino();
-//            origen_vuelta_ticket2 = ticket.get(i).getOrigen_vuelta();
-//            destino_vuelta_ticket2 = ticket.get(i).getDestino_vuelta();
+            origen_vuelta_ticket2 = ticket.get(i).getDestino();
+            destino_vuelta_ticket2 = ticket.get(i).getOrigen();
             }
             else if(i == 2){
             tipo_vuelo_ticket3 = ticket.get(i).getTipo_vuelo();
             origen_ida_ticket3 = ticket.get(i).getOrigen();
             destino_ida_ticket3 = ticket.get(i).getDestino();
-//            origen_vuelta_ticket3 = ticket.get(i).getOrigen_vuelta();
-//            destino_vuelta_ticket3 = ticket.get(i).getDestino_vuelta();
+            origen_vuelta_ticket3 = ticket.get(i).getDestino();
+            destino_vuelta_ticket3 = ticket.get(i).getOrigen();
             }else if(i == 3){
             tipo_vuelo_ticket4 = ticket.get(i).getTipo_vuelo();
             origen_ida_ticket4 = ticket.get(i).getOrigen();
             destino_ida_ticket4 = ticket.get(i).getDestino();
-//            origen_vuelta_ticket4 = ticket.get(i).getOrigen_vuelta();
-//            destino_vuelta_ticket4 = ticket.get(i).getDestino_vuelta();
+            origen_vuelta_ticket4 = ticket.get(i).getDestino();
+            destino_vuelta_ticket4 = ticket.get(i).getOrigen();
             }else if(i == 4){
             tipo_vuelo_ticket5 = ticket.get(i).getTipo_vuelo();
             origen_ida_ticket5 = ticket.get(i).getOrigen();
             destino_ida_ticket5 = ticket.get(i).getDestino();
-//            origen_vuelta_ticket5 = ticket.get(i).getOrigen_vuelta();
-//            destino_vuelta_ticket5 = ticket.get(i).getDestino_vuelta();
+            origen_vuelta_ticket5 = ticket.get(i).getDestino();
+            destino_vuelta_ticket5 = ticket.get(i).getOrigen();
             }
+            
+            
+text_ticket1_1 = "Ida: "+origen_ida_ticket1+" → "+destino_ida_ticket1;
+text_ticket1_2 = "Vuelta: "+origen_vuelta_ticket1+" → "+destino_vuelta_ticket1;
+
+//ticket 2
+text_ticket2_1 = "Ida: "+origen_ida_ticket2+" → "+destino_ida_ticket2;
+text_ticket2_2 = "Vuelta: "+origen_vuelta_ticket2+" → "+destino_vuelta_ticket2;
+
+//ticket 3
+text_ticket3_1 = "Ida: "+origen_ida_ticket3+" → "+destino_ida_ticket3;
+text_ticket3_2 = "Vuelta: "+origen_vuelta_ticket3+" → "+destino_vuelta_ticket3;
+
+//ticket 4
+text_ticket4_1 = "Ida: "+origen_ida_ticket4+" → "+destino_ida_ticket4;
+text_ticket4_2 = "Vuelta: "+origen_vuelta_ticket4+" → "+destino_vuelta_ticket4;
+
+//ticket 5
+text_ticket5_1 = "Ida: "+origen_ida_ticket5+" → "+destino_ida_ticket5;
+text_ticket5_2 = "Vuelta: "+origen_vuelta_ticket5+" → "+destino_vuelta_ticket5;
+            
+
+if("IDA".equals(tipo_vuelo_ticket1)){
+    tipo.setText(tipo_vuelo_ticket1);
+    vuelo_ida.setText(text_ticket1_1);
+    
+}else{
+    tipo.setText(tipo_vuelo_ticket1);
+    vuelo_ida.setText(text_ticket1_1);
+    vuelo_vuelta.setText(text_ticket1_2);
+}
+
+if("IDA".equals(tipo_vuelo_ticket2)){
+    tipo2.setText(tipo_vuelo_ticket2);
+    vuelo_ida2.setText(text_ticket2_1);
+    
+}else{
+    tipo2.setText(tipo_vuelo_ticket2);
+    vuelo_ida2.setText(text_ticket2_1);
+    vuelo_vuelta2.setText(text_ticket2_2);
+}
+
+if("IDA".equals(tipo_vuelo_ticket3)){
+    tipo3.setText(tipo_vuelo_ticket3);
+    vuelo_ida3.setText(text_ticket3_1);
+    
+}else{
+    tipo3.setText(tipo_vuelo_ticket3);
+    vuelo_ida3.setText(text_ticket3_1);
+    vuelo_vuelta3.setText(text_ticket3_2);
+}
+
+if("IDA".equals(tipo_vuelo_ticket4)){
+    tipo4.setText(tipo_vuelo_ticket4);
+    vuelo_ida4.setText(text_ticket4_1);
+    
+}else{
+    tipo4.setText(tipo_vuelo_ticket4);
+    vuelo_ida4.setText(text_ticket4_1);
+    vuelo_vuelta4.setText(text_ticket4_2);
+}
+
+if("IDA".equals(tipo_vuelo_ticket5)){
+    tipo5.setText(tipo_vuelo_ticket5);
+    vuelo_ida5.setText(text_ticket5_1);
+    
+}else{
+    tipo5.setText(tipo_vuelo_ticket5);
+    vuelo_ida5.setText(text_ticket5_1);
+    vuelo_vuelta5.setText(text_ticket5_2);
+}
             
         }
 
