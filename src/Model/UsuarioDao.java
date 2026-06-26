@@ -55,7 +55,7 @@ public class UsuarioDao {
     
     public Usuario iniciarSesion(String correo, String contraseña){
 
-    String sql = "SELECT idUsuario,correoUsuario,contrasenaUsuario FROM usuarios WHERE correo_usuario = ? AND password_usuario = ?";
+    String sql = "select id_usuario, nombre, apellido,correo,contrasena,rol from usuarios WHERE usuarios.correo = ? AND usuarios.contrasena= ?";
 
     try{
 
@@ -72,12 +72,12 @@ public class UsuarioDao {
 
             Usuario usuario = new Usuario();
 
-            usuario.setIdUsuario(rs.getInt("idUsuario"));
-//            usuario.setNombre(rs.getString("nombre_usuario"));
-//            usuario.setApellido(rs.getString("apellido_usuario"));
-            usuario.setCorreo(rs.getString("correoUsuario"));
-            usuario.setContraseña(rs.getString("contrasenaUsuario"));
-//            usuario.setRol(rs.getString("rol"));
+            usuario.setIdUsuario(rs.getInt("id_usuario"));
+            usuario.setNombre(rs.getString("nombre"));
+            usuario.setApellido(rs.getString("apellido"));
+            usuario.setCorreo(rs.getString("correo"));
+            usuario.setContraseña(rs.getString("contrasena"));
+            usuario.setRol(rs.getString("rol"));
             
             
             return usuario;
@@ -96,7 +96,7 @@ public class UsuarioDao {
     public Usuario buscarPorCorreo(String correo){
     
     String sql =
-    "SELECT * FROM usuario WHERE correo_usuario = ?";
+    "SELECT * FROM usuarios WHERE correo = ?";
 
     try{
 
@@ -117,16 +117,16 @@ public class UsuarioDao {
                     rs.getInt("id_usuario"));
 
             usuario.setNombre(
-                    rs.getString("nombre_usuario"));
+                    rs.getString("nombre"));
 
             usuario.setApellido(
-                    rs.getString("apellido_usuario"));
+                    rs.getString("apellido"));
 
             usuario.setCorreo(
-                    rs.getString("correo_usuario"));
+                    rs.getString("correo"));
 
             usuario.setContraseña(
-                    rs.getString("password_usuario"));
+                    rs.getString("contrasena"));
 
             usuario.setRol(
                     rs.getString("rol"));
@@ -144,7 +144,7 @@ public class UsuarioDao {
     
     public int getId (Usuario usuario){
 
-    String sql = "SELECT id_usuario FROM usuario WHERE correo_usuario = ? AND password_usuario = ?";
+    String sql = "SELECT id_usuario FROM usuarios WHERE usuarios.correo = ? AND usuarios.contrasena = ?";
     int id = 0;
 
     try{

@@ -57,7 +57,7 @@ public class LoginView extends JFrame {
         b1 = new JButton("INICIAR SESION");
         b2 = new JButton("Recuperar contraseña");
 
-        ImageIcon imagen = new ImageIcon("Skylinelogo.jpeg");
+        ImageIcon imagen = new ImageIcon("src/Imagenes/Skylinelogo.jpeg");
 
         Image img = imagen.getImage();
         Image imgEscalada = img.getScaledInstance(250, 250, Image.SCALE_SMOOTH);
