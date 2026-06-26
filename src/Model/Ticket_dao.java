@@ -24,7 +24,7 @@ public class Ticket_dao {
     
     public int getTotalVuelos(Usuario usuario){
         int r = 0;
-        String sql = "SELECT COUNT(*) AS total_vuelos FROM Tickets JOIN Reservas ON Tickets.id_reserva = Reservas.id JOIN Asientos ON Reservas.id_asiento = Asientos.id WHERE Tickets.id_pasajero = ?";
+        String sql = "SELECT COUNT(*) AS total_vuelos FROM Tickets JOIN Reservas ON Tickets.id_reserva = Reservas.id JOIN Asientos ON Reservas.codigo_asiento = Asientos.codigo_asiento WHERE Tickets.id_pasajero = ?";
         try {
         con = conectar.getConection();
         ps = con.prepareStatement(sql);
@@ -63,7 +63,7 @@ public class Ticket_dao {
         
         int cont = 1;
         
-        String sql = "SELECT t.codigo_ticket AS id_ticket, v.origen AS origen, v.destino AS destino FROM Tickets t JOIN Reservas r ON t.id_reserva = r.id JOIN Vuelos v ON r.codigo_vuelo = v.codigo_vuelo WHERE t.id_pasajero = ?";
+        String sql = "SELECT t.codigo_ticket AS id_ticket, v.origen AS origen, v.destino AS destino, t.tipo_vuelo FROM Tickets t JOIN Reservas r ON t.id_reserva = r.id JOIN Vuelos v ON r.codigo_vuelo = v.codigo_vuelo WHERE t.id_pasajero = ?";
         try {
         con = conectar.getConection();
         ps = con.prepareStatement(sql);
@@ -73,16 +73,14 @@ public class Ticket_dao {
         Ticket ticket_res = new Ticket();
         while(rs.next()){
             for(int i = 0; i < total; i++){
-            ticket_res.setTicket(rs.getInt("id_ticket"));
-            ticket_res.setOrigen_ida(rs.getString("origen"));
-            ticket_res.setDestino_ida(rs.getString("destino"));
+            
+            ticket_res.setId(rs.getInt("id_ticket"));
+            ticket_res.setOrigen(rs.getString("origen"));
+            ticket_res.setDestino(rs.getString("destino"));
             ticket_res.setTipo_vuelo(rs.getString("tipo_vuelo"));
             ticket.add(ticket_res);
-        }
-        
             
-            
-            
+        }  
         }
                 
                  } catch (Exception e) {

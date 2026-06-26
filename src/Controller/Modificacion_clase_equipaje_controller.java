@@ -58,7 +58,7 @@ public class Modificacion_clase_equipaje_controller implements ActionListener {
             vista_seleccion_clase_equipaje.setVisible(false);
             
 
-            clase_cont.ClasesDeVueloDisponibles(ticket.getTicket());
+            clase_cont.ClasesDeVueloDisponibles(ticket.getId());
             vista_seleccion_clase.setVisible(true);
             vista_seleccion_clase.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
@@ -68,7 +68,7 @@ public class Modificacion_clase_equipaje_controller implements ActionListener {
             vista_seleccion_clase_equipaje.setVisible(false);
             
             vista_agg_equipaje.Vaciar_clase();
-            vista_agg_equipaje.setClaseActual(dao_agg.ClaseDeVueloActual(ticket.getTicket()));
+            vista_agg_equipaje.setClaseActual(dao_agg.ClaseDeVueloActual(ticket.getId()));
             vista_agg_equipaje.setVisible(true);
             vista_agg_equipaje.setExtendedState(JFrame.MAXIMIZED_BOTH);
 

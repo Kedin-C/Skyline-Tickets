@@ -24,7 +24,7 @@ public class Seleccion_equipaje_extra_dao {
     public int ClaseDeVueloActual(int var) {
         int r = 0;
 
-        String sql = "SELECT a.codigo_clase FROM Tickets t JOIN Reservas r ON t.id_reserva = r.id JOIN Asientos a ON r.id_asiento = a.id WHERE t.codigo_ticket = ?";
+        String sql = "SELECT a.codigo_clase FROM Tickets t JOIN Reservas r ON t.id_reserva = r.id JOIN Asientos a ON r.codigo_asiento = a.codigo_asiento WHERE t.codigo_ticket = ?";
         try {
             
 

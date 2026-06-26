@@ -66,7 +66,7 @@ public class Seleccion_vuelo_usuario_no_registrado_dao {
 
     public int confir_nombre(String nom) {
         int r = 0;
-        String sql = " select Count(*) from usuarios WHERE nombre = ? ";
+        String sql = " select Count(*) from datos_pasajero WHERE nombre = ? ";
         try {
             
 
@@ -98,7 +98,7 @@ public class Seleccion_vuelo_usuario_no_registrado_dao {
 
     public int confir_documento(String var){
         int r = 0;
-        String sql = "select Count(*) from usuarios WHERE numero_documento = ?";
+        String sql = "select Count(*) from datos_pasajero WHERE numero_documento = ?";
         try {
             
 
@@ -131,7 +131,7 @@ public class Seleccion_vuelo_usuario_no_registrado_dao {
 
     public int confir_correo(String var){
         int r = 0;
-        String sql = "select Count(*) from usuarios WHERE correo = ?";
+        String sql = "select Count(*) from datos_pasajero WHERE correo = ?";
         try {
             
 
@@ -162,7 +162,7 @@ public class Seleccion_vuelo_usuario_no_registrado_dao {
     public int confir_ejecucion(int ticket, String nom, String doc, String corr) {
         int r = 0;
         try {
-            String sql = "SELECT COUNT(*) FROM Usuarios INNER JOIN Tickets ON Usuarios.id_usuario = Tickets.id_pasajero WHERE Usuarios.nombre = ? AND Usuarios.numero_documento = ? AND Usuarios.correo = ? AND Tickets.codigo_ticket = ?";
+            String sql = "SELECT COUNT(*) FROM datos_pasajero INNER JOIN Tickets ON datos_pasajero.id = Tickets.id_pasajero WHERE datos_pasajero.nombre = ? AND datos_pasajero.numero_documento = ? AND datos_pasajero.correo = ? AND Tickets.codigo_ticket = ?";
 
             con = conectar.getConection();
             ps = con.prepareStatement(sql);

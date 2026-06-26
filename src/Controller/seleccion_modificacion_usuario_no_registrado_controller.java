@@ -128,7 +128,7 @@ public class seleccion_modificacion_usuario_no_registrado_controller implements 
                 JOptionPane.showMessageDialog(vista, "el correo electronico no esta registrado en el sistema");
             }
             if (definitivo == 1) {
-                this.ticket.setTicket(ticket);
+                this.ticket.setId(ticket);
                 vista.setVisible(false);
                 vista2.setVisible(true);
                 vista2.setExtendedState(JFrame.MAXIMIZED_BOTH);

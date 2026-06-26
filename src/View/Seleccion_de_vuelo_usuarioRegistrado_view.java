@@ -459,33 +459,33 @@ private String text_ticket5_2 = "Vuelta: "+origen_vuelta_ticket5+" → "+destino
             
             if(i == 0){
             tipo_vuelo_ticket1 = ticket.get(i).getTipo_vuelo();
-            origen_ida_ticket1 = ticket.get(i).getOrigen_ida();
-            destino_ida_ticket1 = ticket.get(i).getDestino_ida();
+            origen_ida_ticket1 = ticket.get(i).getOrigen();
+            destino_ida_ticket1 = ticket.get(i).getDestino();
 //            origen_vuelta_ticket1 = ticket.get(i).getOrigen_vuelta();
 //            destino_vuelta_ticket1 = ticket.get(i).getDestino_vuelta();
             }else if(i == 1){
             tipo_vuelo_ticket2 = ticket.get(i).getTipo_vuelo();
-            origen_ida_ticket2 = ticket.get(i).getOrigen_ida();
-            destino_ida_ticket2 = ticket.get(i).getDestino_ida();
+            origen_ida_ticket2 = ticket.get(i).getOrigen();
+            destino_ida_ticket2 = ticket.get(i).getDestino();
 //            origen_vuelta_ticket2 = ticket.get(i).getOrigen_vuelta();
 //            destino_vuelta_ticket2 = ticket.get(i).getDestino_vuelta();
             }
             else if(i == 2){
             tipo_vuelo_ticket3 = ticket.get(i).getTipo_vuelo();
-            origen_ida_ticket3 = ticket.get(i).getOrigen_ida();
-            destino_ida_ticket3 = ticket.get(i).getDestino_ida();
+            origen_ida_ticket3 = ticket.get(i).getOrigen();
+            destino_ida_ticket3 = ticket.get(i).getDestino();
 //            origen_vuelta_ticket3 = ticket.get(i).getOrigen_vuelta();
 //            destino_vuelta_ticket3 = ticket.get(i).getDestino_vuelta();
             }else if(i == 3){
             tipo_vuelo_ticket4 = ticket.get(i).getTipo_vuelo();
-            origen_ida_ticket4 = ticket.get(i).getOrigen_ida();
-            destino_ida_ticket4 = ticket.get(i).getDestino_ida();
+            origen_ida_ticket4 = ticket.get(i).getOrigen();
+            destino_ida_ticket4 = ticket.get(i).getDestino();
 //            origen_vuelta_ticket4 = ticket.get(i).getOrigen_vuelta();
 //            destino_vuelta_ticket4 = ticket.get(i).getDestino_vuelta();
             }else if(i == 4){
             tipo_vuelo_ticket5 = ticket.get(i).getTipo_vuelo();
-            origen_ida_ticket5 = ticket.get(i).getOrigen_ida();
-            destino_ida_ticket5 = ticket.get(i).getDestino_ida();
+            origen_ida_ticket5 = ticket.get(i).getOrigen();
+            destino_ida_ticket5 = ticket.get(i).getDestino();
 //            origen_vuelta_ticket5 = ticket.get(i).getOrigen_vuelta();
 //            destino_vuelta_ticket5 = ticket.get(i).getDestino_vuelta();
             }

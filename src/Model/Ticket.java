@@ -10,11 +10,11 @@ package Model;
  */
 public class Ticket {
     
-    int ticket;
+    int Id;
     private String tipo_vuelo;
 
-    private String origen_ida;
-    private String destino_ida;
+    private String origen;
+    private String destino;
 
     
     public Ticket(){
@@ -22,20 +22,20 @@ public class Ticket {
     
     }
     
-    public void setTicket(int ticket){
-        this.ticket = ticket;
+    public void setId(int Id){
+        this.Id = Id;
     }
     
-    public int getTicket(){
-        return this.ticket;
+    public int getId(){
+        return this.Id;
     }
     
-    public void setOrigen_ida(String origen_ida){
-        this.origen_ida = origen_ida;
+    public void setOrigen(String origen){
+        this.origen = origen;
     }
     
-    public String getOrigen_ida(){
-        return this.origen_ida;
+    public String getOrigen(){
+        return this.origen;
     }
     
     public void setTipo_vuelo(String tipo_vuelo){
@@ -46,12 +46,12 @@ public class Ticket {
         return this.tipo_vuelo;
     }
     
-    public void setDestino_ida(String destino_ida){
-        this.destino_ida = destino_ida;
+    public void setDestino(String destino){
+        this.destino = destino;
     }
     
-    public String getDestino_ida(){
-        return this.destino_ida;
+    public String getDestino(){
+        return this.destino;
     }
 
     

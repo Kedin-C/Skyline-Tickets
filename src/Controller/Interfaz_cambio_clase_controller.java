@@ -61,16 +61,16 @@ public class Interfaz_cambio_clase_controller implements ActionListener {
         }
         
         if(e.getSource() == vista_seleccion_clase.boton_Actual){
-        if(this.dao.ClaseDeVueloActual(ticket.getTicket()) == 1){
+        if(this.dao.ClaseDeVueloActual(ticket.getId()) == 1){
             JOptionPane.showMessageDialog(vista_seleccion_clase, "Clase Económica\n" +
 "\n" +
 "Viaja con comodidad y al mejor precio. Incluye equipaje de mano, asiento estándar, entretenimiento a bordo y acceso a los servicios esenciales durante el vuelo.");
         
-        }else if(this.dao.ClaseDeVueloActual(ticket.getTicket()) == 2){
+        }else if(this.dao.ClaseDeVueloActual(ticket.getId()) == 2){
         JOptionPane.showMessageDialog(vista_seleccion_clase, "Clase Ejecutiva\n" +
 "\n" +
 "Disfruta de una experiencia superior con mayor espacio, embarque prioritario, acceso a salas VIP, equipaje adicional y servicio premium a bordo.");
-        }else if(this.dao.ClaseDeVueloActual(ticket.getTicket()) == 3){
+        }else if(this.dao.ClaseDeVueloActual(ticket.getId()) == 3){
         JOptionPane.showMessageDialog(vista_seleccion_clase,"Primera Clase\n" +
 "\n" +
 "Accede al máximo nivel de exclusividad y confort con asientos tipo cama, atención personalizada, salas VIP exclusivas, gastronomía premium y beneficios prioritarios en todo tu viaje.");
