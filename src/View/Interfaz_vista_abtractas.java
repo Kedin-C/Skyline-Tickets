@@ -53,7 +53,7 @@ public abstract class Interfaz_vista_abtractas extends JFrame{
     //Aqui estoy poniendo un border a el panel para despues poder ubicarlo en direfentes direcciones
     panel1.setLayout(new BorderLayout());
     //Aqui llamando a la imagen que tengo guardada en documentos, y creo una variable para guardarla
-    ImageIcon imagen_portada =new ImageIcon("portada.png");
+    ImageIcon imagen_portada =new ImageIcon("Imagenes/logo_blanco.png");
     //Aqui convirto a la imagen para usar el metodo de getScaledInstance, el cual me ayuda a dimensionar la imagen
     Image imagen_ajustada = imagen_portada.getImage().getScaledInstance(190, 170, Image.SCALE_SMOOTH);
     //Aqui estoy convirtiendo a la imagen que anteriormente ajuste, a una imageicon denuevo para usarla

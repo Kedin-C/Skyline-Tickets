@@ -2,9 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package skyline_tickets.view;
+package View;
 
-import View.Interfaz_vista_abtractas;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
@@ -21,13 +20,13 @@ import javax.swing.JPanel;
  *
  * @author juans
  */
-public class ApartadoReportes_view extends Interfaz_vista_abtractas{
+public class ApartadoReportesMenuView extends Interfaz_vista_abtractas{
     
     public Container contenedor;
     public JPanel panel1,panel2,panelbotones,panelcentro;
     public JButton Rfinanciero,Roperacional,Rvuelos;
     
-    public ApartadoReportes_view(){
+    public ApartadoReportesMenuView(){
         String nombre = "Pagina Principal";
         super(nombre);
         contenedor = super.getContenedor();

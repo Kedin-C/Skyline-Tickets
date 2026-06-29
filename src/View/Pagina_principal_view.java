@@ -23,17 +23,17 @@ import javax.swing.border.EmptyBorder;
  *
  * @author juans
  */
-public class ViewPrincipal extends Interfaz_vista_abtractas{
+public class Pagina_principal_view extends Interfaz_vista_abtractas{
     
             
     public Container contenedor;
     public JPanel panel1,panelboton,panelboton2,paneltitulo;
-    public PanelConFondo_view panel2;
+    public Panel_con_fondo_view panel2;
     public JButton comprar,clase,inicioSesion;
     public JLabel titulo;
     public FlowLayout miflow;
     
-    public ViewPrincipal(){
+    public Pagina_principal_view(){
         String nombre = "Pagina Principal";
         super(nombre);
         contenedor = super.getContenedor();
@@ -48,7 +48,7 @@ public class ViewPrincipal extends Interfaz_vista_abtractas{
         panelboton2.setOpaque(false);
         panelboton2.setBorder(new EmptyBorder(20,1,1,20));
         panel1.add(panelboton2, BorderLayout.LINE_END);
-        panel2 = new PanelConFondo_view("/imagenes/fondo_principal2.png");
+        panel2 = new Panel_con_fondo_view("/imagenes/fondo_principal.png");
         panel2.setLayout(new BoxLayout(panel2, BoxLayout.Y_AXIS));
         titulo = new JLabel("Bienvenidos");
         titulo.setFont(new Font("Arial", Font.BOLD, 30));

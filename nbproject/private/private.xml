@@ -3,10 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/juans/Desktop/Skyline%20Tickets/repositorio_Skyline/Skyline-Tickets/src/skyline_tickets/Apartado_reportes_Controller.java</file>
+            <file>file:/C:/Users/juans/Desktop/Skyline%20Tickets/repositorio_Skyline/Skyline-Tickets/src/skyline_tickets/SkylineTickets.java</file>
+            <file>file:/C:/Users/juans/Desktop/Skyline%20Tickets/repositorio_Skyline/Skyline-Tickets/src/Model/Conexion.java</file>
+            <file>file:/C:/Users/juans/Desktop/Skyline%20Tickets/repositorio_Skyline/Skyline-Tickets/src/Model/ReportesDao.java</file>
+            <file>file:/C:/Users/juans/Desktop/Skyline%20Tickets/repositorio_Skyline/Skyline-Tickets/src/View/Apartado_reportes_operacionales_view.java</file>
             <file>file:/C:/Users/juans/Desktop/Skyline%20Tickets/repositorio_Skyline/Skyline-Tickets/src/skyline_tickets/Reportes_controlador.java</file>
             <file>file:/C:/Users/juans/Desktop/Skyline%20Tickets/repositorio_Skyline/Skyline-Tickets/src/skyline_tickets/Reportes_creadorPdf.java</file>
-            <file>file:/C:/Users/juans/Desktop/Skyline%20Tickets/repositorio_Skyline/Skyline-Tickets/src/Model/ReportesDao.java</file>
+            <file>file:/C:/Users/juans/Desktop/Skyline%20Tickets/repositorio_Skyline/Skyline-Tickets/src/View/Interfaz_vista_abtractas.java</file>
         </group>
     </open-files>
 </project-private>

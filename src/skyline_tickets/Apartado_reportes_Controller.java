@@ -6,9 +6,9 @@ package skyline_tickets;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import View.Apartado_reportes_view;
+import View.Apartado_reportes_operacionales_view;
 //import skyline_tickets.view.TipoReportes;
-import skyline_tickets.view.ApartadoReportes_view;
+import View.ApartadoReportesMenuView;
 
 
 /**
@@ -17,10 +17,10 @@ import skyline_tickets.view.ApartadoReportes_view;
  */
 public class Apartado_reportes_Controller implements ActionListener{
     
-    public ApartadoReportes_view vista;
-    public Apartado_reportes_view vistaR;
+    public ApartadoReportesMenuView vista;
+    public Apartado_reportes_operacionales_view vistaR;
     
-    public Apartado_reportes_Controller(ApartadoReportes_view vista, Apartado_reportes_view vistaR){
+    public Apartado_reportes_Controller(ApartadoReportesMenuView vista, Apartado_reportes_operacionales_view vistaR){
         this.vista=vista;
         this.vistaR=vistaR;
         this.vista.Rfinanciero.addActionListener(this);

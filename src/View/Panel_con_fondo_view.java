@@ -13,11 +13,11 @@ import javax.swing.JPanel;
  *
  * @author juans
  */
-public class PanelConFondo_view extends JPanel{
+public class Panel_con_fondo_view extends JPanel{
     
     private Image imagenFondo;
 
-    public PanelConFondo_view(String rutaImagen){
+    public Panel_con_fondo_view(String rutaImagen){
         imagenFondo = new ImageIcon(getClass().getResource(rutaImagen)).getImage();
     }
 
