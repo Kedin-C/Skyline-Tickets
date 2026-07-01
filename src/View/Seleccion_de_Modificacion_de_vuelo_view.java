@@ -70,7 +70,7 @@ public class Seleccion_de_Modificacion_de_vuelo_view extends Interfaz_vista_abtr
         
         Clase_vuelo = new JButton("  CLASE DE VUELO     ",nueva_imagen_clase);
         Equipaje = new JButton("  EQUIPAJE          ",nueva_imagen_equipaje);
-        Volver = super.getVolver();
+        Volver = super.volver;
         
         Message_text1 = new JLabel("Bienvenido, aquí podrás cambiarte a una");
         Message_text2 = new JLabel("clase de vuelo mejor y agregar equipaje de");
@@ -113,10 +113,7 @@ public class Seleccion_de_Modificacion_de_vuelo_view extends Interfaz_vista_abtr
         Clase_vuelo.setBackground(Color.decode("#037FB9"));
         Clase_vuelo.setForeground(Color.WHITE);
         
-        Volver.setPreferredSize(new Dimension(250,40));
-    
-        Volver.setBackground(Color.decode("#037FB9"));
-        Volver.setForeground(Color.WHITE);
+        
     
         
         

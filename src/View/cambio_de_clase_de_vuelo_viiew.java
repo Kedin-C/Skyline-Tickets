@@ -300,11 +300,7 @@ public class cambio_de_clase_de_vuelo_viiew extends Interfaz_vista_abtractas {
         
         // boton volver
         
-        boton_volver = new JButton("VOLVER");
-        boton_volver.setPreferredSize(new Dimension(200,40));
-    
-        boton_volver.setBackground(Color.decode("#037FB9"));
-        boton_volver.setForeground(Color.WHITE);
+        boton_volver = super.volver;
         
         cont_volver.add(boton_volver);
 

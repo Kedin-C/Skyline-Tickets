@@ -108,13 +108,9 @@ public class Agregar_equipaje_extra_view extends Interfaz_vista_abtractas{
         cont_boton_volver.setBorder(new EmptyBorder(10,1,1,1));
         
         
-        volver.setPreferredSize(new Dimension(170,40));    
-        volver.setBackground(Color.decode("#037FB9"));
-        volver.setForeground(Color.WHITE);
+        volver = super.volver;
         
-        confirmar.setPreferredSize(new Dimension(170,40));    
-        confirmar.setBackground(Color.decode("#037FB9"));
-        confirmar.setForeground(Color.WHITE);
+        confirmar = super.continuar;
         
         quitar.setPreferredSize(new Dimension(170,40));    
         quitar.setBackground(Color.decode("#037FB9"));

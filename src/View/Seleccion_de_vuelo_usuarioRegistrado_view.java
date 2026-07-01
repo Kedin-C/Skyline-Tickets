@@ -26,10 +26,11 @@ import javax.swing.border.EmptyBorder;
  */
 public class Seleccion_de_vuelo_usuarioRegistrado_view extends Interfaz_vista_abtractas{
 private Container contenedor;
-private JPanel panel,panel2;
+private JPanel panel,panel2,panelP,panelPC;
 private JPanel panel2_dist1, panel2_dist2;
 private JPanel panel2_dist1_1,panel2_dist1_2,panel2_dist1_3,panel2_dist1_4,panel2_dist1_5;
 private JPanel dist1_cont, dist2_cont, dist3_cont,dist4_cont,dist5_cont;
+public JButton volver;
 //ticket 1
 private JPanel img_panel,tipo_panel,text1_panel,text2_panel,boton_panel;
 private JLabel imagen,tipo,vuelo_ida,vuelo_vuelta;
@@ -130,6 +131,10 @@ private String text_ticket5_2;
     this.contenedor = super.getContenedor();
     panel1 = super.getPanel1();
     panel2 = super.getPanel2();
+    panel2.setLayout(new BorderLayout());
+    panelP =  new JPanel();
+    panelPC = new JPanel(new BorderLayout());
+
      
     panel2_dist1 = new JPanel(new GridLayout(1,5,40,40));
     panel2_dist2 = new JPanel();
@@ -300,6 +305,12 @@ private String text_ticket5_2;
     
     
     panel2_dist1.setBorder(new EmptyBorder(100,1,1,1));
+    panel2_dist2.setBorder(new EmptyBorder(1,1,20,20));
+
+    
+    
+    
+    volver = super.volver;
   
     
     img_panel.add(imagen);
@@ -370,7 +381,7 @@ private String text_ticket5_2;
     text1_panel.setBackground(Color.decode("#037FB9"));
     text2_panel.setBackground(Color.decode("#037FB9"));
     boton_panel.setBackground(Color.decode("#037FB9"));
-    panel2_dist1_1.setBackground(Color.decode("#037FB9"));
+    
     
     
     img_panel2.setBackground(Color.decode("#037FB9"));
@@ -378,14 +389,14 @@ private String text_ticket5_2;
     text1_panel2.setBackground(Color.decode("#037FB9"));
     text2_panel2.setBackground(Color.decode("#037FB9"));
     boton_panel2.setBackground(Color.decode("#037FB9"));
-    panel2_dist1_2.setBackground(Color.decode("#037FB9"));
+    
     
     img_panel3.setBackground(Color.decode("#037FB9"));
     tipo_panel3.setBackground(Color.decode("#037FB9"));
     text1_panel3.setBackground(Color.decode("#037FB9"));
     text2_panel3.setBackground(Color.decode("#037FB9"));
     boton_panel3.setBackground(Color.decode("#037FB9"));
-    panel2_dist1_3.setBackground(Color.decode("#037FB9"));
+    
     
     
     img_panel4.setBackground(Color.decode("#037FB9"));
@@ -393,14 +404,14 @@ private String text_ticket5_2;
     text1_panel4.setBackground(Color.decode("#037FB9"));
     text2_panel4.setBackground(Color.decode("#037FB9"));
     boton_panel4.setBackground(Color.decode("#037FB9"));
-    panel2_dist1_4.setBackground(Color.decode("#037FB9"));
+   
     
     img_panel5.setBackground(Color.decode("#037FB9"));
     tipo_panel5.setBackground(Color.decode("#037FB9"));
     text1_panel5.setBackground(Color.decode("#037FB9"));
     text2_panel5.setBackground(Color.decode("#037FB9"));
     boton_panel5.setBackground(Color.decode("#037FB9"));
-    panel2_dist1_5.setBackground(Color.decode("#037FB9"));
+    
     
     
 
@@ -411,13 +422,22 @@ private String text_ticket5_2;
     panel2_dist1_4.add(dist4_cont);
     panel2_dist1_5.add(dist5_cont);
     
+ 
+    
+    panel2_dist2.add(volver);
+    panelPC.add(panel2_dist2,BorderLayout.EAST);
     
     
     
     
     
-    panel2.add(panel2_dist1);
-    panel2.add(panel2_dist2,BorderLayout.WEST);
+
+    
+    panelP.add(panel2_dist1);
+    
+    
+    panel2.add(panelP);
+    panel2.add(panelPC,BorderLayout.SOUTH);
     
     
     

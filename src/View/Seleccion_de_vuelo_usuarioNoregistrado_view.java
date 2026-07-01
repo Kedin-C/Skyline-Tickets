@@ -138,8 +138,8 @@ public class Seleccion_de_vuelo_usuarioNoregistrado_view extends Interfaz_vista_
    
 
 
-    continuar = super.getContinuar();
-    volver = super.getVolver();
+    continuar = super.continuar;
+    volver = super.volver;
     
     contenedor_continuar.setBorder(new EmptyBorder(100,0,0,120));
     
