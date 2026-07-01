@@ -54,7 +54,7 @@ public class Ticket_dao {
     }
     
     
-    public List getTotalVuelosList(int total,Usuario usuario){
+    public List getTotalVuelosList(Usuario usuario){
         
         List<Ticket> ticket = new ArrayList<Ticket>();
         
