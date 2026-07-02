@@ -30,6 +30,7 @@ public class Seleccion_forma_de_pago_view extends Interfaz_vista_abtractas{
     public JButton volver;
     public JButton forma1,forma2,forma3;
     private JLabel text;
+    private int vista_anterior;
     
      public Seleccion_forma_de_pago_view() {
         String nombre = "Seleccion forma de pago view";
@@ -109,6 +110,15 @@ public class Seleccion_forma_de_pago_view extends Interfaz_vista_abtractas{
         
         panel2.add(panel_cont);
         panel2.add(panel_cont2,BorderLayout.SOUTH);
+    }
+     
+    public void setVista_anterior(int v){
+    
+    this.vista_anterior = v;
+    }
+    
+    public int getVista_anterior(){
+        return this.vista_anterior;
     }
     
           

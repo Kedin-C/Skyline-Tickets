@@ -8,6 +8,7 @@ import Model.Seleccion_equipaje_extra_dao;
 import Model.Ticket;
 import View.Agregar_equipaje_extra_view;
 import View.Seleccion_de_Modificacion_de_vuelo_view;
+import View.Seleccion_forma_de_pago_view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
@@ -22,15 +23,17 @@ public class Interfaz_equipaje_controller implements ActionListener{
     
     private Seleccion_de_Modificacion_de_vuelo_view vista_seleccion_clase_equipaje;
     private Agregar_equipaje_extra_view vista_agg_equipaje;
+    private Seleccion_forma_de_pago_view forma_pago;
     private Seleccion_equipaje_extra_dao dao;
     private Ticket ticket;
     
     
     
    
-    public Interfaz_equipaje_controller(Seleccion_de_Modificacion_de_vuelo_view vista_seleccion_clase_equipaje,Agregar_equipaje_extra_view vista_agg_equipaje,Seleccion_equipaje_extra_dao dao, Ticket ticket){
+    public Interfaz_equipaje_controller(Seleccion_de_Modificacion_de_vuelo_view vista_seleccion_clase_equipaje,Agregar_equipaje_extra_view vista_agg_equipaje,Seleccion_equipaje_extra_dao dao, Ticket ticket, Seleccion_forma_de_pago_view forma_pago){
     this.vista_seleccion_clase_equipaje = vista_seleccion_clase_equipaje;
     this.vista_agg_equipaje = vista_agg_equipaje;
+    this.forma_pago = forma_pago;
     this.dao = dao;
     this.ticket = ticket;
 
@@ -39,6 +42,7 @@ public class Interfaz_equipaje_controller implements ActionListener{
     vista_agg_equipaje.agregar.addActionListener(this);
     vista_agg_equipaje.quitar.addActionListener(this);
     vista_agg_equipaje.actual.addActionListener(this);
+    vista_agg_equipaje.confirmar.addActionListener(this);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -72,19 +76,26 @@ public class Interfaz_equipaje_controller implements ActionListener{
         if(e.getSource() == vista_agg_equipaje.actual){
         
             if(this.dao.ClaseDeVueloActual(ticket.getId()) == 1){
-            JOptionPane.showMessageDialog(vista_seleccion_clase_equipaje, "Clase Económica\n" +
-"\n" +
-"Viaja con comodidad y al mejor precio. Incluye equipaje de mano, asiento estándar, entretenimiento a bordo y acceso a los servicios esenciales durante el vuelo.");
+            JOptionPane.showMessageDialog(vista_seleccion_clase_equipaje, "Clase Económica Viaja con comodidad y al mejor precio. Incluye equipaje de mano, asiento estándar, entretenimiento a bordo y acceso a los servicios esenciales durante el vuelo.");
         
         }else if(this.dao.ClaseDeVueloActual(ticket.getId()) == 2){
-        JOptionPane.showMessageDialog(vista_seleccion_clase_equipaje, "Clase Ejecutiva\n" +
-"\n" +
-"Disfruta de una experiencia superior con mayor espacio, embarque prioritario, acceso a salas VIP, equipaje adicional y servicio premium a bordo.");
+        JOptionPane.showMessageDialog(vista_seleccion_clase_equipaje, "Clase Ejecutiva Disfruta de una experiencia superior con mayor espacio, embarque prioritario, acceso a salas VIP, equipaje adicional y servicio premium a bordo.");
         }else if(this.dao.ClaseDeVueloActual(ticket.getId()) == 3){
-        JOptionPane.showMessageDialog(vista_seleccion_clase_equipaje,"Primera Clase\n" +
-"\n" +
-"Accede al máximo nivel de exclusividad y confort con asientos tipo cama, atención personalizada, salas VIP exclusivas, gastronomía premium y beneficios prioritarios en todo tu viaje.");
+        JOptionPane.showMessageDialog(vista_seleccion_clase_equipaje,"Primera Clase Accede al máximo nivel de exclusividad y confort con asientos tipo cama, atención personalizada, salas VIP exclusivas, gastronomía premium y beneficios prioritarios en todo tu viaje.");
         }
+        }
+        
+        if(e.getSource() == vista_agg_equipaje.confirmar){
+        
+            if(vista_agg_equipaje.getEquipaje_estado() == 0){
+                JOptionPane.showMessageDialog(vista_agg_equipaje, "No has agregado equipaje de bodega extra");
+            }else{
+                vista_agg_equipaje.setVisible(false);
+                
+                forma_pago.setVisible(true);
+                forma_pago.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                forma_pago.setVista_anterior(2);
+            }
         }
         
         }
