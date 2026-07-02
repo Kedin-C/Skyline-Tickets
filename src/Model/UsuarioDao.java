@@ -17,10 +17,6 @@ import java.sql.ResultSet;
  */
 public class UsuarioDao {
 
-/**
- *
- * @author Nikob
- */
 
     Conexion conectar = Conexion.getObject();
     Connection con;
