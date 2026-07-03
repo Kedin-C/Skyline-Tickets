@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package skyline_tickets.view;
+package View;
 
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JFrame;
-import skyline_tickets.controller.Buscar_vuelos_controller;
+import Controller.Buscar_vuelos_controller;
 
 public class Buscar_vuelos_view extends Interfaz_vista_abtractas{
     // Declaracion de objetos y variables
@@ -110,12 +110,12 @@ public class Buscar_vuelos_view extends Interfaz_vista_abtractas{
         siguiente_volver = new JPanel(new FlowLayout(FlowLayout.RIGHT,15, 10));
         
         
-        //Crear textos
+        //Crear textos 
         lugar_origen = new JLabel("Lugar de origen*");
         lugar_destino = new JLabel("Lugar de destino*");
         fecha_ida = new JLabel("Fecha de ida*");
         fecha_regreso = new JLabel("Fecha de regreso*");
-        horario = new JLabel("Elegir horario");
+        horario = new JLabel("Elegir horario (opcional)");
         
         //Crear botones
         vuelo_ida = new JRadioButton("Vuelo de ida");
@@ -167,7 +167,7 @@ public class Buscar_vuelos_view extends Interfaz_vista_abtractas{
         fechas.add(elegir_fecha_ida);
         fechas.add(fecha_regreso);
         fechas.add(elegir_fecha_regreso);
-//        
+        
         Component cajaInvisible = Box.createRigidArea(new Dimension(20, 50));
         
         buscar.add(horario);

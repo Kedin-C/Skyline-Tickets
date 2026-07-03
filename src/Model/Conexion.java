@@ -8,15 +8,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author david
- */
 public class Conexion {
     public static Conexion object;
     Connection con;
     
-    String url = "jdbc:mysql://localhost:3306/Skyline-Tickets";
+    String url = "jdbc:mysql://localhost:3306/vuelos";
     String user = "root";
     String pass = "";
     

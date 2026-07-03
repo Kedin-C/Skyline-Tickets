@@ -4,17 +4,19 @@
  */
 package skyline_tickets;
 
-/**
- *
- * @author david
- */
+import Controller.Buscar_vuelos_controller;
+import Model.Datos;
+import View.Buscar_vuelos_view;
+
 public class SkylineTickets {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        Datos datos = new Datos();
+        
+        Buscar_vuelos_view vistaBuscarVuelos = new Buscar_vuelos_view();
+        Buscar_vuelos_controller controllerBuscarVuelos = new Buscar_vuelos_controller(vistaBuscarVuelos, datos);
+        
     }
     
 }

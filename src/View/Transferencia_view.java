@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package skyline_tickets.view;
+package View;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URI;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 import javax.swing.JOptionPane;
@@ -21,7 +22,7 @@ import javax.swing.JOptionPane;
 public class Transferencia_view extends Interfaz_vista_abtractas{
     
     private JPanel contenedor_principal, contenedor, siguiente_volver;
-    private JButton bancolombia, paypal, nequi, volver;
+    public JButton bancolombia, paypal, nequi, volver;
     private TitledBorder titulo;
     
     
@@ -84,6 +85,11 @@ public class Transferencia_view extends Interfaz_vista_abtractas{
         
         contenedor_principal.add(contenedor);
         contenedor_principal.add(siguiente_volver, BorderLayout.SOUTH);
+        
+        this.setSize(550, 800);
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
         
         //Para que los botones enviean a la pagina

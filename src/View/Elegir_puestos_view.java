@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package skyline_tickets.view;
+package View;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -24,6 +24,7 @@ public class Elegir_puestos_view extends Interfaz_vista_abtractas{
     public JButton torre1[][], torre2[][], siguiente, volver, aleatorio;
     private FondoPanel avion;
     private JScrollPane scrol;
+    
     public Elegir_puestos_view() {
         
         String nombrePagina = "Elegir Puestos";
@@ -31,7 +32,7 @@ public class Elegir_puestos_view extends Interfaz_vista_abtractas{
         contenedor_principal = super.getPanel2();
         
         //Agregando la imagen de fondo
-        avion = new FondoPanel("avion.png");
+        avion = new FondoPanel("src/Imagenes/avion_fondo.png");
         avion.setLayout(null);
         avion.setOpaque(false);
         

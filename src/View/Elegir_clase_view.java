@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package skyline_tickets.view;
+package View;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -63,9 +63,25 @@ public class Elegir_clase_view extends Interfaz_vista_abtractas{
         siguiente.setBackground(Color.decode("#037FB9"));
         
         //informacion de cada clase
-        infoEconomica = new JTextArea("info");
-        infoEjecutiva = new JTextArea("info");
-        infoPrimera = new JTextArea("info");
+        infoEconomica = new JTextArea("\t - Bolso de mano\n"
+                + "\t - Asientos cómodos\n"
+                + "\t - Sistema de entretenimiento\n"
+                + "\t\t $ 180.000\n");
+        infoEjecutiva = new JTextArea("\t - Bolso de mano\n"
+                + "\t - Morral\n"
+                + "\t - Asientos amplios con mayor espacio\n"
+                + "\t - Sistema de entretenimiento\n"
+                + "\t - Acceso a salas VIP\n"
+                + "\t\t $ 450.000\n");
+        infoPrimera = new JTextArea("\t - Bolso de mano\n"
+                + "\t - Morral\n"
+                + "\t - Bodega\n"
+                + "\t - Asientos completamente convertibles en cama\n"
+                + "\t - Sistema de entretenimiento y Wifi\n"
+                + "\t - Acceso a salas VIP\n"
+                + "\t - Salas VIP premium\n"
+                + "\t - Entretenimiento premium y conectividad\n"
+                + "\t\t $ 850.000\n");
         
         //No deja modificar la informacion del JTextArea
         infoEconomica.setEditable(false);
