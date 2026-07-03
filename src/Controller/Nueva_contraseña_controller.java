@@ -34,7 +34,7 @@ public class Nueva_contraseña_controller {
         
         view.getB2().addActionListener(e -> {
             Login_view loginView = new Login_view();
-            new Login_controller(loginView);
+//            new Login_controller(loginView);
             loginView.setLocationRelativeTo(null);
             loginView.setVisible(true);
             view.dispose();
@@ -72,7 +72,7 @@ public class Nueva_contraseña_controller {
             JOptionPane.showMessageDialog(null, "Contraseña actualizada correctamente");
            
             Login_view loginView = new Login_view();
-            new Login_controller(loginView);
+//            new Login_controller(loginView);
             loginView.setLocationRelativeTo(null);
             loginView.setVisible(true);
             view.dispose();

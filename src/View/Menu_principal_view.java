@@ -127,7 +127,7 @@ public class Menu_principal_view extends JFrame implements ActionListener {
             dispose();
 
             Login_view login = new Login_view();
-            new Login_controller(login);
+//            new Login_controller(login);
         }
 
         if (e.getSource() == b2) {

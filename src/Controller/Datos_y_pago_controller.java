@@ -20,9 +20,9 @@ public class Datos_y_pago_controller implements ActionListener{
     Datos_y_pago_view vista = new Datos_y_pago_view();
     Datos datos = new Datos();
     
-    Tarjeta_de_credito_view viewTarjetaCredito = new Tarjeta_de_credito_view();
-    Tarjeta_de_debito_view viewTerjetaDebito = new Tarjeta_de_debito_view();
-    Transferencia_view viewTransferencia = new Transferencia_view();
+    Tarjeta_de_credito_view viewTarjetaCredito;
+    Tarjeta_de_debito_view viewTerjetaDebito;
+    Transferencia_view viewTransferencia;
     
     int n;
     
@@ -111,6 +111,7 @@ public class Datos_y_pago_controller implements ActionListener{
         
         if(e.getSource() == this.viewTarjetaCredito.volver){
             vista.setVisible(true);
+            
             viewTarjetaCredito.setVisible(false);
         }
         

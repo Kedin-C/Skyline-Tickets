@@ -22,7 +22,7 @@ public class UsuarioDao {
     public boolean registrarUsuario(Usuario usuario) {
         String sql = "INSERT INTO usuario(nombre_usuario, apellido_usuario, correo_usuario, password_usuario, rol) VALUES(?,?,?,?,?)";
         try {
-            con = conexionBD.getConnection();
+            con = conexionBD.getConection();
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, usuario.getNombre());
             ps.setString(2, usuario.getApellido());
@@ -40,7 +40,7 @@ public class UsuarioDao {
     public Usuario iniciarSesion(String correo, String contraseña) {
         String sql = "SELECT * FROM usuario WHERE correo_usuario = ? AND password_usuario = ?";
         try {
-            con = conexionBD.getConnection();
+            con = conexionBD.getConection();
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, correo);
             ps.setString(2, contraseña);
@@ -64,7 +64,7 @@ public class UsuarioDao {
     public Usuario buscarPorCorreo(String correo) {
         String sql = "SELECT * FROM usuario WHERE correo_usuario = ?";
         try {
-            con = conexionBD.getConnection();
+            con = conexionBD.getConection();
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, correo);
             ResultSet rs = ps.executeQuery();
@@ -87,7 +87,7 @@ public class UsuarioDao {
     public boolean actualizarContraseña(String correo, String nuevaContraseña) {
         String sql = "UPDATE usuario SET password_usuario = ? WHERE correo_usuario = ?";
         try {
-            con = conexionBD.getConnection();
+            con = conexionBD.getConection();
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, nuevaContraseña);
             ps.setString(2, correo);
@@ -109,7 +109,7 @@ public class UsuarioDao {
     public boolean actualizarCorreo(int idUsuario, String nuevoCorreo) {
         String sql = "UPDATE usuario SET correo_usuario = ? WHERE id_usuario = ?";
         try {
-            con = conexionBD.getConnection();
+            con = conexionBD.getConection();
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, nuevoCorreo);
             ps.setInt(2, idUsuario);
@@ -127,7 +127,7 @@ public class UsuarioDao {
         String sql = "SELECT COUNT(*) FROM usuario WHERE correo_usuario = ?";
 
         try {
-            con = conexionBD.getConnection();
+            con = conexionBD.getConection();
             PreparedStatement ps = con.prepareStatement(sql);
 
             ps.setString(1, correo);
@@ -143,5 +143,39 @@ public class UsuarioDao {
         }
 
         return false;
+    }
+    
+    public int getId (Usuario usuario){
+
+    String sql = "SELECT id_usuario FROM usuarios WHERE usuarios.correo = ? AND usuarios.contrasena = ?";
+    int id = 0;
+
+    try{
+
+        con = conexionBD.getConection();
+
+        PreparedStatement ps = con.prepareStatement(sql);
+
+        ps.setString(1, usuario.getCorreo());
+        ps.setString(2, usuario.getContraseña());
+
+        ResultSet rs = ps.executeQuery();
+
+        if(rs.next()){
+            
+            id = rs.getInt(1);
+            
+            
+        }
+        
+        return id;
+
+    }catch(Exception e){
+
+        System.out.println(e.getMessage());
+
+    }
+
+    return id;
     }
 }

@@ -35,7 +35,7 @@ public class Codigo_descuentoDao {
     public boolean guardarCodigo(Codigo_descuento codigo) {
         String sql = "INSERT INTO codigo_descuento(codigo, porcentaje_descuento, usado) VALUES(?,?,0)";
         try {
-            con = conexionBD.getConnection();
+            con = conexionBD.getConection();
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, codigo.getCodigo());
             ps.setInt(2, codigo.getPorcentajeDescuento());

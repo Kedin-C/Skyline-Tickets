@@ -4,6 +4,8 @@
  */
 package View;
 
+import Controller.Buscar_vuelos_controller;
+import Model.Datos;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -71,6 +73,7 @@ public class ViewPrincipal extends Interfaz_vista_abtractas implements ActionLis
         clase.setBorderPainted(false);
         contenedor.add(panel2, BorderLayout.CENTER);
         inicio.addActionListener(this);
+        comprar.addActionListener(this);
         
         setVisible(true);
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
@@ -83,8 +86,14 @@ public class ViewPrincipal extends Interfaz_vista_abtractas implements ActionLis
             dispose();
 
             Menu_principal_view menu = new Menu_principal_view();
-           
+         
         }
+        if(e.getSource() == comprar){
+            Buscar_vuelos_view compra = new Buscar_vuelos_view();
+            Datos datos = new Datos();
+            Buscar_vuelos_controller compraControlador = new Buscar_vuelos_controller(compra, datos);
+        }  
+        
     }
     
     } 

@@ -20,7 +20,7 @@ public class Conexion {
     String user = "root";
     String pass = "";
     
-    private Conexion(){};
+    Conexion(){};
     
     public static Conexion getObject(){
     

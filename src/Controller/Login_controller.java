@@ -17,16 +17,22 @@ import Model.Usuario;
 import View.Inicio_usuario_view;
 import View.Login_view;
 import View.Menu_principal_view;
-import view.Pagina_principal_administrador_view;
+//import view.Pagina_principal_administrador_view;
 import View.Recuperar_contraseña_view;
+import View.ViewPrincipal;
 
 
 public class Login_controller implements ActionListener {
     private Login_view vista;
     private UsuarioDao dao;
-    public Login_controller(Login_view vista) {
+    private ViewPrincipal prin;
+    Usuario usu;
+    
+    public Login_controller(Login_view vista,ViewPrincipal principal,Usuario usuario) {
         this.vista = vista;
         this.dao = new UsuarioDao();
+        this.prin = principal;
+        this.usu = usuario;
         vista.getB1().addActionListener(this);
         vista.getB2().addActionListener(this);
         vista.getBtnVolver().addActionListener(this);
@@ -54,9 +60,9 @@ public class Login_controller implements ActionListener {
                             "Ingreso como administrador");
                     // Abrir MenuAdministradorView
                     
-                     Pagina_principal_administrador_view vistaInicioad = new Pagina_principal_administrador_view();
-                     vistaInicioad.setLocationRelativeTo(null);
-                     vistaInicioad.setVisible(true);
+//                     Pagina_principal_administrador_view vistaInicioad = new Pagina_principal_administrador_view();
+//                     vistaInicioad.setLocationRelativeTo(null);
+//                     vistaInicioad.setVisible(true);
                      vista.dispose();
                 } else {
                     JOptionPane.showMessageDialog(
