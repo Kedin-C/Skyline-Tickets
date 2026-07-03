@@ -28,7 +28,7 @@ public class Pagina_principal_administrador_view extends Interfaz_vista_abtracta
     public Container contenedor;
     public JPanel panel1,panelboton,panelboton2,panelboton3,paneltitulo,panelbotones;
     public Panel_con_fondo_view panel2;
-    public JButton comprar,clase,rol,reportes;
+    public JButton comprar,clase,reportes;
     public JLabel titulo;
     public FlowLayout miflow;
     
@@ -49,22 +49,22 @@ public class Pagina_principal_administrador_view extends Interfaz_vista_abtracta
         reportes.setFont(new Font("Arial", Font.BOLD, 20));
         reportes.setBorderPainted(false);
 
-        rol = new JButton("Asignar Rol");
-        rol.setBackground(Color.white);
-        rol.setPreferredSize(new Dimension(200, 40));
-        rol.setFont(new Font("Arial", Font.BOLD, 20));
-        rol.setBorderPainted(false);
+//        rol = new JButton("Asignar Rol");
+//        rol.setBackground(Color.white);
+//        rol.setPreferredSize(new Dimension(200, 40));
+//        rol.setFont(new Font("Arial", Font.BOLD, 20));
+//        rol.setBorderPainted(false);
 
         // Agregar ambos al mismo panel
         panelbotones.add(reportes);
-        panelbotones.add(rol);
+//        panelbotones.add(rol);
 
         // Añadir el panel completo al lado derecho del panel1
         panel1.add(panelbotones, BorderLayout.LINE_END);
         
         // Panel principal con fondo
-        panel2 = new Panel_con_fondo_view("/imagenes/fondo_principal.png");
-        panel2.setLayout(new BoxLayout(panel2, BoxLayout.Y_AXIS)); // disposición vertical
+        panel2 = new Panel_con_fondo_view("src/Imagenes/fondo_principal.png");
+        panel2.setLayout(new BoxLayout(panel2, BoxLayout.Y_AXIS));
 
         // Título de bienvenida
         titulo = new JLabel("Bienvenidos");
