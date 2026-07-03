@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  * @author david
  */
 public class seleccion_modificacion_usuario_no_registrado_controller implements ActionListener {
-
+    //private Pagina_principal_administrador_view vista_print_admin;
     private Seleccion_de_vuelo_usuarioNoregistrado_view vista;
     private Seleccion_de_Modificacion_de_vuelo_view vista2;
     private Seleccion_vuelo_usuario_no_registrado_dao dao;

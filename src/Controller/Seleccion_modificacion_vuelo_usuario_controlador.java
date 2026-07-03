@@ -23,6 +23,7 @@ public class Seleccion_modificacion_vuelo_usuario_controlador implements ActionL
     
     Seleccion_de_vuelo_usuarioRegistrado_view vista = new Seleccion_de_vuelo_usuarioRegistrado_view();
     ViewPrincipal_controlador vista_print_cont;
+    //Pagina_principal_administrador_view
     ViewPrincipal vista_print;
     Ticket_dao dao = new Ticket_dao();
     Ticket ticket;
