@@ -6,10 +6,9 @@ package Model;
 
 /**
  *
- * @author david
+ * @author Nikob
  */
 public class Usuario {
-
     private int idUsuario;
     private String nombre;
     private String apellido;
@@ -48,7 +47,7 @@ public class Usuario {
     }
     
     
-    //set
+    
     
     public void setIdUsuario(int idUsuario){
         this.idUsuario=idUsuario;
@@ -74,5 +73,3 @@ public class Usuario {
         this.rol=rol;
     }
 }
-    
-

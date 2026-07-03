@@ -4,6 +4,12 @@
  */
 package View;
 
+/**
+ *
+ * @author Nikob
+ */
+
+import Controller.Informacion_personal_controller;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -17,36 +23,32 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-/**
- *
- * @author juans
- */
-public class ViewPrincipal extends Interfaz_vista_abtractas implements ActionListener{
-    
-            
+public class Inicio_usuario_view extends Interfaz_vista_abtractas implements ActionListener {
+
     public Container contenedor;
-    public JPanel panel1,panelboton,panelboton2;
+    public JPanel panel1, panelboton, panelboton2;
     public PanelConFondo panel2;
-    public JButton comprar,clase,inicio;
-    
-    public ViewPrincipal(){
+    public JButton comprar, clase, inicio;
+
+    public Inicio_usuario_view() {
         super("Pagina Principal");
         contenedor = super.getContenedor();
         panel1 = super.getPanel1();
-        inicio = new JButton("Inicio Sesión");
+        inicio = new JButton("Informacion personal");
         inicio.setBackground(Color.white);
-        inicio.setPreferredSize(new Dimension(200, 40));
-        inicio.setFont(new Font("Arial", Font.BOLD, 20));
+        inicio.setPreferredSize(new Dimension(300, 40));
+        inicio.setFont(new Font("Arial", Font.BOLD, 15));
         inicio.setBorderPainted(false);
         panelboton2 = new JPanel();
         panelboton2.add(inicio);
         panelboton2.setOpaque(false);
-        panelboton2.setBorder(new EmptyBorder(20,1,1,20));
+        panelboton2.setBorder(new EmptyBorder(20, 1, 1, 20));
         panel1.add(panelboton2, BorderLayout.LINE_END);
         panel2 = new PanelConFondo("/imagenes/fondo_principal.png");
         panel2.setLayout(new BoxLayout(panel2, BoxLayout.Y_AXIS));
@@ -54,7 +56,7 @@ public class ViewPrincipal extends Interfaz_vista_abtractas implements ActionLis
         clase = new JButton("Modificar Clase de Vuelo y Equipaje");
         panelboton = new JPanel();
         panelboton.add(comprar);
-        panelboton.setBorder(new EmptyBorder(50,1,50,1));
+        panelboton.setBorder(new EmptyBorder(50, 1, 50, 1));
         panelboton.setOpaque(false);
         panel2.add(Box.createVerticalGlue());
         panel2.add(clase);
@@ -71,21 +73,22 @@ public class ViewPrincipal extends Interfaz_vista_abtractas implements ActionLis
         clase.setBorderPainted(false);
         contenedor.add(panel2, BorderLayout.CENTER);
         inicio.addActionListener(this);
-        
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setVisible(true);
-        setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
-    }  
-        
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if(e.getSource() == inicio){
+        if (e.getSource() == inicio) {
             dispose();
 
-            Menu_principal_view menu = new Menu_principal_view();
-           
+            Informacion_personal_controller controlador = new Informacion_personal_controller();
+            controlador.mostrar();
+
         }
     }
-    
-    } 
 
+}
