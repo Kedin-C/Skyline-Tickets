@@ -2,16 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package controller;
+package Controller;
 
 /**
  *
  * @author Nikob
  */
-import model.UsuarioDao;
+import Model.UsuarioDao;
 import javax.swing.JOptionPane;
-import view.Nueva_contraseña_view;
-import view.Login_view;
+import View.Nueva_contraseña_view;
+import View.Login_view;
 
 public class Nueva_contraseña_controller {
 

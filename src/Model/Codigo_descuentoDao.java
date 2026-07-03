@@ -2,12 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package model;
+package Model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.Random;
-import model.Conexion;
-import model.Codigo_descuento;
+import Model.Conexion;
+import Model.Codigo_descuento;
 /**
  *
  * @author Nikob

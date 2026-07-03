@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/Nikob/OneDrive/Desktop/Proyecto/Skyline-Tickets/src/Model/Conexion.java</file>
+            <file>file:/C:/Users/Nikob/OneDrive/Desktop/Proyecto/Skyline-Tickets/src/View/Nueva_contraseña_view.java</file>
+            <file>file:/C:/Users/Nikob/OneDrive/Desktop/Proyecto/Skyline-Tickets/src/Model/Sesion_usuario.java</file>
+            <file>file:/C:/Users/Nikob/OneDrive/Desktop/Proyecto/Skyline-Tickets/src/Controller/Login_controller.java</file>
+            <file>file:/C:/Users/Nikob/OneDrive/Desktop/Proyecto/Skyline-Tickets/src/Model/Usuario.java</file>
+            <file>file:/C:/Users/Nikob/OneDrive/Desktop/Proyecto/Skyline-Tickets/src/Model/UsuarioDao.java</file>
+            <file>file:/C:/Users/Nikob/OneDrive/Desktop/Proyecto/Skyline-Tickets/src/Controller/Codigo_descuento_controller.java</file>
+            <file>file:/C:/Users/Nikob/OneDrive/Desktop/Proyecto/Skyline-Tickets/src/View/Inicio_usuario_view.java</file>
+            <file>file:/C:/Users/Nikob/OneDrive/Desktop/Proyecto/Skyline-Tickets/src/Controller/Informacion_personal_controller.java</file>
+            <file>file:/C:/Users/Nikob/OneDrive/Desktop/Proyecto/Skyline-Tickets/src/View/Informacion_personal_view.java</file>
+        </group>
+    </open-files>
 </project-private>

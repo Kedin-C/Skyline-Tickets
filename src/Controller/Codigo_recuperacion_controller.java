@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package controller;
+package Controller;
 /**
  *
  * @author Nikob
  */
 
-import model.UsuarioDao;
+import Model.UsuarioDao;
 import java.util.Random;
 import javax.swing.JOptionPane;
-import model.Usuario;
-import view.Codigo_recuperacion_view;
-import view.Nueva_contraseña_view;
+import Model.Usuario;
+import View.Codigo_recuperacion_view;
+import View.Nueva_contraseña_view;
 
 public class Codigo_recuperacion_controller {
 

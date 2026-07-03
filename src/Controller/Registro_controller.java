@@ -4,22 +4,22 @@
  */
 
 
-package controller;
+package Controller;
 
 /**
  *
  * @author Nikob
  */
-import model.UsuarioDao;
-import model.Codigo_descuento;
-import controller.Codigo_descuento_controller;
+import Model.UsuarioDao;
+import Model.Codigo_descuento;
+import Controller.Codigo_descuento_controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
-import model.Usuario;
-import view.Login_view;
-import view.Menu_principal_view;
-import view.Registro_view;
+import Model.Usuario;
+import View.Login_view;
+import View.Menu_principal_view;
+import View.Registro_view;
 
 public class Registro_controller implements ActionListener {
 

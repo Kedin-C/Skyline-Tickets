@@ -2,19 +2,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package controller;
+package Controller;
 
 /**
  *
  * @author Nikob
  */
-import controller.Login_controller;
+import Controller.Login_controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
-import view.Codigo_recuperacion_view;
-import view.Login_view;
-import view.Recuperar_contraseña_view;
+import View.Codigo_recuperacion_view;
+import View.Login_view;
+import View.Recuperar_contraseña_view;
 
 public class Recuperar_contraseña_controller {
 

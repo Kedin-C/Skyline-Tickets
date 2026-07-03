@@ -2,16 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package view;
+package View;
 
 /**
  *
  * @author Nikob
  */
 
-import controller.Recuperar_contraseña_controller;
-import model.UsuarioDao;
-import model.Usuario;
+import Controller.Recuperar_contraseña_controller;
+import Model.UsuarioDao;
+import Model.Usuario;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

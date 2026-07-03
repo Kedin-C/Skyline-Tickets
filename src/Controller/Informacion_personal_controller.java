@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package controller;
+package Controller;
  
 /**
  *
@@ -10,12 +10,12 @@ package controller;
  */
 
 import javax.swing.JOptionPane;
-import model.Sesion_usuario;
-import model.Usuario;
-import model.UsuarioDao;
-import view.Informacion_personal_view;
-import view.Inicio_usuario_view;
-import view.Nueva_contraseña_view;
+import Model.Sesion_usuario;
+import Model.Usuario;
+import Model.UsuarioDao;
+import View.Informacion_personal_view;
+import View.Inicio_usuario_view;
+import View.Nueva_contraseña_view;
 
 public class Informacion_personal_controller {
     Informacion_personal_view vista;

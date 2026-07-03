@@ -2,23 +2,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package controller;
+package Controller;
 
 /**
  *
  * @author Nikob
  */
-import model.UsuarioDao;
-import model.Sesion_usuario;
+import Model.UsuarioDao;
+import Model.Sesion_usuario;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
-import model.Usuario;
-import view.Inicio_usuario_view;
-import view.Login_view;
-import view.Menu_principal_view;
+import Model.Usuario;
+import View.Inicio_usuario_view;
+import View.Login_view;
+import View.Menu_principal_view;
 import view.Pagina_principal_administrador_view;
-import view.Recuperar_contraseña_view;
+import View.Recuperar_contraseña_view;
 
 
 public class Login_controller implements ActionListener {

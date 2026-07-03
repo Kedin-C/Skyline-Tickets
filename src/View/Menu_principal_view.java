@@ -2,12 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package view;
+package View;
 
 /**
  *
  * @author Nikob
  */
+
+import Controller.Login_controller;
+import Controller.Registro_controller;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -16,6 +19,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -23,48 +28,32 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
-public class Recuperar_contraseña_view extends JFrame {
+
+public class Menu_principal_view extends JFrame implements ActionListener {
 
     Container contenedor;
-
-    JButton b1, btnVolver;
-
-    JPanel mipanel1, mipanel2, mipanel3;
-
+    JButton b1, b2, btnVolver;
+    JPanel mipanel1, mipanel2;
     JLabel logo;
-    JLabel titulo;
-    JLabel correo;
 
-    JTextField txCorreo;
+    public Menu_principal_view() {
 
-    public Recuperar_contraseña_view() {
-
-        super("Recuperación de Contraseña");
+        super("Menu");
 
         contenedor = getContentPane();
 
+        
         mipanel1 = new JPanel(new BorderLayout());
         mipanel1.setBackground(new Color(3, 127, 185));
 
+        
         mipanel2 = new JPanel();
         mipanel2.setLayout(new BoxLayout(mipanel2, BoxLayout.Y_AXIS));
         mipanel2.setBackground(Color.WHITE);
 
-        mipanel3 = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 5));
-        mipanel3.setBackground(Color.WHITE);
-        mipanel3.setMaximumSize(new Dimension(350, 70));
-
-        titulo = new JLabel("Formulario Recuperación de Contraseña");
-        titulo.setFont(new Font("Arial", Font.BOLD, 20));
-
-        correo = new JLabel("Ingrese su Correo*");
-
-        txCorreo = new JTextField();
-        txCorreo.setPreferredSize(new Dimension(350, 25));
-
-        b1 = new JButton("ENVIAR CÓDIGO");
+        b1 = new JButton("INICIAR SESION");
+        b2 = new JButton("REGISTRARSE");
         btnVolver = new JButton("VOLVER");
 
         ImageIcon imagen = new ImageIcon(
@@ -76,26 +65,31 @@ public class Recuperar_contraseña_view extends JFrame {
         logo = new JLabel(new ImageIcon(imgEscalada));
 
         logo.setAlignmentX(Component.CENTER_ALIGNMENT);
-        titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
         b1.setAlignmentX(Component.CENTER_ALIGNMENT);
+        b2.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        mipanel3.add(correo);
-        mipanel3.add(txCorreo);
+        b1.addActionListener(this);
+        b2.addActionListener(this);
+        btnVolver.addActionListener(this);
 
-        mipanel2.add(Box.createVerticalStrut(30));
+        mipanel2.add(Box.createVerticalStrut(40));
         mipanel2.add(logo);
-        mipanel2.add(Box.createVerticalStrut(15));
-        mipanel2.add(titulo);
-        mipanel2.add(Box.createVerticalStrut(35));
-        mipanel2.add(mipanel3);
-        mipanel2.add(Box.createVerticalStrut(35));
+        mipanel2.add(Box.createVerticalStrut(50));
         mipanel2.add(b1);
+        mipanel2.add(Box.createVerticalStrut(25));
+        mipanel2.add(b2);
 
         b1.setBackground(new Color(3, 127, 185));
+        b2.setBackground(new Color(3, 127, 185));
+
         b1.setForeground(Color.WHITE);
+        b2.setForeground(Color.WHITE);
+
         b1.setFocusPainted(false);
+        b2.setFocusPainted(false);
+
         b1.setFont(new Font("Arial", Font.BOLD, 16));
-        b1.setMaximumSize(new Dimension(350, 50));
+        b2.setFont(new Font("Arial", Font.BOLD, 16));
 
         btnVolver.setBackground(Color.WHITE);
         btnVolver.setForeground(new Color(3, 127, 185));
@@ -103,9 +97,12 @@ public class Recuperar_contraseña_view extends JFrame {
         btnVolver.setFont(new Font("Arial", Font.BOLD, 16));
         btnVolver.setPreferredSize(new Dimension(130, 45));
 
-        mipanel2.setPreferredSize(new Dimension(500, 520));
+        mipanel2.setPreferredSize(new Dimension(500, 600));
 
-        JPanel panelCentro = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 60));
+        b1.setMaximumSize(new Dimension(350, 50));
+        b2.setMaximumSize(new Dimension(350, 50));
+
+        JPanel panelCentro = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 100));
         panelCentro.setBackground(new Color(3, 127, 185));
         panelCentro.add(mipanel2);
 
@@ -123,15 +120,31 @@ public class Recuperar_contraseña_view extends JFrame {
         setVisible(true);
     }
 
-    public JButton getB1() {
-        return b1;
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        if (e.getSource() == b1) {
+            dispose();
+
+            Login_view login = new Login_view();
+            new Login_controller(login);
+        }
+
+        if (e.getSource() == b2) {
+            dispose();
+
+            Registro_view registro = new Registro_view();
+            new Registro_controller(registro);
+        }
+
+        if (e.getSource() == btnVolver) {
+            dispose();
+            ViewPrincipal principal = new ViewPrincipal();
+            
+        }
     }
 
     public JButton getBtnVolver() {
         return btnVolver;
-    }
-
-    public JTextField getTxCorreo() {
-        return txCorreo;
     }
 }
