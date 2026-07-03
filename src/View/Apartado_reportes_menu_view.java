@@ -51,7 +51,7 @@ public class Apartado_reportes_menu_view extends Interfaz_vista_abtractas{
         Roperacional.setPreferredSize(new Dimension(300, 150));
         
         //Panel de botones
-        panelbotones = new JPanel(new GridLayout(1,3,100,100));
+        panelbotones = new JPanel(new GridLayout(1,2,100,100));
         panelbotones.setBackground(Color.white);
         
         //Panel centrado

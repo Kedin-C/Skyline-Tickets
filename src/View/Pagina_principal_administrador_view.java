@@ -22,7 +22,7 @@ import javax.swing.border.EmptyBorder;
  *
  * @author juans
  */
-public class Pagina_principal_view extends Interfaz_vista_abtractas{
+public class Pagina_principal_administrador_view extends Interfaz_vista_abtractas{
     
             
     public Container contenedor;
@@ -32,7 +32,7 @@ public class Pagina_principal_view extends Interfaz_vista_abtractas{
     public JLabel titulo;
     public FlowLayout miflow;
     
-    public Pagina_principal_view(){
+    public Pagina_principal_administrador_view(){
         String nombre = "Pagina Principal";
         super(nombre);
         contenedor = super.getContenedor();
