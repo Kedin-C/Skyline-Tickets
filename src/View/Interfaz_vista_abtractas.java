@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package View;
+package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -29,17 +29,13 @@ public abstract class Interfaz_vista_abtractas extends JFrame{
     //panel1 es la cabeza de la pagina y panel2 es el cuerpo de la pagina osea todo lo de abajo de la cabeza
     JPanel panel1,panel2;
     JLabel portada;
-    JButton continuar,volver;
     GridLayout migrid;
     
-    
-    public Interfaz_vista_abtractas(String nombre_pagina){
-        
-        super(nombre_pagina);
+    public Interfaz_vista_abtractas(String nombrePagina){
+        super(nombrePagina);
     
     //contenedor
     contenedor = getContentPane();  
-
     
     //Jpanel
     panel1 = new JPanel();
@@ -53,31 +49,14 @@ public abstract class Interfaz_vista_abtractas extends JFrame{
     //Aqui estoy poniendo un border a el panel para despues poder ubicarlo en direfentes direcciones
     panel1.setLayout(new BorderLayout());
     //Aqui llamando a la imagen que tengo guardada en documentos, y creo una variable para guardarla
-    ImageIcon imagen_portada =new ImageIcon("portada.png");
-    //Aqui convirto a la imagen para usar el metodo de getScaledInstance, el cual me ayuda a dimensionar la imagen
+    ImageIcon imagen_portada = new ImageIcon(
+        getClass().getResource("/imagenes/logo_blanco.png"));
+    //Aqui estoy ajustando el tama;o de la imagen para que cuadre
     Image imagen_ajustada = imagen_portada.getImage().getScaledInstance(190, 170, Image.SCALE_SMOOTH);
-    //Aqui estoy convirtiendo a la imagen que anteriormente ajuste, a una imageicon denuevo para usarla
+    //Aqui estoy convirtiendo a la imagen que anteriormente ajuste, a un icono
     Icon portada_img = new ImageIcon(imagen_ajustada);
     //Aqui estoy declarando el JLabel en donde va a estar la imagen
     portada =  new JLabel(portada_img);
-    
-    ImageIcon imagen1 = new ImageIcon("avion.png");    
-    Image imagen1_ajustada =  imagen1.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);   
-    ImageIcon imagen_ya_ajustada = new ImageIcon(imagen1_ajustada);
-    
-    continuar = new JButton("Continuar   ",imagen_ya_ajustada);
-    continuar.setPreferredSize(new Dimension(180,45));
-    continuar.setBackground(Color.decode("#037FB9"));
-    continuar.setForeground(Color.WHITE);
-    
-    ImageIcon imagen_volver = new ImageIcon("volver.png");       
-    Image Imagen_volver_ajustada = imagen_volver.getImage().getScaledInstance(40, 30, Image.SCALE_SMOOTH);        
-    ImageIcon nueva_imagen_volver = new ImageIcon(Imagen_volver_ajustada);
-    
-    volver = new JButton("  Volver    ",nueva_imagen_volver);
-    volver.setPreferredSize(new Dimension(200,40));    
-    volver.setBackground(Color.decode("#037FB9"));
-    volver.setForeground(Color.WHITE);
 
     
   
@@ -95,7 +74,7 @@ public abstract class Interfaz_vista_abtractas extends JFrame{
   
     public Container getContenedor(){
      return this.contenedor;
-    }
+    };
     
     public JPanel getPanel1(){
         return this.panel1;
@@ -104,13 +83,5 @@ public abstract class Interfaz_vista_abtractas extends JFrame{
      public JPanel getPanel2(){
         return this.panel2;
     }
-     
-     public JButton getContinuar(){
-         return this.continuar;
-     }
-     
-     public JButton getVolver(){
-         return this.volver;
-     }
     
 }
