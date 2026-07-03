@@ -10,14 +10,14 @@ package Controller;
  */
 import java.util.Properties;
 import javax.swing.JOptionPane;
-//import jakarta.mail.Authenticator;
-//import jakarta.mail.Message;
-//import jakarta.mail.MessagingException;
-//import jakarta.mail.PasswordAuthentication;
-//import jakarta.mail.Session;
-//import jakarta.mail.Transport;
-//import jakarta.mail.internet.InternetAddress;
-//import jakarta.mail.internet.MimeMessage;
+import jakarta.mail.Authenticator;
+import jakarta.mail.Message;
+import jakarta.mail.MessagingException;
+import jakarta.mail.PasswordAuthentication;
+import jakarta.mail.Session;
+import jakarta.mail.Transport;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 
 public class Correo_controller {
 
@@ -29,67 +29,67 @@ public class Correo_controller {
     private  String asunto;
 
     
-//    private Session crearSesion() {
-//
-//        Properties propiedades = new Properties();
-//
-//        propiedades.put("mail.smtp.host", "smtp.gmail.com");
-//        propiedades.put("mail.smtp.port", "587");
-//        propiedades.put("mail.smtp.auth", "true");
-//        propiedades.put("mail.smtp.starttls.enable", "true");
-//
-//        Session sesion = Session.getInstance(
-//                propiedades,
-//                new Authenticator() {
-//                    @Override
-//                    protected PasswordAuthentication getPasswordAuthentication() {
-//                        return new PasswordAuthentication(correoRemitente, contraseña);
-//                    }
-//                });
-//
-//        sesion.setDebug(true);
-//
-//        return sesion;
-//    }
+    private Session crearSesion() {
+
+        Properties propiedades = new Properties();
+
+        propiedades.put("mail.smtp.host", "smtp.gmail.com");
+        propiedades.put("mail.smtp.port", "587");
+        propiedades.put("mail.smtp.auth", "true");
+        propiedades.put("mail.smtp.starttls.enable", "true");
+
+        Session sesion = Session.getInstance(
+                propiedades,
+                new Authenticator() {
+                    @Override
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(correoRemitente, contraseña);
+                    }
+                });
+
+        sesion.setDebug(true);
+
+        return sesion;
+    }
 
  
-//    private void enviarCorreo() {
-//
-//        try {
-//
-//            Session sesion = crearSesion();
-//
-//            MimeMessage correo = new MimeMessage(sesion);
-//
-//            correo.setFrom(new InternetAddress(correoRemitente));
-//
-//            correo.setRecipient(
-//                    Message.RecipientType.TO,
-//                    new InternetAddress(cdestino)
-//            );
-//
-//            correo.setSubject(asunto);
-//
-//            correo.setText(mensaje);
-//
-//            Transport.send(correo);
-//
-//            JOptionPane.showMessageDialog(
-//                    null,
-//                    "Correo enviado correctamente."
-//            );
-//
-//        } catch (MessagingException e) {
-//
-//            JOptionPane.showMessageDialog(
-//                    null,
-//                    "Error al enviar el correo\n" + e.getMessage()
-//            );
-//
-//            e.printStackTrace();
-//        }
-//
-//    }
+    private void enviarCorreo() {
+
+        try {
+
+            Session sesion = crearSesion();
+
+            MimeMessage correo = new MimeMessage(sesion);
+
+            correo.setFrom(new InternetAddress(correoRemitente));
+
+            correo.setRecipient(
+                    Message.RecipientType.TO,
+                    new InternetAddress(cdestino)
+            );
+
+            correo.setSubject(asunto);
+
+            correo.setText(mensaje);
+
+            Transport.send(correo);
+
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Correo enviado correctamente."
+            );
+
+        } catch (MessagingException e) {
+
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Error al enviar el correo\n" + e.getMessage()
+            );
+
+            e.printStackTrace();
+        }
+
+    }
 
     
     public void enviarCodigoRecuperacion(String correoDestino, String codigo) {

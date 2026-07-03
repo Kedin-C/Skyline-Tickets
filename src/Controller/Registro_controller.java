@@ -127,7 +127,7 @@ public class Registro_controller implements ActionListener {
                 vista.dispose();
 
                 Login_view login = new Login_view();
-                new Login_controller(login);
+//                new Login_controller(login);
                 login.setVisible(true);
 
             } else {

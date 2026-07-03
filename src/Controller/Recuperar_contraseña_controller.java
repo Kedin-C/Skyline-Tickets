@@ -41,7 +41,7 @@ public class Recuperar_contraseña_controller {
                 view.dispose();
 
                 Login_view login = new Login_view();
-                new Login_controller(login);
+//                new Login_controller(login);
             }
         });
     }
