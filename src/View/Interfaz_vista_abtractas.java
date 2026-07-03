@@ -44,7 +44,7 @@ public abstract class Interfaz_vista_abtractas extends JFrame{
     //Jpanel
     panel1 = new JPanel();
     panel2 = new JPanel();
-    //Esto es para ponerle margin al panel
+    //Esto es para ponerle margen al panel
     panel1.setBorder(new EmptyBorder(0,20,0,0));
     //Aqui pongo el color del panel
     panel1.setBackground(Color.decode("#037FB9"));
@@ -53,7 +53,7 @@ public abstract class Interfaz_vista_abtractas extends JFrame{
     //Aqui estoy poniendo un border a el panel para despues poder ubicarlo en direfentes direcciones
     panel1.setLayout(new BorderLayout());
     //Aqui llamando a la imagen que tengo guardada en documentos, y creo una variable para guardarla
-    ImageIcon imagen_portada =new ImageIcon("portada.png");
+    ImageIcon imagen_portada =new ImageIcon("src/Imagenes/logo_blanco.png");
     //Aqui convirto a la imagen para usar el metodo de getScaledInstance, el cual me ayuda a dimensionar la imagen
     Image imagen_ajustada = imagen_portada.getImage().getScaledInstance(190, 170, Image.SCALE_SMOOTH);
     //Aqui estoy convirtiendo a la imagen que anteriormente ajuste, a una imageicon denuevo para usarla
@@ -70,7 +70,7 @@ public abstract class Interfaz_vista_abtractas extends JFrame{
     continuar.setBackground(Color.decode("#037FB9"));
     continuar.setForeground(Color.WHITE);
     
-    ImageIcon imagen_volver = new ImageIcon("volver.png");       
+    ImageIcon imagen_volver = new ImageIcon("src/Imagenes/volver.png");       
     Image Imagen_volver_ajustada = imagen_volver.getImage().getScaledInstance(40, 30, Image.SCALE_SMOOTH);        
     ImageIcon nueva_imagen_volver = new ImageIcon(Imagen_volver_ajustada);
     
