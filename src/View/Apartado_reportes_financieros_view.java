@@ -12,7 +12,6 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -33,35 +32,35 @@ import org.jfree.chart.JFreeChart;
  *
  * @author juans
  */
-public class Apartado_reportes_operacionales_view extends Interfaz_vista_abtractas{
+public class Apartado_reportes_financieros_view extends Interfaz_vista_abtractas{
     
     public Container contenedor;
     public JPanel panel1,panel2,panelBotones,panelReportes,panelInferior,panelGraficos,panelCentral,paneltiempo1,paneltiempo2,
-            panelbotonfiltro,panelModal,panelComboxDestino,panelComboxTipo,panelBotonDestino,panelModalDestino,panelModalTipo,
+            panelbotonfiltro,panelModal,panelComboxTipo,panelModalTipo,
             panelBotonTipo;
     public JLabel titulo;
-    public JButton btnFecha,btnDestino,btnTipo,btnExportar,volver,btnAplicarFecha,btnAplicarDestino,btnAplicarTipo;
+    public JButton btnFecha,btnTipo,btnExportar,volver,btnAplicarFecha,btnAplicarTipo;
     public JTextArea areaReportes;
     public JScrollPane scrollReportes;
     public DefaultTableModel modelo;
     public JTable tabla;
     private String tituloReportes;
-    public JFreeChart chartTiempo,chartDestinos,charTipo;
-    public ChartPanel panelTiempo,panelDestinos,panelTipo;
-    public JDialog modalFecha,modalDestino,modalTipo;
+    public JFreeChart chartIngresos,chartGastos,charTipo;
+    public ChartPanel panelIngresos,panelGastos,panelTipo;
+    public JDialog modalFecha,modalTipo;
     public JDateChooser fechaInicio,fechaFin;
     public JComboBox ComboxTipo;
-    public String listaTipo[] = {"","Nacional","Internacional"};
+    public String listaTipo[] = {"","Ventas","Ingresos","Gastos","Ganancias"};
     
-    public Apartado_reportes_operacionales_view(){
-        String nombre = "REPORTES OPERACIONALES";
+    public Apartado_reportes_financieros_view(){
+        String nombre = "REPORTES FINANCIEROS";
         super(nombre);
         contenedor = super.getContenedor();
         panel1 = super.getPanel1();
         panel2 = super.getPanel2();
 
         //Titulo
-        JLabel titulo = new JLabel("Reportes Operacionales", SwingConstants.CENTER);
+        JLabel titulo = new JLabel("Reportes Financieros", SwingConstants.CENTER);
         titulo.setForeground(Color.WHITE);
         titulo.setFont(new Font("Arial", Font.BOLD, 20));
         panel1.add(titulo, BorderLayout.CENTER);
@@ -72,16 +71,12 @@ public class Apartado_reportes_operacionales_view extends Interfaz_vista_abtract
         // Panel con los botones de filtros hacia la izquierda
         JPanel panelFiltros = new JPanel(new FlowLayout(FlowLayout.LEFT, 60, 10));
         btnFecha = new JButton("Filtro por Fecha");
-        btnDestino = new JButton("Filtro por Destino");
-        btnTipo = new JButton("Filtro por Tipo de Vuelo");
+        btnTipo = new JButton("Filtro por Tipo de Reporte");
         btnFecha.setBackground(Color.decode("#037FB9"));
         btnFecha.setForeground(Color.white);
-        btnDestino.setBackground(Color.decode("#037FB9"));
-        btnDestino.setForeground(Color.white);
         btnTipo.setBackground(Color.decode("#037FB9"));
         btnTipo.setForeground(Color.white);
         panelFiltros.add(btnFecha);
-        panelFiltros.add(btnDestino);
         panelFiltros.add(btnTipo);
 
         //Panel con el boton exportar hacia la derecha
@@ -97,32 +92,29 @@ public class Apartado_reportes_operacionales_view extends Interfaz_vista_abtract
         
         //creo una tabla con columnas
         modelo = new DefaultTableModel();
-        modelo.addColumn("NUMERO VUELO  ");
+        modelo.addColumn("TIPO ");
+        modelo.addColumn("DESCRIPCION ");
+        modelo.addColumn("MONTO ");
         modelo.addColumn("FECHA ");
-        modelo.addColumn("ORIGEN ");
-        modelo.addColumn("DESTINO ");
-        modelo.addColumn("TIPO VUELO ");
-        modelo.addColumn("CLASE ");
-        modelo.addColumn("CANTIDAD PASAJEROS ");
-        modelo.addColumn("ESTADO ");
+        modelo.addColumn("REFERENCIA ");
         
         
-        // Gráfico de barras Tiempo
-        panelTiempo = new ChartPanel(chartTiempo);
-        panelTiempo.setPreferredSize(new Dimension(400, 300));
+        // Gráfico de barras Ingresos
+        panelIngresos = new ChartPanel(chartIngresos);
+        panelIngresos.setPreferredSize(new Dimension(400, 300));
         
-        // Gráfico de barras Destinos
-        panelDestinos = new ChartPanel(chartDestinos);
-        panelDestinos.setPreferredSize(new Dimension(400, 300));
+        // Gráfico de barras Gastos
+        panelGastos = new ChartPanel(chartGastos);
+        panelGastos.setPreferredSize(new Dimension(400, 300));
 
-        // Gráfico de pastel tipo
+        // Gráfico de pastel gastos/ganancias
         panelTipo = new ChartPanel(charTipo);
         panelTipo.setPreferredSize(new Dimension(400, 300));
         
         panelGraficos= new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 20));
         panelGraficos.setPreferredSize(new Dimension(220, 340));
-        panelGraficos.add(panelTiempo);
-        panelGraficos.add(panelDestinos);
+        panelGraficos.add(panelIngresos);
+        panelGraficos.add(panelGastos);
         panelGraficos.add(panelTipo);
         
         
@@ -194,24 +186,7 @@ public class Apartado_reportes_operacionales_view extends Interfaz_vista_abtract
         modalFecha.add(panelModal);
         
         
-        // Agregamos el modal del filtro Destinos
-        modalDestino = new JDialog(this, "Seleccionar Destino", true);
-        modalDestino.setLayout(new FlowLayout(FlowLayout.CENTER));
-        panelModalDestino = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panelModalDestino.setPreferredSize(new Dimension(150, 150));
-        
-        panelComboxDestino = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        
-        panelBotonDestino = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        btnAplicarDestino = new JButton("Aplicar Filtro");
-        panelBotonDestino.add(btnAplicarDestino);
-        
-        panelModalDestino.add(panelComboxDestino);
-        panelModalDestino.add(panelBotonDestino);
-        modalDestino.add(panelModalDestino);
-        
-        
-        // Agregamos el modal del filtro Destinos
+        // Agregamos el modal del filtro Tipo de Reporte
         modalTipo = new JDialog(this, "Seleccionar Tipo", true);
         modalTipo.setLayout(new FlowLayout(FlowLayout.CENTER));
         panelModalTipo = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -237,12 +212,6 @@ public class Apartado_reportes_operacionales_view extends Interfaz_vista_abtract
         modalFecha.setSize(200, 200);
         modalFecha.setLocationRelativeTo(this);
         modalFecha.setVisible(true);
-    }
-    
-    public void mostrarModalDestino() {
-        modalDestino.setSize(200, 200);
-        modalDestino.setLocationRelativeTo(this);
-        modalDestino.setVisible(true);
     }
     
     public void mostrarModalTipo() {

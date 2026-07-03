@@ -16,7 +16,6 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 /**
@@ -27,9 +26,9 @@ public class Pagina_principal_view extends Interfaz_vista_abtractas{
     
             
     public Container contenedor;
-    public JPanel panel1,panelboton,panelboton2,paneltitulo;
+    public JPanel panel1,panelboton,panelboton2,panelboton3,paneltitulo,panelbotones;
     public Panel_con_fondo_view panel2;
-    public JButton comprar,clase,inicioSesion;
+    public JButton comprar,clase,rol,reportes;
     public JLabel titulo;
     public FlowLayout miflow;
     
@@ -38,48 +37,81 @@ public class Pagina_principal_view extends Interfaz_vista_abtractas{
         super(nombre);
         contenedor = super.getContenedor();
         panel1 = super.getPanel1();
-        JButton inicio = new JButton("Inicio Sesión");
-        inicio.setBackground(Color.white);
-        inicio.setPreferredSize(new Dimension(200, 40));
-        inicio.setFont(new Font("Arial", Font.BOLD, 20));
-        inicio.setBorderPainted(false);
-        panelboton2 = new JPanel();
-        panelboton2.add(inicio);
-        panelboton2.setOpaque(false);
-        panelboton2.setBorder(new EmptyBorder(20,1,1,20));
-        panel1.add(panelboton2, BorderLayout.LINE_END);
+        
+        // Crear panel contenedor para los dos botones
+        panelbotones = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 20));
+        panelbotones.setOpaque(false);
+
+        // Configurar botones
+        reportes = new JButton("Reportes");
+        reportes.setBackground(Color.white);
+        reportes.setPreferredSize(new Dimension(200, 40));
+        reportes.setFont(new Font("Arial", Font.BOLD, 20));
+        reportes.setBorderPainted(false);
+
+        rol = new JButton("Asignar Rol");
+        rol.setBackground(Color.white);
+        rol.setPreferredSize(new Dimension(200, 40));
+        rol.setFont(new Font("Arial", Font.BOLD, 20));
+        rol.setBorderPainted(false);
+
+        // Agregar ambos al mismo panel
+        panelbotones.add(reportes);
+        panelbotones.add(rol);
+
+        // Añadir el panel completo al lado derecho del panel1
+        panel1.add(panelbotones, BorderLayout.LINE_END);
+        
+        // Panel principal con fondo
         panel2 = new Panel_con_fondo_view("/imagenes/fondo_principal.png");
-        panel2.setLayout(new BoxLayout(panel2, BoxLayout.Y_AXIS));
+        panel2.setLayout(new BoxLayout(panel2, BoxLayout.Y_AXIS)); // disposición vertical
+
+        // Título de bienvenida
         titulo = new JLabel("Bienvenidos");
         titulo.setFont(new Font("Arial", Font.BOLD, 30));
         titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        // Panel auxiliar para el título
         miflow = new FlowLayout();
         paneltitulo = new JPanel(miflow);
         paneltitulo.add(titulo);
+
+       // Botones principales
         comprar = new JButton("Comprar Vuelo");
         clase = new JButton("Modificar Clase de Vuelo y Equipaje");
+
+        // Panel para el botón "Comprar Vuelo"
         panelboton = new JPanel();
         panelboton.add(comprar);
         panelboton.setBorder(new EmptyBorder(50,1,50,1));
         panelboton.setOpaque(false);
-        panel2.add(Box.createVerticalGlue());
-        panel2.add(titulo,BorderLayout.CENTER);
-        panel2.add(clase);
-        panel2.add(panelboton);
+
+        // Agregar componentes al panel con fondo
+        panel2.add(Box.createVerticalGlue());   
+        panel2.add(titulo);                     
+        panel2.add(clase);                      
+        panel2.add(panelboton);                 
+
+       // Configuración del botón "Comprar Vuelo"
         comprar.setAlignmentX(Component.CENTER_ALIGNMENT);
         comprar.setBackground(Color.white);
         comprar.setPreferredSize(new Dimension(300, 60));
         comprar.setFont(new Font("Arial", Font.BOLD, 24));
         comprar.setBorderPainted(false);
+
+        // Configuración del botón "Modificar Clase de Vuelo y Equipaje"
         clase.setAlignmentX(Component.CENTER_ALIGNMENT);
         clase.setBackground(Color.white);
         clase.setPreferredSize(new Dimension(450, 60));
         clase.setFont(new Font("Arial", Font.BOLD, 24));
         clase.setBorderPainted(false);
-        contenedor.add(panel2, BorderLayout.CENTER);
+
+        // Agregar panel2 al contenedor principal
+        contenedor.add(panel2, BorderLayout.CENTER);         
         
 
     }
+
     
     
 }

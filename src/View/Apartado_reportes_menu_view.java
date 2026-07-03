@@ -20,18 +20,19 @@ import javax.swing.JPanel;
  *
  * @author juans
  */
-public class ApartadoReportesMenuView extends Interfaz_vista_abtractas{
+public class Apartado_reportes_menu_view extends Interfaz_vista_abtractas{
     
     public Container contenedor;
-    public JPanel panel1,panel2,panelbotones,panelcentro;
-    public JButton Rfinanciero,Roperacional,Rvuelos;
+    public JPanel panel1,panel2,panelbotones,panelcentro,panelInferior;
+    public JButton Rfinanciero,Roperacional,volver;
     
-    public ApartadoReportesMenuView(){
+    public Apartado_reportes_menu_view(){
         String nombre = "Pagina Principal";
         super(nombre);
         contenedor = super.getContenedor();
         panel1 = super.getPanel1();
         panel2 = super.getPanel2();
+        volver = super.getVolver();
         panel2.setLayout(new BoxLayout(panel2, BoxLayout.Y_AXIS));
         panel2.add(Box.createVerticalGlue());
         
@@ -49,13 +50,6 @@ public class ApartadoReportesMenuView extends Interfaz_vista_abtractas{
         Roperacional.setForeground(Color.white);
         Roperacional.setPreferredSize(new Dimension(300, 150));
         
-        //Boton vuelos
-        Rvuelos = new JButton("Reportes Vuelos");
-        Rvuelos.setFont(new Font("Arial", Font.BOLD, 20));
-        Rvuelos.setBackground(Color.decode("#037FB9"));
-        Rvuelos.setForeground(Color.white);
-        Rvuelos.setPreferredSize(new Dimension(300, 150));
-        
         //Panel de botones
         panelbotones = new JPanel(new GridLayout(1,3,100,100));
         panelbotones.setBackground(Color.white);
@@ -65,11 +59,16 @@ public class ApartadoReportesMenuView extends Interfaz_vista_abtractas{
         panelcentro.setBackground(Color.WHITE);
         panelcentro.add(panelbotones);
         
+        //Panel centrado
+        panelInferior = new JPanel(new FlowLayout(FlowLayout.RIGHT, 60, 10));
+        panelInferior.setBackground(Color.white);
+        panelInferior.add(volver);
+        
         //Agregar componentes
         panelbotones.add(Rfinanciero);
         panelbotones.add(Roperacional);
-        panelbotones.add(Rvuelos);
         panel2.add(panelcentro);
+        panel2.add(panelInferior);
         
     }
     

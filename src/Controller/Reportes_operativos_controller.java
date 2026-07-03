@@ -2,13 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package skyline_tickets;
+package Controller;
 
+import Controller.Reportes_creadorPdf;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import Model.ReportesDao;
+import Model.Reportes_operativos_dao;
+import View.Apartado_reportes_menu_view;
 import View.Apartado_reportes_operacionales_view;
 import java.awt.Dimension;
 import java.text.SimpleDateFormat;
@@ -24,19 +26,21 @@ import org.jfree.data.general.DefaultPieDataset;
  *
  * @author juans
  */
-public class Reportes_controlador implements ActionListener{
+public class Reportes_operativos_controller implements ActionListener{
     
-    public ReportesDao reportes = new ReportesDao();
+    public Reportes_operativos_dao reportes = new Reportes_operativos_dao();
     public Apartado_reportes_operacionales_view vista = new Apartado_reportes_operacionales_view();
+    public Apartado_reportes_menu_view vistaM = new Apartado_reportes_menu_view();
     DefaultTableModel modelo = new DefaultTableModel();
     String[] listaDestinos;
     JComboBox<String> comboDestinos;
     Reportes_creadorPdf CrearPdf;
     JFreeChart chartTiempo,chartDestino,chartTipo;
     
-    public Reportes_controlador(Apartado_reportes_operacionales_view vista, ReportesDao dao) {
+    public Reportes_operativos_controller(Apartado_reportes_operacionales_view vista, Reportes_operativos_dao reportes, Apartado_reportes_menu_view vistaM) {
         this.vista = vista;
-        this.reportes = dao;
+        this.reportes = reportes;
+        this.vistaM = vistaM;
         this.CrearPdf = new Reportes_creadorPdf();
         this.vista.btnExportar.addActionListener(this);
         this.vista.btnFecha.addActionListener(this);
@@ -45,6 +49,7 @@ public class Reportes_controlador implements ActionListener{
         this.vista.btnAplicarDestino.addActionListener(this);
         this.vista.btnTipo.addActionListener(this);
         this.vista.btnAplicarTipo.addActionListener(this);
+        this.vista.volver.addActionListener(this);
         cargarTabla();
         cargarGraficoTendenciaFecha("2026-03-01", "2026-06-30");
         cargarGraficoDestinosFecha("2026-03-01", "2026-06-30", 5);
@@ -93,6 +98,9 @@ public class Reportes_controlador implements ActionListener{
                 cargarGraficoDistribucionTipo(tipo);
                 vista.modalTipo.dispose();
             }
+        }else if(e.getSource() == vista.volver){
+            vista.setVisible(false);
+            vistaM.setVisible(true);
         }
     }
 

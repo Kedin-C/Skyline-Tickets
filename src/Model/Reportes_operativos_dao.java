@@ -17,7 +17,7 @@ import org.jfree.data.general.DefaultPieDataset;
  *
  * @author juans
  */
-public class ReportesDao {
+public class Reportes_operativos_dao {
     
     Conexion conectar = Conexion.getObject();
     Connection con;
