@@ -1,0 +1,96 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package controller;
+
+/**
+ *
+ * @author Nikob
+ */
+import model.UsuarioDao;
+import model.Sesion_usuario;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+import model.Usuario;
+import view.Inicio_usuario_view;
+import view.Login_view;
+import view.Menu_principal_view;
+import view.Pagina_principal_administrador_view;
+import view.Recuperar_contraseña_view;
+
+
+public class Login_controller implements ActionListener {
+    private Login_view vista;
+    private UsuarioDao dao;
+    public Login_controller(Login_view vista) {
+        this.vista = vista;
+        this.dao = new UsuarioDao();
+        vista.getB1().addActionListener(this);
+        vista.getB2().addActionListener(this);
+        vista.getBtnVolver().addActionListener(this);
+
+    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == vista.getB1()) {
+            String correo = vista.getTxCorreo().getText();
+            String contraseña = vista.getTxContraseña().getText();
+            Usuario usuario = dao.iniciarSesion(
+                    correo,
+                    contraseña);
+            if(usuario != null) {
+
+                
+                Sesion_usuario.setUsuario(usuario);
+
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Bienvenido " + usuario.getNombre());
+                if(usuario.getRol().equals("ADMINISTRADOR")) {
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Ingreso como administrador");
+                    // Abrir MenuAdministradorView
+                    
+                     Pagina_principal_administrador_view vistaInicioad = new Pagina_principal_administrador_view();
+                     vistaInicioad.setLocationRelativeTo(null);
+                     vistaInicioad.setVisible(true);
+                     vista.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Ingreso como usuario");
+                     Inicio_usuario_view vistaInicio = new Inicio_usuario_view();
+                     vistaInicio.setLocationRelativeTo(null);
+                     vistaInicio.setVisible(true);
+                     vista.dispose();
+                }
+            } else {
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Correo o contraseña incorrectos");
+            }
+        }
+    
+        if(e.getSource() == vista.getB2()) {
+            
+        Recuperar_contraseña_view recuperarView = new Recuperar_contraseña_view();
+        new Recuperar_contraseña_controller(recuperarView);
+        recuperarView.setLocationRelativeTo(null);
+        recuperarView.setVisible(true);
+        vista.dispose();
+        }
+        
+        
+        if(e.getSource() == vista.getBtnVolver()) {
+            
+        Menu_principal_view MenuView = new Menu_principal_view();
+        MenuView.setLocationRelativeTo(null);
+        
+        vista.dispose();
+        }
+        }
+    }
+
