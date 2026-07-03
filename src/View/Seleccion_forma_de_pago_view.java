@@ -31,6 +31,9 @@ public class Seleccion_forma_de_pago_view extends Interfaz_vista_abtractas{
     public JButton forma1,forma2,forma3;
     private JLabel text;
     private int vista_anterior;
+    private int id_ticket;
+
+    
     
      public Seleccion_forma_de_pago_view() {
         String nombre = "Seleccion forma de pago view";
@@ -119,6 +122,14 @@ public class Seleccion_forma_de_pago_view extends Interfaz_vista_abtractas{
     
     public int getVista_anterior(){
         return this.vista_anterior;
+    }
+    
+    public int getId_ticket() {
+        return id_ticket;
+    }
+
+    public void setId_ticket(int id_ticket) {
+        this.id_ticket = id_ticket;
     }
     
           

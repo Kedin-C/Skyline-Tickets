@@ -34,7 +34,6 @@ public class ViewPrincipal_controlador implements ActionListener{
     this.ticket = ticket;
     this.usuario = usuario;
     this.s = s;
-    
     vista.clase.addActionListener(this);
     }
 
@@ -44,12 +43,16 @@ public class ViewPrincipal_controlador implements ActionListener{
         if(e.getSource() == vista.clase){
             
             
-            setTickets();
-            
-            
-            s.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-             s.setVisible(true);
+            if(getCant_t() > 0){
+                setTickets();
+                s.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+                s.setVisible(true);
                 s.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            }else{
+                JOptionPane.showMessageDialog(vista,"No tienes vuelos activos disponibles");
+            }
+            
+                
         
             
         
@@ -62,12 +65,35 @@ public class ViewPrincipal_controlador implements ActionListener{
             
             
             
-    List<Ticket> tick = tdao.getTotalVuelosList(tickets, usuario);  
+    List<Ticket> tick = tdao.getTotalVuelosList(usuario);  
 
     s.setTicketInfo(tick);
     s.SetVuelos(tickets);
-    
-    ;
             
     }
+    
+    public int getCant_t(){
+        
+        JOptionPane.showMessageDialog(vista,tdao.getTotalVuelos(usuario));
+        return tdao.getTotalVuelos(usuario);
+    }
+    
+    public Ticket getTicket_select(int v){
+    
+         int cod = 0;
+         int tickets = tdao.getTotalVuelos(usuario);
+         List<Ticket> tick = tdao.getTotalVuelosList(usuario);  
+         
+         if(v <= tickets && v >= 0){
+             ticket.setId(tick.get(v).getId());
+             ticket.setDestino(tick.get(v).getDestino());
+             ticket.setOrigen(tick.get(v).getOrigen());
+             ticket.setTipo_vuelo(tick.get(v).getTipo_vuelo());
+         }
+         
+         return this.ticket;
+         
+    }
+    
+    
  }

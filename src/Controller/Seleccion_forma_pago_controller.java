@@ -22,7 +22,7 @@ public class Seleccion_forma_pago_controller implements ActionListener{
     
     
     
-    Seleccion_forma_pago_controller(Seleccion_forma_de_pago_view vista, cambio_de_clase_de_vuelo_viiew clase, Agregar_equipaje_extra_view equipaje){
+    public Seleccion_forma_pago_controller(Seleccion_forma_de_pago_view vista, cambio_de_clase_de_vuelo_viiew clase, Agregar_equipaje_extra_view equipaje){
         this.clase = clase;
         this.equipaje = equipaje;
         this.vista = vista;

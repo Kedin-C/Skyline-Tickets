@@ -34,27 +34,27 @@ public JButton volver;
 //ticket 1
 private JPanel img_panel,tipo_panel,text1_panel,text2_panel,boton_panel;
 private JLabel imagen,tipo,vuelo_ida,vuelo_vuelta;
-private JButton select1;
+public JButton select1;
 
 //ticket 2
 private JPanel img_panel2,tipo_panel2,text1_panel2,text2_panel2,boton_panel2;
 private JLabel imagen2,tipo2,vuelo_ida2,vuelo_vuelta2;
-private JButton select2;
+public JButton select2;
 
 //ticket 3
 private JPanel img_panel3,tipo_panel3,text1_panel3,text2_panel3,boton_panel3;
 private JLabel imagen3,tipo3,vuelo_ida3,vuelo_vuelta3;
-private JButton select3;
+public JButton select3;
 
 //ticket 4
 private JPanel img_panel4,tipo_panel4,text1_panel4,text2_panel4,boton_panel4;
 private JLabel imagen4,tipo4,vuelo_ida4,vuelo_vuelta4;
-private JButton select4;
+public JButton select4;
 
 //ticket 5
 private JPanel img_panel5,tipo_panel5,text1_panel5,text2_panel5,boton_panel5;
 private JLabel imagen5,tipo5,vuelo_ida5,vuelo_vuelta5;
-private JButton select5;
+public JButton select5;
 
 
 //ticket 1
@@ -248,7 +248,8 @@ private String text_ticket5_2;
     vuelo_ida.setForeground(Color.WHITE);
     vuelo_vuelta.setFont(new Font("Arial",Font.BOLD,15));
     vuelo_vuelta.setForeground(Color.WHITE);
-    tipo.setFont(new Font("Arial",Font.BOLD,20));
+    tipo.setBorder(new EmptyBorder(20,1,1,1));
+    tipo.setFont(new Font("Arial",Font.BOLD,18));
     tipo.setForeground(Color.WHITE);
     
     select1.setPreferredSize(new Dimension(200,30));
@@ -259,7 +260,8 @@ private String text_ticket5_2;
     vuelo_ida2.setForeground(Color.WHITE);
     vuelo_vuelta2.setFont(new Font("Arial",Font.BOLD,15));
     vuelo_vuelta2.setForeground(Color.WHITE);
-    tipo2.setFont(new Font("Arial",Font.BOLD,20));
+    tipo2.setBorder(new EmptyBorder(20,1,1,1));
+    tipo2.setFont(new Font("Arial",Font.BOLD,18));
     tipo2.setForeground(Color.WHITE);
     
     select2.setPreferredSize(new Dimension(200,30));
@@ -270,7 +272,8 @@ private String text_ticket5_2;
     vuelo_ida3.setForeground(Color.WHITE);
     vuelo_vuelta3.setFont(new Font("Arial",Font.BOLD,15));
     vuelo_vuelta3.setForeground(Color.WHITE);
-    tipo3.setFont(new Font("Arial",Font.BOLD,20));
+    tipo3.setBorder(new EmptyBorder(20,1,1,1));
+    tipo3.setFont(new Font("Arial",Font.BOLD,18));
     tipo3.setForeground(Color.WHITE);
     
     select3.setPreferredSize(new Dimension(200,30));
@@ -281,7 +284,8 @@ private String text_ticket5_2;
     vuelo_ida4.setForeground(Color.WHITE);
     vuelo_vuelta4.setFont(new Font("Arial",Font.BOLD,15));
     vuelo_vuelta4.setForeground(Color.WHITE);
-    tipo4.setFont(new Font("Arial",Font.BOLD,20));
+    tipo4.setBorder(new EmptyBorder(20,1,1,1));
+    tipo4.setFont(new Font("Arial",Font.BOLD,18));
     tipo4.setForeground(Color.WHITE);
     
     select4.setPreferredSize(new Dimension(200,30));
@@ -292,7 +296,8 @@ private String text_ticket5_2;
     vuelo_ida5.setForeground(Color.WHITE);
     vuelo_vuelta5.setFont(new Font("Arial",Font.BOLD,15));
     vuelo_vuelta5.setForeground(Color.WHITE);
-    tipo5.setFont(new Font("Arial",Font.BOLD,20));
+    tipo5.setBorder(new EmptyBorder(20,1,1,1));
+    tipo5.setFont(new Font("Arial",Font.BOLD,18));
     tipo5.setForeground(Color.WHITE);
     
     select5.setPreferredSize(new Dimension(200,30));
@@ -328,7 +333,7 @@ private String text_ticket5_2;
     img_panel3.add(imagen3);
     tipo_panel3.add(tipo3);
     text1_panel3.add(vuelo_ida3);
-
+    text2_panel3.add(vuelo_vuelta3);
     boton_panel3.add(select3);
     
     img_panel4.add(imagen4);
@@ -340,7 +345,7 @@ private String text_ticket5_2;
     img_panel5.add(imagen5);
     tipo_panel5.add(tipo5);
     text1_panel5.add(vuelo_ida5);
-
+    text2_panel5.add(vuelo_vuelta5);
     boton_panel5.add(select5);
     
     
@@ -536,6 +541,7 @@ text_ticket5_2 = "Vuelta: "+origen_vuelta_ticket5+" → "+destino_vuelta_ticket5
 if("IDA".equals(tipo_vuelo_ticket1)){
     tipo.setText(tipo_vuelo_ticket1);
     vuelo_ida.setText(text_ticket1_1);
+    vuelo_vuelta.setText(" ");
     
 }else{
     tipo.setText(tipo_vuelo_ticket1);
@@ -546,6 +552,7 @@ if("IDA".equals(tipo_vuelo_ticket1)){
 if("IDA".equals(tipo_vuelo_ticket2)){
     tipo2.setText(tipo_vuelo_ticket2);
     vuelo_ida2.setText(text_ticket2_1);
+    vuelo_vuelta2.setText(" ");
     
 }else{
     tipo2.setText(tipo_vuelo_ticket2);
@@ -556,6 +563,7 @@ if("IDA".equals(tipo_vuelo_ticket2)){
 if("IDA".equals(tipo_vuelo_ticket3)){
     tipo3.setText(tipo_vuelo_ticket3);
     vuelo_ida3.setText(text_ticket3_1);
+    vuelo_vuelta3.setText(" ");
     
 }else{
     tipo3.setText(tipo_vuelo_ticket3);
@@ -566,6 +574,7 @@ if("IDA".equals(tipo_vuelo_ticket3)){
 if("IDA".equals(tipo_vuelo_ticket4)){
     tipo4.setText(tipo_vuelo_ticket4);
     vuelo_ida4.setText(text_ticket4_1);
+    vuelo_vuelta4.setText(" ");
     
 }else{
     tipo4.setText(tipo_vuelo_ticket4);
@@ -576,6 +585,7 @@ if("IDA".equals(tipo_vuelo_ticket4)){
 if("IDA".equals(tipo_vuelo_ticket5)){
     tipo5.setText(tipo_vuelo_ticket5);
     vuelo_ida5.setText(text_ticket5_1);
+    vuelo_vuelta5.setText(" ");
     
 }else{
     tipo5.setText(tipo_vuelo_ticket5);

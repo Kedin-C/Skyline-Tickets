@@ -30,7 +30,7 @@ public class Interfaz_cambio_clase_controller implements ActionListener {
     
     
     
-    public Interfaz_cambio_clase_controller(Seleccion_de_Modificacion_de_vuelo_view vista_seleccion_clase_equipaje,cambio_de_clase_de_vuelo_viiew vista_seleccion_clase, Seleccion_modificacion_clase_de_vuelo_dao dao, Ticket ticket,Seleccion_forma_de_pago_view forma_pago){
+    public Interfaz_cambio_clase_controller(Seleccion_de_Modificacion_de_vuelo_view vista_seleccion_clase_vuelo,cambio_de_clase_de_vuelo_viiew vista_seleccion_clase, Seleccion_modificacion_clase_de_vuelo_dao dao, Ticket ticket,Seleccion_forma_de_pago_view forma_pago){
     this.vista_seleccion_clase_vuelo = vista_seleccion_clase_vuelo;
     this.vista_seleccion_clase = vista_seleccion_clase;
     this.forma_pago = forma_pago;
