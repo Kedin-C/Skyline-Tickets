@@ -141,7 +141,7 @@ public int getCod_anterior_view() {
         this.cod_anterior_view = cod_anterior_view;
     }
 
-}
+
 
 //La imagen de la tarjeta
 class FondoPanel extends JPanel {
@@ -158,4 +158,5 @@ class FondoPanel extends JPanel {
             g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
         }
     }
+}
 }

@@ -138,7 +138,7 @@ public class Tarjeta_de_debito_view extends Interfaz_vista_abtractas{
     public void setCod_anterior_view(int cod_anterior_view) {
         this.cod_anterior_view = cod_anterior_view;
     }
-}
+
 
 //La imagen de la tarjeta
 class FondoPanel extends JPanel {
@@ -155,4 +155,5 @@ class FondoPanel extends JPanel {
             g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
         }
     }
+}
 }
