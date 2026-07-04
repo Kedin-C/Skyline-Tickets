@@ -20,18 +20,17 @@ public class VuelosDao {
 
     
     public List<Vuelos> listarIda(String origen, String destino, String fecha){
-        // WHERE origen=? AND destino=? AND fecha=?
 
         
         List<Vuelos> listarV = new ArrayList<Vuelos>();
-        String sql="SELECT * FROM vuelos";
+        String sql="SELECT * FROM vuelos WHERE origen=? AND destino=? AND fecha=?";
         try{
             con = Conexion.getObject().getConection();
             ps=con.prepareStatement(sql);
             
-//            ps.setString(1, origen);
-//            ps.setString(2, destino);
-//            ps.setString(3, fecha);
+            ps.setString(1, origen);
+            ps.setString(2, destino);
+            ps.setString(3, fecha);
         
             rs=ps.executeQuery();
             
