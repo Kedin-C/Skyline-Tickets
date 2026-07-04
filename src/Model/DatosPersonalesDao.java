@@ -7,6 +7,7 @@ package Model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
 public class DatosPersonalesDao {
     
@@ -15,7 +16,41 @@ public class DatosPersonalesDao {
     PreparedStatement ps;
     ResultSet rs;
     
-    public void enviarDatos(){
-        String sql = "";
+    public void enviarDatos(String numero_documento, String nombre, String apellido, int codigo_tipo_documento, String sexo, String numero_telefono, String correo, String fecha_nacimiento, String nacionalidad){
+        String sql = "INSERT INTO datos_pasajero (numero_documento, nombre, apellido, codigo_tipo_documento, sexo, numero_telefono, correo, fecha_nacimiento, nacionalidad) "
+                + "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ? )";
+        try{
+            con = Conexion.getObject().getConection();
+            ps=con.prepareStatement(sql);
+        
+            ps.setString(1, numero_documento);
+            ps.setString(2, nombre);
+            ps.setString(3, apellido);
+            ps.setInt(4, codigo_tipo_documento);
+            ps.setString(5, sexo);
+            ps.setString(6, numero_telefono);
+            ps.setString(7, correo);
+            ps.setString(8, fecha_nacimiento);
+            ps.setString(9, nacionalidad);
+        
+            ps.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "Datos guardados con exito");
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, 
+                    ex.toString(),
+                    "Error al gusrdar los datos del pasajero"+ex.getMessage(),
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }finally {
+            if (con != null) {
+                try {
+                    con.close();
+                    ps.close();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.toString());
+                }
+            }
+        }
     }
 }

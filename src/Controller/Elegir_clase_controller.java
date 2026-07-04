@@ -39,20 +39,35 @@ public class Elegir_clase_controller implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        
         if(e.getSource() == vista.siguiente){
             if(vista.economica.isSelected()){
                 datos.setClaseVuelo(1);
+                datos.setTotalPagar(datos.getTotalPagar()+180000);
             }else if(vista.ejecutiva.isSelected()){
                 datos.setClaseVuelo(2);
+                datos.setTotalPagar(datos.getTotalPagar()+450000);
             }else{
                 datos.setClaseVuelo(3);
+                datos.setTotalPagar(datos.getTotalPagar()+850000);
             }
             
             datos.setNumeroTickets(Integer.parseInt(vista.listarNumeros.getSelectedItem().toString()));
+            
             if(vista.listarEquipaje.getSelectedIndex() > 0){
                 String tickets = vista.listarEquipaje.getSelectedItem().toString();
                 datos.setEquipajeExtra(Integer.parseInt(tickets.substring(0, 2)));
+                if(vista.listarEquipaje.getSelectedIndex() == 1){
+                    datos.setTotalPagar(datos.getTotalPagar()+60000);
+                }
+                if(vista.listarEquipaje.getSelectedIndex() == 2){
+                    datos.setTotalPagar(datos.getTotalPagar()+80000);
+                }else{
+                    datos.setTotalPagar(datos.getTotalPagar()+100000);
+                }
             }
+            
+            datos.setTotalPagar(datos.getTotalPagar()*datos.getNumeroTickets());
             
             Elegir_puestos_view vistaElegirPuestos = new Elegir_puestos_view();
             vista.setVisible(false);

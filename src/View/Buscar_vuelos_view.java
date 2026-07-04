@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JFrame;
-import Controller.Buscar_vuelos_controller;
 
 public class Buscar_vuelos_view extends Interfaz_vista_abtractas{
     // Declaracion de objetos y variables

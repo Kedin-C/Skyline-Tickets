@@ -133,6 +133,8 @@ public class Datos_y_pago_controller implements ActionListener{
             }
         });
         
+        vista.precioTotal.setText(""+datos.getTotalPagar());
+        
     }
 
         
@@ -163,7 +165,7 @@ public class Datos_y_pago_controller implements ActionListener{
                 
                 datos.setDatosPersonales(datosPasajeros);
                 
-                
+                datos.subirDatos();
                 //int pago = Integer.parseInt(vista.precioTotal.getText());
                 //datos.setTotalPagar(pago);
             }
@@ -177,7 +179,7 @@ public class Datos_y_pago_controller implements ActionListener{
                 
                 datos.setDatosPersonales(datosPasajeros);
                 
-                
+                datos.subirDatos();
                 //int pago = Integer.parseInt(vista.precioTotal.getText());
                 //datos.setTotalPagar(pago);
             
@@ -267,7 +269,6 @@ public class Datos_y_pago_controller implements ActionListener{
         datosPersonales.setFecha_nacimiento(fechaNacimiento);
 
         datosPasajeros.add(datosPersonales);
-            
     
     }
 }

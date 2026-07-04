@@ -128,6 +128,7 @@ public class Buscar_vuelos_controller implements ActionListener{
             principal.setVisible(true);
             principal.setExtendedState(JFrame.MAXIMIZED_BOTH);
         }
+        
         if(e.getSource() == vista.siguiente){
             
             int filaVuelo = vista.tabla.getSelectedRow();
@@ -144,7 +145,9 @@ public class Buscar_vuelos_controller implements ActionListener{
             
             //Para optener el id del vuelo
             int id = Integer.parseInt(vista.tabla.getValueAt(filaVuelo, 0).toString());
+            double precio = Double.parseDouble(vista.tabla.getValueAt(filaVuelo, 6).toString());
             datos.setCodigoVuelo(id);
+            datos.setTotalPagar(precio);
             
             if(vista.vuelo_ida.isSelected()){
                 datos.setTipoVuelo("Vuelo de ida");
