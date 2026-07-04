@@ -4,18 +4,13 @@
  */
 package Model;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Date;
 
 public class Vuelos {
     
     private int codigo_vuelo;
-    private String origen;
-    private String destino;
+    private String origen, destino, hora_salida, hora_llegada;
     private Date fecha;
-    private String hora_salida;
-    private String hora_llegada;
     private Double precio;      
             
     public Vuelos(){

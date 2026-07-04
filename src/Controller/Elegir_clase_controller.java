@@ -7,7 +7,6 @@ package Controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ButtonGroup;
-import javax.swing.JOptionPane;
 import Model.Datos;
 import View.Elegir_clase_view;
 import View.Elegir_puestos_view;
@@ -21,6 +20,7 @@ public class Elegir_clase_controller implements ActionListener{
         
         this.vista=vista;
         this.datos=datos;
+        
         this.vista.siguiente.addActionListener((ActionListener) this);
         this.vista.volver.addActionListener(this);
         

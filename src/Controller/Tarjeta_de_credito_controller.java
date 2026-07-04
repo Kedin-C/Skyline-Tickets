@@ -104,7 +104,7 @@ public class Tarjeta_de_credito_controller implements ActionListener{
                 
                 String nombre = vista.nombre_titular.getText();
                 
-                datos.setDatosPago(numero_tarjeta+", "+cvv+", "+nombre+", "+fecha+", "+datos.getTotalPagar());
+                //datos.setDatosPago(numero_tarjeta+", "+cvv+", "+nombre+", "+fecha+", "+datos.getTotalPagar());
             }
         }
         

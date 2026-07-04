@@ -8,6 +8,10 @@ public class Reservas {
     
     private int id, id_asiento, codigo_vuelo; 
     
+    public Reservas(){
+    
+    }
+    
     public Reservas(int id, int id_asiento, int codigo_vuelo){
         
         this.id = id;
@@ -41,6 +45,11 @@ public class Reservas {
 
     public int getCodigo_vuelo() {
         return codigo_vuelo;
+    }
+
+    @Override
+    public String toString() {
+        return "Reservas{" + "id=" + id + ", id_asiento=" + id_asiento + ", codigo_vuelo=" + codigo_vuelo + '}';
     }
     
     

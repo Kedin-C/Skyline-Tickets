@@ -12,31 +12,26 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 public class VuelosDao {
-    Conexion conectar = Conexion.getObject();
+    
     Connection con;
     
     PreparedStatement ps;
     ResultSet rs;
-    
-    
-    public void codigoVuelo(){
-    
-    }
+
     
     public List<Vuelos> listarIda(String origen, String destino, String fecha){
-        
+        // WHERE origen=? AND destino=? AND fecha=?
+
         
         List<Vuelos> listarV = new ArrayList<Vuelos>();
         String sql="SELECT * FROM vuelos";
-        JOptionPane.showMessageDialog(null,conectar + " Hola");
         try{
-            
-            con = conectar.getConection();
+            con = Conexion.getObject().getConection();
             ps=con.prepareStatement(sql);
             
-            ps.setString(1, origen);
-            ps.setString(2, destino);
-            ps.setString(3, fecha);
+//            ps.setString(1, origen);
+//            ps.setString(2, destino);
+//            ps.setString(3, fecha);
         
             rs=ps.executeQuery();
             

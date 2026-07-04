@@ -4,6 +4,18 @@
  */
 package Model;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 public class DatosPersonalesDao {
     
+    Connection con;
+    
+    PreparedStatement ps;
+    ResultSet rs;
+    
+    public void enviarDatos(){
+        String sql = "";
+    }
 }

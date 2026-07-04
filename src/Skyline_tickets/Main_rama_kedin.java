@@ -47,7 +47,7 @@ public class Main_rama_kedin {
         Interfaz_equipaje_controller interfaz2 = new Interfaz_equipaje_controller(modificacion,bodega,dao_equipaje_extra,ticket,forma_pago_vista);
         Interfaz_cambio_clase_controller interfaz3 = new Interfaz_cambio_clase_controller(modificacion,clase,dao_modificacion_clase_vuelo,ticket,forma_pago_vista);
         Modificacion_clase_equipaje_controller interfaz1 = new Modificacion_clase_equipaje_controller(modificacion,clase,bodega,buscar_vuelo,ticket,interfaz3,dao_equipaje_extra);
-        seleccion_modificacion_usuario_no_registrado_controller interfaz = new seleccion_modificacion_usuario_no_registrado_controller(dao_modificacion_vuelo,buscar_vuelo,modificacion,interfaz1,ticket);
+        //seleccion_modificacion_usuario_no_registrado_controller interfaz = new seleccion_modificacion_usuario_no_registrado_controller(dao_modificacion_vuelo,buscar_vuelo,modificacion,interfaz1,ticket);
         Seleccion_forma_pago_controller forma_pago_controlador = new Seleccion_forma_pago_controller(forma_pago_vista, clase, bodega);        
         
         

@@ -103,7 +103,7 @@ public class Tarjeta_de_debito_controller implements ActionListener{
                 
                 String nombre = vista.nombre_titular.getText();
                 
-                datos.setDatosPago(numero_tarjeta+", "+fecha+", "+cvv+", "+nombre+", "+datos.getTotalPagar());
+                //datos.setDatosPago(numero_tarjeta+", "+fecha+", "+cvv+", "+nombre+", "+datos.getTotalPagar());
             }
         }
         

@@ -1,0 +1,2 @@
+View.FondoPanel
+View.Tarjeta_de_debito_view

@@ -8,25 +8,34 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import Model.Datos;
+import Model.DatosPersonales;
+import Model.DatosPersonalesDao;
 import View.Datos_y_pago_view;
 import View.Tarjeta_de_credito_view;
 import View.Tarjeta_de_debito_view;
 import View.Transferencia_view;
+import java.awt.Toolkit;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 
 public class Datos_y_pago_controller implements ActionListener{
     
+    DatosPersonales datosPersonales = new DatosPersonales();
+    DatosPersonalesDao datosPersonalesdao = new DatosPersonalesDao();
     Datos_y_pago_view vista = new Datos_y_pago_view();
     Datos datos = new Datos();
     
-    Tarjeta_de_credito_view viewTarjetaCredito;
-    Tarjeta_de_debito_view viewTerjetaDebito;
-    Transferencia_view viewTransferencia;
+    Tarjeta_de_credito_view viewTarjetaCredito = new Tarjeta_de_credito_view();
+    Tarjeta_de_debito_view viewTerjetaDebito = new Tarjeta_de_debito_view();
+    Transferencia_view viewTransferencia = new Transferencia_view();
     
     int n;
     
-    ArrayList<String> datosPasajeros = new ArrayList<>();
+    ArrayList<DatosPersonales> datosPasajeros = new ArrayList<>();
     
     public Datos_y_pago_controller(Datos_y_pago_view vista, Datos datos){
         
@@ -37,6 +46,7 @@ public class Datos_y_pago_controller implements ActionListener{
         this.n=1;
         
         this.vista.siguiente.addActionListener(this);
+        this.vista.volver.addActionListener(this);
         this.vista.credito.addActionListener(this);
         this.vista.debito.addActionListener(this);
         this.vista.pse.addActionListener(this);
@@ -51,6 +61,76 @@ public class Datos_y_pago_controller implements ActionListener{
             vista.debito.setEnabled(true);
             vista.pse.setEnabled(true);
         }
+        
+        
+        //Condicones para que los campos solo permitan siertos caracteres
+        vista.nombrecampo.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                if (!Character.isLetter(e.getKeyChar()) && e.getKeyChar() != ' ')//Solo letras y espacios
+                {
+                    e.consume();
+                }
+            }
+        });
+        
+        //Desactivar el comando de "Pegar" (Ctrl + V)
+        vista.nombrecampo.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), "none");
+        
+        vista.apellidocampo.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                if (!Character.isLetter(e.getKeyChar()) && e.getKeyChar() != ' ')//Solo letras y espacios
+                {
+                    e.consume();
+                }
+            }
+        });
+        
+        //Desactivar el comando de "Pegar" (Ctrl + V)
+        vista.apellidocampo.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), "none");
+        
+        vista.numero_documento.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                if (!Character.isDigit(e.getKeyChar()) && e.getKeyChar() != '.')//Solo numeros y puntos 
+                {
+                    e.consume();
+                }
+            }
+        });
+        
+        //Desactivar el comando de "Pegar" (Ctrl + V)
+        vista.numero_documento.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), "none");
+        
+        vista.numeroTel.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                if (!Character.isDigit(e.getKeyChar()) && e.getKeyChar() != ' ')//Solo numeros espacios
+                {
+                    e.consume();
+                }
+            }
+        });
+        
+        //Desactivar el comando de "Pegar" (Ctrl + V)
+        vista.numeroTel.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), "none");
+        
+        
+        //Para que no pueda ingresar al campo de fecha
+        JTextField editorFecha = (JTextField) vista.elegir_fecha.getDateEditor().getUiComponent();
+        editorFecha.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                e.consume();
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                // Bloquea y no deja entrar letras, números, Backspace y Suprimir
+                e.consume();
+            }
+        });
         
     }
 
@@ -80,8 +160,11 @@ public class Datos_y_pago_controller implements ActionListener{
                 Tarjeta_de_credito_controller controllerTarjetaCredito = new Tarjeta_de_credito_controller(viewTarjetaCredito, datos);
                 
                 datos.setDatosPersonales(datosPasajeros);
-                int pago = Integer.parseInt(vista.precioTotal.getText());
-                datos.setTotalPagar(pago);
+                
+                
+                JOptionPane.showMessageDialog(vista, datos.getDatosPersonales());
+                //int pago = Integer.parseInt(vista.precioTotal.getText());
+                //datos.setTotalPagar(pago);
             }
         }
         if (e.getSource() == vista.debito) {
@@ -91,8 +174,11 @@ public class Datos_y_pago_controller implements ActionListener{
                 Tarjeta_de_debito_controller controllerTerjetaDebito = new Tarjeta_de_debito_controller(viewTerjetaDebito, datos);
                 
                 datos.setDatosPersonales(datosPasajeros);
-                int pago = Integer.parseInt(vista.precioTotal.getText());
-                datos.setTotalPagar(pago);
+                
+                
+                JOptionPane.showMessageDialog(vista, datos.getDatosPersonales());
+                //int pago = Integer.parseInt(vista.precioTotal.getText());
+                //datos.setTotalPagar(pago);
             
             }
         }
@@ -103,15 +189,27 @@ public class Datos_y_pago_controller implements ActionListener{
                 Transferencia_controller controllerTransferencia = new Transferencia_controller(viewTransferencia, datos);
                 
                 datos.setDatosPersonales(datosPasajeros);
-                int pago = Integer.parseInt(vista.precioTotal.getText());
-                datos.setTotalPagar(pago);
+                
+                
+                JOptionPane.showMessageDialog(vista, datos.getDatosPersonales());
+                //int pago = Integer.parseInt(vista.precioTotal.getText());
+                //datos.setTotalPagar(pago);
                 
             }
         }
         
         if(e.getSource() == this.viewTarjetaCredito.volver){
             vista.setVisible(true);
-            
+            viewTarjetaCredito.setVisible(false);
+        }
+        
+        if(e.getSource() == this.viewTerjetaDebito.volver){
+            vista.setVisible(true);
+            viewTarjetaCredito.setVisible(false);
+        }
+        
+        if(e.getSource() == this.viewTransferencia.volver){
+            vista.setVisible(true);
             viewTarjetaCredito.setVisible(false);
         }
         
@@ -129,25 +227,7 @@ public class Datos_y_pago_controller implements ActionListener{
             && vista.listar_nacionalidad.getSelectedIndex() > 0
             && vista.elegir_fecha.getDate() != null){
             
-            String nombre, apellido, numDocumento, numTel, corre, sexo, nacionalidad, fechaNacimiento;
-            int tipoDocumento;
-            
-            nombre = vista.nombrecampo.getText();
-            apellido = vista.apellidocampo.getText();
-            numDocumento = vista.numero_documento.getText();
-            numTel = vista.numeroTel.getText();
-            corre = vista.correo.getText();
-            tipoDocumento = vista.listar_documento.getSelectedIndex();
-            sexo = vista.listar_sexo.getSelectedItem().toString();
-            nacionalidad = vista.listar_nacionalidad.getSelectedItem().toString();
-            
-            
-            SimpleDateFormat formateadorRegreso = new SimpleDateFormat("yyyy-MM-dd");
-            //aplicando el metodo que deja la fecha tal cual en el campo de fecha regreso
-            fechaNacimiento = formateadorRegreso.format(vista.elegir_fecha);
-                    
-            
-            datosPasajeros.add(numDocumento+", "+nombre+", "+apellido+", "+tipoDocumento+", "+sexo+", "+numTel+", "+corre+", "+fechaNacimiento+", "+nacionalidad);
+            guardarDatos();
             
             return true;
         }else{
@@ -155,5 +235,38 @@ public class Datos_y_pago_controller implements ActionListener{
                                 "Debes llenar todos los datos", "Llenar datos", JOptionPane.WARNING_MESSAGE);
             return false;
         }
+    }
+    
+    public void guardarDatos(){
+        
+        String nombre, apellido, numDocumento, numTel, corre, sexo, nacionalidad, fechaNacimiento;
+        int tipoDocumento;
+
+        nombre = vista.nombrecampo.getText();
+        apellido = vista.apellidocampo.getText();
+        numDocumento = vista.numero_documento.getText();
+        numTel = vista.numeroTel.getText();
+        corre = vista.correo.getText();
+        tipoDocumento = vista.listar_documento.getSelectedIndex();
+        sexo = vista.listar_sexo.getSelectedItem().toString();
+        nacionalidad = vista.listar_nacionalidad.getSelectedItem().toString();
+
+        SimpleDateFormat formateadorRegreso = new SimpleDateFormat("yyyy-MM-dd");
+        //aplicando el metodo que deja la fecha tal cual en el campo de fecha regreso
+        fechaNacimiento = formateadorRegreso.format(vista.elegir_fecha.getDate());
+
+        datosPersonales.setNombre(nombre);
+        datosPersonales.setApellido(apellido);
+        datosPersonales.setNumero_documento(numDocumento);
+        datosPersonales.setNumero_telefono(numTel);
+        datosPersonales.setCorreo(corre);
+        datosPersonales.setCodigo_tipo_documento(tipoDocumento);
+        datosPersonales.setSexo(sexo);
+        datosPersonales.setNationalidad(nacionalidad);
+        datosPersonales.setFecha_nacimiento(fechaNacimiento);
+
+        datosPasajeros.add(datosPersonales);
+            
+    
     }
 }

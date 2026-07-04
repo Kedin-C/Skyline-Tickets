@@ -11,13 +11,16 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import Model.Datos;
+import Model.Reservas;
+import Model.ReservasDao;
 import View.Datos_y_pago_view;
 import View.Elegir_puestos_view;
 import View.Tarjeta_de_credito_view;
 
 public class Elegir_puestos_controller implements ActionListener{
     
-    
+    Reservas reserva = new Reservas();
+    ReservasDao reservadao = new ReservasDao();
     Elegir_puestos_view vista = new Elegir_puestos_view();
     Datos datos = new Datos();
     
@@ -125,12 +128,13 @@ public class Elegir_puestos_controller implements ActionListener{
                 datos.setCodigoAsiento(codigoAsiento);
                 
                 Datos_y_pago_view viewDatosyPago = new Datos_y_pago_view();
-                Tarjeta_de_credito_view viewTarjetaCredito = new Tarjeta_de_credito_view();
                 vista.setVisible(false);
                 viewDatosyPago.setVisible(true);
-                Datos_y_pago_controller controllerDatosyPago = new Datos_y_pago_controller(viewDatosyPago, datos);
+                Datos_y_pago_controller controllerDatosPago = new Datos_y_pago_controller(viewDatosyPago, datos);
 
                 JOptionPane.showMessageDialog(vista, "Elegiste los puestos: " + datos.getCodigoAsiento());
+                
+                if(datos.getNumeroTickets() > 1)
                 JOptionPane.showMessageDialog(vista, "Llena los datos de los " + datos.getNumeroTickets() + " tickets");
             }else{
                 JOptionPane.showMessageDialog(vista,
@@ -151,18 +155,18 @@ public class Elegir_puestos_controller implements ActionListener{
             
                 if(torreAleatoria == 0){
 
-                    if(vista.torre1[fila][columna].isSelected()){
-                        continue;
-                    }else {
+                    if(vista.torre1[fila][columna].isEnabled()){
                         vista.torre1[fila][columna].doClick();
+                    }else {
+                        continue;
                     }
                 }
                 
                 if(torreAleatoria == 1){
-                    if(vista.torre2[fila][columna].isSelected()){
-                        continue;
-                    }else {
+                    if(vista.torre2[fila][columna].isEnabled()){
                         vista.torre2[fila][columna].doClick();
+                    }else {
+                        continue;
                     }
                 }  
             }

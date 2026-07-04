@@ -5,14 +5,14 @@
 package Model;
 
 import java.util.ArrayList;
-import java.util.Date;
 
-//(Data Transfer Object)
 public class Datos {
     
     private int codigoVuelo, numeroTickets, equipajeExtra, claseVuelo, totalPagar;
-    private String tipoVuelo, datosPago, fechaRegreso;
-    private ArrayList<String> codigoAsiento, datosPersonales;
+    private String tipoVuelo, fechaRegreso;
+    private ArrayList<String> codigoAsiento;
+    private ArrayList<DatosPersonales> datosPersonales;
+    private DatosPago datosPago;
     
     public Datos(){
         
@@ -20,30 +20,6 @@ public class Datos {
 
     public void setCodigoVuelo(int codigoVuelo) {
         this.codigoVuelo = codigoVuelo;
-    }
-
-    public void setCodigoAsiento(ArrayList<String> codigoAsiento) {
-        this.codigoAsiento = codigoAsiento;
-    }
-
-    public void setDatosPersonales(ArrayList<String> datosPersonales) {
-        this.datosPersonales = datosPersonales;
-    }
-
-    public void setTipoVuelo(String tipoVuelo) {
-        this.tipoVuelo = tipoVuelo;
-    }
-
-    public void setDatosPago(String datosPago) {
-        this.datosPago = datosPago;
-    }
-    
-    public void setFechaRegreso(String fechaRegreso){
-        this.fechaRegreso = fechaRegreso;
-    }
-
-    public void setClaseVuelo(int claseVuelo) {
-        this.claseVuelo = claseVuelo;
     }
 
     public void setNumeroTickets(int numeroTickets) {
@@ -54,39 +30,38 @@ public class Datos {
         this.equipajeExtra = equipajeExtra;
     }
 
+    public void setClaseVuelo(int claseVuelo) {
+        this.claseVuelo = claseVuelo;
+    }
+
     public void setTotalPagar(int totalPagar) {
         this.totalPagar = totalPagar;
     }
-    
-    
+
+    public void setTipoVuelo(String tipoVuelo) {
+        this.tipoVuelo = tipoVuelo;
+    }
+
+    public void setFechaRegreso(String fechaRegreso) {
+        this.fechaRegreso = fechaRegreso;
+    }
+
+    public void setCodigoAsiento(ArrayList<String> codigoAsiento) {
+        this.codigoAsiento = codigoAsiento;
+    }
+
+    public void setDatosPersonales(ArrayList<DatosPersonales> datosPersonales) {
+        this.datosPersonales = datosPersonales;
+    }
+
+    public void setDatosPago(DatosPago datosPago) {
+        this.datosPago = datosPago;
+    }
+
     
     
     public int getCodigoVuelo() {
         return codigoVuelo;
-    }
-
-    public ArrayList<String> getCodigoAsiento() {
-        return codigoAsiento;
-    }
-
-    public ArrayList<String> getDatosPersonales() {
-        return datosPersonales;
-    }
-
-    public String getTipoVuelo() {
-        return tipoVuelo;
-    }
-
-    public String getDatosPago() {
-        return datosPago;
-    }
-    
-    public String getFechaRegreso(){
-        return fechaRegreso;
-    }
-
-    public int getClaseVuelo() {
-        return claseVuelo;
     }
 
     public int getNumeroTickets() {
@@ -97,8 +72,34 @@ public class Datos {
         return equipajeExtra;
     }
 
+    public int getClaseVuelo() {
+        return claseVuelo;
+    }
+
     public int getTotalPagar() {
         return totalPagar;
     }
+
+    public String getTipoVuelo() {
+        return tipoVuelo;
+    }
+
+    public String getFechaRegreso() {
+        return fechaRegreso;
+    }
+
+    public ArrayList<String> getCodigoAsiento() {
+        return codigoAsiento;
+    }
+
+    public ArrayList<DatosPersonales> getDatosPersonales() {
+        return datosPersonales;
+    }
+
+    public DatosPago getDatosPago() {
+        return datosPago;
+    }
+
+    
     
 }
