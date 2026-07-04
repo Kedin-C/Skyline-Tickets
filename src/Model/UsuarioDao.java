@@ -147,7 +147,7 @@ public class UsuarioDao {
     
     public int getId (Usuario usuario){
 
-    String sql = "SELECT id_usuario FROM usuarios WHERE usuarios.correo = ? AND usuarios.contrasena = ?";
+    String sql = "SELECT id_usuario FROM usuarios WHERE usuarios.correo_usuario = ? AND usuarios.password_usuario = ?";
     int id = 0;
 
     try{

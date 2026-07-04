@@ -91,8 +91,8 @@ public class Login_controller implements ActionListener {
         
         
         if(e.getSource() == vista.getBtnVolver()) {
-            
-        Menu_principal_view MenuView = new Menu_principal_view();
+        ViewPrincipal vp = new ViewPrincipal();
+        Menu_principal_view MenuView = new Menu_principal_view(vp);
         MenuView.setLocationRelativeTo(null);
         
         vista.dispose();

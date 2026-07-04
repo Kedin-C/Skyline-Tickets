@@ -32,13 +32,15 @@ import javax.swing.JPanel;
 
 public class Menu_principal_view extends JFrame implements ActionListener {
 
-    Container contenedor;
-    JButton b1, b2, btnVolver;
-    JPanel mipanel1, mipanel2;
-    JLabel logo;
+    private Container contenedor;
+    public JButton b1, b2, btnVolver;
+    private JPanel mipanel1, mipanel2;
+    private JLabel logo;
+    private ViewPrincipal principal;
 
-    public Menu_principal_view() {
+    public Menu_principal_view(ViewPrincipal vista) {
 
+        this.principal = vista;
         super("Menu");
 
         contenedor = getContentPane();
@@ -116,8 +118,7 @@ public class Menu_principal_view extends JFrame implements ActionListener {
         contenedor.add(mipanel1);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setVisible(true);
+        
     }
 
     @Override
@@ -138,8 +139,11 @@ public class Menu_principal_view extends JFrame implements ActionListener {
         }
 
         if (e.getSource() == btnVolver) {
-            dispose();
-            ViewPrincipal principal = new ViewPrincipal();
+            setVisible(false);
+            
+            principal.setVisible(true);
+                    
+
             
         }
     }

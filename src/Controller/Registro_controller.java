@@ -20,6 +20,7 @@ import Model.Usuario;
 import View.Login_view;
 import View.Menu_principal_view;
 import View.Registro_view;
+import View.ViewPrincipal;
 
 public class Registro_controller implements ActionListener {
 
@@ -39,8 +40,8 @@ public class Registro_controller implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         
         if(e.getSource() == vista.getBtnVolver()) {
-            
-        Menu_principal_view MenuView = new Menu_principal_view();
+        ViewPrincipal vp = new ViewPrincipal();
+        Menu_principal_view MenuView = new Menu_principal_view(vp);
         MenuView.setLocationRelativeTo(null);
         
         vista.dispose();

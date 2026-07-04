@@ -6,8 +6,10 @@ package Controller;
 
 import Model.Seleccion_vuelo_usuario_no_registrado_dao;
 import Model.Ticket;
+import View.Pagina_principal_administrador_view;
 import View.Seleccion_de_Modificacion_de_vuelo_view;
 import View.Seleccion_de_vuelo_usuarioNoregistrado_view;
+import View.ViewPrincipal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -20,21 +22,22 @@ import javax.swing.JOptionPane;
  * @author david
  */
 public class seleccion_modificacion_usuario_no_registrado_controller implements ActionListener {
-    //private Pagina_principal_administrador_view vista_print_admin;
+    private ViewPrincipal vista_principal;
     private Seleccion_de_vuelo_usuarioNoregistrado_view vista;
     private Seleccion_de_Modificacion_de_vuelo_view vista2;
     private Seleccion_vuelo_usuario_no_registrado_dao dao;
     private Ticket ticket;
 
 
-    public seleccion_modificacion_usuario_no_registrado_controller(Seleccion_vuelo_usuario_no_registrado_dao dao, Seleccion_de_vuelo_usuarioNoregistrado_view vista, Seleccion_de_Modificacion_de_vuelo_view vista2, Modificacion_clase_equipaje_controller controlador_equipaje,Ticket ticket) {
+    public seleccion_modificacion_usuario_no_registrado_controller(Seleccion_vuelo_usuario_no_registrado_dao dao, Seleccion_de_vuelo_usuarioNoregistrado_view vista, Seleccion_de_Modificacion_de_vuelo_view vista2, Modificacion_clase_equipaje_controller controlador_equipaje,Ticket ticket,ViewPrincipal principal) {
         this.vista = vista;
         this.vista2 = vista2;
         this.dao = dao;
         this.ticket = ticket;
+        this.vista_principal = principal;
         vista.continuar.addActionListener(this);
+        vista.volver.addActionListener(this);
         vista.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        vista.setVisible(true);
         vista.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
@@ -43,7 +46,10 @@ public class seleccion_modificacion_usuario_no_registrado_controller implements 
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == vista.volver) {
-
+            vista.setVisible(false);
+            
+           vista_principal.setVisible(true);
+           vista_principal.setExtendedState(JFrame.MAXIMIZED_BOTH);
         }
 
         if (e.getSource() == vista.continuar) {

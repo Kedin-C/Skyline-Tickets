@@ -12,7 +12,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 public class VuelosDao {
-    
+    Conexion conectar = Conexion.getObject();
     Connection con;
     
     PreparedStatement ps;
@@ -28,13 +28,15 @@ public class VuelosDao {
         
         List<Vuelos> listarV = new ArrayList<Vuelos>();
         String sql="SELECT * FROM vuelos";
+        JOptionPane.showMessageDialog(null,conectar + " Hola");
         try{
-            con = Conexion.getObject().getConection();
+            
+            con = conectar.getConection();
             ps=con.prepareStatement(sql);
             
-//            ps.setString(1, origen);
-//            ps.setString(2, destino);
-//            ps.setString(3, fecha);
+            ps.setString(1, origen);
+            ps.setString(2, destino);
+            ps.setString(3, fecha);
         
             rs=ps.executeQuery();
             

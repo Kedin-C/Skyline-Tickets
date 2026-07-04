@@ -16,7 +16,7 @@ public class Conexion {
     public static Conexion object;
     Connection con;
     
-    String url = "jdbc:mysql://localhost:3306/SkyLine_Tickets";
+    String url = "jdbc:mysql://localhost:3306/skyline_tickets_bd";
     String user = "root";
     String pass = "";
     
