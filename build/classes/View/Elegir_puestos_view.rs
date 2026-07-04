@@ -1,2 +1,0 @@
-View.FondoPanel
-View.Elegir_puestos_view

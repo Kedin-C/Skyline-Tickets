@@ -24,7 +24,7 @@ public class Transferencia_view extends Interfaz_vista_abtractas{
     private JPanel contenedor_principal, contenedor, siguiente_volver;
     public JButton bancolombia, paypal, nequi, volver;
     private TitledBorder titulo;
-    
+    private int cod_anterior_view;
     
     public Transferencia_view() {
         
@@ -155,6 +155,16 @@ public class Transferencia_view extends Interfaz_vista_abtractas{
                 }
             }
         });
+        
+        
+    }
+    
+    public int getCod_anterior_view() {
+        return cod_anterior_view;
+    }
+
+    public void setCod_anterior_view(int cod_anterior_view) {
+        this.cod_anterior_view = cod_anterior_view;
     }
     
 }

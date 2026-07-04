@@ -83,7 +83,7 @@ public class Interfaz_cambio_clase_controller implements ActionListener {
             
             forma_pago.setVisible(true);
             forma_pago.setExtendedState(JFrame.MAXIMIZED_BOTH);
-            
+            forma_pago.setVista_anterior(1);
         
         }
         
@@ -96,6 +96,8 @@ public class Interfaz_cambio_clase_controller implements ActionListener {
             
         
         }
+        
+        
     }
     
     

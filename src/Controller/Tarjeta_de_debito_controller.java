@@ -5,6 +5,7 @@
 package Controller;
 
 import Model.Datos;
+import View.Seleccion_forma_de_pago_view;
 import View.Tarjeta_de_debito_view;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -12,22 +13,25 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 
 public class Tarjeta_de_debito_controller implements ActionListener{
     
+    private Seleccion_forma_de_pago_view vista_atras;
     private Tarjeta_de_debito_view vista;
     private Datos datos;
     
-    public Tarjeta_de_debito_controller(Tarjeta_de_debito_view vista, Datos datos){
-    
+    public Tarjeta_de_debito_controller(Tarjeta_de_debito_view vista, Datos datos,Seleccion_forma_de_pago_view vista_atras){
+        this.vista_atras = vista_atras;
         this.vista = vista;
         this.datos=datos;
         
         
         this.vista.pagar.addActionListener(this);
+        this.vista.volver.addActionListener(this);
         
         //Condicones para que los campos solo permitan siertos caracteres
         vista.num_tarjeta.addKeyListener(new KeyAdapter() {
@@ -105,6 +109,18 @@ public class Tarjeta_de_debito_controller implements ActionListener{
                 
                 //datos.setDatosPago(numero_tarjeta+", "+fecha+", "+cvv+", "+nombre+", "+datos.getTotalPagar());
             }
+        }
+        
+        if(e.getSource() == vista.volver){
+            
+            if(vista.getCod_anterior_view() == 1){
+            
+               
+                vista.setVisible(false);
+                vista_atras.setVisible(true);
+                vista_atras.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            }
+        
         }
         
     }

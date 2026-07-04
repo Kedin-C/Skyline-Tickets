@@ -31,6 +31,7 @@ public class Tarjeta_de_debito_view extends Interfaz_vista_abtractas{
     public JDateChooser fecha_ven;
     private SimpleDateFormat formatoFecha;
     public JTextField num_tarjeta, cvv, nombre_titular, codigoDescuento;
+    private int cod_anterior_view;
     
     public Tarjeta_de_debito_view(){
         String nombrePagina = "Tarjeta de debito";
@@ -128,6 +129,14 @@ public class Tarjeta_de_debito_view extends Interfaz_vista_abtractas{
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+    }
+    
+    public int getCod_anterior_view() {
+        return cod_anterior_view;
+    }
+
+    public void setCod_anterior_view(int cod_anterior_view) {
+        this.cod_anterior_view = cod_anterior_view;
     }
 }
 

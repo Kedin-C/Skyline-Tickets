@@ -11,6 +11,7 @@ import Model.Datos;
 import Model.DatosPersonales;
 import Model.DatosPersonalesDao;
 import View.Datos_y_pago_view;
+import View.Seleccion_forma_de_pago_view;
 import View.Tarjeta_de_credito_view;
 import View.Tarjeta_de_debito_view;
 import View.Transferencia_view;
@@ -157,12 +158,12 @@ public class Datos_y_pago_controller implements ActionListener{
             if(validarDatos()){
                 vista.setVisible(false);
                 viewTarjetaCredito.setVisible(true);
-                Tarjeta_de_credito_controller controllerTarjetaCredito = new Tarjeta_de_credito_controller(viewTarjetaCredito, datos);
+                Seleccion_forma_de_pago_view selec_pago = new Seleccion_forma_de_pago_view();
+                Tarjeta_de_credito_controller controllerTarjetaCredito = new Tarjeta_de_credito_controller(viewTarjetaCredito, datos,selec_pago);
                 
                 datos.setDatosPersonales(datosPasajeros);
                 
                 
-                JOptionPane.showMessageDialog(vista, datos.getDatosPersonales());
                 //int pago = Integer.parseInt(vista.precioTotal.getText());
                 //datos.setTotalPagar(pago);
             }
@@ -171,12 +172,12 @@ public class Datos_y_pago_controller implements ActionListener{
             if(validarDatos()){
                 vista.setVisible(false);
                 viewTerjetaDebito.setVisible(true);
-                Tarjeta_de_debito_controller controllerTerjetaDebito = new Tarjeta_de_debito_controller(viewTerjetaDebito, datos);
+                Seleccion_forma_de_pago_view selec_pago = new Seleccion_forma_de_pago_view();
+                Tarjeta_de_debito_controller controllerTerjetaDebito = new Tarjeta_de_debito_controller(viewTerjetaDebito, datos,selec_pago);
                 
                 datos.setDatosPersonales(datosPasajeros);
                 
                 
-                JOptionPane.showMessageDialog(vista, datos.getDatosPersonales());
                 //int pago = Integer.parseInt(vista.precioTotal.getText());
                 //datos.setTotalPagar(pago);
             
@@ -186,12 +187,12 @@ public class Datos_y_pago_controller implements ActionListener{
             if(validarDatos()){
                 vista.setVisible(false);
                 viewTransferencia.setVisible(true);
-                Transferencia_controller controllerTransferencia = new Transferencia_controller(viewTransferencia, datos);
+                Seleccion_forma_de_pago_view selec_pago = new Seleccion_forma_de_pago_view();
+                Transferencia_controller controllerTransferencia = new Transferencia_controller(viewTransferencia, datos,selec_pago);
                 
                 datos.setDatosPersonales(datosPasajeros);
                 
                 
-                JOptionPane.showMessageDialog(vista, datos.getDatosPersonales());
                 //int pago = Integer.parseInt(vista.precioTotal.getText());
                 //datos.setTotalPagar(pago);
                 

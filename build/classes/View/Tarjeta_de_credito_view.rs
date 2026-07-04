@@ -1,2 +1,0 @@
-View.Tarjeta_de_credito_view
-View.FondoPanel
