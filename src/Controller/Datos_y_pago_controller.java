@@ -165,9 +165,8 @@ public class Datos_y_pago_controller implements ActionListener{
                 
                 datos.setDatosPersonales(datosPasajeros);
                 
-                datos.subirDatos();
-                //int pago = Integer.parseInt(vista.precioTotal.getText());
-                //datos.setTotalPagar(pago);
+                double pago = Double.parseDouble(vista.precioTotal.getText());
+                datos.setTotalPagar(pago);
             }
         }
         if (e.getSource() == vista.debito) {
@@ -179,9 +178,8 @@ public class Datos_y_pago_controller implements ActionListener{
                 
                 datos.setDatosPersonales(datosPasajeros);
                 
-                datos.subirDatos();
-                //int pago = Integer.parseInt(vista.precioTotal.getText());
-                //datos.setTotalPagar(pago);
+                int pago = Integer.parseInt(vista.precioTotal.getText());
+                datos.setTotalPagar(pago);
             
             }
         }
@@ -194,9 +192,8 @@ public class Datos_y_pago_controller implements ActionListener{
                 
                 datos.setDatosPersonales(datosPasajeros);
                 
-                
-                //int pago = Integer.parseInt(vista.precioTotal.getText());
-                //datos.setTotalPagar(pago);
+                double pago = Integer.parseInt(vista.precioTotal.getText());
+                datos.setTotalPagar(pago);
                 
             }
         }
@@ -220,11 +217,11 @@ public class Datos_y_pago_controller implements ActionListener{
     }
     
     public boolean validarDatos(){
-        if(vista.nombrecampo != null 
-            && vista.apellidocampo != null 
-            && vista.numero_documento != null 
-            && vista.numeroTel != null 
-            && vista.correo != null 
+        if(!vista.nombrecampo.getText().isBlank() 
+            && !vista.apellidocampo.getText().isBlank()
+            && !vista.numero_documento.getText().isBlank()
+            && !vista.numeroTel.getText().isBlank()
+            && !vista.correo.getText().isBlank()
             && vista.listar_documento.getSelectedIndex() > 0
             && vista.listar_sexo.getSelectedIndex() > 0 
             && vista.listar_nacionalidad.getSelectedIndex() > 0

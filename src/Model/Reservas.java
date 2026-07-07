@@ -6,16 +6,17 @@ package Model;
 
 public class Reservas {
     
-    private int id, id_asiento, codigo_vuelo; 
+    private int id, codigo_vuelo;
+    String codigo_asiento;
     
     public Reservas(){
     
     }
     
-    public Reservas(int id, int id_asiento, int codigo_vuelo){
+    public Reservas(int id, String codigo_asiento, int codigo_vuelo){
         
         this.id = id;
-        this.id_asiento = id_asiento;
+        this.codigo_asiento = codigo_asiento;
         this.codigo_vuelo = codigo_vuelo;
         
     }
@@ -24,8 +25,8 @@ public class Reservas {
         this.id = id;
     }
 
-    public void setId_asiento(int id_asiento) {
-        this.id_asiento = id_asiento;
+    public void setCodigo_asiento(String codigo_asiento) {
+        this.codigo_asiento = codigo_asiento;
     }
 
     public void setCodigo_vuelo(int codigo_vuelo) {
@@ -39,8 +40,8 @@ public class Reservas {
         return id;
     }
 
-    public int getId_asiento() {
-        return id_asiento;
+    public String getCodigo_asiento() {
+        return codigo_asiento;
     }
 
     public int getCodigo_vuelo() {
@@ -49,7 +50,7 @@ public class Reservas {
 
     @Override
     public String toString() {
-        return "Reservas{" + "id=" + id + ", id_asiento=" + id_asiento + ", codigo_vuelo=" + codigo_vuelo + '}';
+        return "Reservas{" + "id=" + id + ", codigo_asiento=" + codigo_asiento + ", codigo_vuelo=" + codigo_vuelo + '}';
     }
     
     

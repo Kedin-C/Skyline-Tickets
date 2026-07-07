@@ -15,6 +15,7 @@ public class Elegir_clase_controller implements ActionListener{
     
     Elegir_clase_view vista = new Elegir_clase_view();
     Datos datos = new Datos();
+    Elegir_puestos_view vistaElegirPuestos = new Elegir_puestos_view();
     
     public Elegir_clase_controller(Elegir_clase_view vista, Datos datos){
         
@@ -23,6 +24,8 @@ public class Elegir_clase_controller implements ActionListener{
         
         this.vista.siguiente.addActionListener((ActionListener) this);
         this.vista.volver.addActionListener(this);
+        
+        this.vistaElegirPuestos.volver.addActionListener(this);
         
         //Se encarga de evitar que elija los 3 botones de tipo de viaje
         ButtonGroup grupoViaje = new ButtonGroup();
@@ -69,11 +72,16 @@ public class Elegir_clase_controller implements ActionListener{
             
             datos.setTotalPagar(datos.getTotalPagar()*datos.getNumeroTickets());
             
-            Elegir_puestos_view vistaElegirPuestos = new Elegir_puestos_view();
             vista.setVisible(false);
             vistaElegirPuestos.setVisible(true);
             Elegir_puestos_controller controllerElegirPuestos = new Elegir_puestos_controller(vistaElegirPuestos, datos);
             
         }
+        
+        if(e.getSource() == vistaElegirPuestos.volver){
+            vista.setVisible(true);
+            vistaElegirPuestos.setVisible(false);
+        }
+        
     }
 }

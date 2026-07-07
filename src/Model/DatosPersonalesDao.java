@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -35,11 +36,10 @@ public class DatosPersonalesDao {
         
             ps.executeUpdate();
             
-            JOptionPane.showMessageDialog(null, "Datos guardados con exito");
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, 
                     ex.toString(),
-                    "Error al gusrdar los datos del pasajero"+ex.getMessage(),
+                    "Error al guardar los datos del pasajero"+ex.getMessage(),
                     JOptionPane.ERROR_MESSAGE
             );
         }finally {

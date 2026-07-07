@@ -5,6 +5,7 @@
 package Controller;
 
 import Model.Datos;
+import Model.DatosPago;
 import View.Seleccion_forma_de_pago_view;
 import View.Tarjeta_de_debito_view;
 import java.awt.Toolkit;
@@ -23,8 +24,10 @@ public class Tarjeta_de_debito_controller implements ActionListener{
     private Seleccion_forma_de_pago_view vista_atras;
     private Tarjeta_de_debito_view vista;
     private Datos datos;
+    private DatosPago datosPagar;
     
     public Tarjeta_de_debito_controller(Tarjeta_de_debito_view vista, Datos datos,Seleccion_forma_de_pago_view vista_atras){
+        
         this.vista_atras = vista_atras;
         this.vista = vista;
         this.datos=datos;
@@ -97,17 +100,21 @@ public class Tarjeta_de_debito_controller implements ActionListener{
         
         if(e.getSource() == vista.pagar){
             if(Validar()){
-                String numero_tarjeta = vista.num_tarjeta.getText();
+                datosPagar.setNumero_tarjeta(vista.num_tarjeta.getText());
                 
                 SimpleDateFormat formateadorRegreso = new SimpleDateFormat("yyyy-MM-dd");
                 //aplicando el metodo que deja la fecha tal cual en el campo de fecha regreso
                 String fecha = formateadorRegreso.format(vista.fecha_ven);
                 
-                String cvv = vista.cvv.getText();
+                datosPagar.setFecha_vencimiento(fecha);
                 
-                String nombre = vista.nombre_titular.getText();
+                datosPagar.setCvv(Integer.parseInt(vista.cvv.getText()));
                 
-                //datos.setDatosPago(numero_tarjeta+", "+fecha+", "+cvv+", "+nombre+", "+datos.getTotalPagar());
+                datosPagar.setNombre_titular(vista.nombre_titular.getText());
+                
+                datos.setDatosPago(datosPagar);
+                
+                datos.subirDatos();
             }
         }
         
@@ -115,7 +122,6 @@ public class Tarjeta_de_debito_controller implements ActionListener{
             
             if(vista.getCod_anterior_view() == 1){
             
-               
                 vista.setVisible(false);
                 vista_atras.setVisible(true);
                 vista_atras.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -134,7 +140,7 @@ public class Tarjeta_de_debito_controller implements ActionListener{
             return true;
         }else{
             JOptionPane.showMessageDialog(vista,
-                                "Debes llenar todos los datos", "Llenar datos", JOptionPane.WARNING_MESSAGE);
+                                "Debes llenar todos los datos de la tarjeta de debito", "Llenar datos tarjeta debito", JOptionPane.WARNING_MESSAGE);
             return false;
         }
     }

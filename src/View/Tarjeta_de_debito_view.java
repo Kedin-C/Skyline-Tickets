@@ -74,7 +74,7 @@ public class Tarjeta_de_debito_view extends Interfaz_vista_abtractas{
         numeroTarjeta = new JLabel("Numero de tarjeta*");
         fechaVen = new JLabel("Fecha de vencimiento*");
         cv = new JLabel("CVV*");
-        nombreTitular = new JLabel("Nombre tirular*");
+        nombreTitular = new JLabel("Nombre titular*");
         descuento = new JLabel("Codigo de descuento (opcional)");
         
         

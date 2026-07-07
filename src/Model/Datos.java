@@ -16,6 +16,8 @@ public class Datos {
     private DatosPago datosPago;
     
     private DatosPersonalesDao datosPersonalesDao = new DatosPersonalesDao();
+    private DatosPagoDao datosPagoDao = new DatosPagoDao();
+    private ReservasDao datosReserva = new ReservasDao();
     
     public Datos(){
         
@@ -117,6 +119,20 @@ public class Datos {
             String nacionalidad = this.datosPersonales.get(i).getNationalidad();
                     
             datosPersonalesDao.enviarDatos(numero_documento, nombre, apellido, codigo_tipo_documento, sexo, numero_telefono, correo, fecha_nacimiento, nacionalidad);
+        }
+        
+        if(getDatosPago() != null){
+            int cvv = this.datosPago.getCvv();
+            String numero_tarjeta = this.datosPago.getNumero_tarjeta();
+            String nombre_titular = this.datosPago.getNombre_titular();
+            String fecha_vencimiento = this.datosPago.getFecha_vencimiento();
+            double total = getTotalPagar();
+
+            datosPagoDao.enviarDatos(numero_tarjeta, cvv, nombre_titular, fecha_vencimiento, total);
+        }
+        
+        for(int index = 0; index < codigoAsiento.size(); index++){
+            datosReserva.enviarDatos(codigoAsiento.get(index), codigoVuelo);
         }
         
         

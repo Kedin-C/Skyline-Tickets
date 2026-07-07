@@ -5,6 +5,7 @@
 package Controller;
 
 import Model.Datos;
+import Model.DatosPago;
 import View.Seleccion_forma_de_pago_view;
 import View.Tarjeta_de_credito_view;
 import java.awt.Toolkit;
@@ -14,6 +15,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 
@@ -22,8 +24,10 @@ public class Tarjeta_de_credito_controller implements ActionListener{
     private Tarjeta_de_credito_view vista;
     private Seleccion_forma_de_pago_view vista_atras;
     private Datos datos;
+    private DatosPago datosPagar = new DatosPago();
     
     public Tarjeta_de_credito_controller(Tarjeta_de_credito_view vista, Datos datos,Seleccion_forma_de_pago_view vista_atras){
+        
         this.vista_atras = vista_atras;
         this.vista = vista;
         this.datos = datos;
@@ -97,24 +101,29 @@ public class Tarjeta_de_credito_controller implements ActionListener{
         
         if(e.getSource() == vista.pagar){
             if(Validar()){
-                String numero_tarjeta = vista.num_tarjeta.getText();
+                
+                datosPagar.setNumero_tarjeta(vista.num_tarjeta.getText());
                 
                 SimpleDateFormat formateadorRegreso = new SimpleDateFormat("yyyy-MM-dd");
                 //aplicando el metodo que deja la fecha tal cual en el campo de fecha regreso
-                String fecha = formateadorRegreso.format(vista.fecha_ven);
+                String fecha = formateadorRegreso.format(vista.fecha_ven.getDate());
                 
-                String cvv = vista.cvv.getText();
+                datosPagar.setFecha_vencimiento(fecha);
                 
-                String nombre = vista.nombre_titular.getText();
+                datosPagar.setCvv(Integer.parseInt(vista.cvv.getText()));
                 
-                //datos.setDatosPago(numero_tarjeta+", "+cvv+", "+nombre+", "+fecha+", "+datos.getTotalPagar());
+                datosPagar.setNombre_titular(vista.nombre_titular.getText());
+                
+                datos.setDatosPago(datosPagar);
+                
+                datos.subirDatos();
+                
             }
         }
         
         if(e.getSource() == vista.volver){
             
             if(vista.getCod_anterior_view() == 1){
-            
                
                 vista.setVisible(false);
                 vista_atras.setVisible(true);
@@ -133,6 +142,8 @@ public class Tarjeta_de_credito_controller implements ActionListener{
             
             return true;
         }else{
+            JOptionPane.showMessageDialog(vista,
+                                "Debes llenar todos los datos de la tarjeta de credito", "Llenar datos tarjeta credito", JOptionPane.WARNING_MESSAGE);
             return false;
         }
     }
