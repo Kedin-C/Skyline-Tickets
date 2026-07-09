@@ -31,15 +31,8 @@ import View.ViewPrincipal;
 import View.cambio_de_clase_de_vuelo_viiew;
 import controller.Pagina_principal_controller;
 
-/**
- *
- * @author david
- */
 public class Skyline_Tickets {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         
         ViewPrincipal vista_principal = new ViewPrincipal();
@@ -79,6 +72,9 @@ public class Skyline_Tickets {
         Menu_principal_view menu = new Menu_principal_view(vista_principal);
         
         Pagina_principal_controller pagina_princ_cont = new Pagina_principal_controller(vista_principal,select_vuelo,buscar_v,menu);
+        
+        String ruta = System.getProperty("user.home") + "\\Documents\\Ticket.pdf";
+        System.out.println(ruta);
     }
     
 }

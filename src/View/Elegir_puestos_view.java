@@ -102,7 +102,7 @@ public class Elegir_puestos_view extends Interfaz_vista_abtractas{
         scrol.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         
         //Tamaño y posiscion de donde estan los botones
-        scrol.setBounds(640, 135, 250, 340);
+        scrol.setBounds(610, 115, 330, 400);
         
         //Agregando la matriz de botones para que quede encima de la imagen
         avion.add(scrol);

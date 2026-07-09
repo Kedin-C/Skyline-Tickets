@@ -27,12 +27,14 @@ import View.ViewPrincipal;
 import javax.swing.JFrame;
 
 public class Buscar_vuelos_controller implements ActionListener{
+    
     ViewPrincipal principal;
     Vuelos vuelo = new Vuelos();
     VuelosDao vuelodao = new VuelosDao();
     Buscar_vuelos_view vista = new Buscar_vuelos_view();
     DefaultTableModel modelo = new DefaultTableModel();
     Datos datos = new Datos();
+    Elegir_clase_view vistaElegirClase = new Elegir_clase_view();
     
     public String origen, destino, hora1, hora2;
     public Date fechaIda, fechaRegreso;
@@ -49,6 +51,8 @@ public class Buscar_vuelos_controller implements ActionListener{
         this.vista.buscar_vuelos.addActionListener(this);
         this.vista.siguiente.addActionListener(this);
         this.vista.volver.addActionListener(this);
+        
+        this.vistaElegirClase.volver.addActionListener(this);
         
         //Se encarga de evitar que elija los 2 botones de tipo de viaje
         ButtonGroup grupoViaje = new ButtonGroup();
@@ -128,6 +132,7 @@ public class Buscar_vuelos_controller implements ActionListener{
             principal.setVisible(true);
             principal.setExtendedState(JFrame.MAXIMIZED_BOTH);
         }
+        
         if(e.getSource() == vista.siguiente){
             
             int filaVuelo = vista.tabla.getSelectedRow();
@@ -144,7 +149,9 @@ public class Buscar_vuelos_controller implements ActionListener{
             
             //Para optener el id del vuelo
             int id = Integer.parseInt(vista.tabla.getValueAt(filaVuelo, 0).toString());
+            double precio = Double.parseDouble(vista.tabla.getValueAt(filaVuelo, 6).toString());
             datos.setCodigoVuelo(id);
+            datos.setTotalPagar(precio);
             
             if(vista.vuelo_ida.isSelected()){
                 datos.setTipoVuelo("Vuelo de ida");
@@ -153,9 +160,8 @@ public class Buscar_vuelos_controller implements ActionListener{
                 
             }
             
-            Elegir_clase_view vistaElegirClase = new Elegir_clase_view();
             vista.setVisible(false);
-            vistaElegirClase.setVisible(true);
+            this.vistaElegirClase.setVisible(true);
             Elegir_clase_controller controllerElegirClase = new Elegir_clase_controller(vistaElegirClase, datos);
             
         }
@@ -225,6 +231,11 @@ public class Buscar_vuelos_controller implements ActionListener{
             vista.elegir_fecha_regreso.setEnabled(true);
         }
         
+        if(e.getSource() == vistaElegirClase.volver){
+            vista.setVisible(true);
+            this.vistaElegirClase.setVisible(false);
+        }
+        
     }
     
     
@@ -257,7 +268,10 @@ public class Buscar_vuelos_controller implements ActionListener{
         }
         vista.tabla.setModel(modelo);
         
-        
+        if (modelo.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(vista, "No encontramos resultados");
+        }
+      
     }
     
     
@@ -296,6 +310,9 @@ public class Buscar_vuelos_controller implements ActionListener{
         }
         vista.tabla.setModel(modelo);
         
+        if (modelo.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(vista, "No encontramos resultados");
+        }
     }
     
     public void limpiarTabla(){

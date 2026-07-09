@@ -67,8 +67,9 @@ public class VuelosDao {
     
     public List<Vuelos> listarIdaHorario(String origen, String destino, String fecha, String horario1, String horario2){
         List<Vuelos> listarV = new ArrayList<Vuelos>();
-        String sql="SELECT origen, destino, fecha, hora_salida, hora_llegada, precio FROM vuelos WHERE origen=? AND destino=? AND fecha=? AND hora_salida BETWEEN ? AND ?";
+        String sql="SELECT * FROM vuelos WHERE origen=? AND destino=? AND fecha=? AND hora_salida BETWEEN ? AND ?";
         try{
+            con = Conexion.getObject().getConection();
             ps=con.prepareStatement(sql);
             
             ps.setString(1, origen);

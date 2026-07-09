@@ -98,7 +98,7 @@ public class Datos_y_pago_view extends Interfaz_vista_abtractas{
         apellido = new JLabel("Apellido*");
         tipoDocumento = new JLabel("Tipo Documento*");
         numeroDocumento = new JLabel("Numero Documento*");
-        numeroTelefono = new JLabel("Numero Telefono*");
+        numeroTelefono = new JLabel("Numero de Celular*");
         correoElectronico = new JLabel("Correo Electronico*");
         nacionalidad = new JLabel("Nacionalidad*");
         sexo = new JLabel("Sexo*");

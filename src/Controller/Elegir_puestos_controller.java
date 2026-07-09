@@ -15,7 +15,6 @@ import Model.Reservas;
 import Model.ReservasDao;
 import View.Datos_y_pago_view;
 import View.Elegir_puestos_view;
-import View.Tarjeta_de_credito_view;
 
 public class Elegir_puestos_controller implements ActionListener{
     
@@ -23,12 +22,17 @@ public class Elegir_puestos_controller implements ActionListener{
     ReservasDao reservadao = new ReservasDao();
     Elegir_puestos_view vista = new Elegir_puestos_view();
     Datos datos = new Datos();
+    Datos_y_pago_view vistaDatosyPago = new Datos_y_pago_view();
     
     int filas = 0;
     int columnas = 0;
-    int elegidos = 1;
+    
+    int totalFilas = vista.torre1.length;
+    int totalColumnas = vista.torre1[0].length;
     
     ArrayList<String> codigoAsiento = new ArrayList<>();
+    ArrayList<String> ocupados = new ArrayList<>();
+    ArrayList<String> claseActual = new ArrayList<>();
         
     public Elegir_puestos_controller(Elegir_puestos_view vista, Datos datos){
         
@@ -38,6 +42,8 @@ public class Elegir_puestos_controller implements ActionListener{
         this.vista.aleatorio.addActionListener(this);
         this.vista.siguiente.addActionListener(this);
         this.vista.volver.addActionListener(this);
+        
+        this.vistaDatosyPago.volver.addActionListener(this);
 
         
         for (int f = 0; f < vista.torre1.length; f++) {
@@ -46,6 +52,8 @@ public class Elegir_puestos_controller implements ActionListener{
                 columnas++;
                 if (vista.torre1[f][c] != null) {
                     vista.torre1[f][c].addActionListener(this);
+                    vista.torre1[f][c].setEnabled(true);
+                    vista.torre1[f][c].setBackground(null);
                 }
                 
             }
@@ -56,16 +64,70 @@ public class Elegir_puestos_controller implements ActionListener{
                 
                 if (vista.torre2[f][c] != null) {
                     vista.torre2[f][c].addActionListener(this);
+                    vista.torre2[f][c].setEnabled(true);
+                    vista.torre2[f][c].setBackground(null);
                 }
                 
             }
         }
         
+        //Para traer los puestos ocupados
+        String puestoActual1 = "";
+        String puestoActual2 = "";
+        ocupados = reservadao.asientoReservados(this.datos.getCodigoVuelo());
+        if(ocupados.size() > 0){
+            for (int i = 0; i < ocupados.size(); i++) {
+                for (int f = 0; f < totalFilas; f++) {
+                    for (int c = 0; c < totalColumnas; c++) {
+                        
+                        puestoActual1 = this.vista.torre1[f][c].getText();
+                        puestoActual2 = this.vista.torre2[f][c].getText();
+                        
+                        if (ocupados.get(i).equals(puestoActual1)) {
+                            this.vista.torre1[f][c].setEnabled(false);
+                            
+                            JButton botonPresionado = this.vista.torre1[f][c];
+
+                            //Cambiar el color del botón seleccionado
+                            botonPresionado.setBackground(Color.red);
+                        }
+                        
+                        if (ocupados.get(i).equals(puestoActual2)) {
+                            this.vista.torre2[f][c].setEnabled(false);
+
+                            JButton botonPresionado = this.vista.torre2[f][c];
+
+                            //Cambiar el color del botón seleccionado
+                            botonPresionado.setBackground(Color.red);
+                        
+                        }
+                    }
+                }
+            }
+        }
+        
+        
+        claseActual = reservadao.claseActual(this.datos.getClaseVuelo());
+        for (int i = 0; i < claseActual.size(); i++) {
+            for (int f = 0; f < totalFilas; f++) {
+                for (int c = 0; c < totalColumnas; c++) {
+
+                    puestoActual1 = this.vista.torre1[f][c].getText();
+                    puestoActual2 = this.vista.torre2[f][c].getText();
+
+                    if (claseActual.get(i).equals(puestoActual1)) {
+                        this.vista.torre1[f][c].setEnabled(false);
+                    }
+
+                    if (claseActual.get(i).equals(puestoActual2)) {
+                        this.vista.torre2[f][c].setEnabled(false);
+                    }
+                }
+            }
+        }
+        
     }
 
-    
-    int totalFilas = vista.torre1.length;
-    int totalColumnas = vista.torre1[0].length;
     
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -75,7 +137,7 @@ public class Elegir_puestos_controller implements ActionListener{
             for (int c = 0; c < totalColumnas; c++) {
 
                 if (e.getSource() == vista.torre1[f][c]) {
-                    if(elegidos <= datos.getNumeroTickets()){
+                    if(datos.elegidos <= datos.getNumeroTickets()){
                         vista.torre1[f][c].setEnabled(false);
 
                         JButton botonPresionado = vista.torre1[f][c];
@@ -87,7 +149,7 @@ public class Elegir_puestos_controller implements ActionListener{
                         
                         codigoAsiento.add(nombrebtn);
 
-                        elegidos++;
+                        datos.elegidos++;
                     }else{
                        return; 
                     }
@@ -99,7 +161,7 @@ public class Elegir_puestos_controller implements ActionListener{
             for (int c = 0; c < vista.torre2[f].length; c++) {
 
                 if (e.getSource() == vista.torre2[f][c]) {
-                    if(elegidos <= datos.getNumeroTickets()){
+                    if(datos.elegidos <= datos.getNumeroTickets()){
                         vista.torre2[f][c].setEnabled(false);
                         
                         JButton botonPresionado = vista.torre2[f][c];
@@ -112,7 +174,7 @@ public class Elegir_puestos_controller implements ActionListener{
                         codigoAsiento.add(nombrebtn);
                         
 
-                        elegidos++;
+                        datos.elegidos++;
                     }else{
                         return;
                     }
@@ -127,10 +189,9 @@ public class Elegir_puestos_controller implements ActionListener{
             if(codigoAsiento.size() == datos.getNumeroTickets()){
                 datos.setCodigoAsiento(codigoAsiento);
                 
-                Datos_y_pago_view viewDatosyPago = new Datos_y_pago_view();
                 vista.setVisible(false);
-                viewDatosyPago.setVisible(true);
-                Datos_y_pago_controller controllerDatosPago = new Datos_y_pago_controller(viewDatosyPago, datos);
+                vistaDatosyPago.setVisible(true);
+                Datos_y_pago_controller controllerDatosPago = new Datos_y_pago_controller(vistaDatosyPago, datos);
 
                 JOptionPane.showMessageDialog(vista, "Elegiste los puestos: " + datos.getCodigoAsiento());
                 
@@ -144,7 +205,7 @@ public class Elegir_puestos_controller implements ActionListener{
         
         if(e.getSource() == vista.aleatorio){
             
-            while(elegidos <= datos.getNumeroTickets()){
+            while(datos.elegidos <= datos.getNumeroTickets()){
                 
                 int fila = (int)(Math.random() * totalFilas);
                 int columna = (int)(Math.random() * totalColumnas);
@@ -172,6 +233,11 @@ public class Elegir_puestos_controller implements ActionListener{
             }
             
             vista.siguiente.doClick();
+        }
+        
+        if(e.getSource() == vistaDatosyPago.volver){
+            vista.setVisible(true);
+            vistaDatosyPago.setVisible(false);
         }
     }
     

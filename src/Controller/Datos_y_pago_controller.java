@@ -20,6 +20,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 
@@ -57,15 +59,21 @@ public class Datos_y_pago_controller implements ActionListener{
         this.viewTransferencia.volver.addActionListener(this);
         
         if (this.datos.getNumeroTickets() == 1) {
-            vista.siguiente.setEnabled(false);
-            vista.credito.setEnabled(true);
-            vista.debito.setEnabled(true);
-            vista.pse.setEnabled(true);
+            this.vista.siguiente.setEnabled(false);
+            this.vista.credito.setEnabled(true);
+            this.vista.debito.setEnabled(true);
+            this.vista.pse.setEnabled(true);
         }
+        
+        Calendar cal = Calendar.getInstance(); //Toma la fecha y hora actual
+        cal.add(Calendar.DAY_OF_YEAR, -14);//Resta 2 semanas (14 días) hacia el pasado para definir la fecha de nacimiento mínima
+        
+        this.vista.elegir_fecha.setMaxSelectableDate(cal.getTime());//Para bloquear las fechas de 2 semanas atras al futuro
+        this.vista.elegir_fecha.setDate(cal.getTime());//Para que el calendario se habra en la fecha minima
         
         
         //Condicones para que los campos solo permitan siertos caracteres
-        vista.nombrecampo.addKeyListener(new KeyAdapter() {
+        this.vista.nombrecampo.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
                 if (!Character.isLetter(e.getKeyChar()) && e.getKeyChar() != ' ')//Solo letras y espacios
@@ -76,9 +84,9 @@ public class Datos_y_pago_controller implements ActionListener{
         });
         
         //Desactivar el comando de "Pegar" (Ctrl + V)
-        vista.nombrecampo.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), "none");
+        this.vista.nombrecampo.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), "none");
         
-        vista.apellidocampo.addKeyListener(new KeyAdapter() {
+        this.vista.apellidocampo.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
                 if (!Character.isLetter(e.getKeyChar()) && e.getKeyChar() != ' ')//Solo letras y espacios
@@ -89,12 +97,14 @@ public class Datos_y_pago_controller implements ActionListener{
         });
         
         //Desactivar el comando de "Pegar" (Ctrl + V)
-        vista.apellidocampo.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), "none");
+        this.vista.apellidocampo.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), "none");
         
-        vista.numero_documento.addKeyListener(new KeyAdapter() {
+        this.vista.numero_documento.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
-                if (!Character.isDigit(e.getKeyChar()) && e.getKeyChar() != '.')//Solo numeros y puntos 
+                if (!Character.isDigit(e.getKeyChar()) && e.getKeyChar() != ' ' 
+                        && e.getKeyChar() != '.' && e.getKeyChar() != '-'
+                        && !Character.isLetter(e.getKeyChar()))
                 {
                     e.consume();
                 }
@@ -102,12 +112,12 @@ public class Datos_y_pago_controller implements ActionListener{
         });
         
         //Desactivar el comando de "Pegar" (Ctrl + V)
-        vista.numero_documento.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), "none");
+        this.vista.numero_documento.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), "none");
         
-        vista.numeroTel.addKeyListener(new KeyAdapter() {
+        this.vista.numeroTel.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
-                if (!Character.isDigit(e.getKeyChar()) && e.getKeyChar() != ' ')//Solo numeros espacios
+                if (!Character.isDigit(e.getKeyChar()) && e.getKeyChar() != ' ')
                 {
                     e.consume();
                 }
@@ -115,11 +125,11 @@ public class Datos_y_pago_controller implements ActionListener{
         });
         
         //Desactivar el comando de "Pegar" (Ctrl + V)
-        vista.numeroTel.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), "none");
+        this.vista.numeroTel.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), "none");
         
         
         //Para que no pueda ingresar al campo de fecha
-        JTextField editorFecha = (JTextField) vista.elegir_fecha.getDateEditor().getUiComponent();
+        JTextField editorFecha = (JTextField) this.vista.elegir_fecha.getDateEditor().getUiComponent();
         editorFecha.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -132,6 +142,8 @@ public class Datos_y_pago_controller implements ActionListener{
                 e.consume();
             }
         });
+        
+        this.vista.precioTotal.setText(""+datos.getTotalPagar());
         
     }
 
@@ -148,8 +160,11 @@ public class Datos_y_pago_controller implements ActionListener{
                     vista.credito.setEnabled(true);
                     vista.debito.setEnabled(true);
                     vista.pse.setEnabled(true);
+                    
+                    JOptionPane.showMessageDialog(null, "Llena los datos del ticket numero: " + n);
+                    
                 } else {
-                    JOptionPane.showMessageDialog(vista, "Llena los datos del ticket numero: " + n);
+                    JOptionPane.showMessageDialog(null, "Llena los datos del ticket numero: " + n);
                 }
             }
         }
@@ -163,9 +178,8 @@ public class Datos_y_pago_controller implements ActionListener{
                 
                 datos.setDatosPersonales(datosPasajeros);
                 
-                
-                //int pago = Integer.parseInt(vista.precioTotal.getText());
-                //datos.setTotalPagar(pago);
+                double pago = Double.parseDouble(vista.precioTotal.getText());
+                datos.setTotalPagar(pago);
             }
         }
         if (e.getSource() == vista.debito) {
@@ -177,9 +191,8 @@ public class Datos_y_pago_controller implements ActionListener{
                 
                 datos.setDatosPersonales(datosPasajeros);
                 
-                
-                //int pago = Integer.parseInt(vista.precioTotal.getText());
-                //datos.setTotalPagar(pago);
+                int pago = Integer.parseInt(vista.precioTotal.getText());
+                datos.setTotalPagar(pago);
             
             }
         }
@@ -192,10 +205,8 @@ public class Datos_y_pago_controller implements ActionListener{
                 
                 datos.setDatosPersonales(datosPasajeros);
                 
-                
-                //int pago = Integer.parseInt(vista.precioTotal.getText());
-                //datos.setTotalPagar(pago);
-                
+                double pago = Integer.parseInt(vista.precioTotal.getText());
+                datos.setTotalPagar(pago);
             }
         }
         
@@ -218,19 +229,23 @@ public class Datos_y_pago_controller implements ActionListener{
     }
     
     public boolean validarDatos(){
-        if(vista.nombrecampo != null 
-            && vista.apellidocampo != null 
-            && vista.numero_documento != null 
-            && vista.numeroTel != null 
-            && vista.correo != null 
+        if(!vista.nombrecampo.getText().isBlank() 
+            && !vista.apellidocampo.getText().isBlank()
+            && !vista.numero_documento.getText().isBlank()
+            && !vista.numeroTel.getText().isBlank()
+            && !vista.correo.getText().isBlank()
             && vista.listar_documento.getSelectedIndex() > 0
             && vista.listar_sexo.getSelectedIndex() > 0 
             && vista.listar_nacionalidad.getSelectedIndex() > 0
             && vista.elegir_fecha.getDate() != null){
             
-            guardarDatos();
+            if(datosCorrectos()){
+                guardarDatos();
+                return true;
+            }else{
+                return false;
+            }
             
-            return true;
         }else{
             JOptionPane.showMessageDialog(vista,
                                 "Debes llenar todos los datos", "Llenar datos", JOptionPane.WARNING_MESSAGE);
@@ -238,16 +253,17 @@ public class Datos_y_pago_controller implements ActionListener{
         }
     }
     
+    
     public void guardarDatos(){
         
-        String nombre, apellido, numDocumento, numTel, corre, sexo, nacionalidad, fechaNacimiento;
+        String nombre, apellido, numDocumento, numTel, correo, sexo, nacionalidad, fechaNacimiento;
         int tipoDocumento;
 
         nombre = vista.nombrecampo.getText();
         apellido = vista.apellidocampo.getText();
         numDocumento = vista.numero_documento.getText();
         numTel = vista.numeroTel.getText();
-        corre = vista.correo.getText();
+        correo = vista.correo.getText();
         tipoDocumento = vista.listar_documento.getSelectedIndex();
         sexo = vista.listar_sexo.getSelectedItem().toString();
         nacionalidad = vista.listar_nacionalidad.getSelectedItem().toString();
@@ -260,14 +276,98 @@ public class Datos_y_pago_controller implements ActionListener{
         datosPersonales.setApellido(apellido);
         datosPersonales.setNumero_documento(numDocumento);
         datosPersonales.setNumero_telefono(numTel);
-        datosPersonales.setCorreo(corre);
+        datosPersonales.setCorreo(correo);
         datosPersonales.setCodigo_tipo_documento(tipoDocumento);
         datosPersonales.setSexo(sexo);
         datosPersonales.setNationalidad(nacionalidad);
         datosPersonales.setFecha_nacimiento(fechaNacimiento);
 
         datosPasajeros.add(datosPersonales);
-            
     
     }
+    
+    private boolean datosCorrectos(){
+        String numDocumento = vista.numero_documento.getText();
+        String numTel = quitarEspaciosPuntos(vista.numeroTel.getText());
+        String correo = vista.correo.getText();
+        int puntos = 0;
+        
+        if (numDocumento.length() <= 17){
+            puntos++;
+        }else{
+            JOptionPane.showMessageDialog(vista,
+                                "Tu numero de documento pasa el maximo de caracteres para el sistema", "Numero de documento invalido", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        if (numDocumento.length() >= 8){
+            puntos++;
+        }else{
+            JOptionPane.showMessageDialog(vista,
+                                "Tu numero de documento no alcansa el minimo de caracteres para el sistema", "Numero de documento invalido", JOptionPane.WARNING_MESSAGE);
+        }        
+        
+        if (numTel.length() == 10){
+            puntos++;
+        }else{
+            JOptionPane.showMessageDialog(vista,
+                                "Un numero de celular sin codigo de pais Ej:(+57) debe tener 10 digitos", "Numero de telefonos invalido", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        if(correoCorrecto(correo)){
+            puntos++;
+        }else{
+            JOptionPane.showMessageDialog(vista,
+                                "Tu correo no es valido revisa que tu correo tenga \n'@' y termine en '.co' o '.com' y tenga el servidor Ej:(@gmail.com)", "Correo", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        if(puntos == 4){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    private String quitarEspaciosPuntos(String texto){
+        String resultado="";
+        for(int i = 0; i < texto.length(); i++){
+            char numero = texto.charAt(i);
+            if(numero == ' ' || numero == '.'){
+                continue;
+            }else{
+                resultado = resultado+numero;
+            }
+        }
+        return resultado;
+    }
+    
+    private boolean correoCorrecto(String texto){
+        String dominio="", co="", com="";
+        int puntos = 0;
+        for(int i = texto.length()-1; i >= 0; i--){
+            char letra = texto.charAt(i);
+            if(letra == '@'){
+                dominio = texto.substring(i, texto.length());
+                puntos++;
+                
+                if (dominio.length() > 5) {
+                    co = dominio.substring(dominio.length()-3, dominio.length());
+                    if (dominio.length() > 6) {
+                        com = dominio.substring(dominio.length()-4, dominio.length());
+                    }
+                    if (co.equals(".co") || com.equals(".com")) {
+                        puntos++;
+                    }
+                }
+                //JOptionPane.showMessageDialog(null, "co= "+co+" com= "+com+" Dominio: "+dominio);
+            }
+        }
+        
+        if(puntos == 2){
+            return true;
+        }else{
+            return false;
+        }
+    
+    }
+    
 }
