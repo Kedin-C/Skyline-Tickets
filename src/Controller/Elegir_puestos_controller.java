@@ -26,7 +26,6 @@ public class Elegir_puestos_controller implements ActionListener{
     
     int filas = 0;
     int columnas = 0;
-    int elegidos = 1;
     
     int totalFilas = vista.torre1.length;
     int totalColumnas = vista.torre1[0].length;
@@ -53,6 +52,8 @@ public class Elegir_puestos_controller implements ActionListener{
                 columnas++;
                 if (vista.torre1[f][c] != null) {
                     vista.torre1[f][c].addActionListener(this);
+                    vista.torre1[f][c].setEnabled(true);
+                    vista.torre1[f][c].setBackground(null);
                 }
                 
             }
@@ -63,6 +64,8 @@ public class Elegir_puestos_controller implements ActionListener{
                 
                 if (vista.torre2[f][c] != null) {
                     vista.torre2[f][c].addActionListener(this);
+                    vista.torre2[f][c].setEnabled(true);
+                    vista.torre2[f][c].setBackground(null);
                 }
                 
             }
@@ -134,7 +137,7 @@ public class Elegir_puestos_controller implements ActionListener{
             for (int c = 0; c < totalColumnas; c++) {
 
                 if (e.getSource() == vista.torre1[f][c]) {
-                    if(elegidos <= datos.getNumeroTickets()){
+                    if(datos.elegidos <= datos.getNumeroTickets()){
                         vista.torre1[f][c].setEnabled(false);
 
                         JButton botonPresionado = vista.torre1[f][c];
@@ -146,7 +149,7 @@ public class Elegir_puestos_controller implements ActionListener{
                         
                         codigoAsiento.add(nombrebtn);
 
-                        elegidos++;
+                        datos.elegidos++;
                     }else{
                        return; 
                     }
@@ -158,7 +161,7 @@ public class Elegir_puestos_controller implements ActionListener{
             for (int c = 0; c < vista.torre2[f].length; c++) {
 
                 if (e.getSource() == vista.torre2[f][c]) {
-                    if(elegidos <= datos.getNumeroTickets()){
+                    if(datos.elegidos <= datos.getNumeroTickets()){
                         vista.torre2[f][c].setEnabled(false);
                         
                         JButton botonPresionado = vista.torre2[f][c];
@@ -171,7 +174,7 @@ public class Elegir_puestos_controller implements ActionListener{
                         codigoAsiento.add(nombrebtn);
                         
 
-                        elegidos++;
+                        datos.elegidos++;
                     }else{
                         return;
                     }
@@ -202,7 +205,7 @@ public class Elegir_puestos_controller implements ActionListener{
         
         if(e.getSource() == vista.aleatorio){
             
-            while(elegidos <= datos.getNumeroTickets()){
+            while(datos.elegidos <= datos.getNumeroTickets()){
                 
                 int fila = (int)(Math.random() * totalFilas);
                 int columna = (int)(Math.random() * totalColumnas);

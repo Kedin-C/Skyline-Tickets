@@ -56,6 +56,7 @@ public class Elegir_clase_controller implements ActionListener{
             }
             
             datos.setNumeroTickets(Integer.parseInt(vista.listarNumeros.getSelectedItem().toString()));
+            datos.elegidos = 1;
             
             if(vista.listarEquipaje.getSelectedIndex() > 0){
                 String tickets = vista.listarEquipaje.getSelectedItem().toString();

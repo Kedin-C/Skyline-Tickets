@@ -15,6 +15,8 @@ public class Datos {
     private ArrayList<DatosPersonales> datosPersonales;
     private DatosPago datosPago;
     
+    public int elegidos = 1;
+    
     private DatosPersonalesDao datosPersonalesDao = new DatosPersonalesDao();
     private DatosPagoDao datosPagoDao = new DatosPagoDao();
     private ReservasDao datosReserva = new ReservasDao();

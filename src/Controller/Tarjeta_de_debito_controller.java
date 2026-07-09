@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -36,6 +37,12 @@ public class Tarjeta_de_debito_controller implements ActionListener{
         this.vista.pagar.addActionListener(this);
         this.vista.volver.addActionListener(this);
         
+        Calendar cal = Calendar.getInstance(); //Toma la fecha y hora actual
+        cal.add(Calendar.DAY_OF_YEAR, 1);
+        
+        this.vista.fecha_ven.setMinSelectableDate(cal.getTime());
+        
+        
         //Condicones para que los campos solo permitan siertos caracteres
         vista.num_tarjeta.addKeyListener(new KeyAdapter() {
             @Override
@@ -48,10 +55,10 @@ public class Tarjeta_de_debito_controller implements ActionListener{
         });
         
         //Desactivar el comando de "Pegar" (Ctrl + V)
-        vista.num_tarjeta.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), "none");
+        this.vista.num_tarjeta.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), "none");
         
         //Para que no pueda ingresar al campo de fecha
-        JTextField editorFecha = (JTextField) vista.fecha_ven.getDateEditor().getUiComponent();
+        JTextField editorFecha = (JTextField) this.vista.fecha_ven.getDateEditor().getUiComponent();
         editorFecha.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -66,9 +73,9 @@ public class Tarjeta_de_debito_controller implements ActionListener{
         });
         
         //Desactivar el comando de "Pegar" (Ctrl + V)
-        vista.fecha_ven.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), "none");
+        this.vista.fecha_ven.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), "none");
         
-        vista.cvv.addKeyListener(new KeyAdapter() {
+        this.vista.cvv.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
                 if (!Character.isDigit(e.getKeyChar()))//Solo numeros
@@ -79,9 +86,9 @@ public class Tarjeta_de_debito_controller implements ActionListener{
         });
         
         //Desactivar el comando de "Pegar" (Ctrl + V)
-        vista.cvv.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), "none");
+        this.vista.cvv.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), "none");
         
-        vista.nombre_titular.addKeyListener(new KeyAdapter() {
+        this.vista.nombre_titular.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
                 if (!Character.isLetter(e.getKeyChar()) && e.getKeyChar() != ' ')//Solo letras y espacios
@@ -92,7 +99,7 @@ public class Tarjeta_de_debito_controller implements ActionListener{
         });
         
         //Desactivar el comando de "Pegar" (Ctrl + V)
-        vista.nombre_titular.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), "none");
+        this.vista.nombre_titular.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), "none");
     }
 
     @Override
@@ -131,7 +138,7 @@ public class Tarjeta_de_debito_controller implements ActionListener{
         
     }
     
-    public boolean Validar(){
+    private boolean Validar(){
         if(!vista.num_tarjeta.getText().isBlank() &&
                 vista.fecha_ven.getDate() != null &&
                 !vista.cvv.getText().isBlank() &&
@@ -142,6 +149,12 @@ public class Tarjeta_de_debito_controller implements ActionListener{
             JOptionPane.showMessageDialog(vista,
                                 "Debes llenar todos los datos de la tarjeta de debito", "Llenar datos tarjeta debito", JOptionPane.WARNING_MESSAGE);
             return false;
+        }
+    }
+    
+    private boolean datosCorrectos(){
+        
+        if(){
         }
     }
 }

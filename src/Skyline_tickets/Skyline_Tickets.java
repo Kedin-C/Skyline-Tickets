@@ -72,6 +72,9 @@ public class Skyline_Tickets {
         Menu_principal_view menu = new Menu_principal_view(vista_principal);
         
         Pagina_principal_controller pagina_princ_cont = new Pagina_principal_controller(vista_principal,select_vuelo,buscar_v,menu);
+        
+        String ruta = System.getProperty("user.home") + "\\Documents\\Ticket.pdf";
+        System.out.println(ruta);
     }
     
 }
