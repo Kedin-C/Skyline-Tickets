@@ -187,21 +187,22 @@ public class Datos_y_pago_view extends Interfaz_vista_abtractas{
         pse.setEnabled(false);
         
         
-        volver = new JButton("Volver");
+        volver = super.getVolver2();
         siguiente = new JButton("Siguiente");
+        siguiente.setPreferredSize(new Dimension(120,30)); 
         
         //Color letras botones
         credito.setForeground(Color.WHITE);
         debito.setForeground(Color.WHITE); 
         pse.setForeground(Color.WHITE);
-        volver.setForeground(Color.WHITE);
+        
         siguiente.setForeground(Color.WHITE);
         
         //Color botones
         credito.setBackground(Color.decode("#037FB9"));
         debito.setBackground(Color.decode("#037FB9")); 
         pse.setBackground(Color.decode("#037FB9"));
-        volver.setBackground(Color.decode("#037FB9"));
+        
         siguiente.setBackground(Color.decode("#037FB9"));
         
         

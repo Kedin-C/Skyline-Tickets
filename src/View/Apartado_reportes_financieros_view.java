@@ -148,7 +148,7 @@ public class Apartado_reportes_financieros_view extends Interfaz_vista_abtractas
         
         //Panel inferior con botón Volver
         panelInferior = new JPanel(new FlowLayout(FlowLayout.RIGHT, 60, 10));
-        volver = super.getVolver();
+        volver = super.volver;
         panelInferior.add(volver);
 
         panel2.setLayout(new BorderLayout());

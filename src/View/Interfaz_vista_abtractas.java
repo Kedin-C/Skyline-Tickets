@@ -29,7 +29,7 @@ public abstract class Interfaz_vista_abtractas extends JFrame{
     //panel1 es la cabeza de la pagina y panel2 es el cuerpo de la pagina osea todo lo de abajo de la cabeza
     JPanel panel1,panel2;
     JLabel portada;
-    JButton continuar,volver;
+    JButton continuar,volver,volver_2;
     GridLayout migrid;
     
     
@@ -78,6 +78,11 @@ public abstract class Interfaz_vista_abtractas extends JFrame{
     volver.setPreferredSize(new Dimension(200,40));    
     volver.setBackground(Color.decode("#037FB9"));
     volver.setForeground(Color.WHITE);
+    
+    volver_2 = new JButton("Volver",nueva_imagen_volver);
+    volver_2.setPreferredSize(new Dimension(120,30));    
+    volver_2.setBackground(Color.decode("#037FB9"));
+    volver_2.setForeground(Color.WHITE);
 
     
   
@@ -111,6 +116,10 @@ public abstract class Interfaz_vista_abtractas extends JFrame{
      
      public JButton getVolver(){
          return this.volver;
+     }
+     
+     public JButton getVolver2(){
+         return this.volver_2;
      }
     
 }

@@ -201,7 +201,6 @@ public class Datos_y_pago_controller implements ActionListener{
                 viewTransferencia.setVisible(true);
                 Seleccion_forma_de_pago_view selec_pago = new Seleccion_forma_de_pago_view();
                 Transferencia_controller controllerTransferencia = new Transferencia_controller(viewTransferencia, datos,selec_pago);
-                
                 datos.setDatosPersonales(datosPasajeros);
                 
                 double pago = Integer.parseInt(vista.precioTotal.getText());
