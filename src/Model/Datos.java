@@ -16,6 +16,7 @@ public class Datos {
     private DatosPago datosPago;
     
     public int elegidos = 1;
+    public int vista_pago=0;
     
     private DatosPersonalesDao datosPersonalesDao = new DatosPersonalesDao();
     private DatosPagoDao datosPagoDao = new DatosPagoDao();
@@ -136,7 +137,6 @@ public class Datos {
         for(int index = 0; index < codigoAsiento.size(); index++){
             datosReserva.enviarDatos(codigoAsiento.get(index), codigoVuelo);
         }
-        
         
     }
     

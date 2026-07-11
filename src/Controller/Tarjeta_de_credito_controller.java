@@ -7,6 +7,7 @@ package Controller;
 import Model.CrearPdfTicket;
 import Model.Datos;
 import Model.DatosPago;
+import Model.DatosPagoDao;
 import View.Seleccion_forma_de_pago_view;
 import View.Tarjeta_de_credito_view;
 import java.awt.Toolkit;
@@ -27,6 +28,7 @@ public class Tarjeta_de_credito_controller implements ActionListener{
     private Seleccion_forma_de_pago_view vista_atras;
     private Datos datos;
     private DatosPago datosPagar = new DatosPago();
+    private DatosPagoDao datosPagarDao = new DatosPagoDao();
     
     private CrearPdfTicket crearPdf;
     
@@ -103,6 +105,8 @@ public class Tarjeta_de_credito_controller implements ActionListener{
         
         //Desactivar el comando de "Pegar" (Ctrl + V)
         this.vista.nombre_titular.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), "none");
+        
+        
     }
 
     @Override
@@ -124,8 +128,17 @@ public class Tarjeta_de_credito_controller implements ActionListener{
                 datosPagar.setNombre_titular(vista.nombre_titular.getText());
                 
                 datos.setDatosPago(datosPagar);
-                
-                datos.subirDatos();
+                if(datos.vista_pago == 1){
+                    
+                    datosPagarDao.enviarDatos(datosPagar.getNumero_tarjeta(),
+                            datosPagar.getCvv(),
+                            datosPagar.getNombre_titular(),
+                            datosPagar.getFecha_vencimiento(),
+                            datos.getTotalPagar());
+                    
+                }else{
+                    datos.subirDatos();
+                }
                 
                 crearPdf = new CrearPdfTicket();
                 
@@ -150,12 +163,63 @@ public class Tarjeta_de_credito_controller implements ActionListener{
                 vista.fecha_ven.getDate() != null &&
                 !vista.cvv.getText().isBlank() &&
                 !vista.nombre_titular.getText().isBlank()){
-            
-            return true;
+            if(datosCorrectos()){
+                return true;
+            }else{
+                return false;
+            }
         }else{
             JOptionPane.showMessageDialog(vista,
                                 "Debes llenar todos los datos de la tarjeta de credito", "Llenar datos tarjeta credito", JOptionPane.WARNING_MESSAGE);
             return false;
         }
+    }
+    
+    
+    private boolean datosCorrectos(){
+        String num_tarjeta = quitarEspacios(vista.num_tarjeta.getText());
+        int cvv = Integer.parseInt(vista.cvv.getText());
+        
+        int puntos = 0;
+        if(num_tarjeta.length() <= 19){
+            puntos++;
+        }else{
+            JOptionPane.showMessageDialog(vista,
+                                "Tu numero de tarjeta supero el limite de digitos", "Numero de tarjeta", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        if(num_tarjeta.length() >= 13){
+            puntos++;
+        }else{
+            JOptionPane.showMessageDialog(vista,
+                                "Tu numero de tarjeta no llega al minimo de digitos", "Numero de tarjeta", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        if(cvv <= 999 && cvv > 99){
+            puntos++;
+        }else{
+            JOptionPane.showMessageDialog(vista,
+                                "Tu CVV debe tener 3 digitos", "CVV", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        if(puntos == 3){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    
+    private String quitarEspacios(String texto){
+        String resultado="";
+        for(int i = 0; i < texto.length(); i++){
+            char numero = texto.charAt(i);
+            if(numero == ' '){
+                continue;
+            }else{
+                resultado = resultado+numero;
+            }
+        }
+        return resultado;
     }
 }

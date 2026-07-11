@@ -143,8 +143,11 @@ public class Tarjeta_de_debito_controller implements ActionListener{
                 vista.fecha_ven.getDate() != null &&
                 !vista.cvv.getText().isBlank() &&
                 !vista.nombre_titular.getText().isBlank()){
-            
-            return true;
+            if(datosCorrectos()){
+                return true;
+            }else{
+                return false;
+            }
         }else{
             JOptionPane.showMessageDialog(vista,
                                 "Debes llenar todos los datos de la tarjeta de debito", "Llenar datos tarjeta debito", JOptionPane.WARNING_MESSAGE);
@@ -152,9 +155,51 @@ public class Tarjeta_de_debito_controller implements ActionListener{
         }
     }
     
+    
     private boolean datosCorrectos(){
+        String num_tarjeta = quitarEspacios(vista.num_tarjeta.getText());
+        int cvv = Integer.parseInt(vista.cvv.getText());
         
-        if(){
+        int puntos = 0;
+        if(num_tarjeta.length() <= 19){
+            puntos++;
+        }else{
+            JOptionPane.showMessageDialog(vista,
+                                "Tu numero de tarjeta supero el limite de digitos", "Numero de tarjeta", JOptionPane.WARNING_MESSAGE);
         }
+        
+        if(num_tarjeta.length() >= 13){
+            puntos++;
+        }else{
+            JOptionPane.showMessageDialog(vista,
+                                "Tu numero de tarjeta no llega al minimo de digitos", "Numero de tarjeta", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        if(cvv <= 999 && cvv > 99){
+            puntos++;
+        }else{
+            JOptionPane.showMessageDialog(vista,
+                                "Tu CVV debe tener 3 digitos", "CVV", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        if(puntos == 3){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    
+    private String quitarEspacios(String texto){
+        String resultado="";
+        for(int i = 0; i < texto.length(); i++){
+            char numero = texto.charAt(i);
+            if(numero == ' '){
+                continue;
+            }else{
+                resultado = resultado+numero;
+            }
+        }
+        return resultado;
     }
 }

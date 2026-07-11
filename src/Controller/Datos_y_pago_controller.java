@@ -45,7 +45,6 @@ public class Datos_y_pago_controller implements ActionListener{
         this.datos=datos;
         this.vista=vista;
         
-        //this.viewTarjetaCredito = viewTarjetaCredito;
         this.n=1;
         
         this.vista.siguiente.addActionListener(this);
@@ -191,7 +190,7 @@ public class Datos_y_pago_controller implements ActionListener{
                 
                 datos.setDatosPersonales(datosPasajeros);
                 
-                int pago = Integer.parseInt(vista.precioTotal.getText());
+                double pago = Double.parseDouble(vista.precioTotal.getText());
                 datos.setTotalPagar(pago);
             
             }
@@ -217,12 +216,12 @@ public class Datos_y_pago_controller implements ActionListener{
         
         if(e.getSource() == this.viewTerjetaDebito.volver){
             vista.setVisible(true);
-            viewTarjetaCredito.setVisible(false);
+            viewTerjetaDebito.setVisible(false);
         }
         
         if(e.getSource() == this.viewTransferencia.volver){
             vista.setVisible(true);
-            viewTarjetaCredito.setVisible(false);
+            viewTransferencia.setVisible(false);
         }
         
         
@@ -290,6 +289,8 @@ public class Datos_y_pago_controller implements ActionListener{
         String numDocumento = vista.numero_documento.getText();
         String numTel = quitarEspaciosPuntos(vista.numeroTel.getText());
         String correo = vista.correo.getText();
+        int tipo_documento = vista.listar_documento.getSelectedIndex();
+                
         int puntos = 0;
         
         if (numDocumento.length() <= 17){
@@ -320,7 +321,56 @@ public class Datos_y_pago_controller implements ActionListener{
                                 "Tu correo no es valido revisa que tu correo tenga \n'@' y termine en '.co' o '.com' y tenga el servidor Ej:(@gmail.com)", "Correo", JOptionPane.WARNING_MESSAGE);
         }
         
-        if(puntos == 4){
+        if(tipo_documento > 3){
+            puntos++;
+        }else{
+            if(tipo_documento == 1){
+                Calendar limite = Calendar.getInstance();
+                limite.add(Calendar.YEAR, -6);
+
+                Date fechaNacimiento = vista.elegir_fecha.getDate();
+                
+                if(fechaNacimiento.after(limite.getTime())){
+                    puntos++;
+                }else{
+                    JOptionPane.showMessageDialog(vista,
+                                "El tipo de documento no concuerda con tu edad", "Fecha de nacimiento", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+            
+            if(tipo_documento == 2){
+                Calendar limite1 = Calendar.getInstance();
+                limite1.add(Calendar.YEAR, -7);
+                
+                Calendar limite2 = Calendar.getInstance();
+                limite2.add(Calendar.YEAR, -18);
+
+                Date fechaNacimiento = vista.elegir_fecha.getDate();
+                
+                if(fechaNacimiento.before(limite1.getTime()) && fechaNacimiento.after(limite2.getTime())){
+                    puntos++;
+                }else{
+                    JOptionPane.showMessageDialog(vista,
+                                "El tipo de documento no concuerda con tu edad", "Fecha de nacimiento", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+            
+            if(tipo_documento == 3){
+                Calendar limite = Calendar.getInstance();
+                limite.add(Calendar.YEAR, -17);
+
+                Date fechaNacimiento = vista.elegir_fecha.getDate();
+                
+                if(fechaNacimiento.before(limite.getTime())){
+                    puntos++;
+                }else{
+                    JOptionPane.showMessageDialog(vista,
+                                "El tipo de documento no concuerda con tu edad", "Fecha de nacimiento", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        }
+        
+        if(puntos == 5){
             return true;
         }else{
             return false;
