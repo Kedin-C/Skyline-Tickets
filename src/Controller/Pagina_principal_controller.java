@@ -50,6 +50,7 @@ public class Pagina_principal_controller implements ActionListener{
             vistaCV.setVisible(true);
             vistaCV.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         }else if(e.getSource() == vista.clase){
+            
             vista.setVisible(false);
             vistaCL.setVisible(true);
             vistaCL.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);

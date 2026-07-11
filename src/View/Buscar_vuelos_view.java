@@ -26,6 +26,10 @@ import javax.swing.Box;
 import javax.swing.JFrame;
 
 public class Buscar_vuelos_view extends Interfaz_vista_abtractas{
+    
+    private int pagina_anterior;
+
+
     // Declaracion de objetos y variables
     private JLabel lugar_origen,lugar_destino,fecha_ida,fecha_regreso,horario;
             private String lista_origen[]={"",
@@ -233,6 +237,14 @@ public class Buscar_vuelos_view extends Interfaz_vista_abtractas{
 
         
         
+    }
+    
+    public int getPagina_anterior() {
+        return pagina_anterior;
+    }
+
+    public void setPagina_anterior(int pagina_anterior) {
+        this.pagina_anterior = pagina_anterior;
     }
 
 }

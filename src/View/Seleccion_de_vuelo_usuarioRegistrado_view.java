@@ -31,6 +31,9 @@ private JPanel panel2_dist1, panel2_dist2;
 private JPanel panel2_dist1_1,panel2_dist1_2,panel2_dist1_3,panel2_dist1_4,panel2_dist1_5;
 private JPanel dist1_cont, dist2_cont, dist3_cont,dist4_cont,dist5_cont;
 public JButton volver;
+private int pagina_anterior;
+
+
 //ticket 1
 private JPanel img_panel,tipo_panel,text1_panel,text2_panel,boton_panel;
 private JLabel imagen,tipo,vuelo_ida,vuelo_vuelta;
@@ -606,6 +609,14 @@ if("IDA".equals(tipo_vuelo_ticket5)){
         panel2_dist1.removeAll();
         panel2_dist1.removeAll();
 
+    }
+    
+        public int getPagina_anterior() {
+        return pagina_anterior;
+    }
+
+    public void setPagina_anterior(int pagina_anterior) {
+        this.pagina_anterior = pagina_anterior;
     }
 
 

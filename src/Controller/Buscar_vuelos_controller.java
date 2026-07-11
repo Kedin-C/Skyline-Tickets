@@ -127,10 +127,23 @@ public class Buscar_vuelos_controller implements ActionListener{
         
         
         if(e.getSource() == vista.volver){
+            
+            if(vista.getPagina_anterior() == 1){
             vista.setVisible(false);
             
             principal.setVisible(true);
             principal.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            }else if(vista.getPagina_anterior() == 2){
+            vista.setVisible(false);
+            
+            principal.setVisible(true);
+            principal.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            }else if(vista.getPagina_anterior() == 3){
+            vista.setVisible(false);
+            
+            principal.setVisible(true);
+            principal.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            }
         }
         
         if(e.getSource() == vista.siguiente){

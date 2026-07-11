@@ -21,19 +21,25 @@ import View.Login_view;
 import View.Menu_principal_view;
 import View.Registro_view;
 import View.ViewPrincipal;
+import javax.swing.JFrame;
 
 public class Registro_controller implements ActionListener {
 
     private Registro_view vista;
     private UsuarioDao dao;
     private Codigo_descuento_controller codigoController;
+    private Menu_principal_view menu;
 
-    public Registro_controller(Registro_view vista) {
+    public Registro_controller(Registro_view vista,Menu_principal_view menu) {
         this.vista = vista;
         this.dao = new UsuarioDao();
         this.codigoController = new Codigo_descuento_controller();
+        this.menu = menu;
         vista.getB1().addActionListener(this);
         vista.getBtnVolver().addActionListener(this);
+        
+        vista.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        vista.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     @Override
@@ -41,8 +47,8 @@ public class Registro_controller implements ActionListener {
         
         if(e.getSource() == vista.getBtnVolver()) {
         ViewPrincipal vp = new ViewPrincipal();
-        Menu_principal_view MenuView = new Menu_principal_view(vp);
-        MenuView.setLocationRelativeTo(null);
+        menu.setVisible(true);
+        
         
         vista.dispose();
         }

@@ -52,6 +52,8 @@ public class cambio_de_clase_de_vuelo_viiew extends Interfaz_vista_abtractas {
     private final JPanel cont_volver;
     
     public int ticket;
+    
+    private int clase_seleccionada;
 
     public cambio_de_clase_de_vuelo_viiew() {
         String nombre = "Seleccion cambio de clase de vuelo";
@@ -424,7 +426,7 @@ public class cambio_de_clase_de_vuelo_viiew extends Interfaz_vista_abtractas {
 
             case 1: {
                 cont_clase_economica.add(cont_economi_imagen, BorderLayout.NORTH);
-        cont_clase_economica.add(cont_economi_texto);
+                cont_clase_economica.add(cont_economi_texto);
                 cont_clase_economica.add(boton_Actual, BorderLayout.SOUTH);
                 this.distribucion3.add(panel_clase_economica);
                 break;
@@ -448,7 +450,7 @@ public class cambio_de_clase_de_vuelo_viiew extends Interfaz_vista_abtractas {
 
             default: {
                 cont_clase_economica.add(cont_economi_imagen, BorderLayout.NORTH);
-        cont_clase_economica.add(cont_economi_texto);
+                cont_clase_economica.add(cont_economi_texto);
                 cont_clase_economica.add(boton_Actual, BorderLayout.SOUTH);
                 this.distribucion3.add(panel_clase_economica);
                 break;
@@ -543,9 +545,9 @@ public class cambio_de_clase_de_vuelo_viiew extends Interfaz_vista_abtractas {
     }
     
     public void remove(){
-    this.distribucion3.removeAll();
-     this.distribucion2.removeAll();
-     this.distribucion1.removeAll();
+        this.distribucion3.removeAll();
+        this.distribucion2.removeAll();
+        this.distribucion1.removeAll();
     }
     
     public void removeBotones(){
@@ -554,6 +556,14 @@ public class cambio_de_clase_de_vuelo_viiew extends Interfaz_vista_abtractas {
         cont_primera_clase.removeAll();
                     
 
+    }
+    
+    public int getClase_seleccionada() {
+        return clase_seleccionada;
+    }
+
+    public void setClase_seleccionada(int clase_seleccionada) {
+        this.clase_seleccionada = clase_seleccionada;
     }
     
     

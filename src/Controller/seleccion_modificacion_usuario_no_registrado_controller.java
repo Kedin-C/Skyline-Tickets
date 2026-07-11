@@ -138,6 +138,7 @@ public class seleccion_modificacion_usuario_no_registrado_controller implements 
                 vista.setVisible(false);
                 vista2.setVisible(true);
                 vista2.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                vista2.setVista_anterior(1);
             } else {
                 JOptionPane.showMessageDialog(vista, "Los datos ingresados no coinciden");
             }

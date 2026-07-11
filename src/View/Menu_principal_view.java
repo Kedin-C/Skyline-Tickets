@@ -37,10 +37,14 @@ public class Menu_principal_view extends JFrame implements ActionListener {
     private JPanel mipanel1, mipanel2;
     private JLabel logo;
     private ViewPrincipal principal;
+    private Login_view login;
+    private Registro_view registro;
 
-    public Menu_principal_view(ViewPrincipal vista) {
+    public Menu_principal_view(ViewPrincipal vista,Login_view login, Registro_view registro) {
 
         this.principal = vista;
+        this.registro = registro;
+        this.login = login;
         super("Menu");
 
         contenedor = getContentPane();
@@ -118,6 +122,7 @@ public class Menu_principal_view extends JFrame implements ActionListener {
         contenedor.add(mipanel1);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         
     }
 
@@ -127,19 +132,17 @@ public class Menu_principal_view extends JFrame implements ActionListener {
         if (e.getSource() == b1) {
             dispose();
 
-            Login_view login = new Login_view();
-//            new Login_controller(login);
+            login.setVisible(true);
         }
 
         if (e.getSource() == b2) {
             dispose();
 
-            Registro_view registro = new Registro_view();
-            new Registro_controller(registro);
+            registro.setVisible(true);
         }
 
         if (e.getSource() == btnVolver) {
-            setVisible(false);
+            dispose();
             
             principal.setVisible(true);
                     

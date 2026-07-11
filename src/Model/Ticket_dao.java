@@ -33,7 +33,9 @@ public class Ticket_dao {
         
         if(rs.next())
             r = rs.getInt(1);
-                 } catch (Exception e) {
+        
+        } 
+        catch (Exception e) {
             
             JOptionPane.showMessageDialog(null, "error en la confirmacion del ticket", e.toString(), JOptionPane.ERROR_MESSAGE);
             
@@ -64,7 +66,6 @@ public class Ticket_dao {
         try {
         con = conectar.getConection();
         ps = con.prepareStatement(sql);
-        JOptionPane.showMessageDialog(null, "ID usuario: " + usuario.getIdUsuario());
         ps.setInt(1, usuario.getIdUsuario());
         
         rs = ps.executeQuery();

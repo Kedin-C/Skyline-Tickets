@@ -32,6 +32,9 @@ public class Seleccion_de_Modificacion_de_vuelo_view extends Interfaz_vista_abtr
     private final JPanel Content_Boton_Clase_vuelo,Content_Boton_Equipaje,Content_Boton_volver;
     public JButton Clase_vuelo,Equipaje,Volver;
     private final JLabel Message_text1,Message_text2,Message_text3;
+    private int vista_anterior;
+    
+
     
     public Seleccion_de_Modificacion_de_vuelo_view(){
         
@@ -136,5 +139,17 @@ public class Seleccion_de_Modificacion_de_vuelo_view extends Interfaz_vista_abtr
         panel2.add(panel_contenedor_distribucion);
         panel2.add(Cont_contenedor_boton_volver,BorderLayout.SOUTH);
     }
+    
+        public void setVista_anterior(int v){
+    
+        this.vista_anterior = v;
+    }
+    
+    public int getVista_anterior(){
+        return this.vista_anterior;
+    }
+    
+    
+    
     
 }
