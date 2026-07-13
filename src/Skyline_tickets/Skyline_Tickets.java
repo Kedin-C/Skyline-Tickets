@@ -95,7 +95,7 @@ public class Skyline_Tickets {
         Seleccion_modificacion_vuelo_usuario_controlador cont_select_vuelo_registrado = new Seleccion_modificacion_vuelo_usuario_controlador(select_vuelo,usuario,ticket,pagina_admin,pagina_admin_cont,pagina_usuario,pagina_usuario_cont,modificacion);
         
         
-        Buscar_vuelos_controller buscar_v_cont = new Buscar_vuelos_controller(buscar_v,datos,vista_principal);
+        Buscar_vuelos_controller buscar_v_cont = new Buscar_vuelos_controller(buscar_v,datos,vista_principal,pagina_admin,pagina_usuario);
         
         
         Pagina_principal_controller pagina_princ_cont = new Pagina_principal_controller(vista_principal,select_vuelo_nor,buscar_v,menu);

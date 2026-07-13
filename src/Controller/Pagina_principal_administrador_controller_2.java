@@ -66,6 +66,7 @@ public class Pagina_principal_administrador_controller_2 implements ActionListen
             
             vistaCV.setVisible(true);
             vistaCV.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
+            vistaCV.setPagina_anterior(3);
         }else if(e.getSource() == vista.clase){
             
             if(getCant_t() > 0){

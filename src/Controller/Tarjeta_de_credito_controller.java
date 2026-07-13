@@ -4,7 +4,7 @@
  */
 package Controller;
 
-import Model.CrearPdfTicket;
+//import Model.CrearPdfTicket;
 import Model.Datos;
 import Model.DatosPago;
 import Model.DatosPagoDao;
@@ -30,7 +30,7 @@ public class Tarjeta_de_credito_controller implements ActionListener{
     private DatosPago datosPagar = new DatosPago();
     private DatosPagoDao datosPagarDao = new DatosPagoDao();
     
-    private CrearPdfTicket crearPdf;
+//    private CrearPdfTicket crearPdf;
     
     public Tarjeta_de_credito_controller(Tarjeta_de_credito_view vista, Datos datos,Seleccion_forma_de_pago_view vista_atras){
         
@@ -140,7 +140,7 @@ public class Tarjeta_de_credito_controller implements ActionListener{
                     datos.subirDatos();
                 }
                 
-                crearPdf = new CrearPdfTicket();
+//                crearPdf = new CrearPdfTicket();
                 
             }
         }

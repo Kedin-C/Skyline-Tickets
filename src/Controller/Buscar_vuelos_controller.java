@@ -23,12 +23,16 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import Model.Datos;
 import View.Elegir_clase_view;
+import View.Inicio_usuario_view;
+import View.Pagina_principal_administrador_view;
 import View.ViewPrincipal;
 import javax.swing.JFrame;
 
 public class Buscar_vuelos_controller implements ActionListener{
     
     ViewPrincipal principal;
+    Pagina_principal_administrador_view pagina_admin;
+    Inicio_usuario_view pagina_usuario;
     Vuelos vuelo = new Vuelos();
     VuelosDao vuelodao = new VuelosDao();
     Buscar_vuelos_view vista = new Buscar_vuelos_view();
@@ -39,11 +43,12 @@ public class Buscar_vuelos_controller implements ActionListener{
     public String origen, destino, hora1, hora2;
     public Date fechaIda, fechaRegreso;
     
-    public Buscar_vuelos_controller(Buscar_vuelos_view vista, Datos datos,ViewPrincipal principal){
+    public Buscar_vuelos_controller(Buscar_vuelos_view vista, Datos datos,ViewPrincipal principal,Pagina_principal_administrador_view pagina_admin,Inicio_usuario_view pagina_usuario){
         
        
         this.principal = principal;
-        
+        this.pagina_admin = pagina_admin;
+        this.pagina_usuario = pagina_usuario;
         
         this.vista = vista;
         this.datos = datos;
@@ -136,13 +141,13 @@ public class Buscar_vuelos_controller implements ActionListener{
             }else if(vista.getPagina_anterior() == 2){
             vista.setVisible(false);
             
-            principal.setVisible(true);
-            principal.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            pagina_usuario.setVisible(true);
+            pagina_usuario.setExtendedState(JFrame.MAXIMIZED_BOTH);
             }else if(vista.getPagina_anterior() == 3){
             vista.setVisible(false);
             
-            principal.setVisible(true);
-            principal.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            pagina_admin.setVisible(true);
+            pagina_admin.setExtendedState(JFrame.MAXIMIZED_BOTH);
             }
         }
         

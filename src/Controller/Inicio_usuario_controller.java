@@ -58,6 +58,7 @@ public class Inicio_usuario_controller implements ActionListener {
 
             vistaCV.setVisible(true);
             vistaCV.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
+            vistaCV.setPagina_anterior(2);
         } else if (e.getSource() == vista.clase) {
 
             if (getCant_t() > 0) {
