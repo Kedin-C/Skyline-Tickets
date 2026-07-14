@@ -8,7 +8,14 @@
             <file>file:/C:/Users/david/Documentos/NetBeansProjects/Skyline-Tickets/src/View/Informacion_personal_view.java</file>
             <file>file:/C:/Users/david/Documentos/NetBeansProjects/Skyline-Tickets/src/Model/DatosPagoDao.java</file>
             <file>file:/C:/Users/david/Documentos/NetBeansProjects/Skyline-Tickets/src/Model/Ticket_dao.java</file>
-            <file>file:/C:/Users/david/Documentos/NetBeansProjects/Skyline-Tickets/src/Model/DatosPersonalesDao.java</file>
+            <file>file:/C:/Users/david/Documentos/NetBeansProjects/Skyline-Tickets/src/Controller/Tarjeta_de_credito_controller.java</file>
+            <file>file:/C:/Users/david/Documentos/NetBeansProjects/Skyline-Tickets/src/Controller/Login_controller.java</file>
+            <file>file:/C:/Users/david/Documentos/NetBeansProjects/Skyline-Tickets/src/Model/Sesion_usuario.java</file>
+            <file>file:/C:/Users/david/Documentos/NetBeansProjects/Skyline-Tickets/src/Model/UsuarioDao.java</file>
+            <file>file:/C:/Users/david/Documentos/NetBeansProjects/Skyline-Tickets/src/Model/Usuario.java</file>
+            <file>file:/C:/Users/david/Documentos/NetBeansProjects/Skyline-Tickets/src/Model/Datos.java</file>
+            <file>file:/C:/Users/david/Documentos/NetBeansProjects/Skyline-Tickets/src/Model/ReservasDao.java</file>
+            <file>file:/C:/Users/david/Documentos/NetBeansProjects/Skyline-Tickets/src/Model/DatosPersonales.java</file>
         </group>
     </open-files>
 </project-private>
