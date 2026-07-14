@@ -3,7 +3,6 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
             <file>file:/C:/Users/Hewlett-Packard/Documents/Skyline-Tickets/src/Skyline_tickets/Skyline_Tickets.java</file>
             <file>file:/C:/Users/Hewlett-Packard/Documents/Skyline-Tickets/src/Model/Ticket_dao.java</file>
             <file>file:/C:/Users/Hewlett-Packard/Documents/Skyline-Tickets/src/Model/Datos.java</file>
@@ -11,14 +10,8 @@
             <file>file:/C:/Users/Hewlett-Packard/Documents/Skyline-Tickets/src/Controller/Tarjeta_de_debito_controller.java</file>
             <file>file:/C:/Users/Hewlett-Packard/Documents/Skyline-Tickets/src/Controller/Tarjeta_de_credito_controller.java</file>
             <file>file:/C:/Users/Hewlett-Packard/Documents/Skyline-Tickets/src/Model/DatosPago.java</file>
-=======
-            <file>file:/C:/Users/david/Documentos/NetBeansProjects/Skyline-Tickets/src/Skyline_tickets/Skyline_Tickets.java</file>
-            <file>file:/C:/Users/david/Documentos/NetBeansProjects/Skyline-Tickets/src/Controller/Inicio_usuario_controller.java</file>
-            <file>file:/C:/Users/david/Documentos/NetBeansProjects/Skyline-Tickets/src/Model/UsuarioDao.java</file>
-            <file>file:/C:/Users/david/Documentos/NetBeansProjects/Skyline-Tickets/src/Model/Ticket_dao.java</file>
-            <file>file:/C:/Users/david/Documentos/NetBeansProjects/Skyline-Tickets/src/View/Seleccion_de_vuelo_usuarioRegistrado_view.java</file>
-            <file>file:/C:/Users/david/Documentos/NetBeansProjects/Skyline-Tickets/src/Controller/Tarjeta_de_credito_controller.java</file>
->>>>>>> 8b69a2125c1600904d1caad086b7595f89c346e4
+            <file>file:/C:/Users/Hewlett-Packard/Documents/Skyline-Tickets/src/Skyline_tickets/Prueba_inicio_sesion.java</file>
+            <file>file:/C:/Users/Hewlett-Packard/Documents/Skyline-Tickets/src/Controller/Login_controller.java</file>
         </group>
     </open-files>
 </project-private>
