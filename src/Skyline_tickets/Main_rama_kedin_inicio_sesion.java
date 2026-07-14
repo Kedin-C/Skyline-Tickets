@@ -35,10 +35,10 @@ public class Main_rama_kedin_inicio_sesion {
          Seleccion_de_vuelo_usuarioRegistrado_view seR = new  Seleccion_de_vuelo_usuarioRegistrado_view();
          ViewPrincipal_controlador prinC = new ViewPrincipal_controlador(pv,usu,ticket,seR);
          
-         Login_controller con = new Login_controller(in,pv,usu);
-         
-         Seleccion_modificacion_vuelo_usuario_controlador cont_select_vuelo_registrado = new Seleccion_modificacion_vuelo_usuario_controlador(seR,usu,ticket,pv,prinC);
-        
+//         Login_controller con = new Login_controller(in,pv,usu);
+//         
+//         Seleccion_modificacion_vuelo_usuario_controlador cont_select_vuelo_registrado = new Seleccion_modificacion_vuelo_usuario_controlador(seR,usu,ticket,pv,prinC);
+//        
         Ticket_dao dao = new Ticket_dao();
          
              in.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 

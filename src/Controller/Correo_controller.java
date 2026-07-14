@@ -13,11 +13,15 @@ import javax.swing.JOptionPane;
 import jakarta.mail.Authenticator;
 import jakarta.mail.Message;
 import jakarta.mail.MessagingException;
+import jakarta.mail.Multipart;
 import jakarta.mail.PasswordAuthentication;
 import jakarta.mail.Session;
 import jakarta.mail.Transport;
 import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeBodyPart;
 import jakarta.mail.internet.MimeMessage;
+import jakarta.mail.internet.MimeMultipart;
+import java.io.File;
 
 public class Correo_controller {
 
@@ -122,5 +126,39 @@ public class Correo_controller {
             + "Skyline Tickets";
 //    enviarCorreo();
 }
+    
+    public void enviarCorreoConAdjunto(String destinatario, File archivoAdjunto) {
+        try {
+            Session sesion = crearSesion();
+
+            MimeMessage correo = new MimeMessage(sesion);
+            correo.setFrom(new InternetAddress(correoRemitente));
+            correo.setRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));
+            correo.setSubject("Ticket de Vuelo");
+
+            // Parte de texto
+            MimeBodyPart texto = new MimeBodyPart();
+            texto.setText("Estimado pasajero,\nAdjunto encontrará su ticket de vuelo en PDF.");
+
+            // Parte del adjunto
+            MimeBodyPart adjunto = new MimeBodyPart();
+            adjunto.attachFile(archivoAdjunto);
+
+            // Combinar partes
+            Multipart multipart = new MimeMultipart();
+            multipart.addBodyPart(texto);
+            multipart.addBodyPart(adjunto);
+
+            correo.setContent(multipart);
+
+            // Enviar
+            Transport.send(correo);
+            System.out.println("Correo enviado correctamente con el ticket adjunto.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error al enviar el correo: " + e.getMessage());
+        }
+    }
 
 }
