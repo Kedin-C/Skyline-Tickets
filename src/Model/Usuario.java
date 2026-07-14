@@ -9,6 +9,8 @@ package Model;
  * @author Nikob
  */
 public class Usuario {
+
+   
     private int idUsuario;
     private String nombre;
     private String apellido;
@@ -71,5 +73,10 @@ public class Usuario {
     
     public void setRol(String rol){
         this.rol=rol;
+    }
+    
+     @Override
+    public String toString() {
+        return "Usuario{" + "idUsuario=" + idUsuario + ", nombre=" + nombre + ", apellido=" + apellido + ", correo=" + correo + ", contrase\u00f1a=" + contraseña + ", rol=" + rol + '}';
     }
 }

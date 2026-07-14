@@ -17,25 +17,39 @@ import Model.Usuario;
 import View.Inicio_usuario_view;
 import View.Login_view;
 import View.Menu_principal_view;
+import View.Pagina_principal_administrador_view;
 //import view.Pagina_principal_administrador_view;
 import View.Recuperar_contraseña_view;
+import View.Registro_view;
 import View.ViewPrincipal;
+import javax.swing.JFrame;
 
 
 public class Login_controller implements ActionListener {
     private Login_view vista;
     private UsuarioDao dao;
     private ViewPrincipal prin;
-    Usuario usu;
+    private Pagina_principal_administrador_view vista_admin;
+    private Inicio_usuario_view vista_usuario;
+    private Menu_principal_view menu;
+    private Registro_view registro;
+    private Usuario usu;
     
-    public Login_controller(Login_view vista,ViewPrincipal principal,Usuario usuario) {
+    public Login_controller(Login_view vista,ViewPrincipal principal,Usuario usuario,Registro_view registro,Pagina_principal_administrador_view vista_admin,Inicio_usuario_view vista_usuario) {
         this.vista = vista;
+        this.vista_admin = vista_admin;
+        this.vista_usuario = vista_usuario;
         this.dao = new UsuarioDao();
         this.prin = principal;
         this.usu = usuario;
-        vista.getB1().addActionListener(this);
-        vista.getB2().addActionListener(this);
-        vista.getBtnVolver().addActionListener(this);
+        this.registro = registro;
+        this.menu = new Menu_principal_view(this.prin,this.vista,this.registro);
+        
+        this.vista.getB1().addActionListener(this);
+        this.vista.getB2().addActionListener(this);
+        this.vista.getBtnVolver().addActionListener(this);
+        this.vista.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.vista.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
     }
     @Override
@@ -46,31 +60,41 @@ public class Login_controller implements ActionListener {
             Usuario usuario = dao.iniciarSesion(
                     correo,
                     contraseña);
-            if(usuario != null) {
-
+            
+            
+            if(usu != null) {
                 
-                Sesion_usuario.setUsuario(usuario);
+                usu.setApellido(usuario.getApellido());
+                usu.setContraseña(usuario.getContraseña());
+                usu.setCorreo(usuario.getCorreo());
+                usu.setIdUsuario(usuario.getIdUsuario());
+                usu.setNombre(usuario.getNombre());
+                usu.setRol(usuario.getRol());
+                
+                
+                Sesion_usuario.setUsuario(usu);
+                
 
                 JOptionPane.showMessageDialog(
                         null,
-                        "Bienvenido " + usuario.getNombre());
-                if(usuario.getRol().equals("ADMINISTRADOR")) {
+                        "Bienvenido " + usu.getNombre());
+                if(usu.getRol().equals("ADMINISTRADOR")) {
                     JOptionPane.showMessageDialog(
                             null,
                             "Ingreso como administrador");
                     // Abrir MenuAdministradorView
                     
-//                     Pagina_principal_administrador_view vistaInicioad = new Pagina_principal_administrador_view();
-//                     vistaInicioad.setLocationRelativeTo(null);
-//                     vistaInicioad.setVisible(true);
+                     
+                     
+                     vista_admin.setVisible(true);
                      vista.dispose();
                 } else {
                     JOptionPane.showMessageDialog(
                             null,
                             "Ingreso como usuario");
-                     Inicio_usuario_view vistaInicio = new Inicio_usuario_view();
-                     vistaInicio.setLocationRelativeTo(null);
-                     vistaInicio.setVisible(true);
+                     
+                     
+                     vista_usuario.setVisible(true);
                      vista.dispose();
                 }
             } else {
@@ -91,11 +115,10 @@ public class Login_controller implements ActionListener {
         
         
         if(e.getSource() == vista.getBtnVolver()) {
-        ViewPrincipal vp = new ViewPrincipal();
-        Menu_principal_view MenuView = new Menu_principal_view(vp);
-        MenuView.setLocationRelativeTo(null);
-        
+  
         vista.dispose();
+        
+        menu.setVisible(true);
         }
         }
     }

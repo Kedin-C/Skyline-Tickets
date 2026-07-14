@@ -25,12 +25,12 @@ import javax.swing.border.EmptyBorder;
 public class Pagina_principal_administrador_view extends Interfaz_vista_abtractas{
     
             
-    public Container contenedor;
-    public JPanel panel1,panelboton,panelboton2,panelboton3,paneltitulo,panelbotones;
-    public Panel_con_fondo_view panel2;
+    private Container contenedor;
+    private JPanel panel1,panelboton,panelboton2,panelboton3,paneltitulo,panelbotones;
+    private Panel_con_fondo_view panel2;
     public JButton comprar,clase,reportes;
-    public JLabel titulo;
-    public FlowLayout miflow;
+    private JLabel titulo;
+    private FlowLayout miflow;
     
     public Pagina_principal_administrador_view(){
         String nombre = "Pagina Principal";

@@ -148,18 +148,14 @@ public class Tarjeta_de_debito_controller implements ActionListener{
                 vista.fecha_ven.getDate() != null &&
                 !vista.cvv.getText().isBlank() &&
                 !vista.nombre_titular.getText().isBlank()){
-            if(datosCorrectos()){
-                return true;
-            }else{
-                return false;
-            }
+            
+            return true;
         }else{
             JOptionPane.showMessageDialog(vista,
                                 "Debes llenar todos los datos de la tarjeta de debito", "Llenar datos tarjeta debito", JOptionPane.WARNING_MESSAGE);
             return false;
         }
     }
-    
     
     private boolean datosCorrectos(){
         String num_tarjeta = quitarEspacios(vista.num_tarjeta.getText());

@@ -4,7 +4,7 @@
  */
 package Controller;
 
-import Model.CrearPdfTicket;
+//import Model.CrearPdfTicket;
 import Model.Datos;
 import Model.DatosPago;
 import Model.DatosPagoDao;
@@ -30,7 +30,7 @@ public class Tarjeta_de_credito_controller implements ActionListener{
     private DatosPago datosPagar = new DatosPago();
     private DatosPagoDao datosPagarDao = new DatosPagoDao();
     
-    private CrearPdfTicket crearPdf;
+//    private CrearPdfTicket crearPdf;
     
     public Tarjeta_de_credito_controller(Tarjeta_de_credito_view vista, Datos datos,Seleccion_forma_de_pago_view vista_atras){
         
@@ -141,7 +141,7 @@ public class Tarjeta_de_credito_controller implements ActionListener{
                     datos.subirDatos();
                 }
                 
-                crearPdf = new CrearPdfTicket();
+//                crearPdf = new CrearPdfTicket();
                 
             }
         }
@@ -186,14 +186,14 @@ public class Tarjeta_de_credito_controller implements ActionListener{
             puntos++;
         }else{
             JOptionPane.showMessageDialog(vista,
-                                "Tu numero de tarjeta supero el limite de digitos", "Numero de tarjeta", JOptionPane.WARNING_MESSAGE);
+                                "Tu numero de tarjeta supero el limite de digitos (19)", "Numero de tarjeta", JOptionPane.WARNING_MESSAGE);
         }
         
         if(num_tarjeta.length() >= 13){
             puntos++;
         }else{
             JOptionPane.showMessageDialog(vista,
-                                "Tu numero de tarjeta no llega al minimo de digitos", "Numero de tarjeta", JOptionPane.WARNING_MESSAGE);
+                                "Tu numero de tarjeta no llega al minimo de digitos (13)", "Numero de tarjeta", JOptionPane.WARNING_MESSAGE);
         }
         
         if(cvv <= 999 && cvv > 99){

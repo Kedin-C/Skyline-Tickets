@@ -132,9 +132,8 @@ public class Registro_view extends JFrame {
 
         contenedor.add(mipanel1);
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setVisible(true);
+       
+        
     }
 
     public JButton getB1() {
