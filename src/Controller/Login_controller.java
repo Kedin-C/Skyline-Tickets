@@ -57,6 +57,7 @@ public class Login_controller implements ActionListener {
         if(e.getSource() == vista.getB1()) {
             String correo = vista.getTxCorreo().getText();
             String contraseña = vista.getTxContraseña().getText();
+            
             Usuario usuario = dao.iniciarSesion(
                     correo,
                     contraseña);
@@ -70,6 +71,13 @@ public class Login_controller implements ActionListener {
                 usu.setIdUsuario(usuario.getIdUsuario());
                 usu.setNombre(usuario.getNombre());
                 usu.setRol(usuario.getRol());
+                usu.setDocumento(usuario.getDocumento());
+                usu.setNumero_telefono(usuario.getNumero_telefono());
+                usu.setCodigo_tipo_documento(usuario.getCodigo_tipo_documento());
+                usu.setFecha_nacimiento(usuario.getFecha_nacimiento());
+                usu.setSexo(usuario.getSexo());
+                usu.setNationalidad(usuario.getNationalidad());
+                usu.setNumero_telefono(usuario.getNumero_telefono());
                 
                 
                 Sesion_usuario.setUsuario(usu);

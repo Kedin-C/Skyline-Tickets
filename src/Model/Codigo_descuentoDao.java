@@ -15,7 +15,7 @@ import Model.Codigo_descuento;
 public class Codigo_descuentoDao {
     
 
-    Conexion conexionBD = new Conexion();
+    Conexion conexionBD = Conexion.getObject();
     Connection con;
 
     public Codigo_descuento generarCodigo() {

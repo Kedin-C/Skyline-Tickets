@@ -24,7 +24,7 @@ public class Ticket_dao {
     
     public int getTotalVuelos(Usuario usuario){
         int r = 0;
-        String sql = "SELECT COUNT(*) AS total_vuelos FROM Tickets JOIN Reservas ON Tickets.id_reserva = Reservas.id JOIN Asientos ON Reservas.codigo_asiento = Asientos.codigo_asiento WHERE Tickets.id_pasajero = ?";
+        String sql = "SELECT COUNT(*) AS total_vuelos FROM usuario JOIN Datos_pasajero ON usuario.numero_documento = Datos_pasajero.numero_documento JOIN Tickets ON Tickets.id_pasajero = Datos_pasajero.id JOIN Reservas ON Tickets.id_reserva = Reservas.id WHERE usuario.id_usuario = ?";
         try {
         con = conectar.getConection();
         ps = con.prepareStatement(sql);

@@ -13,17 +13,20 @@ import java.sql.PreparedStatement;
 import Model.Conexion;
 import Model.Usuario;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
 public class UsuarioDao {
 
-    Conexion conexionBD = new Conexion();
+    Conexion conexionBD = Conexion.getObject();
     Connection con;
+    PreparedStatement ps;
+    ResultSet rs;
 
     public boolean registrarUsuario(Usuario usuario) {
         String sql = "INSERT INTO usuario(nombre_usuario, apellido_usuario, correo_usuario, password_usuario, rol) VALUES(?,?,?,?,?)";
         try {
             con = conexionBD.getConection();
-            PreparedStatement ps = con.prepareStatement(sql);
+            ps = con.prepareStatement(sql);
             ps.setString(1, usuario.getNombre());
             ps.setString(2, usuario.getApellido());
             ps.setString(3, usuario.getCorreo());
@@ -39,20 +42,35 @@ public class UsuarioDao {
 
     public Usuario iniciarSesion(String correo, String contraseña) {
         String sql = "SELECT * FROM usuario WHERE correo_usuario = ? AND password_usuario = ?";
+        
         try {
             con = conexionBD.getConection();
-            PreparedStatement ps = con.prepareStatement(sql);
+            ps = con.prepareStatement(sql);
+            
             ps.setString(1, correo);
             ps.setString(2, contraseña);
-            ResultSet rs = ps.executeQuery();
+            
+            rs = ps.executeQuery();
+
+            
             if (rs.next()) {
                 Usuario usuario = new Usuario();
                 usuario.setIdUsuario(rs.getInt("id_usuario"));
                 usuario.setNombre(rs.getString("nombre_usuario"));
                 usuario.setApellido(rs.getString("apellido_usuario"));
                 usuario.setCorreo(rs.getString("correo_usuario"));
-                usuario.setContraseña(rs.getString("password_usuario"));
-                usuario.setRol(rs.getString("rol"));
+                usuario.setContraseña(rs.getString("password_usuario"));     
+                usuario.setDocumento(rs.getString("numero_documento"));
+                usuario.setCodigo_tipo_documento(rs.getInt("codigo_tipo_documento"));
+                usuario.setFecha_nacimiento(rs.getString("fecha_nacimiento"));
+                usuario.setSexo(rs.getString("sexo"));
+                usuario.setNationalidad(rs.getString("nacionalidad"));
+                usuario.setNumero_telefono(rs.getString("numero_telefono"));
+                if(rs.getString("id_rol").equals(1)){
+                    usuario.setRol("ADMINISTRADOR");
+                }else{
+                                    usuario.setRol("USUARIO");
+}
                 return usuario;
             }
         } catch (Exception e) {
@@ -65,9 +83,9 @@ public class UsuarioDao {
         String sql = "SELECT * FROM usuario WHERE correo_usuario = ?";
         try {
             con = conexionBD.getConection();
-            PreparedStatement ps = con.prepareStatement(sql);
+            ps = con.prepareStatement(sql);
             ps.setString(1, correo);
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
             if (rs.next()) {
                 Usuario usuario = new Usuario();
                 usuario.setIdUsuario(rs.getInt("id_usuario"));
@@ -110,7 +128,7 @@ public class UsuarioDao {
         String sql = "UPDATE usuario SET correo_usuario = ? WHERE id_usuario = ?";
         try {
             con = conexionBD.getConection();
-            PreparedStatement ps = con.prepareStatement(sql);
+            ps = con.prepareStatement(sql);
             ps.setString(1, nuevoCorreo);
             ps.setInt(2, idUsuario);
             int filas = ps.executeUpdate();
@@ -128,11 +146,11 @@ public class UsuarioDao {
 
         try {
             con = conexionBD.getConection();
-            PreparedStatement ps = con.prepareStatement(sql);
+            ps = con.prepareStatement(sql);
 
             ps.setString(1, correo);
 
-            ResultSet rs = ps.executeQuery();
+           rs = ps.executeQuery();
 
             if (rs.next()) {
                 return rs.getInt(1) > 0;
@@ -154,12 +172,12 @@ public class UsuarioDao {
 
         con = conexionBD.getConection();
 
-        PreparedStatement ps = con.prepareStatement(sql);
+        ps = con.prepareStatement(sql);
 
         ps.setString(1, usuario.getCorreo());
         ps.setString(2, usuario.getContraseña());
 
-        ResultSet rs = ps.executeQuery();
+        rs = ps.executeQuery();
 
         if(rs.next()){
             
