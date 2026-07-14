@@ -106,7 +106,6 @@ public class Tarjeta_de_credito_controller implements ActionListener{
         //Desactivar el comando de "Pegar" (Ctrl + V)
         this.vista.nombre_titular.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), "none");
         
-        
     }
 
     @Override
@@ -114,6 +113,8 @@ public class Tarjeta_de_credito_controller implements ActionListener{
         
         if(e.getSource() == vista.pagar){
             if(Validar()){
+                
+                JOptionPane.showMessageDialog(vista, vista.num_tarjeta.getText());
                 
                 datosPagar.setNumero_tarjeta(vista.num_tarjeta.getText());
                 

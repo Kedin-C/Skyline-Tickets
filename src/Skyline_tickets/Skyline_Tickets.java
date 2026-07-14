@@ -34,9 +34,9 @@ import controller.Pagina_principal_controller;
 public class Skyline_Tickets {
 
     public static void main(String[] args) {
-        
+
         ViewPrincipal vista_principal = new ViewPrincipal();
-        
+
         Seleccion_de_vuelo_usuarioNoregistrado_view select_vuelo = new Seleccion_de_vuelo_usuarioNoregistrado_view();
         Seleccion_de_Modificacion_de_vuelo_view modificacion = new Seleccion_de_Modificacion_de_vuelo_view();
         cambio_de_clase_de_vuelo_viiew clase = new cambio_de_clase_de_vuelo_viiew();
@@ -45,36 +45,31 @@ public class Skyline_Tickets {
         Tarjeta_de_credito_view credito = new Tarjeta_de_credito_view();
         Tarjeta_de_debito_view debito = new Tarjeta_de_debito_view();
         Transferencia_view transferencia = new Transferencia_view();
-        
-        
-        
+
         Ticket ticket = new Ticket();
         Datos datos = new Datos();
-        
+
         Seleccion_vuelo_usuario_no_registrado_dao dao_modificacion_vuelo = new Seleccion_vuelo_usuario_no_registrado_dao();
         Seleccion_modificacion_clase_de_vuelo_dao dao_modificacion_clase_vuelo = new Seleccion_modificacion_clase_de_vuelo_dao();
         Seleccion_equipaje_extra_dao dao_equipaje_extra = new Seleccion_equipaje_extra_dao();
-        
-        
-                
-        Interfaz_equipaje_controller interfaz2 = new Interfaz_equipaje_controller(modificacion,bodega,dao_equipaje_extra,ticket,forma_pago_vista);
-        Interfaz_cambio_clase_controller interfaz3 = new Interfaz_cambio_clase_controller(modificacion,clase,dao_modificacion_clase_vuelo,ticket,forma_pago_vista);
-        Modificacion_clase_equipaje_controller interfaz1 = new Modificacion_clase_equipaje_controller(modificacion,clase,bodega,select_vuelo,ticket,interfaz3,dao_equipaje_extra);
-        seleccion_modificacion_usuario_no_registrado_controller interfaz = new seleccion_modificacion_usuario_no_registrado_controller(dao_modificacion_vuelo,select_vuelo,modificacion,interfaz1,ticket,vista_principal);
-        Seleccion_forma_pago_controller forma_pago_controlador = new Seleccion_forma_pago_controller(forma_pago_vista, clase, bodega,credito,debito,transferencia);        
-        Tarjeta_de_credito_controller credito_cont = new Tarjeta_de_credito_controller(credito,datos,forma_pago_vista);
-        Tarjeta_de_debito_controller debito_cont = new Tarjeta_de_debito_controller(debito,datos,forma_pago_vista);
-        Transferencia_controller transferencia_cont = new Transferencia_controller(transferencia,datos,forma_pago_vista);
-        
-        
+
+        Interfaz_equipaje_controller interfaz2 = new Interfaz_equipaje_controller(modificacion, bodega, dao_equipaje_extra, ticket, forma_pago_vista);
+        Interfaz_cambio_clase_controller interfaz3 = new Interfaz_cambio_clase_controller(modificacion, clase, dao_modificacion_clase_vuelo, ticket, forma_pago_vista);
+        Modificacion_clase_equipaje_controller interfaz1 = new Modificacion_clase_equipaje_controller(modificacion, clase, bodega, select_vuelo, ticket, interfaz3, dao_equipaje_extra);
+        seleccion_modificacion_usuario_no_registrado_controller interfaz = new seleccion_modificacion_usuario_no_registrado_controller(dao_modificacion_vuelo, select_vuelo, modificacion, interfaz1, ticket, vista_principal);
+        Seleccion_forma_pago_controller forma_pago_controlador = new Seleccion_forma_pago_controller(forma_pago_vista, clase, bodega, credito, debito, transferencia);
+        Tarjeta_de_credito_controller credito_cont = new Tarjeta_de_credito_controller(credito, datos, forma_pago_vista);
+        Tarjeta_de_debito_controller debito_cont = new Tarjeta_de_debito_controller(debito, datos, forma_pago_vista);
+        Transferencia_controller transferencia_cont = new Transferencia_controller(transferencia, datos, forma_pago_vista);
+
         Buscar_vuelos_view buscar_v = new Buscar_vuelos_view();
-        Buscar_vuelos_controller buscar_v_cont = new Buscar_vuelos_controller(buscar_v,datos,vista_principal);
+        Buscar_vuelos_controller buscar_v_cont = new Buscar_vuelos_controller(buscar_v, datos, vista_principal);
         Menu_principal_view menu = new Menu_principal_view(vista_principal);
-        
-        Pagina_principal_controller pagina_princ_cont = new Pagina_principal_controller(vista_principal,select_vuelo,buscar_v,menu);
-        
+
+        Pagina_principal_controller pagina_princ_cont = new Pagina_principal_controller(vista_principal, select_vuelo, buscar_v, menu);
+
         String ruta = System.getProperty("user.home") + "\\Documents\\Ticket.pdf";
         System.out.println(ruta);
     }
-    
+
 }

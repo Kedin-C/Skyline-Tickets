@@ -6,6 +6,7 @@ package Controller;
 
 import Model.Datos;
 import Model.DatosPago;
+import Model.DatosPagoDao;
 import View.Seleccion_forma_de_pago_view;
 import View.Tarjeta_de_debito_view;
 import java.awt.Toolkit;
@@ -25,7 +26,8 @@ public class Tarjeta_de_debito_controller implements ActionListener{
     private Seleccion_forma_de_pago_view vista_atras;
     private Tarjeta_de_debito_view vista;
     private Datos datos;
-    private DatosPago datosPagar;
+    private DatosPago datosPagar = new DatosPago();
+    private DatosPagoDao datosPagarDao = new DatosPagoDao();
     
     public Tarjeta_de_debito_controller(Tarjeta_de_debito_view vista, Datos datos,Seleccion_forma_de_pago_view vista_atras){
         
@@ -107,6 +109,9 @@ public class Tarjeta_de_debito_controller implements ActionListener{
         
         if(e.getSource() == vista.pagar){
             if(Validar()){
+                
+                JOptionPane.showMessageDialog(vista, vista.num_tarjeta.getText());
+                
                 datosPagar.setNumero_tarjeta(vista.num_tarjeta.getText());
                 
                 SimpleDateFormat formateadorRegreso = new SimpleDateFormat("yyyy-MM-dd");
@@ -165,14 +170,14 @@ public class Tarjeta_de_debito_controller implements ActionListener{
             puntos++;
         }else{
             JOptionPane.showMessageDialog(vista,
-                                "Tu numero de tarjeta supero el limite de digitos", "Numero de tarjeta", JOptionPane.WARNING_MESSAGE);
+                                "Tu numero de tarjeta supero el limite de digitos (19)", "Numero de tarjeta", JOptionPane.WARNING_MESSAGE);
         }
         
         if(num_tarjeta.length() >= 13){
             puntos++;
         }else{
             JOptionPane.showMessageDialog(vista,
-                                "Tu numero de tarjeta no llega al minimo de digitos", "Numero de tarjeta", JOptionPane.WARNING_MESSAGE);
+                                "Tu numero de tarjeta no llega al minimo de digitos (13)", "Numero de tarjeta", JOptionPane.WARNING_MESSAGE);
         }
         
         if(cvv <= 999 && cvv > 99){
