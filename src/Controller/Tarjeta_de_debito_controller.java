@@ -159,7 +159,7 @@ public class Tarjeta_de_debito_controller implements ActionListener{
     
     private boolean datosCorrectos(){
         String num_tarjeta = quitarEspacios(vista.num_tarjeta.getText());
-        int cvv = Integer.parseInt(vista.cvv.getText());
+        String cvv = vista.cvv.getText();
         
         int puntos = 0;
         if(num_tarjeta.length() <= 19){
@@ -176,7 +176,7 @@ public class Tarjeta_de_debito_controller implements ActionListener{
                                 "Tu numero de tarjeta no llega al minimo de digitos (13)", "Numero de tarjeta", JOptionPane.WARNING_MESSAGE);
         }
         
-        if(cvv <= 999 && cvv > 99){
+        if(cvv.length() == 3){
             puntos++;
         }else{
             JOptionPane.showMessageDialog(vista,
