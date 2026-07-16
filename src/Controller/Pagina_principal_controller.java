@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package controller;
+package Controller;
 
 
 
@@ -28,7 +28,7 @@ public class Pagina_principal_controller implements ActionListener{
     public Menu_principal_view vistaIN;
     public ViewPrincipal vista;
 
-    public Pagina_principal_controller(ViewPrincipal vista,Seleccion_de_vuelo_usuarioNoregistrado_view vistaCL,Buscar_vuelos_view vistaCV,Menu_principal_view vistaIN) {
+    public Pagina_principal_controller(ViewPrincipal vista, Seleccion_de_vuelo_usuarioNoregistrado_view vistaCL, Buscar_vuelos_view vistaCV, Menu_principal_view vistaIN) {
         this.vista = vista;
         this.vistaCL=vistaCL;
         this.vistaCV=vistaCV;

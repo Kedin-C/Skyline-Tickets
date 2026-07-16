@@ -44,21 +44,18 @@ import View.Tarjeta_de_debito_view;
 import View.Transferencia_view;
 import View.ViewPrincipal;
 import View.cambio_de_clase_de_vuelo_viiew;
-import controller.Pagina_principal_controller;
+import Controller.Pagina_principal_controller;
 
 public class Skyline_Tickets {
 
     public static void main(String[] args) {
-
+        
         ViewPrincipal vista_principal = new ViewPrincipal();
-
-        Seleccion_de_vuelo_usuarioNoregistrado_view select_vuelo = new Seleccion_de_vuelo_usuarioNoregistrado_view();
         Login_view login = new Login_view();
         Pagina_principal_administrador_view pagina_admin = new Pagina_principal_administrador_view();
         Inicio_usuario_view pagina_usuario = new Inicio_usuario_view();
-        Informacion_personal_view info_per_view = new Informacion_personal_view();
         Usuario usuario = new Usuario();
-        Sesion_usuario sesion_usuario =  new Sesion_usuario();
+        Sesion_usuario sesion_usuario = new Sesion_usuario();
         
         Seleccion_de_vuelo_usuarioRegistrado_view select_vuelo = new Seleccion_de_vuelo_usuarioRegistrado_view();
         Seleccion_de_vuelo_usuarioNoregistrado_view select_vuelo_nor = new Seleccion_de_vuelo_usuarioNoregistrado_view();
@@ -69,8 +66,6 @@ public class Skyline_Tickets {
         Tarjeta_de_credito_view credito = new Tarjeta_de_credito_view();
         Tarjeta_de_debito_view debito = new Tarjeta_de_debito_view();
         Transferencia_view transferencia = new Transferencia_view();
-
-
         Registro_view registro_view = new Registro_view();
         Menu_principal_view menu = new Menu_principal_view(vista_principal,login,registro_view);
         Apartado_reportes_menu_view apart_reportes_menu =  new Apartado_reportes_menu_view();
@@ -78,32 +73,16 @@ public class Skyline_Tickets {
         Informacion_personal_view info_personal = new Informacion_personal_view();
         
         
+        
         Ticket ticket = new Ticket();
         Datos datos = new Datos();
-
+        
         Seleccion_vuelo_usuario_no_registrado_dao dao_modificacion_vuelo = new Seleccion_vuelo_usuario_no_registrado_dao();
         Seleccion_modificacion_clase_de_vuelo_dao dao_modificacion_clase_vuelo = new Seleccion_modificacion_clase_de_vuelo_dao();
         Seleccion_equipaje_extra_dao dao_equipaje_extra = new Seleccion_equipaje_extra_dao();
-
-        Interfaz_equipaje_controller interfaz2 = new Interfaz_equipaje_controller(modificacion, bodega, dao_equipaje_extra, ticket, forma_pago_vista);
-        Interfaz_cambio_clase_controller interfaz3 = new Interfaz_cambio_clase_controller(modificacion, clase, dao_modificacion_clase_vuelo, ticket, forma_pago_vista);
-        Modificacion_clase_equipaje_controller interfaz1 = new Modificacion_clase_equipaje_controller(modificacion, clase, bodega, select_vuelo, ticket, interfaz3, dao_equipaje_extra);
-        seleccion_modificacion_usuario_no_registrado_controller interfaz = new seleccion_modificacion_usuario_no_registrado_controller(dao_modificacion_vuelo, select_vuelo, modificacion, interfaz1, ticket, vista_principal);
-        Seleccion_forma_pago_controller forma_pago_controlador = new Seleccion_forma_pago_controller(forma_pago_vista, clase, bodega, credito, debito, transferencia);
-        Tarjeta_de_credito_controller credito_cont = new Tarjeta_de_credito_controller(credito, datos, forma_pago_vista);
-        Tarjeta_de_debito_controller debito_cont = new Tarjeta_de_debito_controller(debito, datos, forma_pago_vista);
-        Transferencia_controller transferencia_cont = new Transferencia_controller(transferencia, datos, forma_pago_vista);
-
-        Buscar_vuelos_view buscar_v = new Buscar_vuelos_view();
-        Buscar_vuelos_controller buscar_v_cont = new Buscar_vuelos_controller(buscar_v, datos, vista_principal);
-        Menu_principal_view menu = new Menu_principal_view(vista_principal);
-
-        Pagina_principal_controller pagina_princ_cont = new Pagina_principal_controller(vista_principal, select_vuelo, buscar_v, menu);
-
-
         
-        Informacion_personal_controller info_per_cont = new Informacion_personal_controller(info_per_view,pagina_usuario,sesion_usuario);
-
+        
+                
         Interfaz_equipaje_controller interfaz2 = new Interfaz_equipaje_controller(modificacion,bodega,dao_equipaje_extra,ticket,forma_pago_vista);
         Interfaz_cambio_clase_controller interfaz3 = new Interfaz_cambio_clase_controller(modificacion,clase,dao_modificacion_clase_vuelo,ticket,forma_pago_vista);
         Modificacion_clase_equipaje_controller interfaz1 = new Modificacion_clase_equipaje_controller(modificacion,clase,bodega,select_vuelo_nor,ticket,interfaz3,dao_equipaje_extra,select_vuelo);
@@ -115,8 +94,10 @@ public class Skyline_Tickets {
         Login_controller login_cont = new Login_controller(login,vista_principal,usuario,registro_view,pagina_admin,pagina_usuario,sesion_usuario);
         Registro_controller registro_cont = new Registro_controller(registro_view,menu); 
         Pagina_principal_administrador_controller_2 pagina_admin_cont = new Pagina_principal_administrador_controller_2(pagina_admin,apart_reportes_menu,select_vuelo,buscar_v,ticket,usuario);
+        Informacion_personal_controller info_per_cont = new Informacion_personal_controller(info_personal,pagina_usuario,sesion_usuario);
         Inicio_usuario_controller pagina_usuario_cont = new Inicio_usuario_controller(pagina_usuario,select_vuelo,buscar_v,info_personal,ticket,usuario,info_per_cont,sesion_usuario);
         Seleccion_modificacion_vuelo_usuario_controlador cont_select_vuelo_registrado = new Seleccion_modificacion_vuelo_usuario_controlador(select_vuelo,usuario,ticket,pagina_admin,pagina_admin_cont,pagina_usuario,pagina_usuario_cont,modificacion);
+        
         
         Buscar_vuelos_controller buscar_v_cont = new Buscar_vuelos_controller(buscar_v,datos,vista_principal,pagina_admin,pagina_usuario);
         
@@ -126,5 +107,5 @@ public class Skyline_Tickets {
         String ruta = System.getProperty("user.home") + "\\Documents\\Ticket.pdf";
         System.out.println(ruta);
     }
-
+    
 }
