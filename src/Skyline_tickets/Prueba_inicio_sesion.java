@@ -30,7 +30,7 @@ public class Prueba_inicio_sesion {
      */
     public static void main(String[] args) {
         Seleccion_forma_de_pago_view pr = new Seleccion_forma_de_pago_view();
-         
+         Usuario usu = new Usuario();
          Ticket ticket = new Ticket();
          ViewPrincipal pv = new ViewPrincipal();
          Login_view in = new Login_view();

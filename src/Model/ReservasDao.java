@@ -17,6 +17,8 @@ public class ReservasDao {
     PreparedStatement ps;
     ResultSet rs;
     
+    
+    
     public void enviarDatos(String codigo_asiento, int codigo_vuelo){
         String sql = "INSERT INTO reservas (codigo_asiento, codigo_vuelo) "
                 + "VALUES (?, ?)";
@@ -123,6 +125,8 @@ public class ReservasDao {
        return puestos;
        
     }
+    
+    
     
     
 }

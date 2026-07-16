@@ -6,6 +6,7 @@ package Controller;
 
 import Model.Datos;
 import Model.DatosPago;
+import Model.DatosPagoDao;
 import View.Seleccion_forma_de_pago_view;
 import View.Tarjeta_de_debito_view;
 import java.awt.Toolkit;
@@ -25,7 +26,8 @@ public class Tarjeta_de_debito_controller implements ActionListener{
     private Seleccion_forma_de_pago_view vista_atras;
     private Tarjeta_de_debito_view vista;
     private Datos datos;
-    private DatosPago datosPagar;
+    private DatosPago datosPagar = new DatosPago();
+    private DatosPagoDao datosPagarDao = new DatosPagoDao();
     
     public Tarjeta_de_debito_controller(Tarjeta_de_debito_view vista, Datos datos,Seleccion_forma_de_pago_view vista_atras){
         
@@ -107,6 +109,9 @@ public class Tarjeta_de_debito_controller implements ActionListener{
         
         if(e.getSource() == vista.pagar){
             if(Validar()){
+                
+                JOptionPane.showMessageDialog(vista, vista.num_tarjeta.getText());
+                
                 datosPagar.setNumero_tarjeta(vista.num_tarjeta.getText());
                 
                 SimpleDateFormat formateadorRegreso = new SimpleDateFormat("yyyy-MM-dd");
@@ -152,9 +157,50 @@ public class Tarjeta_de_debito_controller implements ActionListener{
         }
     }
     
-//    private boolean datosCorrectos(){
-//        
-////        if(){
-////        }
-//    }
+    private boolean datosCorrectos(){
+        String num_tarjeta = quitarEspacios(vista.num_tarjeta.getText());
+        int cvv = Integer.parseInt(vista.cvv.getText());
+        
+        int puntos = 0;
+        if(num_tarjeta.length() <= 19){
+            puntos++;
+        }else{
+            JOptionPane.showMessageDialog(vista,
+                                "Tu numero de tarjeta supero el limite de digitos (19)", "Numero de tarjeta", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        if(num_tarjeta.length() >= 13){
+            puntos++;
+        }else{
+            JOptionPane.showMessageDialog(vista,
+                                "Tu numero de tarjeta no llega al minimo de digitos (13)", "Numero de tarjeta", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        if(cvv <= 999 && cvv > 99){
+            puntos++;
+        }else{
+            JOptionPane.showMessageDialog(vista,
+                                "Tu CVV debe tener 3 digitos", "CVV", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        if(puntos == 3){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    
+    private String quitarEspacios(String texto){
+        String resultado="";
+        for(int i = 0; i < texto.length(); i++){
+            char numero = texto.charAt(i);
+            if(numero == ' '){
+                continue;
+            }else{
+                resultado = resultado+numero;
+            }
+        }
+        return resultado;
+    }
 }

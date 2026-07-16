@@ -5,6 +5,7 @@
 package Model;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public class Datos {
     
@@ -21,6 +22,9 @@ public class Datos {
     private DatosPersonalesDao datosPersonalesDao = new DatosPersonalesDao();
     private DatosPagoDao datosPagoDao = new DatosPagoDao();
     private ReservasDao datosReserva = new ReservasDao();
+    
+    
+    ArrayList<Integer> id = new ArrayList<>();
     
     public Datos(){
         
@@ -122,6 +126,7 @@ public class Datos {
             String nacionalidad = this.datosPersonales.get(i).getNationalidad();
                     
             datosPersonalesDao.enviarDatos(numero_documento, nombre, apellido, codigo_tipo_documento, sexo, numero_telefono, correo, fecha_nacimiento, nacionalidad);
+            id.add(datosPersonalesDao.idPasajero(numero_documento, nombre, apellido, codigo_tipo_documento, sexo, numero_telefono, correo, fecha_nacimiento, nacionalidad));
         }
         
         if(getDatosPago() != null){
@@ -137,6 +142,8 @@ public class Datos {
         for(int index = 0; index < codigoAsiento.size(); index++){
             datosReserva.enviarDatos(codigoAsiento.get(index), codigoVuelo);
         }
+        
+        JOptionPane.showMessageDialog(null, id);
         
     }
     
