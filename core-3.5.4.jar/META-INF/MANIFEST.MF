@@ -1,0 +1,62 @@
+Manifest-Version: 1.0
+Created-By: 21.0.9-ea (Ubuntu)
+Build-Jdk-Spec: 21
+Automatic-Module-Name: com.google.zxing
+Bnd-LastModified: 1762893742709
+Bundle-Description: Core barcode encoding/decoding library
+Bundle-Developers: zxing-authors;name="ZXing Authors"
+Bundle-DocURL: https://github.com/zxing/zxing/core
+Bundle-License: "The Apache Software License, Version 2.0";link="https:/
+ /www.apache.org/licenses/LICENSE-2.0.txt"
+Bundle-ManifestVersion: 2
+Bundle-Name: ZXing Core
+Bundle-SCM: url="https://github.com/zxing/zxing/core",connection="scm:gi
+ t:https://github.com/zxing/zxing.git/core",developer-connection="scm:gi
+ t:https://github.com/zxing/zxing.git/core",tag="zxing-3.5.4"
+Bundle-SymbolicName: com.google.zxing.core
+Bundle-Version: 3.5.4
+Export-Package: com.google.zxing;uses:="com.google.zxing.common";version
+ ="3.5.4",com.google.zxing.aztec;uses:="com.google.zxing,com.google.zxin
+ g.common";version="3.5.4",com.google.zxing.aztec.decoder;uses:="com.goo
+ gle.zxing,com.google.zxing.aztec,com.google.zxing.common";version="3.5.
+ 4",com.google.zxing.aztec.detector;uses:="com.google.zxing,com.google.z
+ xing.aztec,com.google.zxing.common";version="3.5.4",com.google.zxing.az
+ tec.encoder;uses:="com.google.zxing.common";version="3.5.4",com.google.
+ zxing.client.result;uses:="com.google.zxing";version="3.5.4",com.google
+ .zxing.common;uses:="com.google.zxing";version="3.5.4",com.google.zxing
+ .common.detector;uses:="com.google.zxing,com.google.zxing.common";versi
+ on="3.5.4",com.google.zxing.common.reedsolomon;version="3.5.4",com.goog
+ le.zxing.datamatrix;uses:="com.google.zxing,com.google.zxing.common";ve
+ rsion="3.5.4",com.google.zxing.datamatrix.decoder;uses:="com.google.zxi
+ ng,com.google.zxing.common";version="3.5.4",com.google.zxing.datamatrix
+ .detector;uses:="com.google.zxing,com.google.zxing.common";version="3.5
+ .4",com.google.zxing.datamatrix.encoder;uses:="com.google.zxing";versio
+ n="3.5.4",com.google.zxing.maxicode;uses:="com.google.zxing";version="3
+ .5.4",com.google.zxing.maxicode.decoder;uses:="com.google.zxing,com.goo
+ gle.zxing.common";version="3.5.4",com.google.zxing.multi;uses:="com.goo
+ gle.zxing";version="3.5.4",com.google.zxing.multi.qrcode;uses:="com.goo
+ gle.zxing,com.google.zxing.multi,com.google.zxing.qrcode";version="3.5.
+ 4",com.google.zxing.multi.qrcode.detector;uses:="com.google.zxing,com.g
+ oogle.zxing.common,com.google.zxing.qrcode.detector";version="3.5.4",co
+ m.google.zxing.oned;uses:="com.google.zxing,com.google.zxing.common";ve
+ rsion="3.5.4",com.google.zxing.oned.rss;uses:="com.google.zxing,com.goo
+ gle.zxing.common,com.google.zxing.oned";version="3.5.4",com.google.zxin
+ g.oned.rss.expanded;uses:="com.google.zxing,com.google.zxing.common,com
+ .google.zxing.oned.rss";version="3.5.4",com.google.zxing.oned.rss.expan
+ ded.decoders;uses:="com.google.zxing,com.google.zxing.common";version="
+ 3.5.4",com.google.zxing.pdf417;uses:="com.google.zxing,com.google.zxing
+ .common,com.google.zxing.multi";version="3.5.4",com.google.zxing.pdf417
+ .decoder;uses:="com.google.zxing,com.google.zxing.common";version="3.5.
+ 4",com.google.zxing.pdf417.decoder.ec;uses:="com.google.zxing";version=
+ "3.5.4",com.google.zxing.pdf417.detector;uses:="com.google.zxing,com.go
+ ogle.zxing.common";version="3.5.4",com.google.zxing.pdf417.encoder;uses
+ :="com.google.zxing";version="3.5.4",com.google.zxing.qrcode;uses:="com
+ .google.zxing,com.google.zxing.common,com.google.zxing.qrcode.decoder,c
+ om.google.zxing.qrcode.encoder";version="3.5.4",com.google.zxing.qrcode
+ .decoder;uses:="com.google.zxing,com.google.zxing.common";version="3.5.
+ 4",com.google.zxing.qrcode.detector;uses:="com.google.zxing,com.google.
+ zxing.common";version="3.5.4",com.google.zxing.qrcode.encoder;uses:="co
+ m.google.zxing,com.google.zxing.qrcode.decoder";version="3.5.4"
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Tool: Bnd-6.4.0.202211291949
+
