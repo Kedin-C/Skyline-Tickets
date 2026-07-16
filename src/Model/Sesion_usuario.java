@@ -16,11 +16,11 @@ public class Sesion_usuario {
     
     private static Usuario usuarioLogueado;
 
-    public static void setUsuario(Usuario usuario) {
+    public void setUsuario(Usuario usuario) {
         usuarioLogueado = usuario;
     }
 
-    public static Usuario getUsuario() {
+    public Usuario getUsuario() {
         return usuarioLogueado;
     }
 }

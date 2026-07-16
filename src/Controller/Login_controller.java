@@ -34,8 +34,10 @@ public class Login_controller implements ActionListener {
     private Menu_principal_view menu;
     private Registro_view registro;
     private Usuario usu;
+    private Sesion_usuario sesion_usu;
     
-    public Login_controller(Login_view vista,ViewPrincipal principal,Usuario usuario,Registro_view registro,Pagina_principal_administrador_view vista_admin,Inicio_usuario_view vista_usuario) {
+    
+    public Login_controller(Login_view vista,ViewPrincipal principal,Usuario usuario,Registro_view registro,Pagina_principal_administrador_view vista_admin,Inicio_usuario_view vista_usuario, Sesion_usuario sesion_usu) {
         this.vista = vista;
         this.vista_admin = vista_admin;
         this.vista_usuario = vista_usuario;
@@ -44,6 +46,7 @@ public class Login_controller implements ActionListener {
         this.usu = usuario;
         this.registro = registro;
         this.menu = new Menu_principal_view(this.prin,this.vista,this.registro);
+        this.sesion_usu = sesion_usu;
         
         this.vista.getB1().addActionListener(this);
         this.vista.getB2().addActionListener(this);
@@ -62,6 +65,7 @@ public class Login_controller implements ActionListener {
                     correo,
                     contraseña);
             
+            sesion_usu.setUsuario(usuario);
             
             if(usu != null) {
                 
@@ -80,7 +84,8 @@ public class Login_controller implements ActionListener {
                 usu.setNumero_telefono(usuario.getNumero_telefono());
                 
                 
-                Sesion_usuario.setUsuario(usu);
+                this.sesion_usu.setUsuario(usu);
+                
                 
 
                 JOptionPane.showMessageDialog(

@@ -23,14 +23,9 @@ import javax.swing.SwingConstants;
 
 public class Informacion_personal_view extends Interfaz_vista_abtractas {
 
-    JTextField txtCorreo;
-    JTextField txtNombre;
-    JTextField txtApellido;
-
-    JButton btnCambiarContrasena;
-    JButton btnAceptar;
-    JButton btnVolver;
-
+    public JTextField txtCorreo,txtApellido,txtNombre;
+    public JButton btnCambiarContrasena,btnVolver,btnAceptar;
+ 
     public Informacion_personal_view() {
 
         super("Cambiar información personal:");

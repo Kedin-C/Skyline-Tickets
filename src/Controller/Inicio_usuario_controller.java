@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import Model.Sesion_usuario;
 import Model.Ticket;
 import Model.Ticket_dao;
 import Model.Usuario;
@@ -29,12 +30,16 @@ public class Inicio_usuario_controller implements ActionListener {
     private Ticket ticket;
     private Usuario usuario;
     private Ticket_dao tdao = new Ticket_dao();
+    private Informacion_personal_controller info_per_cont;
+    
 
-    public Inicio_usuario_controller(Inicio_usuario_view vista, Seleccion_de_vuelo_usuarioRegistrado_view vistaCL, Buscar_vuelos_view vistaCV, Informacion_personal_view vistaIP, Ticket ticket, Usuario usu) {
+    public Inicio_usuario_controller(Inicio_usuario_view vista, Seleccion_de_vuelo_usuarioRegistrado_view vistaCL, Buscar_vuelos_view vistaCV, Informacion_personal_view vistaIP, Ticket ticket, Usuario usu,Informacion_personal_controller info_per_cont,Sesion_usuario sesion_usu) {
         this.vista = vista;
         this.vistaCL = vistaCL;
         this.vistaCV = vistaCV;
         this.vistaIP = vistaIP;
+        this.info_per_cont = info_per_cont;
+        
 
         this.ticket = ticket;
         this.usuario = usu;
@@ -47,12 +52,15 @@ public class Inicio_usuario_controller implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == vista.inicio) {
-
+            
+            
             setTickets();
             vista.setVisible(false);
-
+            info_per_cont.cargarDatosEnVista();
+            info_per_cont.agregarEventos();
             vistaIP.setVisible(true);
             vistaIP.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
+            
         } else if (e.getSource() == vista.comprar) {
             vista.setVisible(false);
 
@@ -71,7 +79,8 @@ public class Inicio_usuario_controller implements ActionListener {
                 JOptionPane.showMessageDialog(vista, "No tienes vuelos activos disponibles");
             }
 
-        }
+        } 
+        
     }
 
     public void setTickets() {

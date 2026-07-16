@@ -29,7 +29,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-public class Inicio_usuario_view extends Interfaz_vista_abtractas implements ActionListener {
+public class Inicio_usuario_view extends Interfaz_vista_abtractas  {
 
     public Container contenedor;
     public JPanel panel1, panelboton, panelboton2;
@@ -72,23 +72,13 @@ public class Inicio_usuario_view extends Interfaz_vista_abtractas implements Act
         clase.setFont(new Font("Arial", Font.BOLD, 24));
         clase.setBorderPainted(false);
         contenedor.add(panel2, BorderLayout.CENTER);
-        inicio.addActionListener(this);
+        
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-        if (e.getSource() == inicio) {
-            dispose();
-
-            Informacion_personal_controller controlador = new Informacion_personal_controller();
-            controlador.mostrar();
-
-        }
-    }
+    
 
 }
