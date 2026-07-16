@@ -86,7 +86,7 @@ public class Login_controller implements ActionListener {
                 
                 this.sesion_usu.setUsuario(usu);
                 
-                
+  
 
                 JOptionPane.showMessageDialog(
                         null,

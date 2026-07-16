@@ -79,7 +79,7 @@ public class Pagina_principal_administrador_controller_2 implements ActionListen
                 JOptionPane.showMessageDialog(vista,"No tienes vuelos activos disponibles");
             }
             
-            JOptionPane.showMessageDialog(vistaRM, "hola");
+            
             
         }
     }
@@ -99,7 +99,7 @@ public class Pagina_principal_administrador_controller_2 implements ActionListen
     
     public int getCant_t(){
         
-        JOptionPane.showMessageDialog(vista,tdao.getTotalVuelos(usuario));
+       
         return tdao.getTotalVuelos(usuario);
     }
     

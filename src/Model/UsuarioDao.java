@@ -66,7 +66,7 @@ public class UsuarioDao {
                 usuario.setSexo(rs.getString("sexo"));
                 usuario.setNationalidad(rs.getString("nacionalidad"));
                 usuario.setNumero_telefono(rs.getString("numero_telefono"));
-                if(rs.getString("id_rol").equals(1)){
+                if(Integer.parseInt(rs.getString("id_rol")) == 1){
                     usuario.setRol("ADMINISTRADOR");
                 }else{
                                     usuario.setRol("USUARIO");
