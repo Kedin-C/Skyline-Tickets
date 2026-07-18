@@ -8,7 +8,7 @@ package Controller;
 import Model.Datos;
 import Model.DatosPago;
 import Model.DatosPagoDao;
-import Model.Datos_ticketDao;
+import Model.Ticket_dao;
 import View.Seleccion_forma_de_pago_view;
 import View.Tarjeta_de_credito_view;
 import java.awt.Toolkit;
@@ -31,7 +31,7 @@ public class Tarjeta_de_credito_controller implements ActionListener{
     private Datos datos;
     private DatosPago datosPagar = new DatosPago();
     private DatosPagoDao datosPagarDao = new DatosPagoDao();
-    private Datos_ticketDao ticketdao = new Datos_ticketDao();
+    private Ticket_dao ticketdao = new Ticket_dao();
     private CreadorPDFTickets creador = new CreadorPDFTickets();
     private Correo_controller correo = new Correo_controller();
     
@@ -146,7 +146,39 @@ public class Tarjeta_de_credito_controller implements ActionListener{
                     datos.subirDatos();
                 }
                 
-//                crearPdf = new CrearPdfTicket();
+                new Thread(() -> {
+                    try {
+                        Thread.sleep(10000);
+                        
+                        int listaPasajeros[] = {};
+                        
+                        for (int idPasajero : listaPasajeros) {
+                            // Obtener datos desde el DAO
+                            String nombre = ticketdao.obtenerNombrePasajero(idPasajero);
+                            String documento = ticketdao.obtenerDocumento(idPasajero);
+                            String vuelo = ticketdao.obtenerCodigoVuelo(idPasajero);
+                            String origen = ticketdao.obtenerOrigen(idPasajero);
+                            String destino = ticketdao.obtenerDestino(idPasajero);
+                           String fechat = ticketdao.obtenerFechaVuelo(idPasajero);
+                           String asiento = ticketdao.obtenerAsiento(idPasajero);
+                           double costo = ticketdao.obtenerCosto(idPasajero);
+                           String codigoReserva = ticketdao.obtenerCodigoReserva(idPasajero);
+                           String correoDestino = ticketdao.obtenerCorreoPasajero(idPasajero);
+                           
+                          // Generar PDF para este pasajero
+                            File pdf = creador.generarTicket(
+                               nombre, documento, vuelo, origen, destino,
+                               fechat, asiento, costo, codigoReserva
+                           );
+
+                           // Enviar correo con el PDF adjunto
+                         correo.enviarCorreoConAdjunto(correoDestino, pdf);
+                        }
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(null, e.toString(),
+                        "Error al generar y/o enviar pdf: " + ex.getMessage(), JOptionPane.ERROR_MESSAGE);
+                    }
+                }).start();
                 
             }
         }
