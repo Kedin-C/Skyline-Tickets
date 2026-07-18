@@ -16,6 +16,7 @@ import java.awt.Dimension;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -60,22 +61,37 @@ public class Reportes_operativos_controller implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == vista.btnExportar){
-            System.out.println("hola");
             CrearPdf.setCrearPdf(vista.tabla,chartTiempo,chartDestino,chartTipo);
         }else if(e.getSource() == vista.btnFecha){
             vista.mostrarModalFecha();
         }else if(e.getSource() == vista.btnAplicarFecha){
             Date inicio = vista.fechaInicio.getDate();
             Date fin = vista.fechaFin.getDate();
-            if(inicio != null && fin != null && inicio.before(fin)) {
-                String f1 = new SimpleDateFormat("yyyy-MM-dd").format(inicio);
-                String f2 = new SimpleDateFormat("yyyy-MM-dd").format(fin);
-                cargarTablaPorFecha(f1,f2);
-                cargarGraficoTendenciaFecha(f1,f2);
-                cargarGraficoDestinosFecha(f1,f2,5);
-                cargarGraficoDistribucionFecha(f1,f2);
-                vista.modalFecha.dispose();
+
+            if(inicio == null || fin == null) {
+                JOptionPane.showMessageDialog(vista,
+                    "Debe seleccionar ambas fechas.",
+                    "Error en Filtro",
+                    JOptionPane.ERROR_MESSAGE);
+                return;
             }
+
+            if(inicio.after(fin)) {
+                JOptionPane.showMessageDialog(vista,
+                    "La fecha de inicio no puede ser posterior a la fecha fin.",
+                    "Error en Filtro",
+                    JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            String f1 = new SimpleDateFormat("yyyy-MM-dd").format(inicio);
+            String f2 = new SimpleDateFormat("yyyy-MM-dd").format(fin);
+
+            cargarTablaPorFecha(f1, f2);
+            cargarGraficoTendenciaFecha(f1, f2);
+            cargarGraficoDestinosFecha(f1, f2, 5);
+            cargarGraficoDistribucionFecha(f1, f2);
+            vista.modalFecha.dispose();
         }else if(e.getSource() == vista.btnDestino){
             cargarListaDestinos();
             vista.mostrarModalDestino();
