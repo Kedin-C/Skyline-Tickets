@@ -32,7 +32,7 @@ public class ViewPrincipal extends Interfaz_vista_abtractas{
             
     public Container contenedor;
     public JPanel panel1,panelboton,panelboton2;
-    public PanelConFondo panel2;
+    public Panel_con_fondo_view panel2;
     public JButton comprar,clase,inicio;
     
     public ViewPrincipal(){
@@ -49,7 +49,7 @@ public class ViewPrincipal extends Interfaz_vista_abtractas{
         panelboton2.setOpaque(false);
         panelboton2.setBorder(new EmptyBorder(20,1,1,20));
         panel1.add(panelboton2, BorderLayout.LINE_END);
-        panel2 = new PanelConFondo("/imagenes/fondo_principal_1.png");
+        panel2 = new Panel_con_fondo_view("/Imagenes/fondo_principal_1.png");
         panel2.setLayout(new BoxLayout(panel2, BoxLayout.Y_AXIS));
         comprar = new JButton("Comprar Vuelo");
         clase = new JButton("Modificar Clase de Vuelo y Equipaje");
