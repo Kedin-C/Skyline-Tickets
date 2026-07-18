@@ -46,6 +46,10 @@ import View.Transferencia_view;
 import View.ViewPrincipal;
 import View.cambio_de_clase_de_vuelo_viiew;
 import Controller.Pagina_principal_controller;
+import Controller.Reportes_financieros_controller;
+import Controller.Reportes_operativos_controller;
+import Model.Reportes_financieros_dao;
+import Model.Reportes_operativos_dao;
 import View.Apartado_reportes_financieros_view;
 import View.Apartado_reportes_operacionales_view;
 
@@ -84,6 +88,8 @@ public class Skyline_Tickets {
         Seleccion_vuelo_usuario_no_registrado_dao dao_modificacion_vuelo = new Seleccion_vuelo_usuario_no_registrado_dao();
         Seleccion_modificacion_clase_de_vuelo_dao dao_modificacion_clase_vuelo = new Seleccion_modificacion_clase_de_vuelo_dao();
         Seleccion_equipaje_extra_dao dao_equipaje_extra = new Seleccion_equipaje_extra_dao();
+        Reportes_financieros_dao dao_repo_finan = new Reportes_financieros_dao();
+        Reportes_operativos_dao dao_repo_ope = new Reportes_operativos_dao();
         
         
                 
@@ -102,6 +108,8 @@ public class Skyline_Tickets {
         Inicio_usuario_controller pagina_usuario_cont = new Inicio_usuario_controller(pagina_usuario,select_vuelo,buscar_v,info_personal,ticket,usuario,info_per_cont,sesion_usuario);
         Seleccion_modificacion_vuelo_usuario_controlador cont_select_vuelo_registrado = new Seleccion_modificacion_vuelo_usuario_controlador(select_vuelo,usuario,ticket,pagina_admin,pagina_admin_cont,pagina_usuario,pagina_usuario_cont,modificacion);
         Apartado_menu_reportes_Controller menu_cont =  new Apartado_menu_reportes_Controller(apart_reportes_menu,apart_reportes_opera,apart_reportes_finan,pagina_admin);
+        Reportes_financieros_controller repo_finan_cont = new Reportes_financieros_controller(apart_reportes_finan,dao_repo_finan,apart_reportes_menu);
+        Reportes_operativos_controller repo_ope_cont = new Reportes_operativos_controller(apart_reportes_opera,dao_repo_ope,apart_reportes_menu);
         
         Buscar_vuelos_controller buscar_v_cont = new Buscar_vuelos_controller(buscar_v,datos,vista_principal,pagina_admin,pagina_usuario);
         

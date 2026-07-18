@@ -46,9 +46,8 @@ public class Reportes_financieros_controller implements ActionListener{
         this.vista.btnTipo.addActionListener(this);
         this.vista.btnAplicarTipo.addActionListener(this);
         this.vista.volver.addActionListener(this);
+        this.vista.btnQuitarFiltro.addActionListener(this);
         cargarTabla();
-        
-        
         
         cargarGraficoIngresosFecha("2026-03-01", "2026-06-30");
         cargarGraficoGastosFecha("2026-03-01", "2026-06-30");
@@ -88,6 +87,12 @@ public class Reportes_financieros_controller implements ActionListener{
         }else if(e.getSource() == vista.volver){
             vista.setVisible(false);
             vistaM.setVisible(true);
+        }else if(e.getSource() == vista.btnQuitarFiltro){
+            cargarTabla();
+        
+            cargarGraficoIngresosFecha("2026-03-01", "2026-06-30");
+            cargarGraficoGastosFecha("2026-03-01", "2026-06-30");
+            cargarGraficoDistribucionFecha("2026-03-01", "2026-06-30");
         }
     }
 
@@ -105,7 +110,12 @@ public class Reportes_financieros_controller implements ActionListener{
     // Gráfico ingresos fechas
     public void cargarGraficoIngresosFecha(String fechaInicio, String fechaFin) {
         DefaultCategoryDataset dataset = reportes.obtenerIngresosDatasetT(fechaInicio, fechaFin);
-        chartIngresos = ChartFactory.createBarChart("Ingresos", "Mes", "Monto", dataset);
+        chartIngresos = ChartFactory.createBarChart(
+            "Ingresos (" + fechaInicio + " a " + fechaFin + ")",
+            "Mes",
+            "Monto",
+            dataset
+        );
         ChartPanel panel = new ChartPanel(chartIngresos);
         panel.setPreferredSize(new Dimension(400, 300));
         vista.panelIngresos.removeAll();
@@ -116,7 +126,12 @@ public class Reportes_financieros_controller implements ActionListener{
     // Gráfico gastos fechas
     public void cargarGraficoGastosFecha(String fechaInicio, String fechaFin) {
         DefaultCategoryDataset dataset = reportes.obtenerGastosDatasetT(fechaInicio, fechaFin);
-        chartGastos = ChartFactory.createBarChart("Gastos Últimos 3 Meses", "Mes", "Monto", dataset);
+        chartGastos = ChartFactory.createBarChart(
+            "Gastos por Mes (" + fechaInicio + " a " + fechaFin + ")",
+            "Mes",
+            "Monto",
+            dataset
+        );
         ChartPanel panel = new ChartPanel(chartGastos);
         panel.setPreferredSize(new Dimension(400, 300));
         vista.panelGastos.removeAll();
@@ -127,7 +142,13 @@ public class Reportes_financieros_controller implements ActionListener{
     // Gráfico distribución gastos/ganancias fechas
     public void cargarGraficoDistribucionFecha(String fechaInicio, String fechaFin) {
         DefaultPieDataset dataset = reportes.obtenerDistribucionGastosGananciasDatasetT(fechaInicio, fechaFin);
-        chartTipo = ChartFactory.createPieChart("Distribución Gastos vs Ganancias", dataset, true, true, false);
+        chartTipo = ChartFactory.createPieChart(
+            "Distribución Gastos vs Ganancias (" + fechaInicio + " a " + fechaFin + ")",
+            dataset,
+            true,
+            true,
+            false
+        );
         ChartPanel panel = new ChartPanel(chartTipo);
         panel.setPreferredSize(new Dimension(400, 300));
         vista.panelTipo.removeAll();
@@ -162,7 +183,7 @@ public class Reportes_financieros_controller implements ActionListener{
     // Gráfico ingresos tipo
     public void cargarGraficoIngresosTipo(String tipo) {
         DefaultCategoryDataset dataset = reportes.obtenerIngresosDatasetTP(tipo);
-        chartIngresos = ChartFactory.createBarChart("Ingresos Últimos 3 Meses", "Mes", "Monto", dataset);
+        chartIngresos = ChartFactory.createBarChart(tipo + " por mes", "Mes", "Monto",dataset);
         ChartPanel panel = new ChartPanel(chartIngresos);
         panel.setPreferredSize(new Dimension(400, 300));
         vista.panelIngresos.removeAll();
@@ -173,7 +194,7 @@ public class Reportes_financieros_controller implements ActionListener{
     // Gráfico gastos tipo
     public void cargarGraficoGastosTipo(String tipo) {
         DefaultCategoryDataset dataset = reportes.obtenerGastosDatasetTP(tipo);
-        chartGastos = ChartFactory.createBarChart("Gastos Últimos 3 Meses", "Mes", "Monto", dataset);
+        chartGastos = ChartFactory.createBarChart( tipo + " últimos 3 meses","Mes", "Monto",dataset);
         ChartPanel panel = new ChartPanel(chartGastos);
         panel.setPreferredSize(new Dimension(400, 300));
         vista.panelGastos.removeAll();
@@ -184,12 +205,13 @@ public class Reportes_financieros_controller implements ActionListener{
     // Gráfico distribución gastos/ganancias tipo
     public void cargarGraficoDistribucionTipo(String tipo) {
         DefaultPieDataset dataset = reportes.obtenerDistribucionGastosGananciasDatasetTP(tipo);
-        chartTipo = ChartFactory.createPieChart("Distribución Gastos vs Ganancias", dataset, true, true, false);
+        chartTipo = ChartFactory.createPieChart("Distribución de " + tipo,dataset,true, true, false
+        );
         ChartPanel panel = new ChartPanel(chartTipo);
         panel.setPreferredSize(new Dimension(400, 300));
         vista.panelTipo.removeAll();
         vista.panelTipo.add(panel);
         vista.panelTipo.validate();
-    }
+    }   
     
 }

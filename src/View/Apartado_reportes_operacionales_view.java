@@ -22,6 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -40,7 +41,7 @@ public class Apartado_reportes_operacionales_view extends Interfaz_vista_abtract
             panelbotonfiltro,panelModal,panelComboxDestino,panelComboxTipo,panelBotonDestino,panelModalDestino,panelModalTipo,
             panelBotonTipo;
     public JLabel titulo;
-    public JButton btnFecha,btnDestino,btnTipo,btnExportar,volver,btnAplicarFecha,btnAplicarDestino,btnAplicarTipo;
+    public JButton btnFecha,btnDestino,btnTipo,btnExportar,volver,btnAplicarFecha,btnAplicarDestino,btnAplicarTipo,btnQuitarFiltros;
     public JTextArea areaReportes;
     public JScrollPane scrollReportes;
     public DefaultTableModel modelo;
@@ -74,15 +75,19 @@ public class Apartado_reportes_operacionales_view extends Interfaz_vista_abtract
         btnFecha = new JButton("Filtro por Fecha");
         btnDestino = new JButton("Filtro por Destino");
         btnTipo = new JButton("Filtro por Tipo de Vuelo");
+        btnQuitarFiltros = new JButton("Quitar Filtros");
         btnFecha.setBackground(Color.decode("#037FB9"));
         btnFecha.setForeground(Color.white);
         btnDestino.setBackground(Color.decode("#037FB9"));
         btnDestino.setForeground(Color.white);
         btnTipo.setBackground(Color.decode("#037FB9"));
         btnTipo.setForeground(Color.white);
+        btnQuitarFiltros.setBackground(Color.decode("#037FB9"));
+        btnQuitarFiltros.setForeground(Color.white);
         panelFiltros.add(btnFecha);
         panelFiltros.add(btnDestino);
         panelFiltros.add(btnTipo);
+        panelFiltros.add(btnQuitarFiltros);
 
         //Panel con el boton exportar hacia la derecha
         JPanel panelExportar = new JPanel(new FlowLayout(FlowLayout.RIGHT, 60, 10));
@@ -187,6 +192,9 @@ public class Apartado_reportes_operacionales_view extends Interfaz_vista_abtract
         
         panelbotonfiltro = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelbotonfiltro.add(btnAplicarFecha);
+        
+        ((JTextField) fechaInicio.getDateEditor().getUiComponent()).setEditable(false);
+        ((JTextField) fechaFin.getDateEditor().getUiComponent()).setEditable(false);
 
         panelModal.add(paneltiempo1);
         panelModal.add(paneltiempo2);
