@@ -22,6 +22,7 @@ import View.Menu_principal_view;
 import View.Registro_view;
 import View.ViewPrincipal;
 import javax.swing.JFrame;
+import at.favre.lib.crypto.bcrypt.BCrypt;
 
 public class Registro_controller implements ActionListener {
 
@@ -29,10 +30,12 @@ public class Registro_controller implements ActionListener {
     private UsuarioDao dao;
     private Codigo_descuento_controller codigoController;
     private Menu_principal_view menu;
+    private Login_view login;
 
-    public Registro_controller(Registro_view vista,Menu_principal_view menu) {
+    public Registro_controller(Registro_view vista,Menu_principal_view menu,Login_view login) {
         this.vista = vista;
         this.dao = new UsuarioDao();
+        this.login = new Login_view();
         this.codigoController = new Codigo_descuento_controller();
         this.menu = menu;
         vista.getB1().addActionListener(this);
@@ -46,10 +49,7 @@ public class Registro_controller implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         
         if(e.getSource() == vista.getBtnVolver()) {
-        ViewPrincipal vp = new ViewPrincipal();
         menu.setVisible(true);
-        
-        
         vista.dispose();
         }
         
@@ -103,13 +103,15 @@ public class Registro_controller implements ActionListener {
                         "Las contraseñas no coinciden");
                 return;
             }
+            
+            String hash = ContraseñaHash(contraseña);
 
             Usuario usuario = new Usuario();
             usuario.setNombre(nombre);
             usuario.setApellido(apellido);
             usuario.setCorreo(correo);
-            usuario.setContraseña(contraseña);
-            usuario.setRol("USUARIO");
+            usuario.setContraseña(hash);
+            usuario.setRol(2);
 
             if (dao.registrarUsuario(usuario)) {
 
@@ -133,8 +135,8 @@ public class Registro_controller implements ActionListener {
 
                 vista.dispose();
 
-                Login_view login = new Login_view();
-//                new Login_controller(login);
+                
+                login.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
                 login.setVisible(true);
 
             } else {
@@ -176,5 +178,9 @@ public class Registro_controller implements ActionListener {
         }
 
         return cantidadNumeros >= 2;
+    }
+    
+    private String ContraseñaHash(String contraseña){
+        return BCrypt.withDefaults().hashToString(12, contraseña.toCharArray());
     }
 }

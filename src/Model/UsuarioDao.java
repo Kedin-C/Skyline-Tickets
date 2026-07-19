@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import Model.Conexion;
 import Model.Usuario;
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
@@ -23,7 +24,7 @@ public class UsuarioDao {
     ResultSet rs;
 
     public boolean registrarUsuario(Usuario usuario) {
-        String sql = "INSERT INTO usuario(nombre_usuario, apellido_usuario, correo_usuario, password_usuario, rol) VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO usuario(nombre_usuario, apellido_usuario, correo_usuario, password_usuario, id_rol) VALUES(?,?,?,?,?)";
         try {
             con = conexionBD.getConection();
             ps = con.prepareStatement(sql);
@@ -31,7 +32,7 @@ public class UsuarioDao {
             ps.setString(2, usuario.getApellido());
             ps.setString(3, usuario.getCorreo());
             ps.setString(4, usuario.getContraseña());
-            ps.setString(5, usuario.getRol());
+            ps.setInt(5, usuario.getRol());
             ps.executeUpdate();
             return true;
         } catch (Exception e) {
@@ -41,37 +42,39 @@ public class UsuarioDao {
     }
 
     public Usuario iniciarSesion(String correo, String contraseña) {
-        String sql = "SELECT * FROM usuario WHERE correo_usuario = ? AND password_usuario = ?";
+        String sql = "SELECT * FROM usuario WHERE correo_usuario = ?";
         
         try {
             con = conexionBD.getConection();
             ps = con.prepareStatement(sql);
-            
             ps.setString(1, correo);
-            ps.setString(2, contraseña);
-            
             rs = ps.executeQuery();
 
             
             if (rs.next()) {
-                Usuario usuario = new Usuario();
-                usuario.setIdUsuario(rs.getInt("id_usuario"));
-                usuario.setNombre(rs.getString("nombre_usuario"));
-                usuario.setApellido(rs.getString("apellido_usuario"));
-                usuario.setCorreo(rs.getString("correo_usuario"));
-                usuario.setContraseña(rs.getString("password_usuario"));     
-                usuario.setDocumento(rs.getString("numero_documento"));
-                usuario.setCodigo_tipo_documento(rs.getInt("codigo_tipo_documento"));
-                usuario.setFecha_nacimiento(rs.getString("fecha_nacimiento"));
-                usuario.setSexo(rs.getString("sexo"));
-                usuario.setNationalidad(rs.getString("nacionalidad"));
-                usuario.setNumero_telefono(rs.getString("numero_telefono"));
-                if(Integer.parseInt(rs.getString("id_rol")) == 1){
-                    usuario.setRol("ADMINISTRADOR");
-                }else{
-                                    usuario.setRol("USUARIO");
-}
-                return usuario;
+                String hashGuardado = rs.getString("password_usuario");
+                BCrypt.Result result = BCrypt.verifyer().verify(contraseña.toCharArray(), hashGuardado);
+
+                if (result.verified) {
+                    Usuario usuario = new Usuario();
+                    usuario.setIdUsuario(rs.getInt("id_usuario"));
+                    usuario.setNombre(rs.getString("nombre_usuario"));
+                    usuario.setApellido(rs.getString("apellido_usuario"));
+                    usuario.setCorreo(rs.getString("correo_usuario"));
+                    usuario.setContraseña(hashGuardado);     
+                    usuario.setDocumento(rs.getString("numero_documento"));
+                    usuario.setCodigo_tipo_documento(rs.getInt("codigo_tipo_documento"));
+                    usuario.setFecha_nacimiento(rs.getString("fecha_nacimiento"));
+                    usuario.setSexo(rs.getString("sexo"));
+                    usuario.setNationalidad(rs.getString("nacionalidad"));
+                    usuario.setNumero_telefono(rs.getString("numero_telefono"));
+                    if(Integer.parseInt(rs.getString("id_rol")) == 1){
+                        usuario.setRol(1);
+                    }else{
+                        usuario.setRol(2);
+                    }
+                    return usuario;
+                }    
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -93,7 +96,7 @@ public class UsuarioDao {
                 usuario.setApellido(rs.getString("apellido_usuario"));
                 usuario.setCorreo(rs.getString("correo_usuario"));
                 usuario.setContraseña(rs.getString("password_usuario"));
-                usuario.setRol(rs.getString("rol"));
+                usuario.setRol(rs.getInt("rol"));
                 return usuario;
             }
         } catch (Exception e) {

@@ -69,19 +69,20 @@ public class Login_controller implements ActionListener {
             
             if(usu != null) {
                 
+                usu.setNombre(usuario.getNombre());
                 usu.setApellido(usuario.getApellido());
                 usu.setContraseña(usuario.getContraseña());
                 usu.setCorreo(usuario.getCorreo());
                 usu.setIdUsuario(usuario.getIdUsuario());
                 usu.setNombre(usuario.getNombre());
                 usu.setRol(usuario.getRol());
-                usu.setDocumento(usuario.getDocumento());
-                usu.setNumero_telefono(usuario.getNumero_telefono());
-                usu.setCodigo_tipo_documento(usuario.getCodigo_tipo_documento());
-                usu.setFecha_nacimiento(usuario.getFecha_nacimiento());
-                usu.setSexo(usuario.getSexo());
-                usu.setNationalidad(usuario.getNationalidad());
-                usu.setNumero_telefono(usuario.getNumero_telefono());
+//                usu.setDocumento(usuario.getDocumento());
+//                usu.setNumero_telefono(usuario.getNumero_telefono());
+//                usu.setCodigo_tipo_documento(usuario.getCodigo_tipo_documento());
+//                usu.setFecha_nacimiento(usuario.getFecha_nacimiento());
+//                usu.setSexo(usuario.getSexo());
+//                usu.setNationalidad(usuario.getNationalidad());
+//                usu.setNumero_telefono(usuario.getNumero_telefono());
                 
                 
                 this.sesion_usu.setUsuario(usu);
@@ -91,22 +92,16 @@ public class Login_controller implements ActionListener {
                 JOptionPane.showMessageDialog(
                         null,
                         "Bienvenido " + usu.getNombre());
-                if(usu.getRol().equals("ADMINISTRADOR")) {
+                if(usu.getRol() == 1) {
                     JOptionPane.showMessageDialog(
                             null,
                             "Ingreso como administrador");
-                    // Abrir MenuAdministradorView
-                    
-                     
-                     
                      vista_admin.setVisible(true);
                      vista.dispose();
                 } else {
                     JOptionPane.showMessageDialog(
                             null,
                             "Ingreso como usuario");
-                     
-                     
                      vista_usuario.setVisible(true);
                      vista.dispose();
                 }

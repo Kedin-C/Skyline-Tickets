@@ -80,6 +80,7 @@ public class Skyline_Tickets {
         Informacion_personal_view info_personal = new Informacion_personal_view();
         Apartado_reportes_operacionales_view  apart_reportes_opera = new Apartado_reportes_operacionales_view();
         Apartado_reportes_financieros_view apart_reportes_finan = new Apartado_reportes_financieros_view();
+        Login_view loginV = new Login_view();
         
         
         Ticket ticket = new Ticket();
@@ -102,7 +103,7 @@ public class Skyline_Tickets {
         Tarjeta_de_debito_controller debito_cont = new Tarjeta_de_debito_controller(debito,datos,forma_pago_vista);
         Transferencia_controller transferencia_cont = new Transferencia_controller(transferencia,datos,forma_pago_vista);
         Login_controller login_cont = new Login_controller(login,vista_principal,usuario,registro_view,pagina_admin,pagina_usuario,sesion_usuario);
-        Registro_controller registro_cont = new Registro_controller(registro_view,menu); 
+        Registro_controller registro_cont = new Registro_controller(registro_view,menu,loginV); 
         Pagina_principal_administrador_controller_2 pagina_admin_cont = new Pagina_principal_administrador_controller_2(pagina_admin,apart_reportes_menu,select_vuelo,buscar_v,ticket,usuario);
         Informacion_personal_controller info_per_cont = new Informacion_personal_controller(info_personal,pagina_usuario,sesion_usuario);
         Inicio_usuario_controller pagina_usuario_cont = new Inicio_usuario_controller(pagina_usuario,select_vuelo,buscar_v,info_personal,ticket,usuario,info_per_cont,sesion_usuario);
