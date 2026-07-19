@@ -1,0 +1,343 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package Controller;
+
+import Model.Vuelos;
+import Model.VuelosDao;
+import View.Buscar_vuelos_view;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import javax.swing.ButtonGroup;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import Model.Datos;
+import View.Elegir_clase_view;
+import View.Inicio_usuario_view;
+import View.Pagina_principal_administrador_view;
+import View.ViewPrincipal;
+import javax.swing.JFrame;
+
+public class Buscar_vuelos_controller implements ActionListener{
+    
+    ViewPrincipal principal;
+    Pagina_principal_administrador_view pagina_admin;
+    Inicio_usuario_view pagina_usuario;
+    Vuelos vuelo = new Vuelos();
+    VuelosDao vuelodao = new VuelosDao();
+    Buscar_vuelos_view vista = new Buscar_vuelos_view();
+    DefaultTableModel modelo = new DefaultTableModel();
+    Datos datos = new Datos();
+    Elegir_clase_view vistaElegirClase = new Elegir_clase_view();
+    
+    public String origen, destino, hora1, hora2;
+    public Date fechaIda, fechaRegreso;
+    
+    public Buscar_vuelos_controller(Buscar_vuelos_view vista, Datos datos,ViewPrincipal principal,Pagina_principal_administrador_view pagina_admin,Inicio_usuario_view pagina_usuario){
+        
+       
+        this.principal = principal;
+        this.pagina_admin = pagina_admin;
+        this.pagina_usuario = pagina_usuario;
+        
+        this.vista = vista;
+        this.datos = datos;
+        
+        this.vista.buscar_vuelos.addActionListener(this);
+        this.vista.siguiente.addActionListener(this);
+        this.vista.volver.addActionListener(this);
+        
+        this.vistaElegirClase.volver.addActionListener(this);
+        
+        //Se encarga de evitar que elija los 2 botones de tipo de viaje
+        ButtonGroup grupoViaje = new ButtonGroup();
+        grupoViaje.add(vista.vuelo_ida);
+        grupoViaje.add(vista.vuelo_regreso);
+        
+        this.vista.vuelo_ida.addActionListener(this);
+        this.vista.vuelo_regreso.addActionListener(this);
+        
+        //Para que empiese activo
+        this.vista.vuelo_ida.setSelected(true);
+        
+        //Para bloquear las fechas de 2 dias despues de hoy para atras
+        Calendar cal = Calendar.getInstance(); // toma la fecha y hora actual
+        cal.add(Calendar.DAY_OF_YEAR, 2); //para tomar dos dias despues de la fecha actual
+        Date dosDiasDespues = cal.getTime();
+        
+        this.vista.elegir_fecha_ida.setMinSelectableDate(dosDiasDespues);
+        this.vista.elegir_fecha_regreso.setMinSelectableDate(dosDiasDespues);
+        
+        //Para que empiese bloqueado 
+        this.vista.elegir_fecha_regreso.setEnabled(false);
+        
+        //Para que las columnas no se mueban 
+        this.vista.tabla.getTableHeader().setReorderingAllowed(false);
+        this.vista.tabla.getTableHeader().setResizingAllowed(false);
+        // Configura la tabla para que solo permita seleccionar UNA fila a la vez
+        this.vista.tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        
+        this.modelo = (DefaultTableModel) this.vista.tabla.getModel();
+        
+        //Esconder la primera columna "ID"
+        var modeloColumnas = this.vista.tabla.getColumnModel();
+        modeloColumnas.getColumn(0).setMinWidth(0);
+        modeloColumnas.getColumn(0).setPreferredWidth(0);
+        modeloColumnas.getColumn(0).setMaxWidth(0);
+        modeloColumnas.getColumn(0).setResizable(false);
+        
+        //Para que no pueda ingresar al campo de fecha
+        JTextField editorFecha1 = (JTextField) vista.elegir_fecha_ida.getDateEditor().getUiComponent();
+        editorFecha1.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                e.consume();
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                // Bloquea y no deja entrar letras, números, Backspace y Suprimir
+                e.consume();
+            }
+        });
+        
+        //Para que no pueda ingresar al campo de fecha
+        JTextField editorFecha2 = (JTextField) vista.elegir_fecha_regreso.getDateEditor().getUiComponent();
+        editorFecha2.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                e.consume();
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                // Bloquea y no deja entrar letras, números, Backspace y Suprimir
+                e.consume();
+            }
+        });
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        
+        
+        if(e.getSource() == vista.volver){
+            
+            if(vista.getPagina_anterior() == 1){
+            vista.setVisible(false);
+            
+            principal.setVisible(true);
+            principal.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            }else if(vista.getPagina_anterior() == 2){
+            vista.setVisible(false);
+            
+            pagina_usuario.setVisible(true);
+            pagina_usuario.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            }else if(vista.getPagina_anterior() == 3){
+            vista.setVisible(false);
+            
+            pagina_admin.setVisible(true);
+            pagina_admin.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            }
+        }
+        
+        if(e.getSource() == vista.siguiente){
+            
+            int filaVuelo = vista.tabla.getSelectedRow();
+            
+            if (filaVuelo == -1) {
+                JOptionPane.showMessageDialog(
+                        vista,
+                        "Por favor, seleccione un vuelo de la tabla para continuar.",
+                        "Vuelo no seleccionado",
+                        JOptionPane.WARNING_MESSAGE
+                );
+                return;
+            }
+            
+            //Para optener el id del vuelo
+            int id = Integer.parseInt(vista.tabla.getValueAt(filaVuelo, 0).toString());
+            double precio = Double.parseDouble(vista.tabla.getValueAt(filaVuelo, 6).toString());
+            datos.setCodigoVuelo(id);
+            datos.setTotalPagar(precio);
+            
+            if(vista.vuelo_ida.isSelected()){
+                datos.setTipoVuelo("Vuelo de ida");
+            }else{
+                datos.setTipoVuelo("Vuelo de ida y vuelta");
+                
+            }
+            
+            vista.setVisible(false);
+            this.vistaElegirClase.setVisible(true);
+            Elegir_clase_controller controllerElegirClase = new Elegir_clase_controller(vistaElegirClase, datos);
+            
+        }
+        
+        if(e.getSource() == vista.buscar_vuelos){
+            if(vista.listar_origen.getSelectedIndex() > 0 &&
+               vista.listar_destino.getSelectedIndex() > 0 &&
+               vista.elegir_fecha_ida.getDate() != null){
+                
+                
+                
+                if(vista.vuelo_regreso.isSelected()){
+                    if(vista.elegir_fecha_regreso.getDate() != null){
+                        
+                        fechaIda = vista.elegir_fecha_ida.getDate();
+                        
+                        
+                        fechaRegreso = vista.elegir_fecha_regreso.getDate();
+                        //para que la fecha quede bien 
+                        SimpleDateFormat formateadorRegreso = new SimpleDateFormat("yyyy-MM-dd");
+                        //aplicando el metodo que deja la fecha tal cual en el campo de fecha regreso
+                        String fechaExacta2 = formateadorRegreso.format(fechaRegreso);
+                        
+                        
+                        
+                        
+                        if(fechaRegreso.after(fechaIda)){
+                            datos.setFechaRegreso(fechaExacta2);
+                        }else{
+                            JOptionPane.showMessageDialog(vista,
+                                "La fecha de regreso no puede ser antes que la fecha de ida", "Fecha incoherente", JOptionPane.WARNING_MESSAGE);
+                            limpiarTabla();
+                            return;
+                        }
+                    }else {
+                        JOptionPane.showMessageDialog(vista,
+                                "Debes elegir una fecha de regreso", "Fecha obligatoria", JOptionPane.WARNING_MESSAGE);
+
+                        return;
+                    }
+                }
+                
+                limpiarTabla();
+                if (vista.listar_horario.getSelectedIndex() == 0) {
+                    getListar(vista.tabla);
+                } else {
+                    getListarHorario(vista.tabla);
+                }
+            
+            }else {
+                JOptionPane.showMessageDialog(vista, 
+                        "Asegurate de llenar lugar de origen, \n"
+                        + "lugar de destino y la fecha de ida","Ten cuidado", JOptionPane.WARNING_MESSAGE);
+            }
+            
+        }
+        
+        
+        if (vista.vuelo_ida.isSelected()) { 
+            
+            vista.elegir_fecha_regreso.setEnabled(false);
+            
+            vista.elegir_fecha_regreso.setDate(null);
+            
+        } else if (vista.vuelo_regreso.isSelected()) {
+            
+            vista.elegir_fecha_regreso.setEnabled(true);
+        }
+        
+        if(e.getSource() == vistaElegirClase.volver){
+            vista.setVisible(true);
+            this.vistaElegirClase.setVisible(false);
+        }
+        
+    }
+    
+    
+    
+    //Metodos
+    public void getListar(JTable tabla){
+        origen = vista.listar_origen.getSelectedItem().toString();
+        destino = vista.listar_destino.getSelectedItem().toString();
+        fechaIda = vista.elegir_fecha_ida.getDate();
+        //para que la fecha quede bien 
+        SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd");
+        //aplicando el metodo que deja la fecha tal cual en el campo de fecha ida
+        String fechaExacta = formateador.format(fechaIda);
+        
+        modelo=(DefaultTableModel) tabla.getModel();
+        List<Vuelos> lista = vuelodao.listarIda(origen, destino, fechaExacta);
+        Object[] objeto = new Object[7];
+        
+        modelo.setRowCount(0);
+        
+        for(int i=0; i<lista.size(); i++){
+            objeto[0]=lista.get(i).getCodigo_vuelo();
+            objeto[1]=lista.get(i).getOrigen();
+            objeto[2]=lista.get(i).getDestino();
+            objeto[3]=lista.get(i).getFecha();
+            objeto[4]=lista.get(i).getHora_salida();
+            objeto[5]=lista.get(i).getHora_llegada();
+            objeto[6]=lista.get(i).getPrecio();
+            modelo.addRow(objeto);
+        }
+        vista.tabla.setModel(modelo);
+        
+        if (modelo.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(vista, "No encontramos resultados");
+        }
+      
+    }
+    
+    
+    
+    public void getListarHorario(JTable tabla){
+        origen = vista.listar_origen.getSelectedItem().toString();
+        destino = vista.listar_destino.getSelectedItem().toString();
+        fechaIda = vista.elegir_fecha_ida.getDate();
+        //para que la fecha quede bien 
+        SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd");
+        //aplicando el metodo que deja la fecha tal cual en el campo de fecha ida
+        String fechaExacta = formateador.format(fechaIda);
+        
+        String hora = vista.listar_horario.getSelectedItem().toString();
+        
+        String[] horario = hora.split("-");
+
+        hora1 = horario[0];
+        hora2 = horario[1];
+        
+        modelo=(DefaultTableModel) tabla.getModel();
+        List<Vuelos> lista = vuelodao.listarIdaHorario(origen, destino, fechaExacta, hora1, hora2);
+        Object[] objeto = new Object[7];
+        
+        modelo.setRowCount(0);
+        
+        for(int i=0; i<lista.size(); i++){
+            objeto[0]=lista.get(i).getCodigo_vuelo();
+            objeto[1]=lista.get(i).getOrigen();
+            objeto[2]=lista.get(i).getDestino();
+            objeto[3]=lista.get(i).getFecha();
+            objeto[4]=lista.get(i).getHora_salida();
+            objeto[5]=lista.get(i).getHora_llegada();
+            objeto[6]=lista.get(i).getPrecio();
+            modelo.addRow(objeto);
+        }
+        vista.tabla.setModel(modelo);
+        
+        if (modelo.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(vista, "No encontramos resultados");
+        }
+    }
+    
+    public void limpiarTabla(){
+        for(int i=0;i<vista.tabla.getRowCount(); i++){
+            modelo.removeRow(i);
+            i=i-1;
+        }
+    }
+    
+}

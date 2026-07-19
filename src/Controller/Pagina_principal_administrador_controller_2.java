@@ -11,6 +11,7 @@ import View.Apartado_reportes_menu_view;
 import View.Pagina_principal_administrador_view;
 import View.Seleccion_de_vuelo_usuarioRegistrado_view;
 import View.Buscar_vuelos_view;
+import View.ViewPrincipal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -27,20 +28,23 @@ public class Pagina_principal_administrador_controller_2 implements ActionListen
     public Apartado_reportes_menu_view vistaRM;
     public Seleccion_de_vuelo_usuarioRegistrado_view vistaCL;
     public Buscar_vuelos_view vistaCV;
+    public ViewPrincipal vista_prin;
     private Ticket ticket;
     private Usuario usuario;
     private Ticket_dao tdao = new Ticket_dao();
 
-    public Pagina_principal_administrador_controller_2(Pagina_principal_administrador_view vista, Apartado_reportes_menu_view vistaRM, Seleccion_de_vuelo_usuarioRegistrado_view vistaCL,Buscar_vuelos_view vistaCV,Ticket ticket,Usuario usu) {
+    public Pagina_principal_administrador_controller_2(Pagina_principal_administrador_view vista, Apartado_reportes_menu_view vistaRM, Seleccion_de_vuelo_usuarioRegistrado_view vistaCL,Buscar_vuelos_view vistaCV,Ticket ticket,Usuario usu,ViewPrincipal vista_prin) {
         this.vista = vista;
         this.vistaRM=vistaRM;
         this.vistaCL = vistaCL;
         this.vistaCV=vistaCV;
+        this.vista_prin=vista_prin;
         
         
         this.vista.reportes.addActionListener(this);
         this.vista.comprar.addActionListener(this);
         this.vista.clase.addActionListener(this);
+        this.vista.cerrarSesion.addActionListener(this);
         
         
         this.ticket = ticket;
@@ -77,10 +81,11 @@ public class Pagina_principal_administrador_controller_2 implements ActionListen
             vistaCL.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
             }else{
                 JOptionPane.showMessageDialog(vista,"No tienes vuelos activos disponibles");
-            }
-            
-            
-            
+            } 
+        }else if(e.getSource() == vista.cerrarSesion){
+            vista.setVisible(false);
+            vista_prin.setVisible(true);
+            vista_prin.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         }
     }
     

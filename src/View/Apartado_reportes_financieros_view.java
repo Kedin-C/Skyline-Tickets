@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -39,7 +40,7 @@ public class Apartado_reportes_financieros_view extends Interfaz_vista_abtractas
             panelbotonfiltro,panelModal,panelComboxTipo,panelModalTipo,
             panelBotonTipo;
     public JLabel titulo;
-    public JButton btnFecha,btnTipo,btnExportar,volver,btnAplicarFecha,btnAplicarTipo;
+    public JButton btnFecha,btnTipo,btnExportar,volver,btnAplicarFecha,btnAplicarTipo,btnQuitarFiltro;
     public JTextArea areaReportes;
     public JScrollPane scrollReportes;
     public DefaultTableModel modelo;
@@ -72,12 +73,16 @@ public class Apartado_reportes_financieros_view extends Interfaz_vista_abtractas
         JPanel panelFiltros = new JPanel(new FlowLayout(FlowLayout.LEFT, 60, 10));
         btnFecha = new JButton("Filtro por Fecha");
         btnTipo = new JButton("Filtro por Tipo de Reporte");
+        btnQuitarFiltro = new JButton("Quitar Filtro");
         btnFecha.setBackground(Color.decode("#037FB9"));
         btnFecha.setForeground(Color.white);
         btnTipo.setBackground(Color.decode("#037FB9"));
         btnTipo.setForeground(Color.white);
+        btnQuitarFiltro.setBackground(Color.decode("#037FB9"));
+        btnQuitarFiltro.setForeground(Color.white);
         panelFiltros.add(btnFecha);
         panelFiltros.add(btnTipo);
+        panelFiltros.add(btnQuitarFiltro);
 
         //Panel con el boton exportar hacia la derecha
         JPanel panelExportar = new JPanel(new FlowLayout(FlowLayout.RIGHT, 60, 10));
@@ -179,6 +184,9 @@ public class Apartado_reportes_financieros_view extends Interfaz_vista_abtractas
         
         panelbotonfiltro = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelbotonfiltro.add(btnAplicarFecha);
+        
+        ((JTextField) fechaInicio.getDateEditor().getUiComponent()).setEditable(false);
+        ((JTextField) fechaFin.getDateEditor().getUiComponent()).setEditable(false);
 
         panelModal.add(paneltiempo1);
         panelModal.add(paneltiempo2);

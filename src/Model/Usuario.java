@@ -16,14 +16,14 @@ public class Usuario {
     private String apellido;
     private String correo;
     private String contraseña;
-    private String rol;
+    private int rol;
     private String documento;
     private int codigo_tipo_documento;
     private String numero_telefono;
     private String nationalidad, sexo, fecha_nacimiento;
     
 
-    public Usuario(int idUsuario, String nombre, String apellido, String correo, String contraseña, String rol, String documento, int codigo_tipo_documento, String numero_telefono, String nationalidad, String sexo, String fecha_nacimiento) {
+    public Usuario(int idUsuario, String nombre, String apellido, String correo, String contraseña, int rol, String documento, int codigo_tipo_documento, String numero_telefono, String nationalidad, String sexo, String fecha_nacimiento) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -61,7 +61,7 @@ public class Usuario {
     public String getContraseña(){
         return contraseña;
     }
-    public String getRol(){
+    public int getRol(){
         return rol;
     }
     
@@ -88,7 +88,7 @@ public class Usuario {
         this.contraseña=contraseña;
     }
     
-    public void setRol(String rol){
+    public void setRol(int rol){
         this.rol=rol;
     }
     

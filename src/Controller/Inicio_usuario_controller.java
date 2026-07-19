@@ -12,6 +12,7 @@ import View.Buscar_vuelos_view;
 import View.Informacion_personal_view;
 import View.Inicio_usuario_view;
 import View.Seleccion_de_vuelo_usuarioRegistrado_view;
+import View.ViewPrincipal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -27,31 +28,34 @@ public class Inicio_usuario_controller implements ActionListener {
     public Seleccion_de_vuelo_usuarioRegistrado_view vistaCL;
     public Buscar_vuelos_view vistaCV;
     public Informacion_personal_view vistaIP;
+    public ViewPrincipal vista_prin;
     private Ticket ticket;
     private Usuario usuario;
     private Ticket_dao tdao = new Ticket_dao();
     private Informacion_personal_controller info_per_cont;
     
 
-    public Inicio_usuario_controller(Inicio_usuario_view vista, Seleccion_de_vuelo_usuarioRegistrado_view vistaCL, Buscar_vuelos_view vistaCV, Informacion_personal_view vistaIP, Ticket ticket, Usuario usu,Informacion_personal_controller info_per_cont,Sesion_usuario sesion_usu) {
+    public Inicio_usuario_controller(Inicio_usuario_view vista, Seleccion_de_vuelo_usuarioRegistrado_view vistaCL, Buscar_vuelos_view vistaCV, Informacion_personal_view vistaIP, Ticket ticket, Usuario usu,Informacion_personal_controller info_per_cont,Sesion_usuario sesion_usu,ViewPrincipal vista_prin) {
         this.vista = vista;
         this.vistaCL = vistaCL;
         this.vistaCV = vistaCV;
         this.vistaIP = vistaIP;
+        this.vista_prin=vista_prin;
         this.info_per_cont = info_per_cont;
         
 
         this.ticket = ticket;
         this.usuario = usu;
 
-        this.vista.inicio.addActionListener(this);
+        this.vista.infoPerso.addActionListener(this);
         this.vista.comprar.addActionListener(this);
         this.vista.clase.addActionListener(this);
+        this.vista.cerrarSesion.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == vista.inicio) {
+        if (e.getSource() == vista.infoPerso) {
             
             
             setTickets();
@@ -78,8 +82,11 @@ public class Inicio_usuario_controller implements ActionListener {
             } else {
                 JOptionPane.showMessageDialog(vista, "No tienes vuelos activos disponibles");
             }
-
-        } 
+        }else if(e.getSource() == vista.cerrarSesion){
+            vista.setVisible(false);
+            vista_prin.setVisible(true);
+            vista_prin.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
+        }
         
     }
 

@@ -115,7 +115,7 @@ public DefaultPieDataset obtenerDistribucionGastosGananciasDatasetT(String fecha
     DefaultPieDataset dataset = new DefaultPieDataset();
     String sql = "SELECT tipo, SUM(monto) AS total_monto " +
                  "FROM reportes_financieros " +
-                 "WHERE tipo IN ('Gastos','Ganancias') AND fecha BETWEEN ? AND ? " +
+                 "WHERE tipo IN ('Gastos','Ingresos') AND fecha BETWEEN ? AND ? " +
                  "GROUP BY tipo";
     try {
         con = conectar.getConection();
@@ -182,13 +182,12 @@ public List listarPorTipo(String tipo) {
         rs = ps.executeQuery();
 
         while (rs.next()) {
-            Object[] fila = new Object[6];
-            fila[0] = rs.getInt("id_financiero");
-            fila[1] = rs.getString("tipo");
-            fila[2] = rs.getString("descripcion");
-            fila[3] = rs.getDouble("monto");
-            fila[4] = rs.getDate("fecha");
-            fila[5] = rs.getString("referencia");
+            Object[] fila = new Object[5];
+            fila[0] = rs.getString("tipo");
+            fila[1] = rs.getString("descripcion");
+            fila[2] = rs.getDouble("monto");
+            fila[3] = rs.getDate("fecha");
+            fila[4] = rs.getString("referencia");
 
             listarP.add(fila);
         }
@@ -234,7 +233,7 @@ public DefaultCategoryDataset obtenerGastosDatasetTP(String tipo) {
     DefaultCategoryDataset dataset = new DefaultCategoryDataset();
     String sql = "SELECT DATE_FORMAT(fecha, '%Y-%m') AS mes, SUM(monto) AS total_gastos " +
                  "FROM reportes_financieros " +
-                 "WHERE tipo = ? " +
+                 "WHERE tipo = ? AND fecha >= CURDATE() - INTERVAL 3 MONTH " +
                  "GROUP BY mes ORDER BY mes";
     try {
         con = conectar.getConection();

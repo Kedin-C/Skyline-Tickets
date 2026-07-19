@@ -28,7 +28,7 @@ public class Pagina_principal_administrador_view extends Interfaz_vista_abtracta
     private Container contenedor;
     private JPanel panel1,panelboton,panelboton2,panelboton3,paneltitulo,panelbotones;
     private Panel_con_fondo_view panel2;
-    public JButton comprar,clase,reportes;
+    public JButton comprar,clase,reportes, cerrarSesion;
     private JLabel titulo;
     private FlowLayout miflow;
     
@@ -48,6 +48,12 @@ public class Pagina_principal_administrador_view extends Interfaz_vista_abtracta
         reportes.setPreferredSize(new Dimension(200, 40));
         reportes.setFont(new Font("Arial", Font.BOLD, 20));
         reportes.setBorderPainted(false);
+        
+        cerrarSesion = new JButton("Cerrar Sesión");
+        cerrarSesion.setBackground(Color.white);
+        cerrarSesion.setPreferredSize(new Dimension(200, 40));
+        cerrarSesion.setFont(new Font("Arial", Font.BOLD, 20));
+        cerrarSesion.setBorderPainted(false);
 
 //        rol = new JButton("Asignar Rol");
 //        rol.setBackground(Color.white);
@@ -56,6 +62,8 @@ public class Pagina_principal_administrador_view extends Interfaz_vista_abtracta
 //        rol.setBorderPainted(false);
 
         // Agregar ambos al mismo panel
+        panelbotones.add(cerrarSesion);
+        panelbotones.add(Box.createHorizontalStrut(20));
         panelbotones.add(reportes);
 //        panelbotones.add(rol);
 

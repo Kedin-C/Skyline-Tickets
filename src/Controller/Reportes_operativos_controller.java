@@ -16,6 +16,7 @@ import java.awt.Dimension;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -50,6 +51,7 @@ public class Reportes_operativos_controller implements ActionListener{
         this.vista.btnTipo.addActionListener(this);
         this.vista.btnAplicarTipo.addActionListener(this);
         this.vista.volver.addActionListener(this);
+        this.vista.btnQuitarFiltros.addActionListener(this);
         cargarTabla();
         cargarGraficoTendenciaFecha("2026-03-01", "2026-06-30");
         cargarGraficoDestinosFecha("2026-03-01", "2026-06-30", 5);
@@ -59,22 +61,37 @@ public class Reportes_operativos_controller implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == vista.btnExportar){
-            System.out.println("hola");
             CrearPdf.setCrearPdf(vista.tabla,chartTiempo,chartDestino,chartTipo);
         }else if(e.getSource() == vista.btnFecha){
             vista.mostrarModalFecha();
         }else if(e.getSource() == vista.btnAplicarFecha){
             Date inicio = vista.fechaInicio.getDate();
             Date fin = vista.fechaFin.getDate();
-            if(inicio != null && fin != null && inicio.before(fin)) {
-                String f1 = new SimpleDateFormat("yyyy-MM-dd").format(inicio);
-                String f2 = new SimpleDateFormat("yyyy-MM-dd").format(fin);
-                cargarTablaPorFecha(f1,f2);
-                cargarGraficoTendenciaFecha(f1,f2);
-                cargarGraficoDestinosFecha(f1,f2,5);
-                cargarGraficoDistribucionFecha(f1,f2);
-                vista.modalFecha.dispose();
+
+            if(inicio == null || fin == null) {
+                JOptionPane.showMessageDialog(vista,
+                    "Debe seleccionar ambas fechas.",
+                    "Error en Filtro",
+                    JOptionPane.ERROR_MESSAGE);
+                return;
             }
+
+            if(inicio.after(fin)) {
+                JOptionPane.showMessageDialog(vista,
+                    "La fecha de inicio no puede ser posterior a la fecha fin.",
+                    "Error en Filtro",
+                    JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            String f1 = new SimpleDateFormat("yyyy-MM-dd").format(inicio);
+            String f2 = new SimpleDateFormat("yyyy-MM-dd").format(fin);
+
+            cargarTablaPorFecha(f1, f2);
+            cargarGraficoTendenciaFecha(f1, f2);
+            cargarGraficoDestinosFecha(f1, f2, 5);
+            cargarGraficoDistribucionFecha(f1, f2);
+            vista.modalFecha.dispose();
         }else if(e.getSource() == vista.btnDestino){
             cargarListaDestinos();
             vista.mostrarModalDestino();
@@ -101,6 +118,11 @@ public class Reportes_operativos_controller implements ActionListener{
         }else if(e.getSource() == vista.volver){
             vista.setVisible(false);
             vistaM.setVisible(true);
+        }else if(e.getSource() == vista.btnQuitarFiltros){
+            cargarTabla();
+            cargarGraficoTendenciaFecha("2026-03-01", "2026-06-30");
+            cargarGraficoDestinosFecha("2026-03-01", "2026-06-30", 5);
+            cargarGraficoDistribucionFecha("2026-03-01", "2026-06-30");
         }
     }
 
@@ -118,7 +140,12 @@ public class Reportes_operativos_controller implements ActionListener{
     // Gráfico tendencia fechas
     public void cargarGraficoTendenciaFecha(String fechaInicio, String fechaFin) {
         DefaultCategoryDataset dataset = reportes.obtenerTendenciaVuelosDatasetT(fechaInicio, fechaFin);
-        chartTiempo = ChartFactory.createBarChart("Tendencia de Vuelos", "Mes", "Cantidad", dataset);
+        chartTiempo = ChartFactory.createBarChart(
+            "Tendencia de Vuelos (" + fechaInicio + " a " + fechaFin + ")", 
+            "Mes", 
+            "Cantidad", 
+            dataset
+        );
         ChartPanel panel = new ChartPanel(chartTiempo);
         panel.setPreferredSize(new Dimension(400, 300));
         vista.panelTiempo.removeAll();
@@ -129,18 +156,29 @@ public class Reportes_operativos_controller implements ActionListener{
     // Gráfico top destinos fechas
     public void cargarGraficoDestinosFecha(String fechaInicio, String fechaFin, int limite) {
         DefaultCategoryDataset dataset = reportes.obtenerTopDestinosDatasetT(fechaInicio, fechaFin, limite);
-        chartDestino = ChartFactory.createBarChart("Top Destinos", "Destino", "Cantidad", dataset);
+        chartDestino = ChartFactory.createBarChart(
+            "Top Destinos (" + fechaInicio + " a " + fechaFin + ")", 
+            "Destino", 
+            "Cantidad", 
+            dataset
+        );
         ChartPanel panel = new ChartPanel(chartDestino);
         panel.setPreferredSize(new Dimension(400, 300));
         vista.panelDestinos.removeAll();
         vista.panelDestinos.add(panel);
         vista.panelDestinos.validate();
-    }
+    }   
 
     // Gráfico distribución nacional/internacional fechas
     public void cargarGraficoDistribucionFecha(String fechaInicio, String fechaFin) {
         DefaultPieDataset dataset = reportes.obtenerDistribucionTipoVueloDatasetT(fechaInicio, fechaFin);
-        chartTipo = ChartFactory.createPieChart("Distribución Nacional vs Internacional", dataset, true, true, false);
+        chartTipo = ChartFactory.createPieChart(
+            "Distribución Nacional vs Internacional (" + fechaInicio + " a " + fechaFin + ")", 
+            dataset, 
+            true, 
+            true, 
+            false
+        );
         ChartPanel panel = new ChartPanel(chartTipo);
         panel.setPreferredSize(new Dimension(400, 300));
         vista.panelTipo.removeAll();
@@ -186,7 +224,12 @@ public class Reportes_operativos_controller implements ActionListener{
     // Gráfico tendencia destino
     public void cargarGraficoTendenciaDestino(String destino) {
         DefaultCategoryDataset dataset = reportes.obtenerTendenciaVuelosDatasetD(destino);
-        chartTiempo = ChartFactory.createBarChart("Tendencia de Vuelos", "Mes", "Cantidad", dataset);
+        chartTiempo = ChartFactory.createBarChart(
+            "Tendencia de Vuelos hacia " + destino,
+            "Mes",
+            "Cantidad",
+            dataset
+        );
         ChartPanel panel = new ChartPanel(chartTiempo);
         panel.setPreferredSize(new Dimension(400, 300));
         vista.panelTiempo.removeAll();
@@ -197,7 +240,12 @@ public class Reportes_operativos_controller implements ActionListener{
     // Gráfico top destinos destino
     public void cargarGraficoDestinosDestino(String destino, int limite) {
         DefaultCategoryDataset dataset = reportes.obtenerTopDestinosDatasetD(destino);
-        chartDestino = ChartFactory.createBarChart("Top Destinos", "Destino", "Cantidad", dataset);
+        chartDestino = ChartFactory.createBarChart(
+            "Top Destinos desde " + destino,
+            "Destino",
+            "Cantidad",
+            dataset
+        );
         ChartPanel panel = new ChartPanel(chartDestino);
         panel.setPreferredSize(new Dimension(400, 300));
         vista.panelDestinos.removeAll();
@@ -208,7 +256,13 @@ public class Reportes_operativos_controller implements ActionListener{
     // Gráfico distribución nacional/internacional destino
     public void cargarGraficoDistribucionDestino(String destino) {
         DefaultPieDataset dataset = reportes.obtenerDistribucionTipoVueloDatasetD(destino);
-        chartTipo = ChartFactory.createPieChart("Distribución Nacional vs Internacional", dataset, true, true, false);
+        chartTipo = ChartFactory.createPieChart(
+            "Distribución Nacional vs Internacional desde " + destino,
+            dataset,
+            true,
+            true,
+               false
+        );
         ChartPanel panel = new ChartPanel(chartTipo);
         panel.setPreferredSize(new Dimension(400, 300));
         vista.panelTipo.removeAll();
@@ -229,9 +283,15 @@ public class Reportes_operativos_controller implements ActionListener{
     }
     
     // Gráfico tendencia tipo
+    // Gráfico tendencia tipo
     public void cargarGraficoTendenciaTipo(String tipo) {
         DefaultCategoryDataset dataset = reportes.obtenerTendenciaVuelosDatasetTP(tipo);
-        chartTiempo = ChartFactory.createBarChart("Tendencia de Vuelos", "Mes", "Cantidad", dataset);
+        chartTiempo = ChartFactory.createBarChart(
+            "Tendencia de Vuelos (" + tipo + ")",
+            "Mes",
+            "Cantidad",
+            dataset
+        );
         ChartPanel panel = new ChartPanel(chartTiempo);
         panel.setPreferredSize(new Dimension(400, 300));
         vista.panelTiempo.removeAll();
@@ -241,8 +301,13 @@ public class Reportes_operativos_controller implements ActionListener{
 
     // Gráfico top destinos tipo
     public void cargarGraficoDestinosTipo(String tipo, int limite) {
-        DefaultCategoryDataset dataset = reportes.obtenerTopDestinosDatasetTP(tipo,limite);
-        chartDestino = ChartFactory.createBarChart("Top Destinos", "Destino", "Cantidad", dataset);
+        DefaultCategoryDataset dataset = reportes.obtenerTopDestinosDatasetTP(tipo, limite);
+        chartDestino = ChartFactory.createBarChart(
+            "Top Destinos (" + tipo + ")",
+            "Destino",
+            "Cantidad",
+            dataset
+        );
         ChartPanel panel = new ChartPanel(chartDestino);
         panel.setPreferredSize(new Dimension(400, 300));
         vista.panelDestinos.removeAll();
@@ -253,7 +318,13 @@ public class Reportes_operativos_controller implements ActionListener{
     // Gráfico distribución nacional/internacional tipo
     public void cargarGraficoDistribucionTipo(String tipo) {
         DefaultPieDataset dataset = reportes.obtenerDistribucionTipoVueloDatasetTP(tipo);
-        chartTipo = ChartFactory.createPieChart("Distribución Nacional vs Internacional", dataset, true, true, false);
+        chartTipo = ChartFactory.createPieChart(
+            "Distribución Nacional vs Internacional (" + tipo + ")", 
+            dataset,
+            true,
+            true,
+            false
+        );
         ChartPanel panel = new ChartPanel(chartTipo);
         panel.setPreferredSize(new Dimension(400, 300));
         vista.panelTipo.removeAll();
