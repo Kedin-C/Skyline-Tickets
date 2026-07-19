@@ -12,7 +12,6 @@ public class Ticket {
     
     int Id;
     private String tipo_vuelo;
-
     private String origen;
     private String destino;
 
