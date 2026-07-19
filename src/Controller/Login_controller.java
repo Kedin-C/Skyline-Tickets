@@ -18,7 +18,6 @@ import View.Inicio_usuario_view;
 import View.Login_view;
 import View.Menu_principal_view;
 import View.Pagina_principal_administrador_view;
-//import view.Pagina_principal_administrador_view;
 import View.Recuperar_contraseña_view;
 import View.Registro_view;
 import View.ViewPrincipal;
@@ -35,9 +34,10 @@ public class Login_controller implements ActionListener {
     private Registro_view registro;
     private Usuario usu;
     private Sesion_usuario sesion_usu;
+    private Recuperar_contraseña_view recuperarView;
     
     
-    public Login_controller(Login_view vista,ViewPrincipal principal,Usuario usuario,Registro_view registro,Pagina_principal_administrador_view vista_admin,Inicio_usuario_view vista_usuario, Sesion_usuario sesion_usu) {
+    public Login_controller(Login_view vista,ViewPrincipal principal,Usuario usuario,Registro_view registro,Pagina_principal_administrador_view vista_admin,Inicio_usuario_view vista_usuario, Sesion_usuario sesion_usu,Menu_principal_view menu,Recuperar_contraseña_view recuperarView) {
         this.vista = vista;
         this.vista_admin = vista_admin;
         this.vista_usuario = vista_usuario;
@@ -45,14 +45,13 @@ public class Login_controller implements ActionListener {
         this.prin = principal;
         this.usu = usuario;
         this.registro = registro;
-        this.menu = new Menu_principal_view(this.prin,this.vista,this.registro);
+        this.menu = menu;
         this.sesion_usu = sesion_usu;
+        this.recuperarView = recuperarView;
         
         this.vista.getB1().addActionListener(this);
         this.vista.getB2().addActionListener(this);
         this.vista.getBtnVolver().addActionListener(this);
-        this.vista.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.vista.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
     }
     @Override
@@ -97,12 +96,14 @@ public class Login_controller implements ActionListener {
                             null,
                             "Ingreso como administrador");
                      vista_admin.setVisible(true);
+                     vista_admin.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
                      vista.dispose();
                 } else {
                     JOptionPane.showMessageDialog(
                             null,
                             "Ingreso como usuario");
                      vista_usuario.setVisible(true);
+                     vista_usuario.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
                      vista.dispose();
                 }
             } else {
@@ -113,20 +114,17 @@ public class Login_controller implements ActionListener {
         }
     
         if(e.getSource() == vista.getB2()) {
-            
-        Recuperar_contraseña_view recuperarView = new Recuperar_contraseña_view();
-        new Recuperar_contraseña_controller(recuperarView);
-        recuperarView.setLocationRelativeTo(null);
-        recuperarView.setVisible(true);
         vista.dispose();
+        recuperarView.setVisible(true);
+        recuperarView.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
+        
         }
         
         
         if(e.getSource() == vista.getBtnVolver()) {
-  
         vista.dispose();
-        
         menu.setVisible(true);
+        menu.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         }
         }
     }

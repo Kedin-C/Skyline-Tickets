@@ -30,21 +30,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
-public class Menu_principal_view extends JFrame implements ActionListener {
+public class Menu_principal_view extends JFrame  {
 
     private Container contenedor;
     public JButton b1, b2, btnVolver;
     private JPanel mipanel1, mipanel2;
     private JLabel logo;
-    private ViewPrincipal principal;
-    private Login_view login;
-    private Registro_view registro;
+    
 
-    public Menu_principal_view(ViewPrincipal vista,Login_view login, Registro_view registro) {
-
-        this.principal = vista;
-        this.registro = registro;
-        this.login = login;
+    public Menu_principal_view() {
         super("Menu");
 
         contenedor = getContentPane();
@@ -74,9 +68,7 @@ public class Menu_principal_view extends JFrame implements ActionListener {
         b1.setAlignmentX(Component.CENTER_ALIGNMENT);
         b2.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        b1.addActionListener(this);
-        b2.addActionListener(this);
-        btnVolver.addActionListener(this);
+        
 
         mipanel2.add(Box.createVerticalStrut(40));
         mipanel2.add(logo);
@@ -126,32 +118,4 @@ public class Menu_principal_view extends JFrame implements ActionListener {
         
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-        if (e.getSource() == b1) {
-            dispose();
-
-            login.setVisible(true);
-        }
-
-        if (e.getSource() == b2) {
-            dispose();
-
-            registro.setVisible(true);
-        }
-
-        if (e.getSource() == btnVolver) {
-            dispose();
-            
-            principal.setVisible(true);
-                    
-
-            
-        }
-    }
-
-    public JButton getBtnVolver() {
-        return btnVolver;
-    }
 }

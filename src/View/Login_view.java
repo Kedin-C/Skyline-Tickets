@@ -28,11 +28,11 @@ import javax.swing.JTextField;
 
 public class Login_view extends JFrame {
 
-    Container contenedor;
-    JButton b1, b2, btnVolver;
-    JPanel mipanel1, mipanel2, mipanel3;
-    JLabel logo, contraseña, correo;
-    JTextField txContraseña, txCorreo;
+    private Container contenedor;
+    public JButton b1, b2, btnVolver;
+    public JPanel mipanel1, mipanel2, mipanel3;
+    public JLabel logo, contraseña, correo;
+    public JTextField txContraseña, txCorreo;
 
     public Login_view() {
 

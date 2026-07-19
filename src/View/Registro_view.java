@@ -27,12 +27,11 @@ import javax.swing.JTextField;
 
 public class Registro_view extends JFrame {
 
-    Container contenedor;
-    JButton b1, btnVolver;
-    JPanel mipanel1, mipanel2, mipanel3;
-    JLabel logo;
-    JLabel jnombre, japellido, jcorreo, jcontraseña, jconfirmar;
-    JTextField txNombre, txApellido, txCorreo, txContraseña, txConfirmar;
+    private Container contenedor;
+    public JButton b1, btnVolver;
+    public JPanel mipanel1, mipanel2, mipanel3;
+    public JLabel jnombre, japellido, jcorreo, jcontraseña, jconfirmar,logo;
+    public JTextField txNombre, txApellido, txCorreo, txContraseña, txConfirmar;
 
     public Registro_view() {
 
