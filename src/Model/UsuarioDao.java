@@ -74,7 +74,7 @@ public class UsuarioDao {
                         usuario.setRol(2);
                     }
                     return usuario;
-                }    
+                }   
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -199,4 +199,6 @@ public class UsuarioDao {
 
     return id;
     }
+    
+   
 }
