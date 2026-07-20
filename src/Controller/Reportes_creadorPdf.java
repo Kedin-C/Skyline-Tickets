@@ -33,7 +33,7 @@ public class Reportes_creadorPdf {
         
     }
     
-    public void setCrearPdf(JTable tabla,JFreeChart chartTiempo,JFreeChart chartDestino, JFreeChart chartTipo){
+    public void setCrearPdf(JTable tabla,JFreeChart chartTiempo,JFreeChart chartDestino, JFreeChart chartTipo, String tituloA){
         
         try{
             // Cuadro de diálogo para elegir dónde guardar
@@ -54,7 +54,7 @@ public class Reportes_creadorPdf {
                 documento.open();
 
                 // Título
-                Paragraph titulo = new Paragraph("Reportes Financieros\n\n");
+                Paragraph titulo = new Paragraph("REPORTES "+tituloA+"\n\n");
                 titulo.setAlignment(Paragraph.ALIGN_CENTER);
                 documento.add(titulo);
                 

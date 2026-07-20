@@ -124,6 +124,10 @@ public class Apartado_reportes_financieros_view extends Interfaz_vista_abtractas
         
         
         tabla = new JTable(modelo);
+        tabla.setFont(new Font("Arial", Font.PLAIN, 13));
+        tabla.getTableHeader().setFont(new Font("Arial", Font.BOLD, 15));
+        tabla.setRowHeight(30);
+        tabla.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         tabla.setBackground(Color.decode("#D9D9D9"));
         tabla.setEnabled(false);
         tabla.getTableHeader().setReorderingAllowed(false);

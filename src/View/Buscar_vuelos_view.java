@@ -20,6 +20,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -207,6 +208,11 @@ public class Buscar_vuelos_view extends Interfaz_vista_abtractas{
         };
         tabla = new JTable(modelo);
         scroll = new JScrollPane(tabla);
+
+        tabla.setFont(new Font("Arial", Font.PLAIN, 16));
+        tabla.getTableHeader().setFont(new Font("Arial", Font.BOLD, 18));
+        tabla.setRowHeight(30);
+        tabla.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         
         tablero_datos.add(scroll, BorderLayout.CENTER);
         

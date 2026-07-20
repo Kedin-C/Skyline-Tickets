@@ -58,7 +58,7 @@ public class Reportes_financieros_controller implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == vista.btnExportar){
-            CrearPdf.setCrearPdf(vista.tabla,chartIngresos,chartGastos,chartTipo);
+            CrearPdf.setCrearPdf(vista.tabla,chartIngresos,chartGastos,chartTipo,"FINANCIEROS");
         }else if(e.getSource() == vista.btnFecha){
             vista.mostrarModalFecha();
         }else if(e.getSource() == vista.btnAplicarFecha){

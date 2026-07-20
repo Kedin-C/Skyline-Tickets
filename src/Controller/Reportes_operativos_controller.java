@@ -61,7 +61,7 @@ public class Reportes_operativos_controller implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == vista.btnExportar){
-            CrearPdf.setCrearPdf(vista.tabla,chartTiempo,chartDestino,chartTipo);
+            CrearPdf.setCrearPdf(vista.tabla,chartTiempo,chartDestino,chartTipo,"OPERACIONALES");
         }else if(e.getSource() == vista.btnFecha){
             vista.mostrarModalFecha();
         }else if(e.getSource() == vista.btnAplicarFecha){

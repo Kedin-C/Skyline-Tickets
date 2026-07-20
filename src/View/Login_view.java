@@ -36,7 +36,7 @@ public class Login_view extends JFrame {
 
     public Login_view() {
 
-        super("Menu");
+        super("LOGIN");
 
         contenedor = getContentPane();
 
@@ -64,7 +64,7 @@ public class Login_view extends JFrame {
         txContraseña.setPreferredSize(new Dimension(350, 25));
 
         b1 = new JButton("INICIAR SESION");
-        b2 = new JButton("Recuperar contraseña");
+        b2 = new JButton("RECUPERAR CONTRASEÑA");
         btnVolver = new JButton("VOLVER");
 
         ImageIcon imagen = new ImageIcon(
