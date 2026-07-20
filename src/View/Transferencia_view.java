@@ -28,8 +28,8 @@ public class Transferencia_view extends Interfaz_vista_abtractas{
     
     public Transferencia_view() {
         
-        String nombrePagina = "Transferencia";
-        super(nombrePagina);
+        
+        super("Transferencia");
         contenedor_principal = super.getPanel2();
         contenedor_principal.setLayout(new BorderLayout());
         

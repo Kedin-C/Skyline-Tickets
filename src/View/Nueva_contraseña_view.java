@@ -24,6 +24,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class Nueva_contraseña_view extends JFrame {
@@ -32,7 +33,7 @@ public class Nueva_contraseña_view extends JFrame {
     JButton b1, b2;
     JPanel mipanel1, mipanel2, mipanel3;
     JLabel logo, lblTitulo, lblNueva, lblConfirmar;
-    JTextField txNuevaContraseña, txConfirmarContraseña;
+    JPasswordField txNuevaContraseña, txConfirmarContraseña;
 
     public Nueva_contraseña_view() {
         super("Cambio de contraseña");
@@ -76,10 +77,10 @@ public class Nueva_contraseña_view extends JFrame {
         lblConfirmar.setFont(new Font("Arial", Font.BOLD, 14));
 
         
-        txNuevaContraseña = new JTextField();
+        txNuevaContraseña = new JPasswordField();
         txNuevaContraseña.setPreferredSize(new Dimension(350, 30));
 
-        txConfirmarContraseña = new JTextField();
+        txConfirmarContraseña = new JPasswordField();
         txConfirmarContraseña.setPreferredSize(new Dimension(350, 30));
 
         

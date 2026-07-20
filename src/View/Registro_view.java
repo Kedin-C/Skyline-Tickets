@@ -23,6 +23,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class Registro_view extends JFrame {
@@ -31,7 +32,8 @@ public class Registro_view extends JFrame {
     public JButton b1, btnVolver;
     public JPanel mipanel1, mipanel2, mipanel3;
     public JLabel jnombre, japellido, jcorreo, jcontraseña, jconfirmar,logo;
-    public JTextField txNombre, txApellido, txCorreo, txContraseña, txConfirmar;
+    public JTextField txNombre, txApellido, txCorreo;
+    public JPasswordField txContraseña, txConfirmar;
 
     public Registro_view() {
 
@@ -59,8 +61,8 @@ public class Registro_view extends JFrame {
         txNombre = new JTextField();
         txApellido = new JTextField();
         txCorreo = new JTextField();
-        txContraseña = new JTextField();
-        txConfirmar = new JTextField();
+        txContraseña = new JPasswordField();
+        txConfirmar = new JPasswordField();
 
         txNombre.setPreferredSize(new Dimension(350, 25));
         txApellido.setPreferredSize(new Dimension(350, 25));

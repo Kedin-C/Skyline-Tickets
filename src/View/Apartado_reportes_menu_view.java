@@ -27,8 +27,8 @@ public class Apartado_reportes_menu_view extends Interfaz_vista_abtractas{
     public JButton Rfinanciero,Roperacional,volver;
     
     public Apartado_reportes_menu_view(){
-        String nombre = "Pagina Principal";
-        super(nombre);
+        
+        super("Pagina Principal");
         contenedor = super.getContenedor();
         panel1 = super.getPanel1();
         panel2 = super.getPanel2();

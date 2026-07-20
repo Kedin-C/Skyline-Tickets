@@ -34,8 +34,8 @@ public class Tarjeta_de_debito_view extends Interfaz_vista_abtractas{
     private int cod_anterior_view;
     
     public Tarjeta_de_debito_view(){
-        String nombrePagina = "Tarjeta de debito";
-        super(nombrePagina);
+        
+        super("Tarjeta de debito");
         
         contenedor_principal = super.getPanel2();
         contenedor_principal.setLayout(new BorderLayout());

@@ -129,8 +129,8 @@ private String text_ticket5_2;
 
     public Seleccion_de_vuelo_usuarioRegistrado_view(){
 
-    String nombre = "Seleccion de vuelo modificar usuarioRegistrado";
-    super(nombre);
+    
+    super("Seleccion de vuelo modificar usuarioRegistrado");
     this.contenedor = super.getContenedor();
     panel1 = super.getPanel1();
     panel2 = super.getPanel2();

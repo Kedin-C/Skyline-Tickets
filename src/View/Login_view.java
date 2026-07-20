@@ -24,6 +24,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class Login_view extends JFrame {
@@ -32,7 +33,8 @@ public class Login_view extends JFrame {
     public JButton b1, b2, btnVolver;
     public JPanel mipanel1, mipanel2, mipanel3;
     public JLabel logo, contraseña, correo;
-    public JTextField txContraseña, txCorreo;
+    public JTextField  txCorreo;
+    public JPasswordField txContraseña;
 
     public Login_view() {
 
@@ -57,7 +59,7 @@ public class Login_view extends JFrame {
         contraseña = new JLabel("Contraseña*");
         correo = new JLabel("Correo*");
 
-        txContraseña = new JTextField();
+        txContraseña = new JPasswordField();
         txCorreo = new JTextField();
 
         txCorreo.setPreferredSize(new Dimension(350, 25));

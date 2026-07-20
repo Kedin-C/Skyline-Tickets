@@ -35,8 +35,8 @@ public class Elegir_clase_view extends Interfaz_vista_abtractas{
     
     public Elegir_clase_view() {
         
-        String nombrePagina = "Elegir Clase";
-        super(nombrePagina);
+        
+        super("Elegir Clase");
         
         contenedor_principal = super.getPanel2();
         contenedor_principal.setLayout(new BorderLayout(0,20));

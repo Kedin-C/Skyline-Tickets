@@ -36,8 +36,8 @@ public class Seleccion_forma_de_pago_view extends Interfaz_vista_abtractas{
     
     
      public Seleccion_forma_de_pago_view() {
-        String nombre = "Seleccion forma de pago view";
-        super(nombre);
+        
+        super("Seleccion forma de pago view");
         contenedor = super.getContenedor();
         panel1 = super.getPanel1();
         panel2 = super.getPanel2(); 

@@ -36,8 +36,8 @@ public class Tarjeta_de_credito_view extends Interfaz_vista_abtractas{
     
     
     public Tarjeta_de_credito_view() {
-        String nombrePagina = "Tarjeta de credito";
-        super(nombrePagina);
+        
+        super("Tarjeta de credito");
         
         contenedor_principal = super.getPanel2();
         contenedor_principal.setLayout(new BorderLayout());

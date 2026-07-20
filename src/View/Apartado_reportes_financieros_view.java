@@ -54,8 +54,8 @@ public class Apartado_reportes_financieros_view extends Interfaz_vista_abtractas
     public String listaTipo[] = {"","Ventas","Ingresos","Gastos","Ganancias"};
     
     public Apartado_reportes_financieros_view(){
-        String nombre = "REPORTES FINANCIEROS";
-        super(nombre);
+        
+        super("REPORTES FINANCIEROS");
         contenedor = super.getContenedor();
         panel1 = super.getPanel1();
         panel2 = super.getPanel2();

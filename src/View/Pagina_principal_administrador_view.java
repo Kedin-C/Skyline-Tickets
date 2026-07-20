@@ -33,8 +33,8 @@ public class Pagina_principal_administrador_view extends Interfaz_vista_abtracta
     private FlowLayout miflow;
     
     public Pagina_principal_administrador_view(){
-        String nombre = "Pagina Principal";
-        super(nombre);
+        
+        super("Pagina Principal");
         contenedor = super.getContenedor();
         panel1 = super.getPanel1();
         

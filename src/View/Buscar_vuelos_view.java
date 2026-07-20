@@ -99,8 +99,8 @@ public class Buscar_vuelos_view extends Interfaz_vista_abtractas{
     
     public Buscar_vuelos_view(){
         
-        String nombrepagina = "Buscar Vuelos";
-        super(nombrepagina);
+        
+        super("Buscar Vuelos");
         contenedor_principal = super.getPanel2();
         contenedor = new JPanel(new BorderLayout(0, 10));
         

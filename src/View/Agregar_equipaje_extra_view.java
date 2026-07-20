@@ -41,8 +41,8 @@ public class Agregar_equipaje_extra_view extends Interfaz_vista_abtractas{
     
 
     public Agregar_equipaje_extra_view() {
-        String nombre = "Agregar equipaje de bodega extra";
-        super(nombre);
+        
+        super("Agregar equipaje de bodega extra");
         
         contenedor = super.getContenedor();
         panel1 = super.getPanel1();

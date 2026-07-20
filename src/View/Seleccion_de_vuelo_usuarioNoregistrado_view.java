@@ -54,8 +54,8 @@ public class Seleccion_de_vuelo_usuarioNoregistrado_view extends Interfaz_vista_
     
     public Seleccion_de_vuelo_usuarioNoregistrado_view(){
     //Titulo de la interfaz
-     String nombre = "Seleccion de vuelo modificar usuario no registrado";
-    super(nombre);
+     
+    super("Seleccion de vuelo modificar usuario no registrado");
         
     contenedor = super.getContenedor();
     

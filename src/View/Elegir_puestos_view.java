@@ -27,8 +27,8 @@ public class Elegir_puestos_view extends Interfaz_vista_abtractas{
     
     public Elegir_puestos_view() {
         
-        String nombrePagina = "Elegir Puestos";
-        super(nombrePagina);
+        
+        super("Elegir Puestos");
         contenedor_principal = super.getPanel2();
         
         //Agregando la imagen de fondo

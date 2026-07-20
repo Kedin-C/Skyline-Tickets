@@ -53,8 +53,8 @@ public class Datos_y_pago_view extends Interfaz_vista_abtractas{
     
     public Datos_y_pago_view() {
         
-        String nombrePagina = "Datos Personales";
-        super(nombrePagina);
+       
+        super("Datos Personales");
         
         contenedor_principal = super.getPanel2();
         

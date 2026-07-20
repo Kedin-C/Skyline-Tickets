@@ -55,8 +55,8 @@ public class Apartado_reportes_operacionales_view extends Interfaz_vista_abtract
     public String listaTipo[] = {"","Nacional","Internacional"};
     
     public Apartado_reportes_operacionales_view(){
-        String nombre = "REPORTES OPERACIONALES";
-        super(nombre);
+        
+        super("REPORTES OPERACIONALES");
         contenedor = super.getContenedor();
         panel1 = super.getPanel1();
         panel2 = super.getPanel2();

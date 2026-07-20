@@ -56,8 +56,8 @@ public class cambio_de_clase_de_vuelo_viiew extends Interfaz_vista_abtractas {
     private int clase_seleccionada;
 
     public cambio_de_clase_de_vuelo_viiew() {
-        String nombre = "Seleccion cambio de clase de vuelo";
-        super(nombre);
+        
+        super("Seleccion cambio de clase de vuelo");
 
         contenedor = super.getContenedor();
         panel1 = super.getPanel1();

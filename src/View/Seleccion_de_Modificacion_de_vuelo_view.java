@@ -38,8 +38,8 @@ public class Seleccion_de_Modificacion_de_vuelo_view extends Interfaz_vista_abtr
     
     public Seleccion_de_Modificacion_de_vuelo_view(){
         
-        String nombre = "Seleccion_de_Modificacion_de_clase_de_vuelo_o_agregacion_de_equipjae";
-        super(nombre);
+        
+        super("Seleccion_de_Modificacion_de_clase_de_vuelo_o_agregacion_de_equipjae");
         contenedor =  super.getContenedor();
         panel1 = super.getPanel1();
         panel2 = super.getPanel2();
