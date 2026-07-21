@@ -35,7 +35,7 @@ public class CreadorPDFTickets {
         File archivo = null;
         try {
             Document document = new Document();
-            archivo = new File("Ticket");
+            archivo = new File("Ticket_"+nombrePasajero+".pdf");
             PdfWriter.getInstance(document, new FileOutputStream(archivo));
             document.open();
 

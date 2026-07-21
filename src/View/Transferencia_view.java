@@ -50,19 +50,23 @@ public class Transferencia_view extends Interfaz_vista_abtractas{
         volver = new JButton("Volver");
         
         //Tamaño botones y color
-        Dimension tamanoColumna = new Dimension(140, 70);
+        Dimension tamanoColumna = new Dimension(240, 70);
+        Font fuenteGen = new Font("Arial", Font.BOLD, 18);
         
         bancolombia.setPreferredSize(tamanoColumna);
         bancolombia.setMinimumSize(tamanoColumna);
         bancolombia.setMaximumSize(tamanoColumna);
+        bancolombia.setFont(fuenteGen);
         
         paypal.setPreferredSize(tamanoColumna);
         paypal.setMinimumSize(tamanoColumna);
         paypal.setMaximumSize(tamanoColumna);
+        paypal.setFont(fuenteGen);
         
         nequi.setPreferredSize(tamanoColumna);
         nequi.setMinimumSize(tamanoColumna);
         nequi.setMaximumSize(tamanoColumna);
+        nequi.setFont(fuenteGen);
         
         bancolombia.setBackground(Color.decode("#037FB9"));
         paypal.setBackground(Color.decode("#037FB9"));
