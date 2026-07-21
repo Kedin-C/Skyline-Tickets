@@ -7,43 +7,40 @@ package Controller;
  *
  * @author Nikob
  */
-
 import Model.UsuarioDao;
 import java.util.Random;
 import javax.swing.JOptionPane;
 import Model.Usuario;
 import View.Codigo_recuperacion_view;
 import View.Nueva_contraseña_view;
+import View.Login_view;
 
 public class Codigo_recuperacion_controller {
-
     private UsuarioDao usuarioDao;
     private String codigoGenerado;
     private String correoRecuperacion;
     private Codigo_recuperacion_view view;
+    private Login_view loginView;
 
-    
     public Codigo_recuperacion_controller() {
         usuarioDao = new UsuarioDao();
     }
 
-    
     public Codigo_recuperacion_controller(Codigo_recuperacion_view view) {
         this.view = view;
         usuarioDao = new UsuarioDao();
         iniciarEventos();
     }
 
-    
-    public Codigo_recuperacion_controller(Codigo_recuperacion_view view, String codigoYaGenerado, String correo) {
+    public Codigo_recuperacion_controller(Codigo_recuperacion_view view, String codigoYaGenerado, String correo, Login_view loginView) {
         this.view = view;
         this.codigoGenerado = codigoYaGenerado;
         this.correoRecuperacion = correo;
+        this.loginView = loginView;
         usuarioDao = new UsuarioDao();
         iniciarEventos();
     }
 
-    
     public boolean procesarSolicitudRecuperacion(String correo) {
         Usuario usuario = usuarioDao.buscarPorCorreo(correo);
         if (usuario == null) {
@@ -54,7 +51,6 @@ public class Codigo_recuperacion_controller {
         return true;
     }
 
-    
     private void generarCodigo() {
         String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         StringBuilder codigo = new StringBuilder();
@@ -62,9 +58,7 @@ public class Codigo_recuperacion_controller {
         for (int i = 0; i < 6; i++) {
             codigo.append(caracteres.charAt(random.nextInt(caracteres.length())));
         }
-
-        this.codigoGenerado = codigo.toString(); 
-
+        this.codigoGenerado = codigo.toString();
         Correo_controller correo = new Correo_controller();
         correo.enviarCodigoRecuperacion(
             getCorreoRecuperacion(),
@@ -72,7 +66,6 @@ public class Codigo_recuperacion_controller {
         );
     }
 
-    
     public boolean validarCodigo(String codigoIngresado) {
         if (codigoGenerado == null) return false;
         System.out.println("CODIGO GENERADO: " + codigoGenerado);
@@ -80,13 +73,12 @@ public class Codigo_recuperacion_controller {
         return codigoGenerado.equals(codigoIngresado.trim());
     }
 
-    
     private void iniciarEventos() {
         view.getB1().addActionListener(e -> {
             String codigoIngresado = view.getTxCodigo().getText().trim();
             if (validarCodigo(codigoIngresado)) {
                 Nueva_contraseña_view nuevaView = new Nueva_contraseña_view();
-                new Nueva_contraseña_controller(nuevaView, correoRecuperacion);
+                new Nueva_contraseña_controller(nuevaView, correoRecuperacion, loginView);
                 nuevaView.setLocationRelativeTo(null);
                 nuevaView.setVisible(true);
                 view.dispose();
@@ -96,16 +88,10 @@ public class Codigo_recuperacion_controller {
         });
     }
 
-    
     public String getCodigoGenerado() {
         return codigoGenerado;
     }
-
     public String getCorreoRecuperacion() {
         return correoRecuperacion;
     }
 }
-
-
-    
-           

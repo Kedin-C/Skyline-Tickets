@@ -8,6 +8,8 @@ package View;
  *
  * @author Nikob
  */
+
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
@@ -15,7 +17,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -39,24 +40,19 @@ public class Nueva_contraseña_view extends JFrame {
         super("Cambio de contraseña");
         contenedor = getContentPane();
 
-        
-        mipanel1 = new JPanel();
-        mipanel1.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
+        mipanel1 = new JPanel(new BorderLayout());
         mipanel1.setBackground(new Color(3, 127, 185));
 
-     
         mipanel2 = new JPanel();
         mipanel2.setLayout(new BoxLayout(mipanel2, BoxLayout.Y_AXIS));
         mipanel2.setBackground(Color.WHITE);
         mipanel2.setPreferredSize(new Dimension(500, 580));
 
-        
         mipanel3 = new JPanel();
         mipanel3.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 5));
         mipanel3.setBackground(Color.WHITE);
         mipanel3.setMaximumSize(new Dimension(350, 130));
 
-        
         ImageIcon imagen = new ImageIcon(getClass()
                 .getResource("/imagenes/Skylinelogo.png"));
         Image img = imagen.getImage();
@@ -64,26 +60,22 @@ public class Nueva_contraseña_view extends JFrame {
         logo = new JLabel(new ImageIcon(imgEscalada));
         logo.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        
         lblTitulo = new JLabel("Cambio de contraseña:");
         lblTitulo.setFont(new Font("Arial", Font.BOLD, 26));
         lblTitulo.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-       
         lblNueva = new JLabel("Nueva contraseña*");
         lblNueva.setFont(new Font("Arial", Font.BOLD, 14));
 
         lblConfirmar = new JLabel("Confirmar contraseña*");
         lblConfirmar.setFont(new Font("Arial", Font.BOLD, 14));
 
-        
         txNuevaContraseña = new JPasswordField();
         txNuevaContraseña.setPreferredSize(new Dimension(350, 30));
 
         txConfirmarContraseña = new JPasswordField();
         txConfirmarContraseña.setPreferredSize(new Dimension(350, 30));
 
-        
         b1 = new JButton("Confirmar");
         b1.setAlignmentX(Component.CENTER_ALIGNMENT);
         b1.setMaximumSize(new Dimension(350, 50));
@@ -92,22 +84,20 @@ public class Nueva_contraseña_view extends JFrame {
         b1.setFocusPainted(false);
         b1.setFont(new Font("Arial", Font.BOLD, 16));
 
-        b2 = new JButton("Volver");
-        b2.setAlignmentX(Component.RIGHT_ALIGNMENT);
-        b2.setMaximumSize(new Dimension(120, 40));
+        // Botón "Volver" con el mismo estilo/tamaño/posición que en Registro_view
+        b2 = new JButton("VOLVER");
         b2.setBackground(Color.WHITE);
-        b2.setForeground(Color.BLACK);
+        b2.setForeground(new Color(3, 127, 185));
         b2.setFocusPainted(false);
-        b2.setFont(new Font("Arial", Font.BOLD, 14));
+        b2.setFont(new Font("Arial", Font.BOLD, 16));
+        b2.setPreferredSize(new Dimension(130, 45));
 
-        
         mipanel3.add(lblNueva);
         mipanel3.add(txNuevaContraseña);
         mipanel3.add(Box.createVerticalStrut(8));
         mipanel3.add(lblConfirmar);
         mipanel3.add(txConfirmarContraseña);
 
-        
         mipanel2.add(Box.createVerticalStrut(30));
         mipanel2.add(logo);
         mipanel2.add(Box.createVerticalStrut(10));
@@ -116,10 +106,18 @@ public class Nueva_contraseña_view extends JFrame {
         mipanel2.add(mipanel3);
         mipanel2.add(Box.createVerticalStrut(30));
         mipanel2.add(b1);
-        mipanel2.add(Box.createVerticalStrut(15));
-        mipanel2.add(b2);
 
-        mipanel1.add(mipanel2);
+        JPanel panelCentro = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 70));
+        panelCentro.setBackground(new Color(3, 127, 185));
+        panelCentro.add(mipanel2);
+
+        JPanel panelInferior = new JPanel(new FlowLayout(FlowLayout.RIGHT, 30, 20));
+        panelInferior.setBackground(new Color(3, 127, 185));
+        panelInferior.add(b2);
+
+        mipanel1.add(panelCentro, BorderLayout.CENTER);
+        mipanel1.add(panelInferior, BorderLayout.SOUTH);
+
         contenedor.add(mipanel1);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -127,8 +125,6 @@ public class Nueva_contraseña_view extends JFrame {
         setVisible(true);
     }
 
-     
-    
     public JButton getB1() {
         return b1;
     }
