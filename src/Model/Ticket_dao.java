@@ -22,6 +22,8 @@ public class Ticket_dao {
     PreparedStatement ps;
     ResultSet rs;
     
+    
+    
     public int getTotalVuelos(Usuario usuario){
         int r = 0;
         String sql = "SELECT COUNT(*) AS total_vuelos FROM usuario JOIN Datos_pasajero ON usuario.numero_documento = Datos_pasajero.numero_documento JOIN Tickets ON Tickets.id_pasajero = Datos_pasajero.id JOIN Reservas ON Tickets.id_reserva = Reservas.id WHERE usuario.id_usuario = ?";
@@ -306,7 +308,42 @@ public class Ticket_dao {
         return reserva;
     }
          
-    
+    public void enviarDatos(int id_pago, int id_pasajero, int id_reserva, int equipaje_extra, String tipo_vuelo){
+        
+        String sql = "INSERT INTO tickets (id_pago, id_pasajero, id_reserva, equipaje_extra, tipo_vuelo)"
+                + "VALUES (?, ?, ?, ?, ?)";
+        
+        try{
+            con = Conexion.getObject().getConection();
+            ps = con.prepareStatement(sql);
+            
+            ps.setInt(1, id_pago);
+            ps.setInt(2, id_pasajero);
+            ps.setInt(3, id_reserva);
+            ps.setInt(4, equipaje_extra);
+            ps.setString(5, tipo_vuelo);
+            
+            ps.executeUpdate();
+        
+            JOptionPane.showMessageDialog(null,"ya");
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, 
+                    ex.toString(),
+                    "Error al guardar los datos del pasajero"+ex.getMessage(),
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }finally {
+            if (con != null) {
+                try {
+                    con.close();
+                    ps.close();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.toString());
+                }
+            }
+        }
+        
+    }
     
    
 }

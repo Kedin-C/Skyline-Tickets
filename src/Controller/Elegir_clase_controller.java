@@ -22,7 +22,7 @@ public class Elegir_clase_controller implements ActionListener{
         this.vista=vista;
         this.datos=datos;
         
-        this.vista.siguiente.addActionListener((ActionListener) this);
+        this.vista.siguiente.addActionListener( this);
         this.vista.volver.addActionListener(this);
         
         this.vistaElegirPuestos.volver.addActionListener(this);

@@ -124,9 +124,17 @@ public class Tarjeta_de_debito_controller implements ActionListener{
                 
                 datosPagar.setNombre_titular(vista.nombre_titular.getText());
                 
+                datosPagar.setTotal(datos.getTotalPagar());
+                
                 datos.setDatosPago(datosPagar);
                 
-                datos.subirDatos();
+                if(datos.vista_pago == 1){
+                    
+                    datosPagarDao.enviarDatos(datosPagar);
+                    
+                }else{
+                    datos.subirDatos();
+                }
             }
         }
         

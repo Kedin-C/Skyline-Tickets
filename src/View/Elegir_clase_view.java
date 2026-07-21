@@ -51,16 +51,16 @@ public class Elegir_clase_view extends Interfaz_vista_abtractas{
         primera = new JRadioButton("Primera Clase");
         
         //botones normales
-        volver = new JButton("Volver");
-        siguiente = new JButton("Siguiente");
+        volver = super.volver_2;
+        siguiente = super.siguiente;
         
         //Color de las letras
-        volver.setForeground(Color.WHITE);
-        siguiente.setForeground(Color.WHITE);
-        
-        //Color de fondo
-        volver.setBackground(Color.decode("#037FB9"));
-        siguiente.setBackground(Color.decode("#037FB9"));
+//        volver.setForeground(Color.WHITE);
+//        siguiente.setForeground(Color.WHITE);
+//        
+//        //Color de fondo
+//        volver.setBackground(Color.decode("#137FB0"));
+//        siguiente.setBackground(Color.decode("#137FB0"));
         
         //informacion de cada clase
         infoEconomica = new JTextArea("\t - Bolso de mano\n"

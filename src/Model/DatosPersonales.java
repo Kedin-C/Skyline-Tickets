@@ -7,13 +7,13 @@ package Model;
 public class DatosPersonales {
     
     private int id, codigo_tipo_documento;
-    private String numero_documento, nombre, apellido, numero_telefono, correo, nationalidad, sexo, fecha_nacimiento;
+    private String numero_documento, nombre, apellido, numero_telefono, correo, nacionalidad, sexo, fecha_nacimiento;
     
     public DatosPersonales(){
     
     }
     
-    public DatosPersonales(int id, int codigo_tipo_documento, String numero_documento, String nombre, String apellido, String numero_telefono, String correo, String nationalidad, String sexo, String fecha_nacimiento){
+    public DatosPersonales(int id, int codigo_tipo_documento, String numero_documento, String nombre, String apellido, String numero_telefono, String correo, String natconalidad, String sexo, String fecha_nacimiento){
         this.id = id;
         this.codigo_tipo_documento = codigo_tipo_documento;
         this.numero_documento = numero_documento;
@@ -21,7 +21,7 @@ public class DatosPersonales {
         this.apellido = apellido;
         this.numero_telefono = numero_telefono;
         this.correo = correo;
-        this.nationalidad = nationalidad;
+        this.nacionalidad = nacionalidad;
         this.sexo = sexo;
         this.fecha_nacimiento = fecha_nacimiento;
     }
@@ -54,8 +54,8 @@ public class DatosPersonales {
         this.correo = correo;
     }
 
-    public void setNationalidad(String nationalidad) {
-        this.nationalidad = nationalidad;
+    public void setNacionalidad(String nacionalidad) {
+        this.nacionalidad = nacionalidad;
     }
 
     public void setSexo(String sexo) {
@@ -94,8 +94,8 @@ public class DatosPersonales {
         return correo;
     }
 
-    public String getNationalidad() {
-        return nationalidad;
+    public String getNacionalidad() {
+        return nacionalidad;
     }
 
     public String getSexo() {
@@ -108,7 +108,7 @@ public class DatosPersonales {
 
     @Override
     public String toString() {
-        return "DatosPersonales{" + "id=" + id + ", codigo_tipo_documento=" + codigo_tipo_documento + ", numero_documento=" + numero_documento + ", nombre=" + nombre + ", apellido=" + apellido + ", numero_telefono=" + numero_telefono + ", correo=" + correo + ", nationalidad=" + nationalidad + ", sexo=" + sexo + ", fecha_nacimiento=" + fecha_nacimiento + '}';
+        return "DatosPersonales{" + "id=" + id + ", codigo_tipo_documento=" + codigo_tipo_documento + ", numero_documento=" + numero_documento + ", nombre=" + nombre + ", apellido=" + apellido + ", numero_telefono=" + numero_telefono + ", correo=" + correo + ", nacionalidad=" + nacionalidad + ", sexo=" + sexo + ", fecha_nacimiento=" + fecha_nacimiento + '}';
     }
     
     
