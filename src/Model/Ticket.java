@@ -10,7 +10,7 @@ package Model;
  */
 public class Ticket {
     
-    int Id;
+    int Id, id_pago, id_reserva, id_pasajero, equipaje_extra;
     private String tipo_vuelo;
     private String origen;
     private String destino;

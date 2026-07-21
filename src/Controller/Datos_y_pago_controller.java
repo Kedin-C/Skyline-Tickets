@@ -277,7 +277,7 @@ public class Datos_y_pago_controller implements ActionListener{
         datosPersonales.setCorreo(correo);
         datosPersonales.setCodigo_tipo_documento(tipoDocumento);
         datosPersonales.setSexo(sexo);
-        datosPersonales.setNationalidad(nacionalidad);
+        datosPersonales.setNacionalidad(nacionalidad);
         datosPersonales.setFecha_nacimiento(fechaNacimiento);
 
         datosPasajeros.add(datosPersonales);
