@@ -63,7 +63,7 @@ public class Seleccion_modificacion_vuelo_usuario_controlador implements ActionL
             select_modificacion.setVista_anterior(2);
             if (vista.getPagina_anterior() == 1) {
                 usuario_view_cont.getTicket_select(0);
-
+         
                 vista.setVisible(false);
 
                 select_modificacion.setVisible(true);

@@ -96,11 +96,15 @@ public class Inicio_usuario_controller implements ActionListener {
         }else if(e.getSource() == vista.historial){
             histo_cont.ResetRow();
             histo_cont.SetRow();
+            if(histo_vista.tabla.getRowCount() == -1){
+                JOptionPane.showMessageDialog(vista, "No has comprado ningun vuelo desde que creaste la cuenta");
+            }else{
             vista.setVisible(false);
             
             histo_vista.setVista_anterior(1);
             histo_vista.setVisible(true);
             histo_vista.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            }
             
         }
         
@@ -127,7 +131,7 @@ public class Inicio_usuario_controller implements ActionListener {
 
         int tickets = tdao.getTotalVuelos(usuario);
         List<Ticket> tick = tdao.getTotalVuelosList(usuario);
-
+        
         if (v <= tickets && v >= 0) {
             ticket.setId(tick.get(v).getId());
             ticket.setDestino(tick.get(v).getDestino());
