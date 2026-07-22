@@ -35,7 +35,7 @@ public class Inicio_usuario_view extends Interfaz_vista_abtractas  {
     public Container contenedor;
     public JPanel panel1, panelboton, panelboton2;
     public Panel_con_fondo_view panel2;
-    public JButton comprar, clase, infoPerso, cerrarSesion;
+    public JButton comprar, clase, infoPerso, cerrarSesion, historial;
 
     public Inicio_usuario_view() {
         super("Pagina Principal");
@@ -55,16 +55,28 @@ public class Inicio_usuario_view extends Interfaz_vista_abtractas  {
         infoPerso.setPreferredSize(new Dimension(300, 40));
         infoPerso.setFont(new Font("Arial", Font.BOLD, 15));
         infoPerso.setBorderPainted(false);
+        
+        //boton historial
+        
+        historial = new JButton("Historial de vuelos");
+        historial.setBackground(Color.white);
+        historial.setPreferredSize(new Dimension(200, 40));
+        historial.setFont(new Font("Arial", Font.BOLD, 15));
+        historial.setBorderPainted(false);
 
         // Panel para los botones superiores
         panelboton2 = new JPanel();
         panelboton2.setOpaque(false);
         panelboton2.setBorder(new EmptyBorder(20, 20, 20, 20));
+        
+        
 
         // Añadimos los botones
         panelboton2.add(cerrarSesion);
         panelboton2.add(Box.createHorizontalStrut(20));
         panelboton2.add(infoPerso);
+        panelboton2.add(Box.createHorizontalStrut(20));
+        panelboton2.add(historial);
 
         panel1.add(panelboton2, BorderLayout.LINE_END);
 

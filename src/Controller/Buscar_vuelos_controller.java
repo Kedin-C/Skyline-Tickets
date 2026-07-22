@@ -23,6 +23,7 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import Model.Datos;
 import View.Elegir_clase_view;
+import View.Historial_vuelos_view;
 import View.Inicio_usuario_view;
 import View.Pagina_principal_administrador_view;
 import View.ViewPrincipal;
@@ -39,16 +40,17 @@ public class Buscar_vuelos_controller implements ActionListener{
     DefaultTableModel modelo = new DefaultTableModel();
     Datos datos = new Datos();
     Elegir_clase_view vistaElegirClase = new Elegir_clase_view();
-    
+    private Historial_vuelos_view historial_vista;
     public String origen, destino, hora1, hora2;
     public Date fechaIda, fechaRegreso;
     
-    public Buscar_vuelos_controller(Buscar_vuelos_view vista, Datos datos,ViewPrincipal principal,Pagina_principal_administrador_view pagina_admin,Inicio_usuario_view pagina_usuario){
+    public Buscar_vuelos_controller(Buscar_vuelos_view vista, Datos datos,ViewPrincipal principal,Pagina_principal_administrador_view pagina_admin,Inicio_usuario_view pagina_usuario,Historial_vuelos_view historial_vista){
         
        
         this.principal = principal;
         this.pagina_admin = pagina_admin;
         this.pagina_usuario = pagina_usuario;
+        this.historial_vista = historial_vista;
         
         this.vista = vista;
         this.datos = datos;
@@ -148,6 +150,12 @@ public class Buscar_vuelos_controller implements ActionListener{
             
             pagina_admin.setVisible(true);
             pagina_admin.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            }else if(vista.getPagina_anterior() == 4){
+            vista.setVisible(false);
+            
+            limpiarTabla();
+            historial_vista.setVisible(true);
+            historial_vista.setExtendedState(JFrame.MAXIMIZED_BOTH);
             }
         }
         
@@ -289,6 +297,36 @@ public class Buscar_vuelos_controller implements ActionListener{
         if (modelo.getRowCount() == 0) {
             JOptionPane.showMessageDialog(vista, "No encontramos resultados");
         }
+      
+    }
+    
+    public void getListarHistorial(JTable tabla){
+        origen = vista.listar_origen.getSelectedItem().toString();
+        destino = vista.listar_destino.getSelectedItem().toString();
+        
+        modelo=(DefaultTableModel) tabla.getModel();
+        int v = historial_vista.tabla.getSelectedRow();
+        List<Vuelos> lista = vuelodao.listarIda_historial((String)historial_vista.tabla.getValueAt(v, 1),(String)historial_vista.tabla.getValueAt(v, 2));
+        Object[] objeto = new Object[7];
+        
+        modelo.setRowCount(0);
+        
+        for(int i=0; i<lista.size(); i++){
+            objeto[0]=lista.get(i).getCodigo_vuelo();
+            objeto[1]=lista.get(i).getOrigen();
+            objeto[2]=lista.get(i).getDestino();
+            objeto[3]=lista.get(i).getFecha();
+            objeto[4]=lista.get(i).getHora_salida();
+            objeto[5]=lista.get(i).getHora_llegada();
+            objeto[6]=lista.get(i).getPrecio();
+            modelo.addRow(objeto);
+        }
+        vista.tabla.setModel(modelo);
+        
+        if (modelo.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(vista, "No encontramos resultados");
+        }
+        
       
     }
     
