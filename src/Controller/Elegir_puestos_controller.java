@@ -9,12 +9,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import Model.Datos;
 import Model.Reservas;
 import Model.ReservasDao;
 import View.Datos_y_pago_view;
 import View.Elegir_puestos_view;
+import javax.swing.JOptionPane;
 
 public class Elegir_puestos_controller implements ActionListener{
     
@@ -150,8 +150,15 @@ public class Elegir_puestos_controller implements ActionListener{
                         String nombrebtn = botonPresionado.getText();
                         
                         codigoAsiento.add(nombrebtn);
-
-                        datos.setTotalPagar(datos.getTotalPagar()+50000);
+                        
+                        if(datos.getClaseVuelo() == 1){
+                            datos.setTotalPagar(datos.getTotalPagar()+30000);
+                        }else if(datos.getClaseVuelo() == 2){
+                            datos.setTotalPagar(datos.getTotalPagar()+50000);
+                        }else{
+                            datos.setTotalPagar(datos.getTotalPagar()+80000);
+                        }
+                        
                         datos.elegidos++;
                     }else{
                        return; 
@@ -175,8 +182,13 @@ public class Elegir_puestos_controller implements ActionListener{
                         String nombrebtn = botonPresionado.getText();
                         
                         codigoAsiento.add(nombrebtn);
-                        
-                        datos.setTotalPagar(datos.getTotalPagar()+50000);
+                        if(datos.getClaseVuelo() == 1){
+                            datos.setTotalPagar(datos.getTotalPagar()+30000);
+                        }else if(datos.getClaseVuelo() == 2){
+                            datos.setTotalPagar(datos.getTotalPagar()+50000);
+                        }else{
+                            datos.setTotalPagar(datos.getTotalPagar()+80000);
+                        }
                         datos.elegidos++;
                     }else{
                         return;
@@ -196,10 +208,12 @@ public class Elegir_puestos_controller implements ActionListener{
                 vistaDatosyPago.setVisible(true);
                 Datos_y_pago_controller controllerDatosPago = new Datos_y_pago_controller(vistaDatosyPago, datos);
 
-                JOptionPane.showMessageDialog(vista, "Elegiste los puestos: " + datos.getCodigoAsiento());
+                JOptionPane.showMessageDialog(vista, "Los puestos elegidos son: " + datos.getCodigoAsiento());
                 
                 if(datos.getNumeroTickets() > 1)
                 JOptionPane.showMessageDialog(vista, "Llena los datos de los " + datos.getNumeroTickets() + " tickets");
+                
+                
             }else{
                 JOptionPane.showMessageDialog(vista,
                                 "Debes elegir los puestos de los tickets que compraras", "Elegir puestos", JOptionPane.WARNING_MESSAGE);
@@ -221,6 +235,13 @@ public class Elegir_puestos_controller implements ActionListener{
 
                     if(vista.torre1[fila][columna].isEnabled()){
                         vista.torre1[fila][columna].doClick();
+                        if(datos.getClaseVuelo() == 1){
+                            datos.setTotalPagar(datos.getTotalPagar()-30000);
+                        }else if(datos.getClaseVuelo() == 2){
+                            datos.setTotalPagar(datos.getTotalPagar()-50000);
+                        }else{
+                            datos.setTotalPagar(datos.getTotalPagar()-80000);
+                        }
                     }else {
                         continue;
                     }
@@ -229,6 +250,13 @@ public class Elegir_puestos_controller implements ActionListener{
                 if(torreAleatoria == 1){
                     if(vista.torre2[fila][columna].isEnabled()){
                         vista.torre2[fila][columna].doClick();
+                        if(datos.getClaseVuelo() == 1){
+                            datos.setTotalPagar(datos.getTotalPagar()-30000);
+                        }else if(datos.getClaseVuelo() == 2){
+                            datos.setTotalPagar(datos.getTotalPagar()-50000);
+                        }else{
+                            datos.setTotalPagar(datos.getTotalPagar()-80000);
+                        }
                     }else {
                         continue;
                     }

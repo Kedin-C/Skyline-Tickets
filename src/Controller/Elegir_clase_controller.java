@@ -10,6 +10,7 @@ import javax.swing.ButtonGroup;
 import Model.Datos;
 import View.Elegir_clase_view;
 import View.Elegir_puestos_view;
+import javax.swing.JOptionPane;
 
 public class Elegir_clase_controller implements ActionListener{
     
@@ -71,7 +72,8 @@ public class Elegir_clase_controller implements ActionListener{
                 }
             }
             
-            datos.setTotalPagar(datos.getTotalPagar()*datos.getNumeroTickets());
+            double preciosTickets = datos.getTotalPagar()*datos.getNumeroTickets();
+            datos.setTotalPagar(preciosTickets);
             
             vista.setVisible(false);
             vistaElegirPuestos.setVisible(true);

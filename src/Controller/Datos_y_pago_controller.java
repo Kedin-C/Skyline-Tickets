@@ -142,7 +142,12 @@ public class Datos_y_pago_controller implements ActionListener{
             }
         });
         
-        this.vista.precioTotal.setText(""+datos.getTotalPagar());
+        JOptionPane.showMessageDialog(null, "Llena los datos de manera correcta y\n"
+                                                        + "que concuerden con los datos reales\n"
+                                                        + "del pasajero ya que se validara esta\n"
+                                                        + "informacion antes de subir al vuelo");
+        
+        this.vista.precioTotal.setText(""+this.datos.getTotalPagar());
         
     }
 
@@ -164,7 +169,16 @@ public class Datos_y_pago_controller implements ActionListener{
                     
                 } else {
                     JOptionPane.showMessageDialog(null, "Llena los datos del ticket numero: " + n);
+                    
                 }
+                vista.nombrecampo.setText("");
+                vista.apellidocampo.setText("");
+                vista.listar_documento.setSelectedIndex(0);
+                vista.numero_documento.setText("");
+                vista.numeroTel.setText("");
+                vista.correo.setText("");
+                vista.listar_sexo.setSelectedIndex(0);
+                vista.listar_nacionalidad.setSelectedIndex(0);
             }
         }
         
@@ -177,8 +191,6 @@ public class Datos_y_pago_controller implements ActionListener{
                 
                 datos.setDatosPersonales(datosPasajeros);
                 
-                double pago = Double.parseDouble(vista.precioTotal.getText());
-                datos.setTotalPagar(pago);
             }
         }
         if (e.getSource() == vista.debito) {
@@ -190,8 +202,6 @@ public class Datos_y_pago_controller implements ActionListener{
                 
                 datos.setDatosPersonales(datosPasajeros);
                 
-                double pago = Double.parseDouble(vista.precioTotal.getText());
-                datos.setTotalPagar(pago);
             
             }
         }
@@ -203,8 +213,6 @@ public class Datos_y_pago_controller implements ActionListener{
                 Transferencia_controller controllerTransferencia = new Transferencia_controller(viewTransferencia, datos,selec_pago);
                 datos.setDatosPersonales(datosPasajeros);
                 
-                double pago = Double.parseDouble(vista.precioTotal.getText());
-                datos.setTotalPagar(pago);
             }
         }
         
