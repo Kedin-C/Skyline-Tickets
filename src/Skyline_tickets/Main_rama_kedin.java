@@ -17,7 +17,7 @@ import View.Agregar_equipaje_extra_view;
 import View.Seleccion_de_Modificacion_de_vuelo_view;
 import View.Seleccion_de_vuelo_usuarioNoregistrado_view;
 import View.Seleccion_forma_de_pago_view;
-import View.cambio_de_clase_de_vuelo_viiew;
+import View.Cambio_de_clase_de_vuelo_viiew;
 
 /**
  *
@@ -31,7 +31,7 @@ public class Main_rama_kedin {
     public static void main(String[] args) {
         Seleccion_de_vuelo_usuarioNoregistrado_view buscar_vuelo = new Seleccion_de_vuelo_usuarioNoregistrado_view();
         Seleccion_de_Modificacion_de_vuelo_view modificacion = new Seleccion_de_Modificacion_de_vuelo_view();
-        cambio_de_clase_de_vuelo_viiew clase = new cambio_de_clase_de_vuelo_viiew();
+        Cambio_de_clase_de_vuelo_viiew clase = new Cambio_de_clase_de_vuelo_viiew();
         Agregar_equipaje_extra_view bodega = new Agregar_equipaje_extra_view();
         Seleccion_forma_de_pago_view forma_pago_vista = new Seleccion_forma_de_pago_view();
         

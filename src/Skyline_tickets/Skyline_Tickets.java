@@ -45,7 +45,7 @@ import View.Tarjeta_de_credito_view;
 import View.Tarjeta_de_debito_view;
 import View.Transferencia_view;
 import View.ViewPrincipal;
-import View.cambio_de_clase_de_vuelo_viiew;
+import View.Cambio_de_clase_de_vuelo_viiew;
 import Controller.Pagina_principal_controller;
 import Controller.Reportes_financieros_controller;
 import Controller.Reportes_operativos_controller;
@@ -68,7 +68,7 @@ public class Skyline_Tickets {
         Seleccion_de_vuelo_usuarioRegistrado_view select_vuelo = new Seleccion_de_vuelo_usuarioRegistrado_view();
         Seleccion_de_vuelo_usuarioNoregistrado_view select_vuelo_nor = new Seleccion_de_vuelo_usuarioNoregistrado_view();
         Seleccion_de_Modificacion_de_vuelo_view modificacion = new Seleccion_de_Modificacion_de_vuelo_view();
-        cambio_de_clase_de_vuelo_viiew clase = new cambio_de_clase_de_vuelo_viiew();
+        Cambio_de_clase_de_vuelo_viiew clase = new Cambio_de_clase_de_vuelo_viiew();
         Agregar_equipaje_extra_view bodega = new Agregar_equipaje_extra_view();
         Seleccion_forma_de_pago_view forma_pago_vista = new Seleccion_forma_de_pago_view();
         Tarjeta_de_credito_view credito = new Tarjeta_de_credito_view();

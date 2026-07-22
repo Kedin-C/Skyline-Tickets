@@ -37,7 +37,7 @@ public class Agregar_equipaje_extra_view extends Interfaz_vista_abtractas{
     private final JPanel cont_contador,cont_boton_confirmar,cont_boton_quitar,cont_boton_agregar,cont_boton_volver;
     
     
-    cambio_de_clase_de_vuelo_viiew in = new cambio_de_clase_de_vuelo_viiew();
+    Cambio_de_clase_de_vuelo_viiew in = new Cambio_de_clase_de_vuelo_viiew();
     
 
     public Agregar_equipaje_extra_view() {
