@@ -21,8 +21,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -32,7 +30,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class Codigo_recuperacion_view extends JFrame implements ActionListener {
+public class Codigo_recuperacion_view extends JFrame {
 
     Container contenedor;
     JButton b1, btnVolver;
@@ -75,8 +73,6 @@ public class Codigo_recuperacion_view extends JFrame implements ActionListener {
 
         b1 = new JButton("VALIDAR CÓDIGO");
         btnVolver = new JButton("VOLVER");
-
-        btnVolver.addActionListener(this);
 
         ImageIcon imagen = new ImageIcon(
                 getClass().getResource("/imagenes/Skylinelogo.png"));
@@ -135,19 +131,6 @@ public class Codigo_recuperacion_view extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-        if (e.getSource() == btnVolver) {
-
-            dispose();
-
-            recuperarView.setLocationRelativeTo(null);
-            recuperarView.setVisible(true);
-
-        }
-    }
-
     public JButton getB1() {
         return b1;
     }
@@ -158,5 +141,13 @@ public class Codigo_recuperacion_view extends JFrame implements ActionListener {
 
     public JTextField getTxCodigo() {
         return txCodigo;
+    }
+
+    public String getCorreoUsuario() {
+        return correoUsuario;
+    }
+
+    public Recuperar_contraseña_view getRecuperarView() {
+        return recuperarView;
     }
 }

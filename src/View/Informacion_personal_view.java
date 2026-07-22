@@ -15,6 +15,7 @@ import java.awt.Font;
 import java.awt.GridBagLayout;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -23,9 +24,10 @@ import javax.swing.SwingConstants;
 
 public class Informacion_personal_view extends Interfaz_vista_abtractas {
 
-    public JTextField txtCorreo,txtApellido,txtNombre;
-    public JButton btnCambiarContrasena,btnVolver,btnAceptar;
- 
+    public JTextField txtCorreo, txtApellido, txtNombre, txtDocumento, txtTelefono;
+    public JComboBox<String> cbSexo;
+    public JButton btnCambiarContrasena, btnVolver, btnAceptar;
+
     public Informacion_personal_view() {
 
         super("Cambiar información personal:");
@@ -51,8 +53,8 @@ public class Informacion_personal_view extends Interfaz_vista_abtractas {
         txtCorreo.setBackground(Color.decode("#D9D9D9"));
         txtCorreo.setFont(new Font("SansSerif", Font.PLAIN, 18));
         txtCorreo.setHorizontalAlignment(JTextField.CENTER);
-        txtCorreo.setMaximumSize(new Dimension(500, 50));
-        txtCorreo.setPreferredSize(new Dimension(500, 50));
+        txtCorreo.setMaximumSize(new Dimension(700, 50));
+        txtCorreo.setPreferredSize(new Dimension(700, 50));
         txtCorreo.setAlignmentX(JTextField.CENTER_ALIGNMENT);
 
         panelForm.add(labelCorreo);
@@ -91,6 +93,57 @@ public class Informacion_personal_view extends Interfaz_vista_abtractas {
 
         panelForm.add(labelApellido);
         panelForm.add(txtApellido);
+        panelForm.add(javax.swing.Box.createVerticalStrut(25));
+
+        
+        JLabel labelDocumento = new JLabel("Número de documento", SwingConstants.CENTER);
+        labelDocumento.setFont(new Font("SansSerif", Font.PLAIN, 18));
+        labelDocumento.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+
+        txtDocumento = new JTextField();
+        txtDocumento.setBackground(Color.decode("#D9D9D9"));
+        txtDocumento.setFont(new Font("SansSerif", Font.PLAIN, 18));
+        txtDocumento.setHorizontalAlignment(JTextField.CENTER);
+        txtDocumento.setMaximumSize(new Dimension(500, 50));
+        txtDocumento.setPreferredSize(new Dimension(500, 50));
+        txtDocumento.setAlignmentX(JTextField.CENTER_ALIGNMENT);
+        txtDocumento.setEditable(false);
+
+        panelForm.add(labelDocumento);
+        panelForm.add(txtDocumento);
+        panelForm.add(javax.swing.Box.createVerticalStrut(25));
+
+        
+        JLabel labelSexo = new JLabel("Sexo", SwingConstants.CENTER);
+        labelSexo.setFont(new Font("SansSerif", Font.PLAIN, 18));
+        labelSexo.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+
+        cbSexo = new JComboBox<>(new String[]{"Seleccionar", "Masculino", "Femenino"});
+        cbSexo.setBackground(Color.decode("#D9D9D9"));
+        cbSexo.setFont(new Font("SansSerif", Font.PLAIN, 18));
+        cbSexo.setMaximumSize(new Dimension(500, 50));
+        cbSexo.setPreferredSize(new Dimension(500, 50));
+        cbSexo.setAlignmentX(JTextField.CENTER_ALIGNMENT);
+
+        panelForm.add(labelSexo);
+        panelForm.add(cbSexo);
+        panelForm.add(javax.swing.Box.createVerticalStrut(25));
+
+        
+        JLabel labelTelefono = new JLabel("Número de teléfono", SwingConstants.CENTER);
+        labelTelefono.setFont(new Font("SansSerif", Font.PLAIN, 18));
+        labelTelefono.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+
+        txtTelefono = new JTextField();
+        txtTelefono.setBackground(Color.decode("#D9D9D9"));
+        txtTelefono.setFont(new Font("SansSerif", Font.PLAIN, 18));
+        txtTelefono.setHorizontalAlignment(JTextField.CENTER);
+        txtTelefono.setMaximumSize(new Dimension(500, 50));
+        txtTelefono.setPreferredSize(new Dimension(500, 50));
+        txtTelefono.setAlignmentX(JTextField.CENTER_ALIGNMENT);
+
+        panelForm.add(labelTelefono);
+        panelForm.add(txtTelefono);
         panelForm.add(javax.swing.Box.createVerticalStrut(25));
 
         btnCambiarContrasena = new JButton("Cambiar contraseña");
@@ -142,6 +195,18 @@ public class Informacion_personal_view extends Interfaz_vista_abtractas {
 
     public JTextField getTxtApellido() {
         return txtApellido;
+    }
+
+    public JTextField getTxtDocumento() {
+        return txtDocumento;
+    }
+
+    public JTextField getTxtTelefono() {
+        return txtTelefono;
+    }
+
+    public JComboBox<String> getCbSexo() {
+        return cbSexo;
     }
 
     public JButton getBtnCambiarContrasena() {
