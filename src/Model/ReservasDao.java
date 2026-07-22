@@ -49,7 +49,7 @@ public class ReservasDao {
         }
     }
     
-    public ArrayList<String> asientoReservados(int codigo_vuelo){
+    public ArrayList<String> asientoReservados(Reservas reserva){
         
         ArrayList<String> puestos = new ArrayList<>();
         String sql = "SELECT codigo_asiento FROM reservas WHERE codigo_vuelo=?";
@@ -58,7 +58,7 @@ public class ReservasDao {
             con = Conexion.getObject().getConection();
             ps=con.prepareStatement(sql);
             
-            ps.setInt(1, codigo_vuelo);
+            ps.setInt(1, reserva.getCodigo_vuelo());
             
             
             rs=ps.executeQuery();
@@ -127,6 +127,44 @@ public class ReservasDao {
     }
     
     
-    
+    public int idReservas(String codigo_asiento, int codigo_vuelo){
+        
+        int id=-1;
+        String sql = "SELECT id FROM reservas WHERE codigo_asiento = ? AND codigo_vuelo = ?";
+        
+        try{
+            con = Conexion.getObject().getConection();
+            ps=con.prepareStatement(sql);
+        
+            ps.setString(1, codigo_asiento);
+            ps.setInt(2, codigo_vuelo);
+            
+            rs=ps.executeQuery();
+            
+            if (rs.next()) {
+                id = rs.getInt("id");
+            } 
+            
+            JOptionPane.showMessageDialog(null, "id_reserva: "+id);
+            
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, 
+                    ex.toString(),
+                    "Error al guardar los datos del pasajero"+ex.getMessage(),
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }finally {
+            if (con != null) {
+                try {
+                    con.close();
+                    ps.close();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.toString());
+                }
+            }
+        }
+       
+       return id; 
+    }
     
 }

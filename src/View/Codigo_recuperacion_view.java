@@ -44,11 +44,13 @@ public class Codigo_recuperacion_view extends JFrame implements ActionListener {
 
     private String correoUsuario;
     private final int MAX_INTENTOS = 3;
+    private Recuperar_contraseña_view recuperarView;
 
-    public Codigo_recuperacion_view(String correoUsuario) {
+    public Codigo_recuperacion_view(String correoUsuario, Recuperar_contraseña_view recuperarView) {
 
         super("Verificación de Código");
         this.correoUsuario = correoUsuario;
+        this.recuperarView = recuperarView;
 
         contenedor = getContentPane();
 
@@ -140,8 +142,6 @@ public class Codigo_recuperacion_view extends JFrame implements ActionListener {
 
             dispose();
 
-            Recuperar_contraseña_view recuperarView = new Recuperar_contraseña_view();
-            new Recuperar_contraseña_controller(recuperarView);
             recuperarView.setLocationRelativeTo(null);
             recuperarView.setVisible(true);
 

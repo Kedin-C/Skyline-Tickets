@@ -108,9 +108,10 @@ public class Elegir_puestos_view extends Interfaz_vista_abtractas{
         avion.add(scrol);
         
         //Creando y decorando los botones
-        siguiente = new JButton("Siguiente");
-        volver = new JButton("Volver");
+        siguiente = super.siguiente;
+        volver = super.volver_2;
         aleatorio = new JButton("Aleatorio");
+        aleatorio.setPreferredSize(new Dimension(120,30));
         
         siguiente.setForeground(Color.WHITE);
         volver.setForeground(Color.WHITE);

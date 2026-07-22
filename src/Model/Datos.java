@@ -16,15 +16,16 @@ public class Datos {
     private ArrayList<DatosPersonales> datosPersonales;
     private DatosPago datosPago;
     
-    public int elegidos = 1;
-    public int vista_pago=0;
+    public int elegidos = 1, vista_pago=0, id_pago;
     
     private DatosPersonalesDao datosPersonalesDao = new DatosPersonalesDao();
     private DatosPagoDao datosPagoDao = new DatosPagoDao();
-    private ReservasDao datosReserva = new ReservasDao();
+    private ReservasDao datosReservaDao = new ReservasDao();
+    private Ticket_dao ticket = new Ticket_dao();
     
     
-    ArrayList<Integer> id = new ArrayList<>();
+    public ArrayList<Integer> id_pasajero = new ArrayList<>();
+    public ArrayList<Integer> id_reserva = new ArrayList<>();
     
     public Datos(){
         
@@ -114,37 +115,42 @@ public class Datos {
     
     public void subirDatos(){
         for(int i=0; i < datosPersonales.size(); i++){
-            
-            String numero_documento = this.datosPersonales.get(i).getNumero_documento();
-            String nombre = this.datosPersonales.get(i).getNombre();
-            String apellido = this.datosPersonales.get(i).getApellido();
-            int codigo_tipo_documento = this.datosPersonales.get(i).getCodigo_tipo_documento();
-            String sexo = this.datosPersonales.get(i).getSexo();
-            String numero_telefono = this.datosPersonales.get(i).getNumero_telefono();
-            String correo = this.datosPersonales.get(i).getCorreo();
-            String fecha_nacimiento = this.datosPersonales.get(i).getFecha_nacimiento();
-            String nacionalidad = this.datosPersonales.get(i).getNationalidad();
                     
-            datosPersonalesDao.enviarDatos(numero_documento, nombre, apellido, codigo_tipo_documento, sexo, numero_telefono, correo, fecha_nacimiento, nacionalidad);
-            id.add(datosPersonalesDao.idPasajero(numero_documento, nombre, apellido, codigo_tipo_documento, sexo, numero_telefono, correo, fecha_nacimiento, nacionalidad));
+            datosPersonalesDao.enviarDatos(datosPersonales.get(i));
         }
         
         if(getDatosPago() != null){
-            int cvv = this.datosPago.getCvv();
-            String numero_tarjeta = this.datosPago.getNumero_tarjeta();
-            String nombre_titular = this.datosPago.getNombre_titular();
-            String fecha_vencimiento = this.datosPago.getFecha_vencimiento();
-            double total = getTotalPagar();
-
-            datosPagoDao.enviarDatos(numero_tarjeta, cvv, nombre_titular, fecha_vencimiento, total);
+            datosPagoDao.enviarDatos(datosPago);
         }
         
         for(int index = 0; index < codigoAsiento.size(); index++){
-            datosReserva.enviarDatos(codigoAsiento.get(index), codigoVuelo);
+            datosReservaDao.enviarDatos(codigoAsiento.get(index), codigoVuelo);
         }
-        
-        JOptionPane.showMessageDialog(null, id);
-        
     }
     
+    public void ids(){
+        for(int i=0; i < datosPersonales.size(); i++){
+                    
+            id_pasajero.add(datosPersonalesDao.idPasajero(datosPersonales.get(i)));
+        }
+        
+        id_pago = datosPagoDao.idPago(datosPago);
+        
+        for(int index = 0; index < codigoAsiento.size(); index++){
+            id_reserva.add(datosReservaDao.idReservas(codigoAsiento.get(index),codigoVuelo));
+        }
+        JOptionPane.showMessageDialog(null, "ids    "+id_pago+"  "+id_pasajero+"  "+id_reserva+"  "+equipajeExtra+"  "+tipoVuelo);
+    }
+    
+    public void subirTicket(){
+        if(id_pago > 0 && id_pasajero.size() > 0 && id_reserva.size() > 0){ 
+            for(int i = 0; i < numeroTickets; i++){
+                ticket.enviarDatos(id_pago, id_pasajero.get(i), id_reserva.get(i), equipajeExtra, tipoVuelo);
+                JOptionPane.showMessageDialog(null, "todo bien");
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "No se pudo envial el ticket a la base de datos");
+        }
+        
+    }
 }

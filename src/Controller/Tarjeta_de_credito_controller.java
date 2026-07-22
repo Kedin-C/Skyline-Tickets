@@ -18,6 +18,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -133,24 +134,26 @@ public class Tarjeta_de_credito_controller implements ActionListener{
                 
                 datosPagar.setNombre_titular(vista.nombre_titular.getText());
                 
+                datosPagar.setTotal(datos.getTotalPagar());
+                
                 datos.setDatosPago(datosPagar);
+                
                 if(datos.vista_pago == 1){
                     
-                    datosPagarDao.enviarDatos(datosPagar.getNumero_tarjeta(),
-                            datosPagar.getCvv(),
-                            datosPagar.getNombre_titular(),
-                            datosPagar.getFecha_vencimiento(),
-                            datos.getTotalPagar());
+                    datosPagarDao.enviarDatos(datosPagar);
                     
                 }else{
                     datos.subirDatos();
+                    datos.ids();
+                    datos.subirTicket();
                 }
                 
                 new Thread(() -> {
                     try {
-                        Thread.sleep(10000);
+                        Thread.sleep(4000);
                         
-                        int listaPasajeros[] = {};
+                        
+                        ArrayList<Integer> listaPasajeros = datos.id_pasajero;
                         
                         for (int idPasajero : listaPasajeros) {
                             // Obtener datos desde el DAO

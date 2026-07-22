@@ -52,7 +52,7 @@ public class Tarjeta_de_credito_view extends Interfaz_vista_abtractas{
         imagen = new FondoPanel("src/Imagenes/Tarjeta_credito.PNG");
         
         //Tamaños de la imagen y de el formulario
-        Dimension tamanoFormulario = new Dimension(450, 250);
+        Dimension tamanoFormulario = new Dimension(750, 350);
         
         formulario.setPreferredSize(tamanoFormulario);
         formulario.setMinimumSize(tamanoFormulario);
@@ -65,7 +65,7 @@ public class Tarjeta_de_credito_view extends Interfaz_vista_abtractas{
         imagen.setMaximumSize(tamanoImagen); 
         
         //Titulo del borde
-        Font fuenteGrande = new Font("Arial", Font.BOLD, 20);
+        Font fuenteGrande = new Font("Arial", Font.BOLD, 17);
         titulo = new TitledBorder("Tarjeta de credito");
         titulo.setTitleFont(fuenteGrande);
         
@@ -124,6 +124,12 @@ public class Tarjeta_de_credito_view extends Interfaz_vista_abtractas{
         
         contenedor_principal.add(datos_tarjeta, BorderLayout.CENTER);
         contenedor_principal.add(volver_pagar, BorderLayout.SOUTH);
+        
+        numeroTarjeta.setFont(fuenteGrande);
+        fechaVen.setFont(fuenteGrande);
+        cv.setFont(fuenteGrande);
+        nombreTitular.setFont(fuenteGrande);
+        descuento.setFont(fuenteGrande);
         
         this.setSize(550, 800);
         this.setLocationRelativeTo(null);

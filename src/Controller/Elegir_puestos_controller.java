@@ -74,7 +74,9 @@ public class Elegir_puestos_controller implements ActionListener{
         //Para traer los puestos ocupados
         String puestoActual1 = "";
         String puestoActual2 = "";
-        ocupados = reservadao.asientoReservados(this.datos.getCodigoVuelo());
+        reserva.setCodigo_vuelo(this.datos.getCodigoVuelo());
+        ocupados = reservadao.asientoReservados(reserva);
+        
         if(ocupados.size() > 0){
             for (int i = 0; i < ocupados.size(); i++) {
                 for (int f = 0; f < totalFilas; f++) {
@@ -149,6 +151,7 @@ public class Elegir_puestos_controller implements ActionListener{
                         
                         codigoAsiento.add(nombrebtn);
 
+                        datos.setTotalPagar(datos.getTotalPagar()+50000);
                         datos.elegidos++;
                     }else{
                        return; 
@@ -173,7 +176,7 @@ public class Elegir_puestos_controller implements ActionListener{
                         
                         codigoAsiento.add(nombrebtn);
                         
-
+                        datos.setTotalPagar(datos.getTotalPagar()+50000);
                         datos.elegidos++;
                     }else{
                         return;

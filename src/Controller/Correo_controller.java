@@ -58,6 +58,7 @@ public class Correo_controller {
 
  
     private void enviarCorreo() {
+         System.out.println("===== ENTRÓ A enviarCorreo() =====");
 
         try {
 
@@ -109,7 +110,7 @@ public class Correo_controller {
                 + "Si no solicitaste este cambio, puedes ignorar este correo.\n\n"
                 + "Skyline Tickets";
 
-//        enviarCorreo();
+        enviarCorreo();
 
     }
     
@@ -124,7 +125,7 @@ public class Correo_controller {
             + "Descuento: " + porcentaje + "%\n\n"
             + "¡Úsalo en tu próxima compra!\n\n"
             + "Skyline Tickets";
-//    enviarCorreo();
+    enviarCorreo();
 }
     
     public void enviarCorreoConAdjunto(String destinatario, File archivoAdjunto) {

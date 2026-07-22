@@ -4,6 +4,7 @@
  */
 package Controller;
 
+
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
@@ -34,7 +35,7 @@ public class CreadorPDFTickets {
         File archivo = null;
         try {
             Document document = new Document();
-            archivo = new File("Ticket");
+            archivo = new File("Ticket_"+nombrePasajero+".pdf");
             PdfWriter.getInstance(document, new FileOutputStream(archivo));
             document.open();
 

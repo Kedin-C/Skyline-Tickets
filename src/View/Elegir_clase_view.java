@@ -8,6 +8,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -22,7 +23,7 @@ import javax.swing.border.Border;
 
 public class Elegir_clase_view extends Interfaz_vista_abtractas{
     
-    private JLabel numeroTickets,aumentaEquipaje;
+    private JLabel numeroTickets,aumentaEquipaje,precioEconomica,precioEjecutiva,precioPrimera;
     public JRadioButton economica,ejecutiva,primera;
     public JButton volver,siguiente;
     private JTextArea infoEconomica,infoEjecutiva,infoPrimera;
@@ -38,12 +39,16 @@ public class Elegir_clase_view extends Interfaz_vista_abtractas{
         
         super("Elegir Clase");
         
+        Font fuenteGrande = new Font("Arial", Font.PLAIN, 17);
+        
         contenedor_principal = super.getPanel2();
         contenedor_principal.setLayout(new BorderLayout(0,20));
         
         //Campos
         numeroTickets = new JLabel("Numero de tickets");
         aumentaEquipaje = new JLabel("Aumentar equipaje en bodega");
+        numeroTickets.setFont(fuenteGrande);
+        aumentaEquipaje.setFont(fuenteGrande);
         
         //botones de seleccion
         economica = new JRadioButton("Clase Economica");
@@ -51,28 +56,28 @@ public class Elegir_clase_view extends Interfaz_vista_abtractas{
         primera = new JRadioButton("Primera Clase");
         
         //botones normales
-        volver = new JButton("Volver");
-        siguiente = new JButton("Siguiente");
+        volver = super.volver_2;
+        siguiente = super.siguiente;
         
         //Color de las letras
-        volver.setForeground(Color.WHITE);
-        siguiente.setForeground(Color.WHITE);
-        
-        //Color de fondo
-        volver.setBackground(Color.decode("#037FB9"));
-        siguiente.setBackground(Color.decode("#037FB9"));
+//        volver.setForeground(Color.WHITE);
+//        siguiente.setForeground(Color.WHITE);
+//        
+//        //Color de fondo
+//        volver.setBackground(Color.decode("#137FB0"));
+//        siguiente.setBackground(Color.decode("#137FB0"));
         
         //informacion de cada clase
         infoEconomica = new JTextArea("\t - Bolso de mano\n"
                 + "\t - Asientos cómodos\n"
-                + "\t - Sistema de entretenimiento\n"
-                + "\t\t $ 180.000\n");
+                + "\t - Sistema de entretenimiento\n");
+//                + "\t\t $ 180.000\n");
         infoEjecutiva = new JTextArea("\t - Bolso de mano\n"
                 + "\t - Morral\n"
                 + "\t - Asientos amplios con mayor espacio\n"
                 + "\t - Sistema de entretenimiento\n"
-                + "\t - Acceso a salas VIP\n"
-                + "\t\t $ 450.000\n");
+                + "\t - Acceso a salas VIP\n");
+//                + "\t\t $ 450.000\n");
         infoPrimera = new JTextArea("\t - Bolso de mano\n"
                 + "\t - Morral\n"
                 + "\t - Bodega\n"
@@ -80,13 +85,30 @@ public class Elegir_clase_view extends Interfaz_vista_abtractas{
                 + "\t - Sistema de entretenimiento y Wifi\n"
                 + "\t - Acceso a salas VIP\n"
                 + "\t - Salas VIP premium\n"
-                + "\t - Entretenimiento premium y conectividad\n"
-                + "\t\t $ 850.000\n");
+                + "\t - Entretenimiento premium y conectividad\n");
+//                + "\t\t $ 850.000\n");
+        
+        economica.setFont(fuenteGrande);
+        ejecutiva.setFont(fuenteGrande);
+        primera.setFont(fuenteGrande);
         
         //No deja modificar la informacion del JTextArea
         infoEconomica.setEditable(false);
         infoEjecutiva.setEditable(false);
         infoPrimera.setEditable(false);
+        
+        precioEconomica = new JLabel("$ 180.000", SwingConstants.CENTER);
+        precioEjecutiva = new JLabel("$ 450.000", SwingConstants.CENTER);
+        precioPrimera = new JLabel("$ 850.000", SwingConstants.CENTER);
+        
+        Font fuentePrecio = new Font("Arial", Font.BOLD, 20);
+        precioEconomica.setFont(fuentePrecio);
+        precioEjecutiva.setFont(fuentePrecio);
+        precioPrimera.setFont(fuentePrecio);
+        
+        infoEconomica.setFont(fuenteGrande);
+        infoEjecutiva.setFont(fuenteGrande);
+        infoPrimera.setFont(fuenteGrande);
         
         //Le da el mismo color del fondo paea que no se vea blanco 
         infoEconomica.setBackground(contenedor_principal.getBackground());
@@ -119,6 +141,10 @@ public class Elegir_clase_view extends Interfaz_vista_abtractas{
         cuadroEconomica = new JPanel(new BorderLayout());
         cuadroEjecutiva = new JPanel(new BorderLayout());
         cuadroPrimera = new JPanel(new BorderLayout());
+        
+        cuadroEconomica.add(precioEconomica, BorderLayout.SOUTH);
+        cuadroEjecutiva.add(precioEjecutiva, BorderLayout.SOUTH);
+        cuadroPrimera.add(precioPrimera, BorderLayout.SOUTH);
         
         //Agregando los componentes a los 3 cuadros de las clases
         cuadroEconomica.add(economica, BorderLayout.NORTH);

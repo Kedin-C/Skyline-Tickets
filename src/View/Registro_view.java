@@ -31,8 +31,8 @@ public class Registro_view extends JFrame {
     private Container contenedor;
     public JButton b1, btnVolver;
     public JPanel mipanel1, mipanel2, mipanel3;
-    public JLabel jnombre, japellido, jcorreo, jcontraseña, jconfirmar,logo;
-    public JTextField txNombre, txApellido, txCorreo;
+    public JLabel jnombre, japellido, jcorreo, jcontraseña, jconfirmar,logo, jdocumento;
+    public JTextField txNombre, txApellido, txCorreo, ndocumento;
     public JPasswordField txContraseña, txConfirmar;
 
     public Registro_view() {
@@ -50,17 +50,19 @@ public class Registro_view extends JFrame {
 
         mipanel3 = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 5));
         mipanel3.setBackground(Color.WHITE);
-        mipanel3.setMaximumSize(new Dimension(350, 260));
+        mipanel3.setMaximumSize(new Dimension(350, 310));
 
         jnombre = new JLabel("Nombre*");
         japellido = new JLabel("Apellido*");
         jcorreo = new JLabel("Correo*");
+        jdocumento = new JLabel("Numero documento");
         jcontraseña = new JLabel("Contraseña*");
         jconfirmar = new JLabel("Confirmar contraseña*");
 
         txNombre = new JTextField();
         txApellido = new JTextField();
         txCorreo = new JTextField();
+        ndocumento = new JTextField();
         txContraseña = new JPasswordField();
         txConfirmar = new JPasswordField();
 
@@ -69,6 +71,7 @@ public class Registro_view extends JFrame {
         txCorreo.setPreferredSize(new Dimension(350, 25));
         txContraseña.setPreferredSize(new Dimension(350, 25));
         txConfirmar.setPreferredSize(new Dimension(350, 25));
+        ndocumento.setPreferredSize(new Dimension(350, 25));
 
         b1 = new JButton("REGISTRARSE");
         btnVolver = new JButton("VOLVER");
@@ -92,6 +95,9 @@ public class Registro_view extends JFrame {
 
         mipanel3.add(jcorreo);
         mipanel3.add(txCorreo);
+        
+        mipanel3.add(jdocumento);
+        mipanel3.add(ndocumento);
 
         mipanel3.add(jcontraseña);
         mipanel3.add(txContraseña);
@@ -126,7 +132,7 @@ public class Registro_view extends JFrame {
         panelCentro.setBackground(new Color(3, 127, 185));
         panelCentro.add(mipanel2);
 
-        mipanel2.setPreferredSize(new Dimension(500, 600));
+        mipanel2.setPreferredSize(new Dimension(500, 700));
 
         mipanel1.add(panelCentro, BorderLayout.CENTER);
         mipanel1.add(panelInferior, BorderLayout.SOUTH);
@@ -163,5 +169,9 @@ public class Registro_view extends JFrame {
 
     public JTextField getTxConfirmar() {
         return txConfirmar;
+    }
+    
+    public JTextField getNdocumento() {
+    return ndocumento;
     }
 }

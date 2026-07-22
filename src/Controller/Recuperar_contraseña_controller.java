@@ -3,12 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Controller;
-
 /**
  *
  * @author Nikob
  */
-import Controller.Login_controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -19,14 +17,15 @@ import View.Recuperar_contraseña_view;
 public class Recuperar_contraseña_controller {
 
     private Recuperar_contraseña_view view;
+    private Login_view loginView;
 
-    public Recuperar_contraseña_controller(Recuperar_contraseña_view view) {
+    public Recuperar_contraseña_controller(Recuperar_contraseña_view view, Login_view loginView) {
         this.view = view;
+        this.loginView = loginView;
         iniciarEventos();
     }
 
     private void iniciarEventos() {
-
         view.getB1().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -37,19 +36,15 @@ public class Recuperar_contraseña_controller {
         view.getBtnVolver().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 view.dispose();
-
-                Login_view login = new Login_view();
-//                new Login_controller(login);
+                loginView.setVisible(true);
+                loginView.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
             }
         });
     }
 
     private void procesar() {
-
         String correo = view.getTxCorreo().getText().trim();
-
         if (correo.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingrese un correo");
             return;
@@ -64,12 +59,10 @@ public class Recuperar_contraseña_controller {
         }
 
         String codigoGenerado = generador.getCodigoGenerado();
-
-        Codigo_recuperacion_view codigoView = new Codigo_recuperacion_view(correo);
-        new Codigo_recuperacion_controller(codigoView, codigoGenerado, correo);
+        Codigo_recuperacion_view codigoView = new Codigo_recuperacion_view(correo, view);
+        new Codigo_recuperacion_controller(codigoView, codigoGenerado, correo, loginView);
         codigoView.setLocationRelativeTo(null);
         codigoView.setVisible(true);
-
         view.dispose();
     }
 }

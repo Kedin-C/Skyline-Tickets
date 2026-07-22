@@ -47,6 +47,7 @@ import View.Transferencia_view;
 import View.ViewPrincipal;
 import View.Cambio_de_clase_de_vuelo_viiew;
 import Controller.Pagina_principal_controller;
+import Controller.Recuperar_contraseña_controller;
 import Controller.Reportes_financieros_controller;
 import Controller.Reportes_operativos_controller;
 import Model.Reportes_financieros_dao;
@@ -83,6 +84,7 @@ public class Skyline_Tickets {
         Apartado_reportes_financieros_view apart_reportes_finan = new Apartado_reportes_financieros_view();
         Login_view loginV = new Login_view();
         Recuperar_contraseña_view recu_con = new Recuperar_contraseña_view();
+        Recuperar_contraseña_controller recuperar_cont = new Recuperar_contraseña_controller(recu_con, loginV);
         
         
         Ticket ticket = new Ticket();

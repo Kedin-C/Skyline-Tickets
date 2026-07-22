@@ -35,7 +35,7 @@ public class Registro_controller implements ActionListener {
     public Registro_controller(Registro_view vista,Menu_principal_view menu,Login_view login) {
         this.vista = vista;
         this.dao = new UsuarioDao();
-        this.login = new Login_view();
+        this.login = login;        
         this.codigoController = new Codigo_descuento_controller();
         this.menu = menu;
         vista.getB1().addActionListener(this);
@@ -58,6 +58,7 @@ public class Registro_controller implements ActionListener {
             String nombre = vista.getTxNombre().getText();
             String apellido = vista.getTxApellido().getText();
             String correo = vista.getTxCorreo().getText();
+            String documento = vista.getNdocumento().getText();
             String contraseña = vista.getTxContraseña().getText();
             String confirmar = vista.getTxConfirmar().getText();
             
@@ -110,6 +111,7 @@ public class Registro_controller implements ActionListener {
             usuario.setNombre(nombre);
             usuario.setApellido(apellido);
             usuario.setCorreo(correo);
+            usuario.setDocumento(documento);
             usuario.setContraseña(hash);
             usuario.setRol(2);
 
@@ -120,7 +122,7 @@ public class Registro_controller implements ActionListener {
                 if (codigo != null) {
 
                     Correo_controller correoController = new Correo_controller();
-
+                    
                     correoController.enviarCodigoDescuento(
                             correo,
                             codigo.getCodigo(),

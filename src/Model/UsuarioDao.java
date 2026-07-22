@@ -24,7 +24,7 @@ public class UsuarioDao {
     ResultSet rs;
 
     public boolean registrarUsuario(Usuario usuario) {
-        String sql = "INSERT INTO usuario(nombre_usuario, apellido_usuario, correo_usuario, password_usuario, id_rol) VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO usuario(nombre_usuario, apellido_usuario, correo_usuario, password_usuario, id_rol, numero_documento) VALUES(?,?,?,?,?,?)";
         try {
             con = conexionBD.getConection();
             ps = con.prepareStatement(sql);
@@ -33,6 +33,7 @@ public class UsuarioDao {
             ps.setString(3, usuario.getCorreo());
             ps.setString(4, usuario.getContraseña());
             ps.setInt(5, usuario.getRol());
+            ps.setString(6, usuario.getDocumento());
             ps.executeUpdate();
             return true;
         } catch (Exception e) {
@@ -96,7 +97,7 @@ public class UsuarioDao {
                 usuario.setApellido(rs.getString("apellido_usuario"));
                 usuario.setCorreo(rs.getString("correo_usuario"));
                 usuario.setContraseña(rs.getString("password_usuario"));
-                usuario.setRol(rs.getInt("rol"));
+                usuario.setRol(rs.getInt("id_rol"));
                 return usuario;
             }
         } catch (Exception e) {
