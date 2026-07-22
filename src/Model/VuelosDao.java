@@ -112,4 +112,50 @@ public class VuelosDao {
         return listarV;
     }
     
+    public List<Vuelos> listarIda_historial(String origen, String destino){
+
+        
+        List<Vuelos> listarV = new ArrayList<Vuelos>();
+        String sql="SELECT * FROM vuelos WHERE origen=? AND destino=? ";
+        try{
+            con = Conexion.getObject().getConection();
+            ps=con.prepareStatement(sql);
+            
+            ps.setString(1, origen);
+            ps.setString(2, destino);
+            
+        
+            rs=ps.executeQuery();
+            
+            while(rs.next()){
+                Vuelos v = new Vuelos();
+                v.setCodigo_vuelo(rs.getInt(1));
+                v.setOrigen(rs.getString(2));
+                v.setDestino(rs.getString(3));
+                v.setFecha(rs.getDate(4));
+                v.setHora_salida(rs.getString(5));
+                v.setHora_llegada(rs.getString(6));
+                v.setPrecio(rs.getDouble(7));
+                
+                listarV.add(v);
+            }
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, 
+                    ex.toString(),
+                    "Error la busqueda de vuelos"+ex.getMessage(),
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }finally{
+            if(con!=null){
+                try{
+                    con.close();
+                    ps.close();
+                }catch(Exception ex){
+                    JOptionPane.showMessageDialog(null, ex.toString());
+                }
+            }
+        }
+        return listarV;
+    }
+    
 }

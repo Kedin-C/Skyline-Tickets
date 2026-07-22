@@ -203,7 +203,7 @@ public class Buscar_vuelos_view extends Interfaz_vista_abtractas{
         datos = new ArrayList<>();
         
         
-        modelo = new DefaultTableModel(columnas, 0) {
+            modelo = new DefaultTableModel(columnas, 0) {
             //Metodo para bloquear los campos de la tabla
             @Override
             public boolean isCellEditable(int row, int column) {

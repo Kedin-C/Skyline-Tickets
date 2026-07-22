@@ -64,7 +64,55 @@ public class Ticket_dao {
         
         int cont = 1;
         
-        String sql = "SELECT t.codigo_ticket AS id_ticket, v.origen AS origen, v.destino AS destino, t.tipo_vuelo FROM Tickets t JOIN Reservas r ON t.id_reserva = r.id JOIN Vuelos v ON r.codigo_vuelo = v.codigo_vuelo JOIN Datos_pasajero dp ON t.id_pasajero = dp.id JOIN usuario u ON u.numero_documento = dp.numero_documento WHERE u.id_usuario = ?;";
+        String sql = "SELECT t.codigo_ticket AS id_ticket, t.tipo_vuelo, v.origen AS origen, v.destino AS destino, v.fecha AS fecha_vuelo FROM Tickets t JOIN Reservas r ON t.id_reserva = r.id JOIN Vuelos v ON r.codigo_vuelo = v.codigo_vuelo JOIN Datos_pasajero dp ON t.id_pasajero = dp.id JOIN usuario u ON u.numero_documento = dp.numero_documento WHERE u.id_usuario = ?";
+        try {
+        con = conectar.getConection();
+        ps = con.prepareStatement(sql);
+        ps.setInt(1, usuario.getIdUsuario());
+        
+        rs = ps.executeQuery();
+        
+        
+        while(rs.next()){
+            Ticket ticket_res = new Ticket();
+            
+            ticket_res.setId(rs.getInt("id_ticket"));
+            ticket_res.setOrigen(rs.getString("origen"));
+            ticket_res.setDestino(rs.getString("destino"));
+            ticket_res.setTipo_vuelo(rs.getString("tipo_vuelo"));
+            ticket_res.setFecha(rs.getString("fecha_vuelo"));
+            ticket.add(ticket_res);
+            
+        }  
+        
+                
+                 } catch (Exception e) {
+            
+            JOptionPane.showMessageDialog(null, "error en la confirmacion del ticket", e.toString(), JOptionPane.ERROR_MESSAGE);
+            
+        }
+        finally {
+            if (con != null) {
+                try {
+                    con.close();
+                    ps.close();
+                    rs.close();
+                    
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, e.toString());
+                }
+            }
+        }
+           return ticket;
+    }
+    
+     public List getVuelosHistorial(Usuario usuario){
+        
+        List<Ticket> ticket = new ArrayList<Ticket>();
+        
+        int cont = 1;
+        
+        String sql = "SELECT t.codigo_ticket AS id_ticket, v.origen AS origen, v.destino AS destino, t.tipo_vuelo FROM Tickets t JOIN Reservas r ON t.id_reserva = r.id JOIN Vuelos v ON r.codigo_vuelo = v.codigo_vuelo JOIN Datos_pasajero dp ON t.id_pasajero = dp.id JOIN usuario u ON u.numero_documento = dp.numero_documento WHERE u.id_usuario = ?";
         try {
         con = conectar.getConection();
         ps = con.prepareStatement(sql);
@@ -104,6 +152,7 @@ public class Ticket_dao {
         }
            return ticket;
     }
+    
     
     public String obtenerNombrePasajero(int idPasajero) {
         String nombre = null;

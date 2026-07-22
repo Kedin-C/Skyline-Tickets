@@ -11,6 +11,7 @@ import View.Apartado_reportes_menu_view;
 import View.Pagina_principal_administrador_view;
 import View.Seleccion_de_vuelo_usuarioRegistrado_view;
 import View.Buscar_vuelos_view;
+import View.Historial_vuelos_view;
 import View.ViewPrincipal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,19 +33,24 @@ public class Pagina_principal_administrador_controller_2 implements ActionListen
     private Ticket ticket;
     private Usuario usuario;
     private Ticket_dao tdao = new Ticket_dao();
+    private Historial_vuelos_view histo_vista;
+    private Historial_vuelos_controller histo_cont;
 
-    public Pagina_principal_administrador_controller_2(Pagina_principal_administrador_view vista, Apartado_reportes_menu_view vistaRM, Seleccion_de_vuelo_usuarioRegistrado_view vistaCL,Buscar_vuelos_view vistaCV,Ticket ticket,Usuario usu,ViewPrincipal vista_prin) {
+    public Pagina_principal_administrador_controller_2(Pagina_principal_administrador_view vista, Apartado_reportes_menu_view vistaRM, Seleccion_de_vuelo_usuarioRegistrado_view vistaCL,Buscar_vuelos_view vistaCV,Ticket ticket,Usuario usu,ViewPrincipal vista_prin,Historial_vuelos_view histo_vista,Historial_vuelos_controller histo_cont) {
         this.vista = vista;
         this.vistaRM=vistaRM;
         this.vistaCL = vistaCL;
         this.vistaCV=vistaCV;
         this.vista_prin=vista_prin;
+        this.histo_vista = histo_vista;
+        this.histo_cont = histo_cont;
         
         
         this.vista.reportes.addActionListener(this);
         this.vista.comprar.addActionListener(this);
         this.vista.clase.addActionListener(this);
         this.vista.cerrarSesion.addActionListener(this);
+        this.vista.historial.addActionListener(this);
         
         
         this.ticket = ticket;
@@ -86,6 +92,14 @@ public class Pagina_principal_administrador_controller_2 implements ActionListen
             vista.setVisible(false);
             vista_prin.setVisible(true);
             vista_prin.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
+        }else if(e.getSource() == vista.historial){
+            histo_cont.ResetRow();
+            histo_cont.SetRow();
+            vista.setVisible(false);
+            
+            histo_vista.setVista_anterior(2);
+            histo_vista.setVisible(true);
+            histo_vista.setExtendedState(JFrame.MAXIMIZED_BOTH);
         }
     }
     
