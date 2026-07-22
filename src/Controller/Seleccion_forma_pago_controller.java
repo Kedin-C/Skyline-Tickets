@@ -10,7 +10,7 @@ import View.Seleccion_forma_de_pago_view;
 import View.Tarjeta_de_credito_view;
 import View.Tarjeta_de_debito_view;
 import View.Transferencia_view;
-import View.cambio_de_clase_de_vuelo_viiew;
+import View.Cambio_de_clase_de_vuelo_viiew;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
@@ -21,7 +21,7 @@ import javax.swing.JFrame;
  */
 public class Seleccion_forma_pago_controller implements ActionListener{
     private Seleccion_forma_de_pago_view vista;
-    private cambio_de_clase_de_vuelo_viiew clase;
+    private Cambio_de_clase_de_vuelo_viiew clase;
     private Agregar_equipaje_extra_view equipaje;
     private Tarjeta_de_credito_view credito;
     private Tarjeta_de_debito_view debito;
@@ -30,7 +30,7 @@ public class Seleccion_forma_pago_controller implements ActionListener{
     
     
     
-    public Seleccion_forma_pago_controller(Seleccion_forma_de_pago_view vista, cambio_de_clase_de_vuelo_viiew clase, Agregar_equipaje_extra_view equipaje,Tarjeta_de_credito_view credito,Tarjeta_de_debito_view debito,Transferencia_view transferencia,Datos datos){
+    public Seleccion_forma_pago_controller(Seleccion_forma_de_pago_view vista, Cambio_de_clase_de_vuelo_viiew clase, Agregar_equipaje_extra_view equipaje,Tarjeta_de_credito_view credito,Tarjeta_de_debito_view debito,Transferencia_view transferencia,Datos datos){
         this.clase = clase;
         this.equipaje = equipaje;
         this.vista = vista;

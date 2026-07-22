@@ -10,7 +10,7 @@ import View.Agregar_equipaje_extra_view;
 import View.Seleccion_de_Modificacion_de_vuelo_view;
 import View.Seleccion_de_vuelo_usuarioNoregistrado_view;
 import View.Seleccion_de_vuelo_usuarioRegistrado_view;
-import View.cambio_de_clase_de_vuelo_viiew;
+import View.Cambio_de_clase_de_vuelo_viiew;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
@@ -22,7 +22,7 @@ import javax.swing.JFrame;
  */
 public class Modificacion_clase_equipaje_controller implements ActionListener {
     private final Seleccion_de_Modificacion_de_vuelo_view vista;
-    private final cambio_de_clase_de_vuelo_viiew vista_seleccion_clase;
+    private final Cambio_de_clase_de_vuelo_viiew vista_seleccion_clase;
     private final Agregar_equipaje_extra_view vista_agg_equipaje;
     private final Seleccion_de_vuelo_usuarioNoregistrado_view vista_noregistrado;
     private Seleccion_de_vuelo_usuarioRegistrado_view vista_registrado;
@@ -34,7 +34,7 @@ public class Modificacion_clase_equipaje_controller implements ActionListener {
     
     
     
-    public Modificacion_clase_equipaje_controller(Seleccion_de_Modificacion_de_vuelo_view vista_seleccion_clase_equipaje,cambio_de_clase_de_vuelo_viiew vista_seleccion_clase,Agregar_equipaje_extra_view vista_agg_equipaje,Seleccion_de_vuelo_usuarioNoregistrado_view vista_atras,Ticket ticket,Interfaz_cambio_clase_controller clase_cont, Seleccion_equipaje_extra_dao dao_agg,Seleccion_de_vuelo_usuarioRegistrado_view vista_registrado){
+    public Modificacion_clase_equipaje_controller(Seleccion_de_Modificacion_de_vuelo_view vista_seleccion_clase_equipaje,Cambio_de_clase_de_vuelo_viiew vista_seleccion_clase,Agregar_equipaje_extra_view vista_agg_equipaje,Seleccion_de_vuelo_usuarioNoregistrado_view vista_atras,Ticket ticket,Interfaz_cambio_clase_controller clase_cont, Seleccion_equipaje_extra_dao dao_agg,Seleccion_de_vuelo_usuarioRegistrado_view vista_registrado){
     this.vista = vista_seleccion_clase_equipaje;
     this.vista_seleccion_clase = vista_seleccion_clase;
     this.vista_agg_equipaje = vista_agg_equipaje;

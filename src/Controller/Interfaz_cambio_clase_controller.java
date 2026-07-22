@@ -8,7 +8,7 @@ import Model.Seleccion_modificacion_clase_de_vuelo_dao;
 import Model.Ticket;
 import View.Seleccion_de_Modificacion_de_vuelo_view;
 import View.Seleccion_forma_de_pago_view;
-import View.cambio_de_clase_de_vuelo_viiew;
+import View.Cambio_de_clase_de_vuelo_viiew;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
@@ -23,14 +23,14 @@ public class Interfaz_cambio_clase_controller implements ActionListener {
     
     
     private Seleccion_de_Modificacion_de_vuelo_view vista_seleccion_clase_vuelo;
-    private cambio_de_clase_de_vuelo_viiew vista_seleccion_clase;
+    private Cambio_de_clase_de_vuelo_viiew vista_seleccion_clase;
     private Seleccion_forma_de_pago_view forma_pago;
     private Seleccion_modificacion_clase_de_vuelo_dao dao;
     private Ticket ticket = new Ticket();
     
     
     
-    public Interfaz_cambio_clase_controller(Seleccion_de_Modificacion_de_vuelo_view vista_seleccion_clase_vuelo,cambio_de_clase_de_vuelo_viiew vista_seleccion_clase, Seleccion_modificacion_clase_de_vuelo_dao dao, Ticket ticket,Seleccion_forma_de_pago_view forma_pago){
+    public Interfaz_cambio_clase_controller(Seleccion_de_Modificacion_de_vuelo_view vista_seleccion_clase_vuelo,Cambio_de_clase_de_vuelo_viiew vista_seleccion_clase, Seleccion_modificacion_clase_de_vuelo_dao dao, Ticket ticket,Seleccion_forma_de_pago_view forma_pago){
     this.vista_seleccion_clase_vuelo = vista_seleccion_clase_vuelo;
     this.vista_seleccion_clase = vista_seleccion_clase;
     this.forma_pago = forma_pago;

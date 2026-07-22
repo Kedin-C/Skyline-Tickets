@@ -45,14 +45,14 @@ public class Seleccion_modificacion_vuelo_usuario_controlador implements ActionL
         this.usuario_view_cont = usuario_view_cont;
         this.select_modificacion = select_modificacion;
 
-        vista.SetVuelos(dao.getTotalVuelos(usu));
-        vista.select1.addActionListener(this);
-        vista.select2.addActionListener(this);
-        vista.select3.addActionListener(this);
-        vista.select4.addActionListener(this);
-        vista.select5.addActionListener(this);
-        vista.volver.addActionListener(this);
-        vista.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.vista.SetVuelos(dao.getTotalVuelos(usu));
+        this.vista.select1.addActionListener(this);
+        this.vista.select2.addActionListener(this);
+        this.vista.select3.addActionListener(this);
+        this.vista.select4.addActionListener(this);
+        this.vista.select5.addActionListener(this);
+        this.vista.volver.addActionListener(this);
+        this.vista.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
 

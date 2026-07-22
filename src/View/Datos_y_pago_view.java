@@ -56,6 +56,8 @@ public class Datos_y_pago_view extends Interfaz_vista_abtractas{
        
         super("Datos Personales");
         
+        Font fuenteGrande = new Font("Arial", Font.PLAIN, 18);
+        
         contenedor_principal = super.getPanel2();
         
         //Creando paneles
@@ -83,7 +85,7 @@ public class Datos_y_pago_view extends Interfaz_vista_abtractas{
         panel_precio.setLayout(new BoxLayout(panel_precio, BoxLayout.Y_AXIS));
         
         //Titulo en el borde del contenedor
-        Font fuenteGrande = new Font("Arial", Font.BOLD, 20); //tipo de letra y tamaño
+        
         tituloDatos = new TitledBorder("Datos Personales");
         tituloDatos.setTitleFont(fuenteGrande);
         
@@ -160,11 +162,15 @@ public class Datos_y_pago_view extends Interfaz_vista_abtractas{
         debito = new JButton("Targeta de debito"); 
         pse = new JButton("Transferencia");
         
-        Dimension tamaño = new Dimension(160, 60);
+        Dimension tamaño = new Dimension(220, 60);
         
         credito.setPreferredSize(tamaño);
         debito.setPreferredSize(tamaño);
-        pse.setPreferredSize(tamaño);  
+        pse.setPreferredSize(tamaño); 
+        
+        credito.setFont(fuenteGrande);
+        debito.setFont(fuenteGrande);
+        pse.setFont(fuenteGrande);
         
         
         precioTotal.setEditable(false);
@@ -188,8 +194,8 @@ public class Datos_y_pago_view extends Interfaz_vista_abtractas{
         
         
         volver = super.getVolver2();
-        siguiente = new JButton("Siguiente");
-        siguiente.setPreferredSize(new Dimension(120,30)); 
+        siguiente = super.siguiente;
+//        siguiente.setPreferredSize(new Dimension(120,30)); 
         
         //Color letras botones
         credito.setForeground(Color.WHITE);
@@ -220,6 +226,29 @@ public class Datos_y_pago_view extends Interfaz_vista_abtractas{
         
         contenedor_principal.setLayout(new BorderLayout());
         contenedor_principal.add(contenedor);
+        
+        nombre.setFont(fuenteGrande);
+        apellido.setFont(fuenteGrande);
+        tipoDocumento.setFont(fuenteGrande);
+        numeroDocumento.setFont(fuenteGrande);
+        numeroTelefono.setFont(fuenteGrande);
+        correoElectronico.setFont(fuenteGrande);
+        nacionalidad.setFont(fuenteGrande);
+        sexo.setFont(fuenteGrande);
+        fechaNacimiento.setFont(fuenteGrande);
+        precio.setFont(fuenteGrande);
+        
+        nombrecampo.setFont(fuenteGrande);
+        apellidocampo.setFont(fuenteGrande);
+        numero_documento.setFont(fuenteGrande);
+        numeroTel.setFont(fuenteGrande);
+        correo.setFont(fuenteGrande);
+        precioTotal.setFont(fuenteGrande);
+        
+        listar_documento.setFont(fuenteGrande);
+        listar_sexo.setFont(fuenteGrande);
+        listar_nacionalidad.setFont(fuenteGrande);
+        elegir_fecha.setFont(fuenteGrande);
         
         
         

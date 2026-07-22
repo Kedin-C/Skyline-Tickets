@@ -3,3 +3,4 @@ dist/
 *.class
 nbproject/private/build/
 nbproject/private/
+nbproject/genfiles.properties

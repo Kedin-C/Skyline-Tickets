@@ -37,6 +37,8 @@ public class Tarjeta_de_debito_view extends Interfaz_vista_abtractas{
         
         super("Tarjeta de debito");
         
+        Font fuenteGrande = new Font("Arial", Font.PLAIN, 17);
+        
         contenedor_principal = super.getPanel2();
         contenedor_principal.setLayout(new BorderLayout());
         
@@ -50,7 +52,7 @@ public class Tarjeta_de_debito_view extends Interfaz_vista_abtractas{
         imagen = new FondoPanel("src/Imagenes/Tarjeta_debito.PNG");
         
         //Tamaños de la imagen y de el formulario
-        Dimension tamanoFormulario = new Dimension(480, 250);
+        Dimension tamanoFormulario = new Dimension(750, 350);
         
         formulario.setPreferredSize(tamanoFormulario);
         formulario.setMinimumSize(tamanoFormulario);
@@ -63,7 +65,7 @@ public class Tarjeta_de_debito_view extends Interfaz_vista_abtractas{
         imagen.setMaximumSize(tamanoImagen); 
         
         //Titulo del borde
-        Font fuenteGrande = new Font("Arial", Font.BOLD, 20);
+        
         titulo = new TitledBorder("Tarjeta de debito");
         titulo.setTitleFont(fuenteGrande);
         
@@ -124,7 +126,13 @@ public class Tarjeta_de_debito_view extends Interfaz_vista_abtractas{
         
         contenedor_principal.add(datos_tarjeta, BorderLayout.CENTER);
         contenedor_principal.add(volver_pagar, BorderLayout.SOUTH);
-        
+     
+        numeroTarjeta.setFont(fuenteGrande);
+        fechaVen.setFont(fuenteGrande);
+        cv.setFont(fuenteGrande);
+        nombreTitular.setFont(fuenteGrande);
+        descuento.setFont(fuenteGrande);
+
         this.setSize(550, 800);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

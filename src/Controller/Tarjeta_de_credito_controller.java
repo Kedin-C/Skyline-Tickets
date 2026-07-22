@@ -150,7 +150,7 @@ public class Tarjeta_de_credito_controller implements ActionListener{
                 
                 new Thread(() -> {
                     try {
-                        Thread.sleep(10000);
+                        Thread.sleep(4000);
                         
                         
                         ArrayList<Integer> listaPasajeros = datos.id_pasajero;

@@ -77,6 +77,7 @@ public class Login_controller implements ActionListener {
             usu.setCodigo_tipo_documento(usuario.getCodigo_tipo_documento());
             usu.setFecha_nacimiento(usuario.getFecha_nacimiento());
             usu.setNationalidad(usuario.getNationalidad());
+            
             this.sesion_usu.setUsuario(usu);
             JOptionPane.showMessageDialog(null, "Bienvenido " + usu.getNombre());
             if (usu.getRol() == 1) {

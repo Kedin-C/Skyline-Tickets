@@ -486,7 +486,8 @@ private String text_ticket5_2;
         
         for (int i = 0; i < ticket.size(); i++) {
             
-
+            
+            
             if(i == 0){
             tipo_vuelo_ticket1 = ticket.get(i).getTipo_vuelo();
             origen_ida_ticket1 = ticket.get(i).getOrigen();

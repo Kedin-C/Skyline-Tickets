@@ -104,6 +104,8 @@ public class Buscar_vuelos_view extends Interfaz_vista_abtractas{
         contenedor_principal = super.getPanel2();
         contenedor = new JPanel(new BorderLayout(0, 10));
         
+        Font fuenteGeneral = new Font("Arial", Font.PLAIN, 18);
+        
         //Crear paneles para agrupar los objetos
         origen_destino = new JPanel();
         vueloIda_vueloRegreso = new JPanel();
@@ -125,10 +127,12 @@ public class Buscar_vuelos_view extends Interfaz_vista_abtractas{
         vuelo_ida = new JRadioButton("Vuelo de ida");
         vuelo_regreso = new JRadioButton("Vuelo de ida y vuelta");
         buscar_vuelos = new JButton("Buscar vuelo");
+        Font fuenteBoton = new Font("Arial", Font.BOLD, 16);
+        buscar_vuelos.setFont(fuenteBoton);
         
         volver = super.getVolver2();
-        siguiente = new JButton("Siguiente");
-        siguiente.setPreferredSize(new Dimension(120,30));    
+        siguiente = super.siguiente;
+//        siguiente.setPreferredSize(new Dimension(120,30));    
         
         //Color letras botones
         buscar_vuelos.setForeground(Color.WHITE);
@@ -199,7 +203,7 @@ public class Buscar_vuelos_view extends Interfaz_vista_abtractas{
         datos = new ArrayList<>();
         
         
-        modelo = new DefaultTableModel(columnas, 0) {
+            modelo = new DefaultTableModel(columnas, 0) {
             //Metodo para bloquear los campos de la tabla
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -235,11 +239,25 @@ public class Buscar_vuelos_view extends Interfaz_vista_abtractas{
         contenedor_principal.setLayout(new BorderLayout());
         contenedor_principal.add(contenedor, BorderLayout.CENTER);
         
+        lugar_origen.setFont(fuenteGeneral);
+        lugar_destino.setFont(fuenteGeneral);
+        fecha_ida.setFont(fuenteGeneral);
+        fecha_regreso.setFont(fuenteGeneral);
+        horario.setFont(fuenteGeneral);
         
-        this.setSize(550, 800);
-        this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        vuelo_ida.setFont(fuenteGeneral);
+        vuelo_regreso.setFont(fuenteGeneral);
+        buscar_vuelos.setFont(fuenteGeneral);
+        
+        listar_origen.setFont(fuenteGeneral);
+        listar_destino.setFont(fuenteGeneral);
+        listar_horario.setFont(fuenteGeneral);
+        
+        
+//        this.setSize(550, 800);
+//        this.setLocationRelativeTo(null);
+//        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         
         
