@@ -91,10 +91,8 @@ public class Pagina_principal_administrador_controller_2 implements ActionListen
     
     public void setTickets(){
     
-        int tickets = tdao.getTotalVuelos(usuario);
-            
-            
-            
+    int tickets = tdao.getTotalVuelos(usuario);
+              
     List<Ticket> tick = tdao.getTotalVuelosList(usuario);  
 
     vistaCL.setTicketInfo(tick);
@@ -104,15 +102,15 @@ public class Pagina_principal_administrador_controller_2 implements ActionListen
     
     public int getCant_t(){
         
-       
         return tdao.getTotalVuelos(usuario);
     }
     
     public void getTicket_select(int v){
     
-         int cod = 0;
          int tickets = tdao.getTotalVuelos(usuario);
          List<Ticket> tick = tdao.getTotalVuelosList(usuario);  
+         
+
          
          if(v <= tickets && v >= 0){
              ticket.setId(tick.get(v).getId());

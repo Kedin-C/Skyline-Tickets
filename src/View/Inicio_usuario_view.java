@@ -17,6 +17,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
@@ -79,8 +80,9 @@ public class Inicio_usuario_view extends Interfaz_vista_abtractas  {
         panelboton.setBorder(new EmptyBorder(50, 1, 50, 1));
         panelboton.setOpaque(false);
 
-        panel2.add(Box.createVerticalGlue());
-        panel2.add(panelboton);
+        panel2.add(Box.createVerticalGlue());                   
+        panel2.add(clase);                      
+        panel2.add(panelboton); 
 
         comprar.setAlignmentX(Component.CENTER_ALIGNMENT);
         comprar.setBackground(Color.white);

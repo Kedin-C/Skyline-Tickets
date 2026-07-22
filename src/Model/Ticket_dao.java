@@ -26,11 +26,11 @@ public class Ticket_dao {
     
     public int getTotalVuelos(Usuario usuario){
         int r = 0;
-        String sql = "SELECT COUNT(*) AS total_vuelos FROM usuario JOIN Datos_pasajero ON usuario.numero_documento = Datos_pasajero.numero_documento JOIN Tickets ON Tickets.id_pasajero = Datos_pasajero.id JOIN Reservas ON Tickets.id_reserva = Reservas.id WHERE usuario.id_usuario = ?";
+        String sql = "SELECT COUNT(*) AS total_vuelos FROM usuario JOIN Datos_pasajero ON usuario.numero_documento = Datos_pasajero.numero_documento JOIN Tickets ON Tickets.id_pasajero = Datos_pasajero.id JOIN Reservas ON Tickets.id_reserva = Reservas.id WHERE usuario.numero_documento = ?";
         try {
         con = conectar.getConection();
         ps = con.prepareStatement(sql);
-        ps.setInt(1, usuario.getIdUsuario());
+        ps.setString(1, usuario.getDocumento());
         rs = ps.executeQuery();
         
         if(rs.next())
@@ -64,7 +64,7 @@ public class Ticket_dao {
         
         int cont = 1;
         
-        String sql = "SELECT t.codigo_ticket AS id_ticket, v.origen AS origen, v.destino AS destino, t.tipo_vuelo FROM Tickets t JOIN Reservas r ON t.id_reserva = r.id JOIN Vuelos v ON r.codigo_vuelo = v.codigo_vuelo WHERE t.id_pasajero = ?";
+        String sql = "SELECT t.codigo_ticket AS id_ticket, v.origen AS origen, v.destino AS destino, t.tipo_vuelo FROM Tickets t JOIN Reservas r ON t.id_reserva = r.id JOIN Vuelos v ON r.codigo_vuelo = v.codigo_vuelo JOIN Datos_pasajero dp ON t.id_pasajero = dp.id JOIN usuario u ON u.numero_documento = dp.numero_documento WHERE u.id_usuario = ?;";
         try {
         con = conectar.getConection();
         ps = con.prepareStatement(sql);

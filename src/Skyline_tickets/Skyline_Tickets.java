@@ -20,7 +20,7 @@ import Controller.Seleccion_modificacion_vuelo_usuario_controlador;
 import Controller.Tarjeta_de_credito_controller;
 import Controller.Tarjeta_de_debito_controller;
 import Controller.Transferencia_controller;
-import Controller.seleccion_modificacion_usuario_no_registrado_controller;
+import Controller.Seleccion_modificacion_usuario_no_registrado_controller;
 import Model.Datos;
 import Model.Seleccion_equipaje_extra_dao;
 import Model.Seleccion_modificacion_clase_de_vuelo_dao;
@@ -101,7 +101,7 @@ public class Skyline_Tickets {
         Interfaz_equipaje_controller interfaz2 = new Interfaz_equipaje_controller(modificacion,bodega,dao_equipaje_extra,ticket,forma_pago_vista);
         Interfaz_cambio_clase_controller interfaz3 = new Interfaz_cambio_clase_controller(modificacion,clase,dao_modificacion_clase_vuelo,ticket,forma_pago_vista);
         Modificacion_clase_equipaje_controller interfaz1 = new Modificacion_clase_equipaje_controller(modificacion,clase,bodega,select_vuelo_nor,ticket,interfaz3,dao_equipaje_extra,select_vuelo);
-        seleccion_modificacion_usuario_no_registrado_controller interfaz = new seleccion_modificacion_usuario_no_registrado_controller(dao_modificacion_vuelo,select_vuelo_nor,modificacion,interfaz1,ticket,vista_principal);
+        Seleccion_modificacion_usuario_no_registrado_controller interfaz = new Seleccion_modificacion_usuario_no_registrado_controller(dao_modificacion_vuelo,select_vuelo_nor,modificacion,interfaz1,ticket,vista_principal);
         Seleccion_forma_pago_controller forma_pago_controlador = new Seleccion_forma_pago_controller(forma_pago_vista, clase, bodega,credito,debito,transferencia,datos);        
         Tarjeta_de_credito_controller credito_cont = new Tarjeta_de_credito_controller(credito,datos,forma_pago_vista);
         Tarjeta_de_debito_controller debito_cont = new Tarjeta_de_debito_controller(debito,datos,forma_pago_vista);

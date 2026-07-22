@@ -80,6 +80,13 @@ public class Login_controller implements ActionListener {
             usu.setCorreo(usuario.getCorreo());
             usu.setIdUsuario(usuario.getIdUsuario());
             usu.setRol(usuario.getRol());
+            usu.setDocumento(usuario.getDocumento());
+            usu.setCodigo_tipo_documento(usuario.getCodigo_tipo_documento());
+            usu.setFecha_nacimiento(usuario.getFecha_nacimiento());
+            usu.setNationalidad(usuario.getNationalidad());
+            usu.setNumero_telefono(usuario.getNumero_telefono());
+            usu.setSexo(usuario.getSexo());
+            
 
             this.sesion_usu.setUsuario(usu);
 

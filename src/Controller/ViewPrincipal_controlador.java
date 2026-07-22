@@ -74,13 +74,13 @@ public class ViewPrincipal_controlador implements ActionListener{
     
     public int getCant_t(){
         
-        JOptionPane.showMessageDialog(vista,tdao.getTotalVuelos(usuario));
+        
         return tdao.getTotalVuelos(usuario);
     }
     
     public Ticket getTicket_select(int v){
     
-         int cod = 0;
+        
          int tickets = tdao.getTotalVuelos(usuario);
          List<Ticket> tick = tdao.getTotalVuelosList(usuario);  
          

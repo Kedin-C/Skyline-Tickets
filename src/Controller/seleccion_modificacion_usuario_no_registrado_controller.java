@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
  *
  * @author david
  */
-public class seleccion_modificacion_usuario_no_registrado_controller implements ActionListener {
+public class Seleccion_modificacion_usuario_no_registrado_controller implements ActionListener {
     private ViewPrincipal vista_principal;
     private Seleccion_de_vuelo_usuarioNoregistrado_view vista;
     private Seleccion_de_Modificacion_de_vuelo_view vista2;
@@ -30,7 +30,7 @@ public class seleccion_modificacion_usuario_no_registrado_controller implements 
     private Ticket ticket;
 
 
-    public seleccion_modificacion_usuario_no_registrado_controller(Seleccion_vuelo_usuario_no_registrado_dao dao, Seleccion_de_vuelo_usuarioNoregistrado_view vista, Seleccion_de_Modificacion_de_vuelo_view vista2, Modificacion_clase_equipaje_controller controlador_equipaje, Ticket ticket, ViewPrincipal principal) {
+    public Seleccion_modificacion_usuario_no_registrado_controller(Seleccion_vuelo_usuario_no_registrado_dao dao, Seleccion_de_vuelo_usuarioNoregistrado_view vista, Seleccion_de_Modificacion_de_vuelo_view vista2, Modificacion_clase_equipaje_controller controlador_equipaje, Ticket ticket, ViewPrincipal principal) {
         this.vista = vista;
         this.vista2 = vista2;
         this.dao = dao;
@@ -43,9 +43,6 @@ public class seleccion_modificacion_usuario_no_registrado_controller implements 
 
     }
 
-    public seleccion_modificacion_usuario_no_registrado_controller(Seleccion_vuelo_usuario_no_registrado_dao dao_modificacion_vuelo, Seleccion_de_vuelo_usuarioRegistrado_view select_vuelo, Seleccion_de_Modificacion_de_vuelo_view modificacion, Modificacion_clase_equipaje_controller interfaz1, Ticket ticket, ViewPrincipal vista_principal) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -151,7 +148,7 @@ public class seleccion_modificacion_usuario_no_registrado_controller implements 
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(vista, ex.toString());
         } catch (Exception ex) {
-            System.getLogger(seleccion_modificacion_usuario_no_registrado_controller.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            System.getLogger(Seleccion_modificacion_usuario_no_registrado_controller.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
 
     }

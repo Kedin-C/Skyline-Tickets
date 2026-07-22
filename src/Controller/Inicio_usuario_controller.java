@@ -108,7 +108,7 @@ public class Inicio_usuario_controller implements ActionListener {
 
     public void getTicket_select(int v) {
 
-        int cod = 0;
+
         int tickets = tdao.getTotalVuelos(usuario);
         List<Ticket> tick = tdao.getTotalVuelosList(usuario);
 
