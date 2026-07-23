@@ -207,12 +207,13 @@ public class Buscar_vuelos_controller implements ActionListener{
         }
         
         if(e.getSource() == vista.buscar_vuelos){
+           
             if(vista.listar_origen.getSelectedIndex() > 0 &&
                vista.listar_destino.getSelectedIndex() > 0 &&
                vista.elegir_fecha_ida.getDate() != null){
 
                 validarRegreso();
-
+                getListar(vista.tabla);
             
             }else {
                 JOptionPane.showMessageDialog(vista, 
@@ -383,13 +384,13 @@ public class Buscar_vuelos_controller implements ActionListener{
                 limpiarTabla();
                 
             }
-            if(puntos == 2){
+            
                 limpiarTabla();
                 if (vista.listar_horario.getSelectedIndex() == 0) {
                     getListar(vista.tabla);
                 } else {
                     getListarHorario(vista.tabla);
-                }
+                
             }
             
         }
