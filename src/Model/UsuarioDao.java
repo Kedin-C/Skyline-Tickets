@@ -144,6 +144,25 @@ public class UsuarioDao {
         }
     }
 
+    public boolean actualizarInformacionPersonal(int idUsuario, String correo, String documento, String sexo, String telefono) {
+        String sql = "UPDATE usuario SET correo_usuario = ?, numero_documento = ?, sexo = ?, numero_telefono = ? WHERE id_usuario = ?";
+        try {
+            con = conexionBD.getConection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, correo);
+            ps.setString(2, documento);
+            ps.setString(3, sexo);
+            ps.setString(4, telefono);
+            ps.setInt(5, idUsuario);
+            int filas = ps.executeUpdate();
+            return filas > 0;
+        } catch (Exception e) {
+            System.out.println("ERROR en actualizarInformacionPersonal: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public boolean existeCorreo(String correo) {
 
         String sql = "SELECT COUNT(*) FROM usuario WHERE correo_usuario = ?";

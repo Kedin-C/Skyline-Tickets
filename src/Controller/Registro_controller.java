@@ -2,8 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
-
 package Controller;
 
 /**
@@ -63,6 +61,13 @@ public class Registro_controller implements ActionListener {
             String confirmar = vista.getTxConfirmar().getText();
             
             
+            if (!validarCorreo(correo)) {
+                JOptionPane.showMessageDialog(
+                null,
+                "El correo no puede estar vacío, no debe contener espacios y debe tener un formato válido (ejemplo@dominio.com).");
+                return;
+            }
+            
             if (dao.existeCorreo(correo)) {
                 JOptionPane.showMessageDialog(
                 null,
@@ -70,7 +75,12 @@ public class Registro_controller implements ActionListener {
                 return;
             }       
             
-            
+            if (!validarDocumento(documento)) {
+                JOptionPane.showMessageDialog(
+                        null,
+                        "El número de documento debe contener solo números y tener entre 8 y 17 dígitos.");
+                return;
+            }
             
             if (!validarNombreApellido(nombre)) {
                 JOptionPane.showMessageDialog(
@@ -155,6 +165,26 @@ public class Registro_controller implements ActionListener {
     
     private boolean validarNombreApellido(String texto) {
         return texto.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$");
+    }
+
+    private boolean validarCorreo(String correo) {
+        if (correo == null || correo.isEmpty()) {
+            return false;
+        }
+        if (correo.contains(" ")) {
+            return false;
+        }
+        return correo.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$");
+    }
+
+    private boolean validarDocumento(String documento) {
+        if (documento == null || documento.isEmpty()) {
+            return false;
+        }
+        if (!documento.matches("[0-9]+")) {
+            return false;
+        }
+        return documento.length() >= 8 && documento.length() <= 17;
     }
 
     

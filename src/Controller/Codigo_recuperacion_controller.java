@@ -14,24 +14,22 @@ import Model.Usuario;
 import View.Codigo_recuperacion_view;
 import View.Nueva_contraseña_view;
 import View.Login_view;
-
 public class Codigo_recuperacion_controller {
     private UsuarioDao usuarioDao;
     private String codigoGenerado;
     private String correoRecuperacion;
     private Codigo_recuperacion_view view;
     private Login_view loginView;
-
+    
+    
     public Codigo_recuperacion_controller() {
         usuarioDao = new UsuarioDao();
     }
-
     public Codigo_recuperacion_controller(Codigo_recuperacion_view view) {
         this.view = view;
         usuarioDao = new UsuarioDao();
         iniciarEventos();
     }
-
     public Codigo_recuperacion_controller(Codigo_recuperacion_view view, String codigoYaGenerado, String correo, Login_view loginView) {
         this.view = view;
         this.codigoGenerado = codigoYaGenerado;
@@ -40,7 +38,6 @@ public class Codigo_recuperacion_controller {
         usuarioDao = new UsuarioDao();
         iniciarEventos();
     }
-
     public boolean procesarSolicitudRecuperacion(String correo) {
         Usuario usuario = usuarioDao.buscarPorCorreo(correo);
         if (usuario == null) {
@@ -50,7 +47,6 @@ public class Codigo_recuperacion_controller {
         generarCodigo();
         return true;
     }
-
     private void generarCodigo() {
         String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         StringBuilder codigo = new StringBuilder();
@@ -65,14 +61,12 @@ public class Codigo_recuperacion_controller {
             getCodigoGenerado()
         );
     }
-
     public boolean validarCodigo(String codigoIngresado) {
         if (codigoGenerado == null) return false;
         System.out.println("CODIGO GENERADO: " + codigoGenerado);
         System.out.println("CODIGO INGRESADO: " + codigoIngresado);
         return codigoGenerado.equals(codigoIngresado.trim());
     }
-
     private void iniciarEventos() {
         view.getB1().addActionListener(e -> {
             String codigoIngresado = view.getTxCodigo().getText().trim();
@@ -86,8 +80,13 @@ public class Codigo_recuperacion_controller {
                 JOptionPane.showMessageDialog(null, "Código incorrecto");
             }
         });
-    }
 
+        view.getBtnVolver().addActionListener(e -> {
+            view.dispose();
+            view.getRecuperarView().setLocationRelativeTo(null);
+            view.getRecuperarView().setVisible(true);
+        });
+    }
     public String getCodigoGenerado() {
         return codigoGenerado;
     }
