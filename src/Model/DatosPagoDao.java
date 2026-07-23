@@ -89,7 +89,6 @@ public class DatosPagoDao {
                 }
             }
         }
-       JOptionPane.showMessageDialog(null, "id_pago: "+id);
        return id; 
     }
     

@@ -90,7 +90,6 @@ public class DatosPersonalesDao {
                 }
             }
         }
-       JOptionPane.showMessageDialog(null, "id_pasajero: "+id);
        return id; 
     }
 }

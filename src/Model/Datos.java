@@ -139,16 +139,52 @@ public class Datos {
         for(int index = 0; index < codigoAsiento.size(); index++){
             id_reserva.add(datosReservaDao.idReservas(codigoAsiento.get(index),codigoVuelo));
         }
-        JOptionPane.showMessageDialog(null, "ids    "+id_pago+"  "+id_pasajero+"  "+id_reserva+"  "+equipajeExtra+"  "+tipoVuelo);
+
     }
     
     public void subirTicket(){
-        if(id_pago > 0 && id_pasajero.size() > 0 && id_reserva.size() > 0){ 
+        if(id_pasajero.size() > 0 && id_reserva.size() > 0){ 
             for(int i = 0; i < numeroTickets; i++){
                 ticket.enviarDatos(id_pago, id_pasajero.get(i), id_reserva.get(i), equipajeExtra, tipoVuelo);
             }
         }else{
-            JOptionPane.showMessageDialog(null, "No se pudo envial el ticket a la base de datos");
+            JOptionPane.showMessageDialog(null, "No se pudo enviar el ticket a la base de datos");
+        }
+        
+    }
+    
+    public void subirDatosT(){
+        for(int i=0; i < datosPersonales.size(); i++){
+                    
+            datosPersonalesDao.enviarDatos(datosPersonales.get(i));
+        }
+        
+        for(int index = 0; index < codigoAsiento.size(); index++){
+            datosReservaDao.enviarDatos(codigoAsiento.get(index), codigoVuelo);
+        }
+    }
+    
+    public void idsT(){
+        for(int i=0; i < datosPersonales.size(); i++){
+                    
+            id_pasajero.add(datosPersonalesDao.idPasajero(datosPersonales.get(i)));
+        }
+        
+//        id_pago = datosPagoDao.idPago(datosPago);
+        
+        for(int index = 0; index < codigoAsiento.size(); index++){
+            id_reserva.add(datosReservaDao.idReservas(codigoAsiento.get(index),codigoVuelo));
+        }
+
+    }
+    
+    public void subirTicketT(){
+        if(id_pasajero.size() > 0 && id_reserva.size() > 0){ 
+            for(int i = 0; i < numeroTickets; i++){
+                ticket.enviarDatost(id_pasajero.get(i), id_reserva.get(i), equipajeExtra, tipoVuelo);
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "No se pudo enviar el ticket a la base de datos");
         }
         
     }
