@@ -30,7 +30,7 @@ public class CreadorPDFTickets {
     
     public File generarTicket(String nombrePasajero, String documento, String vuelo,
                               String origen, String destino, String fecha, String asiento,
-                              double costo, String codigoReserva) {
+                              double costo, String codigoReserva,int ticket) {
         
         File archivo = null;
         try {
@@ -54,6 +54,7 @@ public class CreadorPDFTickets {
             // Datos del vuelo
             document.add(new Paragraph("Vuelo", subtitulo));
             document.add(new Paragraph("Código de vuelo: " + vuelo));
+            document.add(new Paragraph("Código de ticket: " + ticket));
             document.add(new Paragraph("Origen: " + origen));
             document.add(new Paragraph("Destino: " + destino));
             document.add(new Paragraph("Fecha: " + fecha));
@@ -73,7 +74,6 @@ public class CreadorPDFTickets {
             document.add(qr);
 
             document.close();
-            JOptionPane.showMessageDialog(null, "Ticket PDF generado correctamente");
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al generar el ticket PDF: " + e.getMessage());

@@ -24,6 +24,7 @@ import javax.swing.ListSelectionModel;
 import Model.Datos;
 import View.And_puestos;
 import View.Cambio_de_clase_de_vuelo_viiew;
+import Model.Usuario;
 import View.Elegir_clase_view;
 import View.Elegir_puestos_view;
 import View.Historial_vuelos_view;
@@ -51,9 +52,12 @@ public class Buscar_vuelos_controller implements ActionListener{
     private And_puestos pva;
     private Seleccion_forma_de_pago_view forma_pago_vista;
     private Cambio_de_clase_de_vuelo_viiew cambio_vuelo;
+    private Usuario usuario;
+    private ViewPrincipal vistaPrincipal;
+    private Pagina_principal_administrador_view viewAdmin;
+    private Inicio_usuario_view viewUsuario;
     
-    
-    public Buscar_vuelos_controller(Buscar_vuelos_view vista, Datos datos,ViewPrincipal principal,Pagina_principal_administrador_view pagina_admin,Inicio_usuario_view pagina_usuario,Historial_vuelos_view historial_vista,And_puestos pva,Seleccion_forma_de_pago_view forma_pago_vista,Cambio_de_clase_de_vuelo_viiew cambio_vuelo){
+    public Buscar_vuelos_controller(Buscar_vuelos_view vista, Datos datos,ViewPrincipal principal,Pagina_principal_administrador_view pagina_admin,Inicio_usuario_view pagina_usuario,Historial_vuelos_view historial_vista,And_puestos pva,Seleccion_forma_de_pago_view forma_pago_vista,Cambio_de_clase_de_vuelo_viiew cambio_vuelo, Usuario usuario, ViewPrincipal vistaPrincipal, Pagina_principal_administrador_view viewAdmin, Inicio_usuario_view viewUsuario){
         
         this.forma_pago_vista = forma_pago_vista;
         this.principal = principal;
@@ -62,6 +66,10 @@ public class Buscar_vuelos_controller implements ActionListener{
         this.historial_vista = historial_vista;
         this.pva = pva;
         this.cambio_vuelo = cambio_vuelo;
+        this.usuario = usuario;
+        this.vistaPrincipal = vistaPrincipal;
+        this.viewAdmin = viewAdmin;
+        this.viewUsuario = viewUsuario;
         
         this.vista = vista;
         this.datos = datos;
@@ -72,7 +80,6 @@ public class Buscar_vuelos_controller implements ActionListener{
         
         this.vistaElegirClase.volver.addActionListener(this);
         
-        //Se encarga de evitar que elija los 2 botones de tipo de viaje
         ButtonGroup grupoViaje = new ButtonGroup();
         grupoViaje.add(vista.vuelo_ida);
         grupoViaje.add(vista.vuelo_regreso);
@@ -80,36 +87,29 @@ public class Buscar_vuelos_controller implements ActionListener{
         this.vista.vuelo_ida.addActionListener(this);
         this.vista.vuelo_regreso.addActionListener(this);
         
-        //Para que empiese activo
         this.vista.vuelo_ida.setSelected(true);
         
-        //Para bloquear las fechas de 2 dias despues de hoy para atras
-        Calendar cal = Calendar.getInstance(); // toma la fecha y hora actual
-        cal.add(Calendar.DAY_OF_YEAR, 2); //para tomar dos dias despues de la fecha actual
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DAY_OF_YEAR, 2);
         Date dosDiasDespues = cal.getTime();
         
         this.vista.elegir_fecha_ida.setMinSelectableDate(dosDiasDespues);
         this.vista.elegir_fecha_regreso.setMinSelectableDate(dosDiasDespues);
         
-        //Para que empiese bloqueado 
         this.vista.elegir_fecha_regreso.setEnabled(false);
         
-        //Para que las columnas no se mueban 
         this.vista.tabla.getTableHeader().setReorderingAllowed(false);
         this.vista.tabla.getTableHeader().setResizingAllowed(false);
-        // Configura la tabla para que solo permita seleccionar UNA fila a la vez
         this.vista.tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         
         this.modelo = (DefaultTableModel) this.vista.tabla.getModel();
         
-        //Esconder la primera columna "ID"
         var modeloColumnas = this.vista.tabla.getColumnModel();
         modeloColumnas.getColumn(0).setMinWidth(0);
         modeloColumnas.getColumn(0).setPreferredWidth(0);
         modeloColumnas.getColumn(0).setMaxWidth(0);
         modeloColumnas.getColumn(0).setResizable(false);
         
-        //Para que no pueda ingresar al campo de fecha
         JTextField editorFecha1 = (JTextField) vista.elegir_fecha_ida.getDateEditor().getUiComponent();
         editorFecha1.addKeyListener(new KeyAdapter() {
             @Override
@@ -119,12 +119,10 @@ public class Buscar_vuelos_controller implements ActionListener{
 
             @Override
             public void keyPressed(KeyEvent e) {
-                // Bloquea y no deja entrar letras, números, Backspace y Suprimir
                 e.consume();
             }
         });
         
-        //Para que no pueda ingresar al campo de fecha
         JTextField editorFecha2 = (JTextField) vista.elegir_fecha_regreso.getDateEditor().getUiComponent();
         editorFecha2.addKeyListener(new KeyAdapter() {
             @Override
@@ -134,7 +132,6 @@ public class Buscar_vuelos_controller implements ActionListener{
 
             @Override
             public void keyPressed(KeyEvent e) {
-                // Bloquea y no deja entrar letras, números, Backspace y Suprimir
                 e.consume();
             }
         });
@@ -184,7 +181,6 @@ public class Buscar_vuelos_controller implements ActionListener{
                 return;
             }
             
-            //Para optener el id del vuelo
             int id = Integer.parseInt(vista.tabla.getValueAt(filaVuelo, 0).toString());
             double precio = Double.parseDouble(vista.tabla.getValueAt(filaVuelo, 6).toString());
             datos.setCodigoVuelo(id);
@@ -200,8 +196,7 @@ public class Buscar_vuelos_controller implements ActionListener{
             vista.setVisible(false);
             this.vistaElegirClase.setVisible(true);
             
-            Elegir_clase_controller controllerElegirClase = new Elegir_clase_controller(vistaElegirClase,datos,cambio_vuelo,pva,forma_pago_vista);
-            
+            Elegir_clase_controller controllerElegirClase = new Elegir_clase_controller(vistaElegirClase,datos,cambio_vuelo,pva,forma_pago_vista, usuario, vistaPrincipal, viewAdmin, viewUsuario);            
         }
         
         if(e.getSource() == vista.buscar_vuelos){
@@ -218,9 +213,7 @@ public class Buscar_vuelos_controller implements ActionListener{
                         
                         
                         fechaRegreso = vista.elegir_fecha_regreso.getDate();
-                        //para que la fecha quede bien 
                         SimpleDateFormat formateadorRegreso = new SimpleDateFormat("yyyy-MM-dd");
-                        //aplicando el metodo que deja la fecha tal cual en el campo de fecha regreso
                         String fechaExacta2 = formateadorRegreso.format(fechaRegreso);
                         
                         
@@ -278,14 +271,11 @@ public class Buscar_vuelos_controller implements ActionListener{
     
     
     
-    //Metodos
     public void getListar(JTable tabla){
         origen = vista.listar_origen.getSelectedItem().toString();
         destino = vista.listar_destino.getSelectedItem().toString();
         fechaIda = vista.elegir_fecha_ida.getDate();
-        //para que la fecha quede bien 
         SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd");
-        //aplicando el metodo que deja la fecha tal cual en el campo de fecha ida
         String fechaExacta = formateador.format(fechaIda);
         
         modelo=(DefaultTableModel) tabla.getModel();
@@ -348,9 +338,7 @@ public class Buscar_vuelos_controller implements ActionListener{
         origen = vista.listar_origen.getSelectedItem().toString();
         destino = vista.listar_destino.getSelectedItem().toString();
         fechaIda = vista.elegir_fecha_ida.getDate();
-        //para que la fecha quede bien 
         SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd");
-        //aplicando el metodo que deja la fecha tal cual en el campo de fecha ida
         String fechaExacta = formateador.format(fechaIda);
         
         String hora = vista.listar_horario.getSelectedItem().toString();

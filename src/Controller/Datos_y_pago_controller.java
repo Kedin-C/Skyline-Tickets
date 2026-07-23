@@ -11,11 +11,15 @@ import Model.Datos;
 import Model.DatosPersonales;
 import Model.DatosPersonalesDao;
 import Model.Ticket;
+import Model.Usuario;
 import View.Datos_y_pago_view;
+import View.Inicio_usuario_view;
+import View.Pagina_principal_administrador_view;
 import View.Seleccion_forma_de_pago_view;
 import View.Tarjeta_de_credito_view;
 import View.Tarjeta_de_debito_view;
 import View.Transferencia_view;
+import View.ViewPrincipal;
 import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -37,15 +41,23 @@ public class Datos_y_pago_controller implements ActionListener{
     Tarjeta_de_credito_view viewTarjetaCredito = new Tarjeta_de_credito_view();
     Tarjeta_de_debito_view viewTerjetaDebito = new Tarjeta_de_debito_view();
     Transferencia_view viewTransferencia = new Transferencia_view();
+    private Usuario usuario;
+    private ViewPrincipal vistaPrincipal;
+    private Pagina_principal_administrador_view viewAdmin;
+    private Inicio_usuario_view viewUsuario;
     
     int n;
     
     ArrayList<DatosPersonales> datosPasajeros = new ArrayList<>();
     
-    public Datos_y_pago_controller(Datos_y_pago_view vista, Datos datos){
+    public Datos_y_pago_controller(Datos_y_pago_view vista, Datos datos, Usuario usuario, ViewPrincipal vistaPrincipal, Pagina_principal_administrador_view viewAdmin, Inicio_usuario_view viewUsuario){
         
         this.datos=datos;
         this.vista=vista;
+        this.usuario = usuario;
+        this.vistaPrincipal = vistaPrincipal;
+        this.viewAdmin = viewAdmin;
+        this.viewUsuario = viewUsuario;
         
         this.n=1;
         
@@ -189,7 +201,7 @@ public class Datos_y_pago_controller implements ActionListener{
                 vista.setVisible(false);
                 viewTarjetaCredito.setVisible(true);
                 Seleccion_forma_de_pago_view selec_pago = new Seleccion_forma_de_pago_view();
-                Tarjeta_de_credito_controller controllerTarjetaCredito = new Tarjeta_de_credito_controller(viewTarjetaCredito, datos,selec_pago, ticket);
+                Tarjeta_de_credito_controller controllerTarjetaCredito = new Tarjeta_de_credito_controller(viewTarjetaCredito, datos,selec_pago, ticket, usuario, vistaPrincipal, viewAdmin, viewUsuario);
                 
                 datos.setDatosPersonales(datosPasajeros);
                 
