@@ -41,7 +41,7 @@ public class DatosPersonalesDao {
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, 
                     ex.toString(),
-                    "Error al guardar los datos del pasajero"+ex.getMessage(),
+                    "Error al guardar los datos del pasajero "+ex.getMessage(),
                     JOptionPane.ERROR_MESSAGE
             );
         }finally {
@@ -77,7 +77,7 @@ public class DatosPersonalesDao {
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, 
                     ex.toString(),
-                    "Error al guardar los datos del pasajero"+ex.getMessage(),
+                    "Error al traer el id del pasajero"+ex.getMessage(),
                     JOptionPane.ERROR_MESSAGE
             );
         }finally {

@@ -34,7 +34,7 @@ public class ReservasDao {
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, 
                     ex.toString(),
-                    "Error al guardar los datos de lareserva"+ex.getMessage(),
+                    "Error al guardar los datos de la reserva "+ex.getMessage(),
                     JOptionPane.ERROR_MESSAGE
             );
         }finally {
@@ -70,7 +70,7 @@ public class ReservasDao {
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, 
                     ex.toString(),
-                    "Error al gusrdar los datos de la reserva"+ex.getMessage(),
+                    "Error al traer los puestos reservados"+ex.getMessage(),
                     JOptionPane.ERROR_MESSAGE
             );
         }finally {
@@ -109,7 +109,7 @@ public class ReservasDao {
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, 
                     ex.toString(),
-                    "Error al gusrdar los datos de la reserva"+ex.getMessage(),
+                    "Error traer los puestos de la clase "+ex.getMessage(),
                     JOptionPane.ERROR_MESSAGE
             );
         }finally {
@@ -150,7 +150,7 @@ public class ReservasDao {
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, 
                     ex.toString(),
-                    "Error al guardar los datos del pasajero"+ex.getMessage(),
+                    "Error al traer el id de la reserva "+ex.getMessage(),
                     JOptionPane.ERROR_MESSAGE
             );
         }finally {
@@ -165,6 +165,38 @@ public class ReservasDao {
         }
        
        return id; 
+    }
+    
+    
+    public void cambiarReserva(int id, String asiento){
+        
+        String sql = "UPDATE reservas SET codigo_asiento = ? WHERE id = ?  ";
+        
+        try{
+            con = Conexion.getObject().getConection();
+            
+            ps = con.prepareStatement(sql);
+            
+            ps.setInt(1, id);
+            ps.setString(2, asiento);
+            
+            ps.executeUpdate();
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, 
+                    ex.toString(),
+                    "Error al modigicar los datos de la reserva "+ex.getMessage(),
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }finally {
+            if (con != null) {
+                try {
+                    con.close();
+                    ps.close();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.toString());
+                }
+            }
+        }
     }
     
 }
