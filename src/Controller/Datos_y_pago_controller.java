@@ -230,11 +230,8 @@ public class Datos_y_pago_controller implements ActionListener{
                 vista.setVisible(false);
                 viewTerjetaDebito.setVisible(true);
                 Seleccion_forma_de_pago_view selec_pago = new Seleccion_forma_de_pago_view();
-<<<<<<< HEAD
+                
                 Tarjeta_de_debito_controller controllerTerjetaDebito = new Tarjeta_de_debito_controller(viewTerjetaDebito, datos,selec_pago, ticket,pv,modify,vistaPrincipal,viewAdmin,viewUsuario,usuario);
-=======
-                Tarjeta_de_debito_controller controllerTerjetaDebito = new Tarjeta_de_debito_controller(viewTerjetaDebito, datos,selec_pago, ticket, usuario, vistaPrincipal, viewAdmin, viewUsuario);
->>>>>>> 63aca5e69167a43b6826bd3de98f9beb6ea01090
                 
                 datos.setDatosPersonales(datosPasajeros);
                 
