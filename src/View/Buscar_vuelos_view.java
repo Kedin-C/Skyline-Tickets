@@ -34,15 +34,17 @@ public class Buscar_vuelos_view extends Interfaz_vista_abtractas{
     // Declaracion de objetos y variables
     private JLabel lugar_origen,lugar_destino,fecha_ida,fecha_regreso,horario;
             private String lista_origen[]={
-                "","São Paulo", "Bogotá", "Ciudad de México", "Río de Janeiro", "Buenos Aires",
-                "Monterrey", "Brasilia", "Cancún", "Guadalajara", "Lima",
-                "Santiago de Chile", "Medellín", "Fortaleza", "Salvador de Bahía", "Recife",
-                "Curitiba", "Porto Alegre", "Panamá", "San José de Costa Rica", "Quito"},
+                "", "Barranquilla", "Bogotá", "Brasilia", "Buenos Aires", "Cali",
+                "Cancún", "Ciudad de México", "Curitiba", "Fortaleza", "Guadalajara",
+                "Lima", "Medellín", "Monterrey", "Panamá", "Porto Alegre",
+                "Quito", "Recife", "Río de Janeiro", "Salvador de Bahía",
+                "San José de Costa Rica", "Santiago de Chile", "São Paulo"},
             lista_destino[]={
-                "","São Paulo", "Bogotá", "Ciudad de México", "Río de Janeiro", "Buenos Aires",
-                "Monterrey", "Brasilia", "Cancún", "Guadalajara", "Lima",
-                "Santiago de Chile", "Medellín", "Fortaleza", "Cali", "Recife",
-                "Curitiba", "Porto Alegre", "Panamá", "Barranquilla", "Quito"},
+                "", "Barranquilla", "Bogotá", "Brasilia", "Buenos Aires", "Cali",
+                "Cancún", "Ciudad de México", "Curitiba", "Fortaleza", "Guadalajara",
+                "Lima", "Medellín", "Monterrey", "Panamá", "Porto Alegre",
+                "Quito", "Recife", "Río de Janeiro", "Salvador de Bahía",
+                "San José de Costa Rica", "Santiago de Chile", "São Paulo"},
             
             lista_horario[]={"", 
                 "00:00:00 - 03:00:00", "03:00:00 - 06:00:00", "06:00:00 - 09:00:00",
