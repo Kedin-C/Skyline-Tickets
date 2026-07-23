@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import Model.Datos;
 import Model.DatosPersonales;
 import Model.DatosPersonalesDao;
+import Model.Ticket;
 import View.Datos_y_pago_view;
 import View.Seleccion_forma_de_pago_view;
 import View.Tarjeta_de_credito_view;
@@ -32,6 +33,7 @@ public class Datos_y_pago_controller implements ActionListener{
     Datos_y_pago_view vista = new Datos_y_pago_view();
     Datos datos = new Datos();
     
+    Ticket ticket = new Ticket();
     Tarjeta_de_credito_view viewTarjetaCredito = new Tarjeta_de_credito_view();
     Tarjeta_de_debito_view viewTerjetaDebito = new Tarjeta_de_debito_view();
     Transferencia_view viewTransferencia = new Transferencia_view();
@@ -142,7 +144,12 @@ public class Datos_y_pago_controller implements ActionListener{
             }
         });
         
-        this.vista.precioTotal.setText(""+datos.getTotalPagar());
+        JOptionPane.showMessageDialog(null, "Llena los datos de manera correcta y\n"
+                                                        + "que concuerden con los datos reales\n"
+                                                        + "del pasajero ya que se validara esta\n"
+                                                        + "informacion antes de subir al vuelo");
+        
+        this.vista.precioTotal.setText(""+this.datos.getTotalPagar());
         
     }
 
@@ -164,7 +171,16 @@ public class Datos_y_pago_controller implements ActionListener{
                     
                 } else {
                     JOptionPane.showMessageDialog(null, "Llena los datos del ticket numero: " + n);
+                    
                 }
+                vista.nombrecampo.setText("");
+                vista.apellidocampo.setText("");
+                vista.listar_documento.setSelectedIndex(0);
+                vista.numero_documento.setText("");
+                vista.numeroTel.setText("");
+                vista.correo.setText("");
+                vista.listar_sexo.setSelectedIndex(0);
+                vista.listar_nacionalidad.setSelectedIndex(0);
             }
         }
         
@@ -173,12 +189,10 @@ public class Datos_y_pago_controller implements ActionListener{
                 vista.setVisible(false);
                 viewTarjetaCredito.setVisible(true);
                 Seleccion_forma_de_pago_view selec_pago = new Seleccion_forma_de_pago_view();
-                Tarjeta_de_credito_controller controllerTarjetaCredito = new Tarjeta_de_credito_controller(viewTarjetaCredito, datos,selec_pago);
+                Tarjeta_de_credito_controller controllerTarjetaCredito = new Tarjeta_de_credito_controller(viewTarjetaCredito, datos,selec_pago, ticket);
                 
                 datos.setDatosPersonales(datosPasajeros);
                 
-                double pago = Double.parseDouble(vista.precioTotal.getText());
-                datos.setTotalPagar(pago);
             }
         }
         if (e.getSource() == vista.debito) {
@@ -186,12 +200,10 @@ public class Datos_y_pago_controller implements ActionListener{
                 vista.setVisible(false);
                 viewTerjetaDebito.setVisible(true);
                 Seleccion_forma_de_pago_view selec_pago = new Seleccion_forma_de_pago_view();
-                Tarjeta_de_debito_controller controllerTerjetaDebito = new Tarjeta_de_debito_controller(viewTerjetaDebito, datos,selec_pago);
+                Tarjeta_de_debito_controller controllerTerjetaDebito = new Tarjeta_de_debito_controller(viewTerjetaDebito, datos,selec_pago, ticket);
                 
                 datos.setDatosPersonales(datosPasajeros);
                 
-                double pago = Double.parseDouble(vista.precioTotal.getText());
-                datos.setTotalPagar(pago);
             
             }
         }
@@ -203,8 +215,6 @@ public class Datos_y_pago_controller implements ActionListener{
                 Transferencia_controller controllerTransferencia = new Transferencia_controller(viewTransferencia, datos,selec_pago);
                 datos.setDatosPersonales(datosPasajeros);
                 
-                double pago = Double.parseDouble(vista.precioTotal.getText());
-                datos.setTotalPagar(pago);
             }
         }
         
@@ -292,6 +302,11 @@ public class Datos_y_pago_controller implements ActionListener{
                 
         int puntos = 0;
         
+        if(numDocumento.charAt(0) == '0'){
+            puntos--;
+            JOptionPane.showMessageDialog(vista,
+                                "El numero de documento no puede empesar por 0", "Numero de documento invalido", JOptionPane.WARNING_MESSAGE);
+        }
         if (numDocumento.length() <= 17){
             puntos++;
         }else{
@@ -304,7 +319,13 @@ public class Datos_y_pago_controller implements ActionListener{
         }else{
             JOptionPane.showMessageDialog(vista,
                                 "Tu numero de documento no alcansa el minimo de caracteres para el sistema", "Numero de documento invalido", JOptionPane.WARNING_MESSAGE);
-        }        
+        }  
+        
+        if(numTel.charAt(0) == '0'){
+            puntos--;
+            JOptionPane.showMessageDialog(vista,
+                                "El numero de celular no puede empesar por 0", "Numero de documento invalido", JOptionPane.WARNING_MESSAGE);
+        }
         
         if (numTel.length() == 10){
             puntos++;

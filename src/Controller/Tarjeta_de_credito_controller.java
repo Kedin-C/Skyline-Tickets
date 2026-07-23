@@ -8,6 +8,7 @@ package Controller;
 import Model.Datos;
 import Model.DatosPago;
 import Model.DatosPagoDao;
+import Model.Ticket;
 import Model.Ticket_dao;
 import View.Seleccion_forma_de_pago_view;
 import View.Tarjeta_de_credito_view;
@@ -35,14 +36,16 @@ public class Tarjeta_de_credito_controller implements ActionListener{
     private Ticket_dao ticketdao = new Ticket_dao();
     private CreadorPDFTickets creador = new CreadorPDFTickets();
     private Correo_controller correo = new Correo_controller();
+    private Ticket ticket;
     
 
     
-    public Tarjeta_de_credito_controller(Tarjeta_de_credito_view vista, Datos datos,Seleccion_forma_de_pago_view vista_atras){
+    public Tarjeta_de_credito_controller(Tarjeta_de_credito_view vista, Datos datos,Seleccion_forma_de_pago_view vista_atras, Ticket ticket){
         
         this.vista_atras = vista_atras;
         this.vista = vista;
         this.datos = datos;
+        this.ticket=ticket;
         
         this.vista.pagar.addActionListener(this);
         this.vista.volver.addActionListener(this);
@@ -112,6 +115,8 @@ public class Tarjeta_de_credito_controller implements ActionListener{
         //Desactivar el comando de "Pegar" (Ctrl + V)
         this.vista.nombre_titular.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), "none");
         
+        
+  
     }
 
     @Override
@@ -119,8 +124,6 @@ public class Tarjeta_de_credito_controller implements ActionListener{
 
         if(e.getSource() == vista.pagar){
             if(Validar()){
-                
-                JOptionPane.showMessageDialog(vista, vista.num_tarjeta.getText());
                 
                 datosPagar.setNumero_tarjeta(vista.num_tarjeta.getText());
                 
@@ -139,6 +142,11 @@ public class Tarjeta_de_credito_controller implements ActionListener{
                 datos.setDatosPago(datosPagar);
                 
                 if(datos.vista_pago == 1){
+                    
+                    datosPagarDao.enviarDatos(datosPagar);
+                    ticketdao.modificarEquipaje(ticket.getId(), datos.getEquipajeExtra());
+                    
+                }else if(datos.vista_pago == 2){
                     
                     datosPagarDao.enviarDatos(datosPagar);
                     
@@ -222,6 +230,7 @@ public class Tarjeta_de_credito_controller implements ActionListener{
         String cvv = vista.cvv.getText();
         
         int puntos = 0;
+       
         if(num_tarjeta.length() <= 19){
             puntos++;
         }else{

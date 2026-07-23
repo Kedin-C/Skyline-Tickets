@@ -86,8 +86,14 @@ public class Tarjeta_de_debito_view extends Interfaz_vista_abtractas{
         nombre_titular = new JTextField(12);
         codigoDescuento = new JTextField(12);
         
+        num_tarjeta.setFont(fuenteGrande);
+        cvv.setFont(fuenteGrande);
+        nombre_titular.setFont(fuenteGrande);
+        codigoDescuento.setFont(fuenteGrande);
+        
         fecha_ven = new JDateChooser();
         
+        fecha_ven.setFont(fuenteGrande);
         
         //Agregando los componentes al formulario
         formulario.add(numeroTarjeta);
@@ -109,14 +115,14 @@ public class Tarjeta_de_debito_view extends Interfaz_vista_abtractas{
         
         
         //Creando botones
-        volver = new JButton("Volver");
+        volver = super.volver_2;
         pagar = new JButton("Realizar pago");
         
-        volver.setForeground(Color.WHITE);
         pagar.setForeground(Color.WHITE);
         
-        volver.setBackground(Color.decode("#037FB9"));
         pagar.setBackground(Color.decode("#037FB9"));
+        
+        pagar.setPreferredSize(new Dimension(120,30));
         
         volver_pagar.add(volver);
         volver_pagar.add(pagar);

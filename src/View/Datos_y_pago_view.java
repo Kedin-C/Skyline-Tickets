@@ -193,9 +193,8 @@ public class Datos_y_pago_view extends Interfaz_vista_abtractas{
         pse.setEnabled(false);
         
         
-        volver = super.getVolver2();
+        volver = super.volver_2;
         siguiente = super.siguiente;
-//        siguiente.setPreferredSize(new Dimension(120,30)); 
         
         //Color letras botones
         credito.setForeground(Color.WHITE);

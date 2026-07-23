@@ -44,6 +44,8 @@ public class Seleccion_forma_pago_controller implements ActionListener{
         vista.forma2.addActionListener(this);
         vista.forma3.addActionListener(this);
        
+        this.datos.setEquipajeExtra(this.equipaje.getEquipaje_estado());
+        
     }
 
     @Override

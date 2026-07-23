@@ -47,7 +47,7 @@ public class Transferencia_view extends Interfaz_vista_abtractas{
         paypal = new JButton("Paypal");
         nequi = new JButton("Nequi");
         
-        volver = new JButton("Volver");
+        volver = super.volver_2;
         
         //Tamaño botones y color
         Dimension tamanoColumna = new Dimension(240, 70);
@@ -72,13 +72,11 @@ public class Transferencia_view extends Interfaz_vista_abtractas{
         paypal.setBackground(Color.decode("#037FB9"));
         nequi.setBackground(Color.decode("#037FB9"));
         
-        volver.setBackground(Color.decode("#037FB9"));
         
         bancolombia.setForeground(Color.WHITE);
         paypal.setForeground(Color.WHITE);
         nequi.setForeground(Color.WHITE);
         
-        volver.setForeground(Color.WHITE);
                 
         siguiente_volver.add(volver);
         

@@ -363,7 +363,7 @@ public class Ticket_dao {
                 + "VALUES (?, ?, ?, ?, ?)";
         
         try{
-            con = Conexion.getObject().getConection();
+            con = conectar.getConection();
             ps = con.prepareStatement(sql);
             
             ps.setInt(1, id_pago);
@@ -374,7 +374,6 @@ public class Ticket_dao {
             
             ps.executeUpdate();
         
-            JOptionPane.showMessageDialog(null,"ya");
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, 
                     ex.toString(),
@@ -394,7 +393,81 @@ public class Ticket_dao {
         
     }
     
+   private int equipajeExtra(int id){
+       
+       int equipaje = 0;
+       
+       String sql = "SELECT equipaje_extra FROM tickets WHERE codigo_ticket = ?";
+       
+       try{
+           con = conectar.getConection();
+           
+           ps = con.prepareStatement(sql);
+           
+           ps.setInt(1, id);
+           
+           rs = ps.executeQuery();
+           
+           if(rs.next()){
+               equipaje = rs.getInt("equipaje_extra");
+           }
+           
+       }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, 
+                    ex.toString(),
+                    "Error al guardar los datos del pasajero"+ex.getMessage(),
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }finally {
+            if (con != null) {
+                try {
+                    con.close();
+                    ps.close();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.toString());
+                }
+            }
+        }
    
+       return equipaje;
+       
+   }
+   
+   
+   public void modificarEquipaje(int id, int equipaje){
+       
+       int nuevoEquipaje = equipajeExtra(id) + equipaje;
+       
+       String sql = "UPDATE tickets SET equipaje_extra = ? WHERE codigo_ticket = ?";
+       
+       try{
+           
+           con = conectar.getConection();
+           
+           ps = con.prepareStatement(sql);
+           
+           ps.setInt(1, nuevoEquipaje);
+           ps.setInt(2, id);
+           
+           ps.executeUpdate();
+       
+       }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, 
+                    ex.toString(),
+                    "Error al guardar los datos del pasajero"+ex.getMessage(),
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }finally {
+            if (con != null) {
+                try {
+                    con.close();
+                    ps.close();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.toString());
+                }
+            }
+        }
+   }
 }
 
 

@@ -10,13 +10,13 @@ import javax.swing.JOptionPane;
 public class Datos {
     
     private int codigoVuelo, numeroTickets, equipajeExtra, claseVuelo;
-    private double totalPagar;
+    private double totalPagar = 0;
     private String tipoVuelo, fechaRegreso;
     private ArrayList<String> codigoAsiento;
     private ArrayList<DatosPersonales> datosPersonales;
     private DatosPago datosPago;
     
-    public int elegidos = 1, vista_pago=0, id_pago;
+    public int elegidos = 1, vista_pago = 0, id_pago;
     
     private DatosPersonalesDao datosPersonalesDao = new DatosPersonalesDao();
     private DatosPagoDao datosPagoDao = new DatosPagoDao();
@@ -146,7 +146,6 @@ public class Datos {
         if(id_pago > 0 && id_pasajero.size() > 0 && id_reserva.size() > 0){ 
             for(int i = 0; i < numeroTickets; i++){
                 ticket.enviarDatos(id_pago, id_pasajero.get(i), id_reserva.get(i), equipajeExtra, tipoVuelo);
-                JOptionPane.showMessageDialog(null, "todo bien");
             }
         }else{
             JOptionPane.showMessageDialog(null, "No se pudo envial el ticket a la base de datos");

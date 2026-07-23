@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import Model.Datos;
 import Model.Seleccion_equipaje_extra_dao;
 import Model.Ticket;
 import View.Agregar_equipaje_extra_view;
@@ -26,16 +27,18 @@ public class Interfaz_equipaje_controller implements ActionListener{
     private Seleccion_forma_de_pago_view forma_pago;
     private Seleccion_equipaje_extra_dao dao;
     private Ticket ticket;
+    private Datos datos;
     
     
     
    
-    public Interfaz_equipaje_controller(Seleccion_de_Modificacion_de_vuelo_view vista_seleccion_clase_equipaje,Agregar_equipaje_extra_view vista_agg_equipaje,Seleccion_equipaje_extra_dao dao, Ticket ticket, Seleccion_forma_de_pago_view forma_pago){
+    public Interfaz_equipaje_controller(Seleccion_de_Modificacion_de_vuelo_view vista_seleccion_clase_equipaje,Agregar_equipaje_extra_view vista_agg_equipaje,Seleccion_equipaje_extra_dao dao, Ticket ticket, Seleccion_forma_de_pago_view forma_pago, Datos datos){
     this.vista_seleccion_clase_equipaje = vista_seleccion_clase_equipaje;
     this.vista_agg_equipaje = vista_agg_equipaje;
     this.forma_pago = forma_pago;
     this.dao = dao;
     this.ticket = ticket;
+    this.datos = datos;
 
     vista_agg_equipaje.volver.addActionListener(this);
     vista_agg_equipaje.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);    
@@ -95,6 +98,11 @@ public class Interfaz_equipaje_controller implements ActionListener{
                 forma_pago.setVisible(true);
                 forma_pago.setExtendedState(JFrame.MAXIMIZED_BOTH);
                 forma_pago.setVista_anterior(2);
+                
+                datos.setEquipajeExtra(vista_agg_equipaje.getEquipaje_estado());
+                datos.setTotalPagar(vista_agg_equipaje.getEquipaje_estado()*4000);
+                datos.vista_pago = 1;
+                
             }
         }
         
