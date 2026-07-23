@@ -97,6 +97,11 @@ public class Historial_vuelos_view extends Interfaz_vista_abtractas{
                 
         
         tabla = new JTable(modelo);
+        
+        
+        tabla.getTableHeader().setReorderingAllowed(false);
+        tabla.getTableHeader().setResizingAllowed(false);
+        
         scroll = new JScrollPane(tabla);
 
         tabla.setFont(new Font("Arial", Font.PLAIN, 15));

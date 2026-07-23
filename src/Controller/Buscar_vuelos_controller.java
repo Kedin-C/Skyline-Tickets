@@ -169,6 +169,7 @@ public class Buscar_vuelos_controller implements ActionListener{
         
         if(e.getSource() == vista.siguiente){
             
+            pva.setNumero(1);
             int filaVuelo = vista.tabla.getSelectedRow();
             
             if (filaVuelo == -1) {
