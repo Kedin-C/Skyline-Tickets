@@ -406,9 +406,8 @@ public class Ticket_dao {
            
            ps.setInt(1, id);
            
-           ps.executeUpdate();
-           
            rs = ps.executeQuery();
+           
            if(rs.next()){
                equipaje = rs.getInt("equipaje_extra");
            }
@@ -431,12 +430,13 @@ public class Ticket_dao {
         }
    
        return equipaje;
+       
    }
    
    
    public void modificarEquipaje(int id, int equipaje){
        
-       int nuevoEquipaje = equipajeExtra(id);
+       int nuevoEquipaje = equipajeExtra(id) + equipaje;
        
        String sql = "UPDATE tickets SET equipaje_extra = ? WHERE codigo_ticket = ?";
        

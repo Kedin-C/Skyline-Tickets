@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import Model.Datos;
 import Model.DatosPersonales;
 import Model.DatosPersonalesDao;
+import Model.Ticket;
 import View.Datos_y_pago_view;
 import View.Seleccion_forma_de_pago_view;
 import View.Tarjeta_de_credito_view;
@@ -32,6 +33,7 @@ public class Datos_y_pago_controller implements ActionListener{
     Datos_y_pago_view vista = new Datos_y_pago_view();
     Datos datos = new Datos();
     
+    Ticket ticket = new Ticket();
     Tarjeta_de_credito_view viewTarjetaCredito = new Tarjeta_de_credito_view();
     Tarjeta_de_debito_view viewTerjetaDebito = new Tarjeta_de_debito_view();
     Transferencia_view viewTransferencia = new Transferencia_view();
@@ -187,7 +189,7 @@ public class Datos_y_pago_controller implements ActionListener{
                 vista.setVisible(false);
                 viewTarjetaCredito.setVisible(true);
                 Seleccion_forma_de_pago_view selec_pago = new Seleccion_forma_de_pago_view();
-                Tarjeta_de_credito_controller controllerTarjetaCredito = new Tarjeta_de_credito_controller(viewTarjetaCredito, datos,selec_pago);
+                Tarjeta_de_credito_controller controllerTarjetaCredito = new Tarjeta_de_credito_controller(viewTarjetaCredito, datos,selec_pago, ticket);
                 
                 datos.setDatosPersonales(datosPasajeros);
                 
@@ -198,7 +200,7 @@ public class Datos_y_pago_controller implements ActionListener{
                 vista.setVisible(false);
                 viewTerjetaDebito.setVisible(true);
                 Seleccion_forma_de_pago_view selec_pago = new Seleccion_forma_de_pago_view();
-                Tarjeta_de_debito_controller controllerTerjetaDebito = new Tarjeta_de_debito_controller(viewTerjetaDebito, datos,selec_pago);
+                Tarjeta_de_debito_controller controllerTerjetaDebito = new Tarjeta_de_debito_controller(viewTerjetaDebito, datos,selec_pago, ticket);
                 
                 datos.setDatosPersonales(datosPasajeros);
                 
@@ -300,6 +302,11 @@ public class Datos_y_pago_controller implements ActionListener{
                 
         int puntos = 0;
         
+        if(numDocumento.charAt(0) == '0'){
+            puntos--;
+            JOptionPane.showMessageDialog(vista,
+                                "El numero de documento no puede empesar por 0", "Numero de documento invalido", JOptionPane.WARNING_MESSAGE);
+        }
         if (numDocumento.length() <= 17){
             puntos++;
         }else{
@@ -312,7 +319,13 @@ public class Datos_y_pago_controller implements ActionListener{
         }else{
             JOptionPane.showMessageDialog(vista,
                                 "Tu numero de documento no alcansa el minimo de caracteres para el sistema", "Numero de documento invalido", JOptionPane.WARNING_MESSAGE);
-        }        
+        }  
+        
+        if(numTel.charAt(0) == '0'){
+            puntos--;
+            JOptionPane.showMessageDialog(vista,
+                                "El numero de celular no puede empesar por 0", "Numero de documento invalido", JOptionPane.WARNING_MESSAGE);
+        }
         
         if (numTel.length() == 10){
             puntos++;

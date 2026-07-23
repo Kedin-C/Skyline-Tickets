@@ -23,7 +23,7 @@ import javax.swing.border.EmptyBorder;
  * @author david
  */
 public class Agregar_equipaje_extra_view extends Interfaz_vista_abtractas{
-    
+
     private final Container contenedor;
     private  JPanel panel1,panel2,clase = null;
     public JButton actual;

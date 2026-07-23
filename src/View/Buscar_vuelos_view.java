@@ -164,6 +164,9 @@ public class Buscar_vuelos_view extends Interfaz_vista_abtractas{
         elegir_fecha_ida.setDateFormatString("yyyy-MM-dd");
         elegir_fecha_regreso.setDateFormatString("yyyy-MM-dd");
         
+        elegir_fecha_ida.setFont(fuenteGeneral);
+        elegir_fecha_regreso.setFont(fuenteGeneral);
+        
         origen_destino.add(lugar_origen);
         origen_destino.add(listar_origen);
         origen_destino.add(lugar_destino);

@@ -7,6 +7,8 @@ package Controller;
 import Model.Datos;
 import Model.DatosPago;
 import Model.DatosPagoDao;
+import Model.Ticket;
+import Model.Ticket_dao;
 import View.Seleccion_forma_de_pago_view;
 import View.Tarjeta_de_debito_view;
 import java.awt.Toolkit;
@@ -14,7 +16,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -28,12 +32,17 @@ public class Tarjeta_de_debito_controller implements ActionListener{
     private Datos datos;
     private DatosPago datosPagar = new DatosPago();
     private DatosPagoDao datosPagarDao = new DatosPagoDao();
+    private Ticket_dao ticketdao = new Ticket_dao();
+    private CreadorPDFTickets creador = new CreadorPDFTickets();
+    private Correo_controller correo = new Correo_controller();
+    private Ticket ticket;
     
-    public Tarjeta_de_debito_controller(Tarjeta_de_debito_view vista, Datos datos,Seleccion_forma_de_pago_view vista_atras){
+    public Tarjeta_de_debito_controller(Tarjeta_de_debito_view vista, Datos datos,Seleccion_forma_de_pago_view vista_atras, Ticket ticket){
         
         this.vista_atras = vista_atras;
         this.vista = vista;
         this.datos=datos;
+        this.ticket=ticket;
         
         
         this.vista.pagar.addActionListener(this);
@@ -110,13 +119,12 @@ public class Tarjeta_de_debito_controller implements ActionListener{
         if(e.getSource() == vista.pagar){
             if(Validar()){
                 
-                JOptionPane.showMessageDialog(vista, vista.num_tarjeta.getText());
                 
                 datosPagar.setNumero_tarjeta(vista.num_tarjeta.getText());
                 
                 SimpleDateFormat formateadorRegreso = new SimpleDateFormat("yyyy-MM-dd");
                 //aplicando el metodo que deja la fecha tal cual en el campo de fecha regreso
-                String fecha = formateadorRegreso.format(vista.fecha_ven);
+                String fecha = formateadorRegreso.format(vista.fecha_ven.getDate());
                 
                 datosPagar.setFecha_vencimiento(fecha);
                 
@@ -131,10 +139,52 @@ public class Tarjeta_de_debito_controller implements ActionListener{
                 if(datos.vista_pago == 1){
                     
                     datosPagarDao.enviarDatos(datosPagar);
+                    ticketdao.modificarEquipaje(ticket.getId(), datos.getEquipajeExtra());
+                    
+                }else if(datos.vista_pago == 2){
+                    
+                    datosPagarDao.enviarDatos(datosPagar);
                     
                 }else{
                     datos.subirDatos();
+                    datos.ids();
+                    datos.subirTicket();
                 }
+                
+                new Thread(() -> {
+                    try {
+                        Thread.sleep(4000);
+                        
+                        
+                        ArrayList<Integer> listaPasajeros = datos.id_pasajero;
+                        
+                        for (int idPasajero : listaPasajeros) {
+                            // Obtener datos desde el DAO
+                            String nombre = ticketdao.obtenerNombrePasajero(idPasajero);
+                            String documento = ticketdao.obtenerDocumento(idPasajero);
+                            String vuelo = ticketdao.obtenerCodigoVuelo(idPasajero);
+                            String origen = ticketdao.obtenerOrigen(idPasajero);
+                            String destino = ticketdao.obtenerDestino(idPasajero);
+                           String fechat = ticketdao.obtenerFechaVuelo(idPasajero);
+                           String asiento = ticketdao.obtenerAsiento(idPasajero);
+                           double costo = ticketdao.obtenerCosto(idPasajero);
+                           String codigoReserva = ticketdao.obtenerCodigoReserva(idPasajero);
+                           String correoDestino = ticketdao.obtenerCorreoPasajero(idPasajero);
+                           
+                          // Generar PDF para este pasajero
+                            File pdf = creador.generarTicket(
+                               nombre, documento, vuelo, origen, destino,
+                               fechat, asiento, costo, codigoReserva
+                           );
+
+                           // Enviar correo con el PDF adjunto
+                         correo.enviarCorreoConAdjunto(correoDestino, pdf);
+                        }
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(null, e.toString(),
+                        "Error al generar y/o enviar pdf: " + ex.getMessage(), JOptionPane.ERROR_MESSAGE);
+                    }
+                }).start();
             }
         }
         
