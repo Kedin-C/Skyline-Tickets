@@ -4,11 +4,15 @@
  */
 package Controller;
 
+import Model.Datos;
 import Model.Seleccion_modificacion_clase_de_vuelo_dao;
 import Model.Ticket;
+import View.And_puestos;
 import View.Seleccion_de_Modificacion_de_vuelo_view;
 import View.Seleccion_forma_de_pago_view;
 import View.Cambio_de_clase_de_vuelo_viiew;
+import View.Elegir_clase_view;
+import View.Elegir_puestos_view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
@@ -26,16 +30,24 @@ public class Interfaz_cambio_clase_controller implements ActionListener {
     private Cambio_de_clase_de_vuelo_viiew vista_seleccion_clase;
     private Seleccion_forma_de_pago_view forma_pago;
     private Seleccion_modificacion_clase_de_vuelo_dao dao;
-    private Ticket ticket = new Ticket();
+    private Elegir_puestos_view puesto_vista;
+    private Ticket ticket;
+    private Datos datos;
+    private Elegir_clase_view clase_view;
+    private And_puestos pva;
     
     
     
-    public Interfaz_cambio_clase_controller(Seleccion_de_Modificacion_de_vuelo_view vista_seleccion_clase_vuelo,Cambio_de_clase_de_vuelo_viiew vista_seleccion_clase, Seleccion_modificacion_clase_de_vuelo_dao dao, Ticket ticket,Seleccion_forma_de_pago_view forma_pago){
+    public Interfaz_cambio_clase_controller(Seleccion_de_Modificacion_de_vuelo_view vista_seleccion_clase_vuelo,Cambio_de_clase_de_vuelo_viiew vista_seleccion_clase, Seleccion_modificacion_clase_de_vuelo_dao dao, Ticket ticket,Seleccion_forma_de_pago_view forma_pago,Elegir_puestos_view puesto_vista,Datos datos,Elegir_clase_view clase_view,And_puestos pva){
     this.vista_seleccion_clase_vuelo = vista_seleccion_clase_vuelo;
     this.vista_seleccion_clase = vista_seleccion_clase;
     this.forma_pago = forma_pago;
+    this.puesto_vista = puesto_vista;
+    this.clase_view = clase_view;
     this.dao = dao;
     this.ticket = ticket;
+    this.datos = datos;
+    this.pva = pva;
 
     
     
@@ -81,22 +93,29 @@ public class Interfaz_cambio_clase_controller implements ActionListener {
         if(e.getSource() == vista_seleccion_clase.boton_Seleccionar_ejecutiva){
             vista_seleccion_clase.setVisible(false);
             
-            forma_pago.setVisible(true);
-            forma_pago.setExtendedState(JFrame.MAXIMIZED_BOTH);
-            forma_pago.setVista_anterior(1);
+            clase_view.ejecutiva.setSelected(true);
+            clase_view.siguiente.doClick();
+            clase_view.setVista_anterior(2);
+            pva.setNumero(2);
+            datos.setClaseVuelo(2);
+            datos.setNumeroTickets(1);
+
             vista_seleccion_clase.setClase_seleccionada(1);
         
         }
         
         if(e.getSource() == vista_seleccion_clase.boton_Seleccionar_primera){
             vista_seleccion_clase.setVisible(false);
+            clase_view.primera.setSelected(true);
+            pva.setNumero(2);
+            clase_view.siguiente.doClick();
             
-            forma_pago.setVisible(true);
-            forma_pago.setExtendedState(JFrame.MAXIMIZED_BOTH);
-            forma_pago.setVista_anterior(1);
+            clase_view.setVista_anterior(2);
+            datos.setClaseVuelo(2);
+            datos.setNumeroTickets(1);
+            
             vista_seleccion_clase.setClase_seleccionada(2);
-            
-        
+
         }
         
         

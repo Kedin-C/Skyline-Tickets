@@ -24,6 +24,9 @@ public class Elegir_puestos_view extends Interfaz_vista_abtractas{
     public JButton torre1[][], torre2[][], siguiente, volver, aleatorio;
     private FondoPanel avion;
     private JScrollPane scrol;
+    private int vista_anterior;
+
+   
     
     public Elegir_puestos_view() {
         
@@ -139,7 +142,18 @@ public class Elegir_puestos_view extends Interfaz_vista_abtractas{
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
     
+    
+     public int getVista_anterior() {
+        return vista_anterior;
+    }
+
+    public void setVista_anterior(int vista_anterior) {
+        this.vista_anterior = vista_anterior;
+    }
+    
 }
+
+
 
 //El avion de fondo 
 class FondoPanel extends JPanel {

@@ -31,6 +31,7 @@ public class Elegir_clase_view extends Interfaz_vista_abtractas{
     private String listaNumeros[] = {"1","2","3","4","5"},
             listaEquipaje[] = {"","15 Kilos $60.000","20 Kilos $80.000","25 Kilos $100.000"};
     public JComboBox listarNumeros,listarEquipaje;
+    private int vista_anterior;
     
     
     
@@ -205,5 +206,14 @@ public class Elegir_clase_view extends Interfaz_vista_abtractas{
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
     }
+    
+         public int getVista_anterior() {
+        return vista_anterior;
+    }
+
+    public void setVista_anterior(int vista_anterior) {
+        this.vista_anterior = vista_anterior;
+    }
+    
     
 }

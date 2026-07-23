@@ -22,10 +22,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import Model.Datos;
+import View.And_puestos;
+import View.Cambio_de_clase_de_vuelo_viiew;
 import View.Elegir_clase_view;
+import View.Elegir_puestos_view;
 import View.Historial_vuelos_view;
 import View.Inicio_usuario_view;
 import View.Pagina_principal_administrador_view;
+import View.Seleccion_de_Modificacion_de_vuelo_view;
+import View.Seleccion_forma_de_pago_view;
 import View.ViewPrincipal;
 import javax.swing.JFrame;
 
@@ -43,14 +48,20 @@ public class Buscar_vuelos_controller implements ActionListener{
     private Historial_vuelos_view historial_vista;
     public String origen, destino, hora1, hora2;
     public Date fechaIda, fechaRegreso;
+    private And_puestos pva;
+    private Seleccion_forma_de_pago_view forma_pago_vista;
+    private Cambio_de_clase_de_vuelo_viiew cambio_vuelo;
     
-    public Buscar_vuelos_controller(Buscar_vuelos_view vista, Datos datos,ViewPrincipal principal,Pagina_principal_administrador_view pagina_admin,Inicio_usuario_view pagina_usuario,Historial_vuelos_view historial_vista){
+    
+    public Buscar_vuelos_controller(Buscar_vuelos_view vista, Datos datos,ViewPrincipal principal,Pagina_principal_administrador_view pagina_admin,Inicio_usuario_view pagina_usuario,Historial_vuelos_view historial_vista,And_puestos pva,Seleccion_forma_de_pago_view forma_pago_vista,Cambio_de_clase_de_vuelo_viiew cambio_vuelo){
         
-       
+        this.forma_pago_vista = forma_pago_vista;
         this.principal = principal;
         this.pagina_admin = pagina_admin;
         this.pagina_usuario = pagina_usuario;
         this.historial_vista = historial_vista;
+        this.pva = pva;
+        this.cambio_vuelo = cambio_vuelo;
         
         this.vista = vista;
         this.datos = datos;
@@ -188,7 +199,8 @@ public class Buscar_vuelos_controller implements ActionListener{
             
             vista.setVisible(false);
             this.vistaElegirClase.setVisible(true);
-            Elegir_clase_controller controllerElegirClase = new Elegir_clase_controller(vistaElegirClase, datos);
+            
+            Elegir_clase_controller controllerElegirClase = new Elegir_clase_controller(vistaElegirClase,datos,cambio_vuelo,pva,forma_pago_vista);
             
         }
         

@@ -8,8 +8,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ButtonGroup;
 import Model.Datos;
+import View.And_puestos;
+import View.Cambio_de_clase_de_vuelo_viiew;
 import View.Elegir_clase_view;
 import View.Elegir_puestos_view;
+import View.Seleccion_de_Modificacion_de_vuelo_view;
+import View.Seleccion_forma_de_pago_view;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class Elegir_clase_controller implements ActionListener{
@@ -17,11 +22,19 @@ public class Elegir_clase_controller implements ActionListener{
     Elegir_clase_view vista = new Elegir_clase_view();
     Datos datos = new Datos();
     Elegir_puestos_view vistaElegirPuestos = new Elegir_puestos_view();
+    private Cambio_de_clase_de_vuelo_viiew cam_clas_view ;
+    private And_puestos pva;
+    private Seleccion_forma_de_pago_view modi_ticket_view ;
+    private Cambio_de_clase_de_vuelo_viiew elegir_clase_vista;
+
     
-    public Elegir_clase_controller(Elegir_clase_view vista, Datos datos){
-        
+    public Elegir_clase_controller(Elegir_clase_view vista, Datos datos,Cambio_de_clase_de_vuelo_viiew cam_view,And_puestos pva,Seleccion_forma_de_pago_view modi_ticket_view){
+        this.modi_ticket_view = modi_ticket_view;
+        this.elegir_clase_vista = cam_view;
+        this.pva =pva;
         this.vista=vista;
         this.datos=datos;
+        this.cam_clas_view = cam_view;
         
         this.vista.siguiente.addActionListener( this);
         this.vista.volver.addActionListener(this);
@@ -45,6 +58,7 @@ public class Elegir_clase_controller implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         
         if(e.getSource() == vista.siguiente){
+
             if(vista.economica.isSelected()){
                 datos.setClaseVuelo(1);
                 datos.setTotalPagar(datos.getTotalPagar()+180000);
@@ -77,13 +91,24 @@ public class Elegir_clase_controller implements ActionListener{
             
             vista.setVisible(false);
             vistaElegirPuestos.setVisible(true);
-            Elegir_puestos_controller controllerElegirPuestos = new Elegir_puestos_controller(vistaElegirPuestos, datos);
+            
+            
+            Elegir_puestos_controller controllerElegirPuestos = new Elegir_puestos_controller(vistaElegirPuestos, datos,pva,modi_ticket_view);
             
         }
         
         if(e.getSource() == vistaElegirPuestos.volver){
+            if(pva.getNumero() == 1){
             vista.setVisible(true);
             vistaElegirPuestos.setVisible(false);
+            }else if(pva.getNumero() == 2){
+            
+                vistaElegirPuestos.setVisible(false);
+                
+                cam_clas_view.setVisible(true);
+                cam_clas_view.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                
+            }
         }
         
     }

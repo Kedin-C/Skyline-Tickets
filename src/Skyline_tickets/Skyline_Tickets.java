@@ -6,6 +6,8 @@ package Skyline_tickets;
 
 import Controller.Apartado_menu_reportes_Controller;
 import Controller.Buscar_vuelos_controller;
+import Controller.Elegir_clase_controller;
+import Controller.Elegir_puestos_controller;
 import Controller.Historial_vuelos_controller;
 import Controller.Informacion_personal_controller;
 import Controller.Inicio_usuario_controller;
@@ -53,8 +55,11 @@ import Controller.Reportes_financieros_controller;
 import Controller.Reportes_operativos_controller;
 import Model.Reportes_financieros_dao;
 import Model.Reportes_operativos_dao;
+import View.And_puestos;
 import View.Apartado_reportes_financieros_view;
 import View.Apartado_reportes_operacionales_view;
+import View.Elegir_clase_view;
+import View.Elegir_puestos_view;
 import View.Historial_vuelos_view;
 import View.Recuperar_contraseña_view;
 
@@ -91,10 +96,14 @@ public class Skyline_Tickets {
         Recuperar_contraseña_view recu_con = new Recuperar_contraseña_view();
         Recuperar_contraseña_controller recuperar_cont = new Recuperar_contraseña_controller(recu_con, loginV);
         Historial_vuelos_view historial_vuelos = new Historial_vuelos_view();
+        Elegir_puestos_view puestos_vista = new Elegir_puestos_view();
+        Elegir_clase_view elegir_clase_vista = new Elegir_clase_view();
+       
         
         //clases
         Ticket ticket = new Ticket();
         Datos datos = new Datos();
+        And_puestos puv =  new And_puestos();
         
         //dao
         Seleccion_vuelo_usuario_no_registrado_dao dao_modificacion_vuelo = new Seleccion_vuelo_usuario_no_registrado_dao();
@@ -106,16 +115,16 @@ public class Skyline_Tickets {
         
         //controladores
         Interfaz_equipaje_controller interfaz2 = new Interfaz_equipaje_controller(modificacion,bodega,dao_equipaje_extra,ticket,forma_pago_vista,datos);
-        Interfaz_cambio_clase_controller interfaz3 = new Interfaz_cambio_clase_controller(modificacion,clase,dao_modificacion_clase_vuelo,ticket,forma_pago_vista);
+        Interfaz_cambio_clase_controller interfaz3 = new Interfaz_cambio_clase_controller(modificacion,clase,dao_modificacion_clase_vuelo,ticket,forma_pago_vista,puestos_vista,datos,elegir_clase_vista,puv);
         Modificacion_clase_equipaje_controller interfaz1 = new Modificacion_clase_equipaje_controller(modificacion,clase,bodega,select_vuelo_nor,ticket,interfaz3,dao_equipaje_extra,select_vuelo);
         Seleccion_modificacion_usuario_no_registrado_controller interfaz = new Seleccion_modificacion_usuario_no_registrado_controller(dao_modificacion_vuelo,select_vuelo_nor,modificacion,interfaz1,ticket,vista_principal);
-        Seleccion_forma_pago_controller forma_pago_controlador = new Seleccion_forma_pago_controller(forma_pago_vista, clase, bodega,credito,debito,transferencia,datos);        
+        Seleccion_forma_pago_controller forma_pago_controlador = new Seleccion_forma_pago_controller(forma_pago_vista, clase, bodega,credito,debito,transferencia,datos,puestos_vista,elegir_clase_vista);        
         Tarjeta_de_credito_controller credito_cont = new Tarjeta_de_credito_controller(credito,datos,forma_pago_vista,ticket);
         Tarjeta_de_debito_controller debito_cont = new Tarjeta_de_debito_controller(debito,datos,forma_pago_vista,ticket);
         Transferencia_controller transferencia_cont = new Transferencia_controller(transferencia,datos,forma_pago_vista);
         Login_controller login_cont = new Login_controller(loginV,vista_principal,usuario,registro_view,pagina_admin,pagina_usuario,sesion_usuario,menu,recu_con);
         Registro_controller registro_cont = new Registro_controller(registro_view,menu,loginV); 
-        Buscar_vuelos_controller buscar_v_cont = new Buscar_vuelos_controller(buscar_v,datos,vista_principal,pagina_admin,pagina_usuario,historial_vuelos);
+        Buscar_vuelos_controller buscar_v_cont = new Buscar_vuelos_controller(buscar_v,datos,vista_principal,pagina_admin,pagina_usuario,historial_vuelos,puv,forma_pago_vista,clase);
         Historial_vuelos_controller historial_cont =  new Historial_vuelos_controller(historial_vuelos,pagina_admin,pagina_usuario,usuario,buscar_v,buscar_v_cont);
         Pagina_principal_administrador_controller_2 pagina_admin_cont = new Pagina_principal_administrador_controller_2(pagina_admin,apart_reportes_menu,select_vuelo,buscar_v,ticket,usuario,vista_principal,historial_vuelos,historial_cont);
         Informacion_personal_controller info_per_cont = new Informacion_personal_controller(info_personal,pagina_usuario,sesion_usuario);
@@ -125,6 +134,8 @@ public class Skyline_Tickets {
         Reportes_financieros_controller repo_finan_cont = new Reportes_financieros_controller(apart_reportes_finan,dao_repo_finan,apart_reportes_menu);
         Reportes_operativos_controller repo_ope_cont = new Reportes_operativos_controller(apart_reportes_opera,dao_repo_ope,apart_reportes_menu);
         Menu_principal_controller menu_prin_cont = new Menu_principal_controller(vista_principal,loginV,registro_view,menu);
+        Elegir_puestos_controller puestos_cont = new Elegir_puestos_controller(puestos_vista,datos,puv,forma_pago_vista);
+        Elegir_clase_controller elegir_clase_cont = new Elegir_clase_controller(elegir_clase_vista,datos,clase,puv,forma_pago_vista);
         
         Pagina_principal_controller pagina_princ_cont = new Pagina_principal_controller(vista_principal,select_vuelo_nor,buscar_v,menu);
         

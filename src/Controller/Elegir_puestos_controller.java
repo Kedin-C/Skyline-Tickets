@@ -12,8 +12,12 @@ import javax.swing.JButton;
 import Model.Datos;
 import Model.Reservas;
 import Model.ReservasDao;
+import View.And_puestos;
 import View.Datos_y_pago_view;
 import View.Elegir_puestos_view;
+import View.Seleccion_de_Modificacion_de_vuelo_view;
+import View.Seleccion_forma_de_pago_view;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class Elegir_puestos_controller implements ActionListener{
@@ -23,6 +27,8 @@ public class Elegir_puestos_controller implements ActionListener{
     Elegir_puestos_view vista = new Elegir_puestos_view();
     Datos datos = new Datos();
     Datos_y_pago_view vistaDatosyPago = new Datos_y_pago_view();
+    private And_puestos pva;
+    private Seleccion_forma_de_pago_view modi_ticket_view;
     
     int filas = 0;
     int columnas = 0;
@@ -34,8 +40,10 @@ public class Elegir_puestos_controller implements ActionListener{
     ArrayList<String> ocupados = new ArrayList<>();
     ArrayList<String> claseActual = new ArrayList<>();
         
-    public Elegir_puestos_controller(Elegir_puestos_view vista, Datos datos){
+    public Elegir_puestos_controller(Elegir_puestos_view vista, Datos datos,And_puestos pva,Seleccion_forma_de_pago_view modi_ticket_view){
         
+        this.modi_ticket_view = modi_ticket_view;
+        this.pva = pva;
         this.vista = vista;
         this.datos = datos;
         
@@ -201,6 +209,7 @@ public class Elegir_puestos_controller implements ActionListener{
         
         if(e.getSource() == vista.siguiente){
             
+            if(pva.getNumero() == 1){
             if(codigoAsiento.size() == datos.getNumeroTickets()){
                 datos.setCodigoAsiento(codigoAsiento);
                 
@@ -217,6 +226,21 @@ public class Elegir_puestos_controller implements ActionListener{
             }else{
                 JOptionPane.showMessageDialog(vista,
                                 "Debes elegir los puestos de los tickets que compraras", "Elegir puestos", JOptionPane.WARNING_MESSAGE);
+            }
+            }else if(pva.getNumero() == 2){
+                
+                if(codigoAsiento.size() == datos.getNumeroTickets()){
+                datos.setCodigoAsiento(codigoAsiento);
+                
+                vista.setVisible(false);
+                modi_ticket_view.setVista_anterior(3);
+                modi_ticket_view.setVisible(true);
+                modi_ticket_view.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+            }else{
+                JOptionPane.showMessageDialog(vista,
+                                "Debes elegir los puestos de los tickets que compraras", "Elegir puestos", JOptionPane.WARNING_MESSAGE);
+            }
             }
         }
         
@@ -269,6 +293,7 @@ public class Elegir_puestos_controller implements ActionListener{
         if(e.getSource() == vistaDatosyPago.volver){
             vista.setVisible(true);
             vistaDatosyPago.setVisible(false);
+            
         }
     }
     
