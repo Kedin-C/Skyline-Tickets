@@ -94,69 +94,69 @@ public class Transferencia_view extends Interfaz_vista_abtractas{
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
         
-        //Para que los botones enviean a la pagina
-        bancolombia.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                try {
-                    // Definir la dirección de la página web
-                    String url = "https://svpersonas.apps.bancolombia.com/autenticacion";
-
-                    // Verificar si el sistema operativo soporta la acción de abrir el navegador
-                    if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-                        // Abrir la URL en el navegador predeterminado
-                        Desktop.getDesktop().browse(new URI(url));
-                    } else {
-                        JOptionPane.showInputDialog("No puedes haceder a este medio de pago");
-                    }
-                } catch (Exception e) {
-                    // Por si ocurre un error con la URL o el navegador
-                    e.printStackTrace();
-                }
-            }
-        });
-        
-        paypal.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                try {
-                    // Definir la dirección de la página web
-                    String url = "https://www.paypal.com/signin?locale.x=es_ES";
-
-                    // Verificar si el sistema operativo soporta la acción de abrir el navegador
-                    if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-                        // Abrir la URL en el navegador predeterminado
-                        Desktop.getDesktop().browse(new URI(url));
-                    } else {
-                        JOptionPane.showInputDialog("No puedes haceder a este medio de pago");
-                    }
-                } catch (Exception e) {
-                    // Por si ocurre un error con la URL o el navegador
-                    e.printStackTrace();
-                }
-            }
-        });
-        
-        nequi.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                try {
-                    // Definir la dirección de la página web
-                    String url = "https://transacciones.nequi.com/bdigital/login.jsp";
-
-                    // Verificar si el sistema operativo soporta la acción de abrir el navegador
-                    if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-                        // Abrir la URL en el navegador predeterminado
-                        Desktop.getDesktop().browse(new URI(url));
-                    } else {
-                        JOptionPane.showInputDialog("No puedes haceder a este medio de pago");
-                    }
-                } catch (Exception e) {
-                    // Por si ocurre un error con la URL o el navegador
-                    e.printStackTrace();
-                }
-            }
-        });
+//        //Para que los botones enviean a la pagina
+//        bancolombia.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent evt) {
+//                try {
+//                    // Definir la dirección de la página web
+//                    String url = "https://svpersonas.apps.bancolombia.com/autenticacion";
+//
+//                    // Verificar si el sistema operativo soporta la acción de abrir el navegador
+//                    if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+//                        // Abrir la URL en el navegador predeterminado
+//                        Desktop.getDesktop().browse(new URI(url));
+//                    } else {
+//                        JOptionPane.showInputDialog("No puedes haceder a este medio de pago");
+//                    }
+//                } catch (Exception e) {
+//                    // Por si ocurre un error con la URL o el navegador
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+//        
+//        paypal.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent evt) {
+//                try {
+//                    // Definir la dirección de la página web
+//                    String url = "https://www.paypal.com/signin?locale.x=es_ES";
+//
+//                    // Verificar si el sistema operativo soporta la acción de abrir el navegador
+//                    if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+//                        // Abrir la URL en el navegador predeterminado
+//                        Desktop.getDesktop().browse(new URI(url));
+//                    } else {
+//                        JOptionPane.showInputDialog("No puedes haceder a este medio de pago");
+//                    }
+//                } catch (Exception e) {
+//                    // Por si ocurre un error con la URL o el navegador
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+//        
+//        nequi.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent evt) {
+//                try {
+//                    // Definir la dirección de la página web
+//                    String url = "https://transacciones.nequi.com/bdigital/login.jsp";
+//
+//                    // Verificar si el sistema operativo soporta la acción de abrir el navegador
+//                    if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+//                        // Abrir la URL en el navegador predeterminado
+//                        Desktop.getDesktop().browse(new URI(url));
+//                    } else {
+//                        JOptionPane.showInputDialog("No puedes haceder a este medio de pago");
+//                    }
+//                } catch (Exception e) {
+//                    // Por si ocurre un error con la URL o el navegador
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
         
         
     }

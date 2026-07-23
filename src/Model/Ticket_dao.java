@@ -412,6 +412,41 @@ public class Ticket_dao {
         
     }
     
+    public void enviarDatost(int id_pasajero, int id_reserva, int equipaje_extra, String tipo_vuelo){
+        
+        String sql = "INSERT INTO tickets (id_pasajero, id_reserva, equipaje_extra, tipo_vuelo)"
+                + "VALUES (?, ?, ?, ?)";
+        
+        try{
+            con = Conexion.getObject().getConection();
+            ps = con.prepareStatement(sql);
+            
+            ps.setInt(1, id_pasajero);
+            ps.setInt(2, id_reserva);
+            ps.setInt(3, equipaje_extra);
+            ps.setString(4, tipo_vuelo);
+            
+            ps.executeUpdate();
+        
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, 
+                    ex.toString(),
+                    "Error al guardar los datos del pasajero"+ex.getMessage(),
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }finally {
+            if (con != null) {
+                try {
+                    con.close();
+                    ps.close();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.toString());
+                }
+            }
+        }
+        
+    }
+    
    private int equipajeExtra(int id){
        
        int equipaje = 0;

@@ -145,7 +145,6 @@ public class ReservasDao {
                 id = rs.getInt("id");
             } 
             
-            JOptionPane.showMessageDialog(null, "id_reserva: "+id);
             
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, 

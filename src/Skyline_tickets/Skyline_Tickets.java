@@ -122,8 +122,8 @@ public class Skyline_Tickets {
         Seleccion_modificacion_usuario_no_registrado_controller interfaz = new Seleccion_modificacion_usuario_no_registrado_controller(dao_modificacion_vuelo,select_vuelo_nor,modificacion,interfaz1,ticket,vista_principal);
         Seleccion_forma_pago_controller forma_pago_controlador = new Seleccion_forma_pago_controller(forma_pago_vista, clase, bodega, credito, debito, transferencia, datos, puestos_vista, elegir_clase_vista);
         Tarjeta_de_credito_controller credito_cont = new Tarjeta_de_credito_controller(credito, datos, forma_pago_vista, ticket, usuario, vista_principal, pagina_admin, pagina_usuario);
-        Tarjeta_de_debito_controller debito_cont = new Tarjeta_de_debito_controller(debito,datos,forma_pago_vista,ticket);
-        Transferencia_controller transferencia_cont = new Transferencia_controller(transferencia,datos,forma_pago_vista);
+        Tarjeta_de_debito_controller debito_cont = new Tarjeta_de_debito_controller(debito,datos,forma_pago_vista,ticket, usuario, vista_principal, pagina_admin, pagina_usuario);
+        Transferencia_controller transferencia_cont = new Transferencia_controller(transferencia,datos,forma_pago_vista, usuario, vista_principal, pagina_admin, pagina_usuario);
         Login_controller login_cont = new Login_controller(loginV,vista_principal,usuario,registro_view,pagina_admin,pagina_usuario,sesion_usuario,menu,recu_con);
         Registro_controller registro_cont = new Registro_controller(registro_view,menu,loginV); 
         Buscar_vuelos_controller buscar_v_cont = new Buscar_vuelos_controller(buscar_v,datos,vista_principal,pagina_admin,pagina_usuario,historial_vuelos,puv,forma_pago_vista,clase,usuario,vista_principal,pagina_admin,pagina_usuario);

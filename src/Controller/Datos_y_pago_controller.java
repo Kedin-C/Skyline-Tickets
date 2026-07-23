@@ -224,7 +224,7 @@ public class Datos_y_pago_controller implements ActionListener{
                 vista.setVisible(false);
                 viewTerjetaDebito.setVisible(true);
                 Seleccion_forma_de_pago_view selec_pago = new Seleccion_forma_de_pago_view();
-                Tarjeta_de_debito_controller controllerTerjetaDebito = new Tarjeta_de_debito_controller(viewTerjetaDebito, datos,selec_pago, ticket);
+                Tarjeta_de_debito_controller controllerTerjetaDebito = new Tarjeta_de_debito_controller(viewTerjetaDebito, datos,selec_pago, ticket, usuario, vistaPrincipal, viewAdmin, viewUsuario);
                 
                 datos.setDatosPersonales(datosPasajeros);
                 
@@ -236,7 +236,7 @@ public class Datos_y_pago_controller implements ActionListener{
                 vista.setVisible(false);
                 viewTransferencia.setVisible(true);
                 Seleccion_forma_de_pago_view selec_pago = new Seleccion_forma_de_pago_view();
-                Transferencia_controller controllerTransferencia = new Transferencia_controller(viewTransferencia, datos,selec_pago);
+                Transferencia_controller controllerTransferencia = new Transferencia_controller(viewTransferencia, datos,selec_pago, usuario, vistaPrincipal, viewAdmin, viewUsuario);
                 datos.setDatosPersonales(datosPasajeros);
                 
             }
