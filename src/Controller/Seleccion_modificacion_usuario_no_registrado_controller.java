@@ -40,7 +40,6 @@ public class Seleccion_modificacion_usuario_no_registrado_controller implements 
         this.vista.volver.addActionListener(this);
         this.vista.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.vista.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
     }
 
 

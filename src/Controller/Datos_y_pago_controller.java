@@ -140,6 +140,16 @@ public class Datos_y_pago_controller implements ActionListener{
         //Desactivar el comando de "Pegar" (Ctrl + V)
         this.vista.numeroTel.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), "none");
         
+//        this.vista.correo.addKeyListener(new KeyAdapter() {
+//            @Override
+//            public void keyTyped(KeyEvent e) {
+//                if (!Character.isDigit(e.getKeyChar()) && e.getKeyChar() != '@'){
+//                    e.consume();
+//                }
+//            }
+//        });
+//        
+//        this.vista.correo.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), "none");
         
         //Para que no pueda ingresar al campo de fecha
         JTextField editorFecha = (JTextField) this.vista.elegir_fecha.getDateEditor().getUiComponent();
@@ -155,6 +165,8 @@ public class Datos_y_pago_controller implements ActionListener{
                 e.consume();
             }
         });
+        
+        
         
         JOptionPane.showMessageDialog(null, "Llena los datos de manera correcta y\n"
                                                         + "que concuerden con los datos reales\n"
@@ -440,7 +452,6 @@ public class Datos_y_pago_controller implements ActionListener{
                         puntos++;
                     }
                 }
-                //JOptionPane.showMessageDialog(null, "co= "+co+" com= "+com+" Dominio: "+dominio);
             }
         }
         

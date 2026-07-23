@@ -36,7 +36,7 @@ public class DatosPagoDao {
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, 
                     ex.toString(),
-                    "Error al guardar los datos del pago"+ex.getMessage(),
+                    "Error al guardar los datos del pago "+ex.getMessage(),
                     JOptionPane.ERROR_MESSAGE
             );
         }finally {
@@ -76,7 +76,7 @@ public class DatosPagoDao {
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, 
                     ex.toString(),
-                    "Error al guardar los datos del pasajero"+ex.getMessage(),
+                    "Error al traer el id del pago "+ex.getMessage(),
                     JOptionPane.ERROR_MESSAGE
             );
         }finally {

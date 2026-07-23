@@ -49,7 +49,7 @@ public class VuelosDao {
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, 
                     ex.toString(),
-                    "Error la busqueda de vuelos"+ex.getMessage(),
+                    "Error en la busqueda de vuelos "+ex.getMessage(),
                     JOptionPane.ERROR_MESSAGE
             );
         }finally{
@@ -96,7 +96,7 @@ public class VuelosDao {
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, 
                     ex.toString(),
-                    "Error la busqueda de vuelos"+ex.getMessage(),
+                    "Error en la busqueda de vuelos "+ex.getMessage(),
                     JOptionPane.ERROR_MESSAGE
             );
         }finally{
@@ -142,7 +142,7 @@ public class VuelosDao {
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, 
                     ex.toString(),
-                    "Error la busqueda de vuelos"+ex.getMessage(),
+                    "Error en la busqueda de vuelos "+ex.getMessage(),
                     JOptionPane.ERROR_MESSAGE
             );
         }finally{

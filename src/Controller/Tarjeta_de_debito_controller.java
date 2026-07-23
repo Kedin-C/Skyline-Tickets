@@ -43,7 +43,7 @@ public class Tarjeta_de_debito_controller implements ActionListener{
         this.vista_atras = vista_atras;
         this.vista = vista;
         this.datos=datos;
-        this.ticket=ticket;
+        this.ticket = ticket;
         
         
         this.vista.pagar.addActionListener(this);

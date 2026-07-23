@@ -190,8 +190,14 @@ public class Buscar_vuelos_controller implements ActionListener{
             if(vista.vuelo_ida.isSelected()){
                 datos.setTipoVuelo("Vuelo de ida");
             }else{
+                
+                validarRegreso();
                 datos.setTipoVuelo("Vuelo de ida y vuelta");
                 
+                SimpleDateFormat formateadorRegreso = new SimpleDateFormat("yyyy-MM-dd");
+                //aplicando el metodo que deja la fecha tal cual en el campo de fecha regreso
+                String fechaRegreso = formateadorRegreso.format(vista.elegir_fecha_regreso.getDate());
+                datos.setFechaRegreso(fechaRegreso);
             }
             
             vista.setVisible(false);
@@ -204,44 +210,9 @@ public class Buscar_vuelos_controller implements ActionListener{
             if(vista.listar_origen.getSelectedIndex() > 0 &&
                vista.listar_destino.getSelectedIndex() > 0 &&
                vista.elegir_fecha_ida.getDate() != null){
-                
-                
-                
-                if(vista.vuelo_regreso.isSelected()){
-                    if(vista.elegir_fecha_regreso.getDate() != null){
-                        
-                        fechaIda = vista.elegir_fecha_ida.getDate();
-                        
-                        
-                        fechaRegreso = vista.elegir_fecha_regreso.getDate();
-                        SimpleDateFormat formateadorRegreso = new SimpleDateFormat("yyyy-MM-dd");
-                        String fechaExacta2 = formateadorRegreso.format(fechaRegreso);
-                        
-                        
-                        
-                        
-                        if(fechaRegreso.after(fechaIda)){
-                            datos.setFechaRegreso(fechaExacta2);
-                        }else{
-                            JOptionPane.showMessageDialog(vista,
-                                "La fecha de regreso no puede ser antes que la fecha de ida", "Fecha incoherente", JOptionPane.WARNING_MESSAGE);
-                            limpiarTabla();
-                            return;
-                        }
-                    }else {
-                        JOptionPane.showMessageDialog(vista,
-                                "Debes elegir una fecha de regreso", "Fecha obligatoria", JOptionPane.WARNING_MESSAGE);
 
-                        return;
-                    }
-                }
-                
-                limpiarTabla();
-                if (vista.listar_horario.getSelectedIndex() == 0) {
-                    getListar(vista.tabla);
-                } else {
-                    getListarHorario(vista.tabla);
-                }
+                validarRegreso();
+
             
             }else {
                 JOptionPane.showMessageDialog(vista, 
@@ -376,6 +347,51 @@ public class Buscar_vuelos_controller implements ActionListener{
         for(int i=0;i<vista.tabla.getRowCount(); i++){
             modelo.removeRow(i);
             i=i-1;
+        }
+    }
+    
+
+    private void validarRegreso(){
+        
+        int puntos = 2;
+        if(vista.vuelo_regreso.isSelected()){
+            if(vista.elegir_fecha_regreso.getDate() != null){
+
+                fechaIda = vista.elegir_fecha_ida.getDate();
+
+
+                fechaRegreso = vista.elegir_fecha_regreso.getDate();
+                //para que la fecha quede bien 
+                SimpleDateFormat formateadorRegreso = new SimpleDateFormat("yyyy-MM-dd");
+                //aplicando el metodo que deja la fecha tal cual en el campo de fecha regreso
+                String fechaExacta2 = formateadorRegreso.format(fechaRegreso);
+
+
+                if(fechaRegreso.after(fechaIda)){
+                    datos.setFechaRegreso(fechaExacta2);
+                }else{
+                    JOptionPane.showMessageDialog(vista,
+                        "La fecha de regreso no puede ser antes que la fecha de ida", "Fecha incoherente", JOptionPane.WARNING_MESSAGE);
+                    puntos--;
+                    limpiarTabla();
+                    
+                }
+            }else {
+                JOptionPane.showMessageDialog(vista,
+                        "Debes elegir una fecha de regreso", "Fecha obligatoria", JOptionPane.WARNING_MESSAGE);
+                puntos--;
+                limpiarTabla();
+                
+            }
+            if(puntos == 2){
+                limpiarTabla();
+                if (vista.listar_horario.getSelectedIndex() == 0) {
+                    getListar(vista.tabla);
+                } else {
+                    getListarHorario(vista.tabla);
+                }
+            }
+            
         }
     }
     

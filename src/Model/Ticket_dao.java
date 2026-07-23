@@ -382,7 +382,7 @@ public class Ticket_dao {
                 + "VALUES (?, ?, ?, ?, ?)";
         
         try{
-            con = conectar.getConection();
+            con = Conexion.getObject().getConection();
             ps = con.prepareStatement(sql);
             
             ps.setInt(1, id_pago);
@@ -419,7 +419,7 @@ public class Ticket_dao {
        String sql = "SELECT equipaje_extra FROM tickets WHERE codigo_ticket = ?";
        
        try{
-           con = conectar.getConection();
+           con = Conexion.getObject().getConection();
            
            ps = con.prepareStatement(sql);
            
@@ -461,7 +461,7 @@ public class Ticket_dao {
        
        try{
            
-           con = conectar.getConection();
+           con = Conexion.getObject().getConection();
            
            ps = con.prepareStatement(sql);
            
