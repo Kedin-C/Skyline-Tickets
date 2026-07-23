@@ -9,6 +9,7 @@ import Model.DatosPago;
 import Model.DatosPagoDao;
 import Model.Ticket;
 import Model.Ticket_dao;
+import View.Confirmar_pago_view;
 import View.Seleccion_forma_de_pago_view;
 import View.Tarjeta_de_debito_view;
 import java.awt.Toolkit;
@@ -151,6 +152,32 @@ public class Tarjeta_de_debito_controller implements ActionListener{
                     datos.subirTicket();
                 }
                 
+                Confirmar_pago_view viewPago = new Confirmar_pago_view();
+                
+                ArrayList<Integer> lista = datos.id_pasajero;
+                int id_pasajero = lista.get(0);
+        
+                int ticketp = ticketdao.obtenerCodTicket(id_pasajero);
+                viewPago.lblNumeroTicket.setText("NUMERO DE TICKET: " + ticketp);
+                String nombrep = ticketdao.obtenerNombrePasajero(id_pasajero);
+                viewPago.lblNombrePasajero.setText("NOMBRE DEL PASAJERO: "+nombrep);
+                String codVuelo = ticketdao.obtenerCodigoVuelo(id_pasajero);
+                viewPago.lblReferenciaPago.setText("CÓDIGO DE VUELO: "+codVuelo);
+                String origenp = ticketdao.obtenerOrigen(id_pasajero);
+                viewPago.lblOrigen.setText(origenp);
+                String destinop = ticketdao.obtenerDestino(id_pasajero);
+                viewPago.lblDestino.setText(destinop);
+                String fechap = ticketdao.obtenerFechaVuelo(id_pasajero);
+                viewPago.lblFechaIda.setText(fechap);
+        
+//              if(viewVuelo.vuelo_regreso.isSelected()){
+//            
+//              }
+
+                vista.setVisible(false);
+                viewPago.setVisible(true);
+                viewPago.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                
                 new Thread(() -> {
                     try {
                         Thread.sleep(4000);
@@ -170,11 +197,12 @@ public class Tarjeta_de_debito_controller implements ActionListener{
                            double costo = ticketdao.obtenerCosto(idPasajero);
                            String codigoReserva = ticketdao.obtenerCodigoReserva(idPasajero);
                            String correoDestino = ticketdao.obtenerCorreoPasajero(idPasajero);
+                           int ticketP =ticketdao.obtenerCodTicket(idPasajero);
                            
                           // Generar PDF para este pasajero
                             File pdf = creador.generarTicket(
                                nombre, documento, vuelo, origen, destino,
-                               fechat, asiento, costo, codigoReserva
+                               fechat, asiento, costo, codigoReserva,ticketP
                            );
 
                            // Enviar correo con el PDF adjunto

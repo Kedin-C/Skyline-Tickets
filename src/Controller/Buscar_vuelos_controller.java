@@ -22,6 +22,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import Model.Datos;
+import Model.Usuario;
 import View.Elegir_clase_view;
 import View.Historial_vuelos_view;
 import View.Inicio_usuario_view;
@@ -43,14 +44,22 @@ public class Buscar_vuelos_controller implements ActionListener{
     private Historial_vuelos_view historial_vista;
     public String origen, destino, hora1, hora2;
     public Date fechaIda, fechaRegreso;
+    private Usuario usuario;
+    private ViewPrincipal vistaPrincipal;
+    private Pagina_principal_administrador_view viewAdmin;
+    private Inicio_usuario_view viewUsuario;
     
-    public Buscar_vuelos_controller(Buscar_vuelos_view vista, Datos datos,ViewPrincipal principal,Pagina_principal_administrador_view pagina_admin,Inicio_usuario_view pagina_usuario,Historial_vuelos_view historial_vista){
+    public Buscar_vuelos_controller(Buscar_vuelos_view vista, Datos datos,ViewPrincipal principal,Pagina_principal_administrador_view pagina_admin,Inicio_usuario_view pagina_usuario,Historial_vuelos_view historial_vista, Usuario usuario, ViewPrincipal vistaPrincipal, Pagina_principal_administrador_view viewAdmin, Inicio_usuario_view viewUsuario){
         
        
         this.principal = principal;
         this.pagina_admin = pagina_admin;
         this.pagina_usuario = pagina_usuario;
         this.historial_vista = historial_vista;
+        this.usuario = usuario;
+        this.vistaPrincipal = vistaPrincipal;
+        this.viewAdmin = viewAdmin;
+        this.viewUsuario = viewUsuario;
         
         this.vista = vista;
         this.datos = datos;
@@ -188,7 +197,7 @@ public class Buscar_vuelos_controller implements ActionListener{
             
             vista.setVisible(false);
             this.vistaElegirClase.setVisible(true);
-            Elegir_clase_controller controllerElegirClase = new Elegir_clase_controller(vistaElegirClase, datos);
+            Elegir_clase_controller controllerElegirClase = new Elegir_clase_controller(vistaElegirClase, datos, usuario, vistaPrincipal, viewAdmin, viewUsuario);
             
         }
         

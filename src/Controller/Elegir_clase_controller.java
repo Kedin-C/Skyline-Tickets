@@ -8,8 +8,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ButtonGroup;
 import Model.Datos;
+import Model.Usuario;
 import View.Elegir_clase_view;
 import View.Elegir_puestos_view;
+import View.Inicio_usuario_view;
+import View.Pagina_principal_administrador_view;
+import View.ViewPrincipal;
 import javax.swing.JOptionPane;
 
 public class Elegir_clase_controller implements ActionListener{
@@ -17,11 +21,19 @@ public class Elegir_clase_controller implements ActionListener{
     Elegir_clase_view vista = new Elegir_clase_view();
     Datos datos = new Datos();
     Elegir_puestos_view vistaElegirPuestos = new Elegir_puestos_view();
+    private Usuario usuario;
+    private ViewPrincipal vistaPrincipal;
+    private Pagina_principal_administrador_view viewAdmin;
+    private Inicio_usuario_view viewUsuario;
     
-    public Elegir_clase_controller(Elegir_clase_view vista, Datos datos){
+    public Elegir_clase_controller(Elegir_clase_view vista, Datos datos, Usuario usuario, ViewPrincipal vistaPrincipal, Pagina_principal_administrador_view viewAdmin, Inicio_usuario_view viewUsuario){
         
         this.vista=vista;
         this.datos=datos;
+        this.usuario = usuario;
+        this.vistaPrincipal = vistaPrincipal;
+        this.viewAdmin = viewAdmin;
+        this.viewUsuario = viewUsuario;
         
         this.vista.siguiente.addActionListener( this);
         this.vista.volver.addActionListener(this);
@@ -77,7 +89,7 @@ public class Elegir_clase_controller implements ActionListener{
             
             vista.setVisible(false);
             vistaElegirPuestos.setVisible(true);
-            Elegir_puestos_controller controllerElegirPuestos = new Elegir_puestos_controller(vistaElegirPuestos, datos);
+            Elegir_puestos_controller controllerElegirPuestos = new Elegir_puestos_controller(vistaElegirPuestos, datos, usuario, vistaPrincipal, viewAdmin, viewUsuario);
             
         }
         

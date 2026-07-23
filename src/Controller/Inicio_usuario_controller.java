@@ -90,6 +90,7 @@ public class Inicio_usuario_controller implements ActionListener {
                 JOptionPane.showMessageDialog(vista, "No tienes vuelos activos disponibles");
             }
         }else if(e.getSource() == vista.cerrarSesion){
+            usuario.setRol(0);
             vista.setVisible(false);
             vista_prin.setVisible(true);
             vista_prin.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);

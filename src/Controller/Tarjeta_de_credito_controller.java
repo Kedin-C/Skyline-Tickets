@@ -10,8 +10,14 @@ import Model.DatosPago;
 import Model.DatosPagoDao;
 import Model.Ticket;
 import Model.Ticket_dao;
+import Model.Usuario;
+import View.Buscar_vuelos_view;
+import View.Confirmar_pago_view;
+import View.Inicio_usuario_view;
+import View.Pagina_principal_administrador_view;
 import View.Seleccion_forma_de_pago_view;
 import View.Tarjeta_de_credito_view;
+import View.ViewPrincipal;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,15 +43,23 @@ public class Tarjeta_de_credito_controller implements ActionListener{
     private CreadorPDFTickets creador = new CreadorPDFTickets();
     private Correo_controller correo = new Correo_controller();
     private Ticket ticket;
+    private Usuario usuario;
+    private ViewPrincipal vistaPrincipal;
+    private Pagina_principal_administrador_view viewAdmin;
+    private Inicio_usuario_view viewUsuario;
     
 
     
-    public Tarjeta_de_credito_controller(Tarjeta_de_credito_view vista, Datos datos,Seleccion_forma_de_pago_view vista_atras, Ticket ticket){
+    public Tarjeta_de_credito_controller(Tarjeta_de_credito_view vista, Datos datos,Seleccion_forma_de_pago_view vista_atras, Ticket ticket, Usuario usuario, ViewPrincipal vistaPrincipal, Pagina_principal_administrador_view viewAdmin, Inicio_usuario_view viewUsuario){
         
         this.vista_atras = vista_atras;
         this.vista = vista;
         this.datos = datos;
         this.ticket=ticket;
+        this.usuario = usuario;
+        this.vistaPrincipal = vistaPrincipal;
+        this.viewAdmin = viewAdmin;
+        this.viewUsuario = viewUsuario;
         
         this.vista.pagar.addActionListener(this);
         this.vista.volver.addActionListener(this);
@@ -156,6 +170,38 @@ public class Tarjeta_de_credito_controller implements ActionListener{
                     datos.subirTicket();
                 }
                 
+                Confirmar_pago_view viewPago = new Confirmar_pago_view();
+                Confirmar_pago_controller pago_cont = new Confirmar_pago_controller(viewPago, vistaPrincipal, viewAdmin, viewUsuario, usuario);
+                
+                ArrayList<Integer> lista = datos.id_pasajero;
+                int id_pasajero = lista.get(0);
+        
+                int ticketp = ticketdao.obtenerCodTicket(id_pasajero);
+                viewPago.lblNumeroTicket.setText("NUMERO DE TICKET: " + ticketp);
+                String nombrep = ticketdao.obtenerNombrePasajero(id_pasajero);
+                viewPago.lblNombrePasajero.setText("NOMBRE DEL PASAJERO: "+nombrep);
+                String codVuelo = ticketdao.obtenerCodigoVuelo(id_pasajero);
+                viewPago.lblReferenciaPago.setText("CÓDIGO DE VUELO: "+codVuelo);
+                String origenp = ticketdao.obtenerOrigen(id_pasajero);
+                viewPago.lblOrigen.setText(origenp);
+                String destinop = ticketdao.obtenerDestino(id_pasajero);
+                viewPago.lblDestino.setText(destinop);
+                String fechap = ticketdao.obtenerFechaVuelo(id_pasajero);
+                viewPago.lblFechaIda.setText("FECHA: "+fechap);
+        
+                if(datos.getFechaRegreso() != null){
+                    viewPago.lblFlechaVuelta.setVisible(true);
+                    viewPago.lblFechaVuelta.setVisible(true);
+                    String fechaida = ticketdao.obtenerFechaVuelo(id_pasajero);
+                    viewPago.lblFechaIda.setText("FECHA IDA: "+fechaida);
+                    String fechavuelta = datos.getFechaRegreso();
+                    viewPago.lblFechaVuelta.setText("FECHA REGRESO: "+fechavuelta);
+                }
+
+                vista.setVisible(false);
+                viewPago.setVisible(true);
+                viewPago.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                
                 new Thread(() -> {
                     try {
                         Thread.sleep(4000);
@@ -175,15 +221,18 @@ public class Tarjeta_de_credito_controller implements ActionListener{
                            double costo = ticketdao.obtenerCosto(idPasajero);
                            String codigoReserva = ticketdao.obtenerCodigoReserva(idPasajero);
                            String correoDestino = ticketdao.obtenerCorreoPasajero(idPasajero);
+                           int ticket = ticketdao.obtenerCodTicket(idPasajero);
                            
                           // Generar PDF para este pasajero
                             File pdf = creador.generarTicket(
                                nombre, documento, vuelo, origen, destino,
-                               fechat, asiento, costo, codigoReserva
+                               fechat, asiento, costo, codigoReserva, ticket
                            );
 
                            // Enviar correo con el PDF adjunto
                          correo.enviarCorreoConAdjunto(correoDestino, pdf);
+                         
+                         JOptionPane.showMessageDialog(null, "Se te envio a tu correo electronico el PDF de tu ticket");
                         }
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(null, e.toString(),

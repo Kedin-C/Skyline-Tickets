@@ -12,8 +12,12 @@ import javax.swing.JButton;
 import Model.Datos;
 import Model.Reservas;
 import Model.ReservasDao;
+import Model.Usuario;
 import View.Datos_y_pago_view;
 import View.Elegir_puestos_view;
+import View.Inicio_usuario_view;
+import View.Pagina_principal_administrador_view;
+import View.ViewPrincipal;
 import javax.swing.JOptionPane;
 
 public class Elegir_puestos_controller implements ActionListener{
@@ -23,6 +27,10 @@ public class Elegir_puestos_controller implements ActionListener{
     Elegir_puestos_view vista = new Elegir_puestos_view();
     Datos datos = new Datos();
     Datos_y_pago_view vistaDatosyPago = new Datos_y_pago_view();
+    private Usuario usuario;
+    private ViewPrincipal vistaPrincipal;
+    private Pagina_principal_administrador_view viewAdmin;
+    private Inicio_usuario_view viewUsuario;
     
     int filas = 0;
     int columnas = 0;
@@ -34,10 +42,14 @@ public class Elegir_puestos_controller implements ActionListener{
     ArrayList<String> ocupados = new ArrayList<>();
     ArrayList<String> claseActual = new ArrayList<>();
         
-    public Elegir_puestos_controller(Elegir_puestos_view vista, Datos datos){
+    public Elegir_puestos_controller(Elegir_puestos_view vista, Datos datos, Usuario usuario, ViewPrincipal vistaPrincipal, Pagina_principal_administrador_view viewAdmin, Inicio_usuario_view viewUsuario){
         
         this.vista = vista;
         this.datos = datos;
+        this.usuario = usuario;
+        this.vistaPrincipal = vistaPrincipal;
+        this.viewAdmin = viewAdmin;
+        this.viewUsuario = viewUsuario;
         
         this.vista.aleatorio.addActionListener(this);
         this.vista.siguiente.addActionListener(this);
@@ -206,7 +218,7 @@ public class Elegir_puestos_controller implements ActionListener{
                 
                 vista.setVisible(false);
                 vistaDatosyPago.setVisible(true);
-                Datos_y_pago_controller controllerDatosPago = new Datos_y_pago_controller(vistaDatosyPago, datos);
+                Datos_y_pago_controller controllerDatosPago = new Datos_y_pago_controller(vistaDatosyPago, datos, usuario, vistaPrincipal, viewAdmin, viewUsuario);
 
                 JOptionPane.showMessageDialog(vista, "Los puestos elegidos son: " + datos.getCodigoAsiento());
                 

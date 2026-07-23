@@ -171,6 +171,25 @@ public class Ticket_dao {
         }
         return nombre;
     }
+    
+    public int obtenerCodTicket(int idPasajero) {
+        int ticket = 0;
+        String sql = "SELECT codigo_ticket FROM tickets WHERE id_pasajero = ?";
+        try {
+            con = conectar.getConection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, idPasajero);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                ticket = rs.getInt("codigo_ticket");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString(),
+                "Error de consulta: " + e.getMessage(), JOptionPane.ERROR_MESSAGE);
+        }
+        return ticket;
+    }
+
 
     public String obtenerDocumento(int idPasajero) {
         String documento = null;
