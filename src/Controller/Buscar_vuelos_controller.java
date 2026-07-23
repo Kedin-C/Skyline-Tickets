@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import Model.Datos;
-import View.And_puestos;
+import Model.And_puestos;
 import View.Cambio_de_clase_de_vuelo_viiew;
 import Model.Usuario;
 import View.Elegir_clase_view;
@@ -45,7 +45,7 @@ public class Buscar_vuelos_controller implements ActionListener{
     Buscar_vuelos_view vista = new Buscar_vuelos_view();
     DefaultTableModel modelo = new DefaultTableModel();
     Datos datos = new Datos();
-    Elegir_clase_view vistaElegirClase = new Elegir_clase_view();
+    private Elegir_clase_view vistaElegirClase ;
     private Historial_vuelos_view historial_vista;
     public String origen, destino, hora1, hora2;
     public Date fechaIda, fechaRegreso;
@@ -57,7 +57,7 @@ public class Buscar_vuelos_controller implements ActionListener{
     private Pagina_principal_administrador_view viewAdmin;
     private Inicio_usuario_view viewUsuario;
     
-    public Buscar_vuelos_controller(Buscar_vuelos_view vista, Datos datos,ViewPrincipal principal,Pagina_principal_administrador_view pagina_admin,Inicio_usuario_view pagina_usuario,Historial_vuelos_view historial_vista,And_puestos pva,Seleccion_forma_de_pago_view forma_pago_vista,Cambio_de_clase_de_vuelo_viiew cambio_vuelo, Usuario usuario, ViewPrincipal vistaPrincipal, Pagina_principal_administrador_view viewAdmin, Inicio_usuario_view viewUsuario){
+    public Buscar_vuelos_controller(Buscar_vuelos_view vista, Datos datos,ViewPrincipal principal,Pagina_principal_administrador_view pagina_admin,Inicio_usuario_view pagina_usuario,Historial_vuelos_view historial_vista,And_puestos pva,Seleccion_forma_de_pago_view forma_pago_vista,Cambio_de_clase_de_vuelo_viiew cambio_vuelo, Usuario usuario, ViewPrincipal vistaPrincipal, Pagina_principal_administrador_view viewAdmin, Inicio_usuario_view viewUsuario,Elegir_clase_view vistaElegirClase){
         
         this.forma_pago_vista = forma_pago_vista;
         this.principal = principal;
@@ -70,6 +70,7 @@ public class Buscar_vuelos_controller implements ActionListener{
         this.vistaPrincipal = vistaPrincipal;
         this.viewAdmin = viewAdmin;
         this.viewUsuario = viewUsuario;
+        this. vistaElegirClase = vistaElegirClase;
         
         this.vista = vista;
         this.datos = datos;
@@ -145,17 +146,17 @@ public class Buscar_vuelos_controller implements ActionListener{
             
             if(vista.getPagina_anterior() == 1){
             vista.setVisible(false);
-            
+            limpiarTabla();
             principal.setVisible(true);
             principal.setExtendedState(JFrame.MAXIMIZED_BOTH);
             }else if(vista.getPagina_anterior() == 2){
             vista.setVisible(false);
-            
+            limpiarTabla();
             pagina_usuario.setVisible(true);
             pagina_usuario.setExtendedState(JFrame.MAXIMIZED_BOTH);
             }else if(vista.getPagina_anterior() == 3){
             vista.setVisible(false);
-            
+            limpiarTabla();
             pagina_admin.setVisible(true);
             pagina_admin.setExtendedState(JFrame.MAXIMIZED_BOTH);
             }else if(vista.getPagina_anterior() == 4){
@@ -202,8 +203,6 @@ public class Buscar_vuelos_controller implements ActionListener{
             
             vista.setVisible(false);
             this.vistaElegirClase.setVisible(true);
-            
-            Elegir_clase_controller controllerElegirClase = new Elegir_clase_controller(vistaElegirClase,datos,cambio_vuelo,pva,forma_pago_vista, usuario, vistaPrincipal, viewAdmin, viewUsuario);            
         }
         
         if(e.getSource() == vista.buscar_vuelos){

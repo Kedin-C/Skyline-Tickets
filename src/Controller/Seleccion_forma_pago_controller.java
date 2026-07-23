@@ -102,7 +102,7 @@ public class Seleccion_forma_pago_controller implements ActionListener{
             credito.setVisible(true);
             credito.setExtendedState(JFrame.MAXIMIZED_BOTH);
             credito.setCod_anterior_view(1);
-            datos.vista_pago = 1;
+            //datos.vista_pago = 1;
             
         
         }
@@ -114,7 +114,7 @@ public class Seleccion_forma_pago_controller implements ActionListener{
             debito.setVisible(true);
             debito.setExtendedState(JFrame.MAXIMIZED_BOTH);
             debito.setCod_anterior_view(1);
-            datos.vista_pago = 1;
+            //datos.vista_pago = 1;
         
         }
         

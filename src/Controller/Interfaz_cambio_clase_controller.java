@@ -7,7 +7,7 @@ package Controller;
 import Model.Datos;
 import Model.Seleccion_modificacion_clase_de_vuelo_dao;
 import Model.Ticket;
-import View.And_puestos;
+import Model.And_puestos;
 import View.Seleccion_de_Modificacion_de_vuelo_view;
 import View.Seleccion_forma_de_pago_view;
 import View.Cambio_de_clase_de_vuelo_viiew;

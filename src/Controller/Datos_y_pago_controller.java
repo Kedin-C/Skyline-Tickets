@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import Model.And_puestos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -15,6 +16,7 @@ import Model.Usuario;
 import View.Datos_y_pago_view;
 import View.Inicio_usuario_view;
 import View.Pagina_principal_administrador_view;
+import View.Seleccion_de_Modificacion_de_vuelo_view;
 import View.Seleccion_forma_de_pago_view;
 import View.Tarjeta_de_credito_view;
 import View.Tarjeta_de_debito_view;
@@ -35,7 +37,7 @@ public class Datos_y_pago_controller implements ActionListener{
     DatosPersonales datosPersonales = new DatosPersonales();
     DatosPersonalesDao datosPersonalesdao = new DatosPersonalesDao();
     Datos_y_pago_view vista = new Datos_y_pago_view();
-    Datos datos = new Datos();
+    Datos datos;
     
     Ticket ticket = new Ticket();
     Tarjeta_de_credito_view viewTarjetaCredito = new Tarjeta_de_credito_view();
@@ -45,13 +47,17 @@ public class Datos_y_pago_controller implements ActionListener{
     private ViewPrincipal vistaPrincipal;
     private Pagina_principal_administrador_view viewAdmin;
     private Inicio_usuario_view viewUsuario;
+    private And_puestos pv;
+    private Seleccion_de_Modificacion_de_vuelo_view modify;
+    
     
     int n;
     
     ArrayList<DatosPersonales> datosPasajeros = new ArrayList<>();
     
-    public Datos_y_pago_controller(Datos_y_pago_view vista, Datos datos, Usuario usuario, ViewPrincipal vistaPrincipal, Pagina_principal_administrador_view viewAdmin, Inicio_usuario_view viewUsuario){
+    public Datos_y_pago_controller(Datos_y_pago_view vista, Datos datos, Usuario usuario, ViewPrincipal vistaPrincipal, Pagina_principal_administrador_view viewAdmin, Inicio_usuario_view viewUsuario,And_puestos pv,Seleccion_de_Modificacion_de_vuelo_view modify){
         
+        this.modify = modify;
         this.datos=datos;
         this.vista=vista;
         this.usuario = usuario;
@@ -213,7 +219,7 @@ public class Datos_y_pago_controller implements ActionListener{
                 vista.setVisible(false);
                 viewTarjetaCredito.setVisible(true);
                 Seleccion_forma_de_pago_view selec_pago = new Seleccion_forma_de_pago_view();
-                Tarjeta_de_credito_controller controllerTarjetaCredito = new Tarjeta_de_credito_controller(viewTarjetaCredito, datos,selec_pago, ticket, usuario, vistaPrincipal, viewAdmin, viewUsuario);
+                Tarjeta_de_credito_controller controllerTarjetaCredito = new Tarjeta_de_credito_controller(viewTarjetaCredito, datos,selec_pago, ticket, usuario, vistaPrincipal, viewAdmin, viewUsuario,pv,modify);
                 
                 datos.setDatosPersonales(datosPasajeros);
                 
@@ -224,7 +230,7 @@ public class Datos_y_pago_controller implements ActionListener{
                 vista.setVisible(false);
                 viewTerjetaDebito.setVisible(true);
                 Seleccion_forma_de_pago_view selec_pago = new Seleccion_forma_de_pago_view();
-                Tarjeta_de_debito_controller controllerTerjetaDebito = new Tarjeta_de_debito_controller(viewTerjetaDebito, datos,selec_pago, ticket);
+                Tarjeta_de_debito_controller controllerTerjetaDebito = new Tarjeta_de_debito_controller(viewTerjetaDebito, datos,selec_pago, ticket,pv,modify,vistaPrincipal,viewAdmin,viewUsuario,usuario);
                 
                 datos.setDatosPersonales(datosPasajeros);
                 

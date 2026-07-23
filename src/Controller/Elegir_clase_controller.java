@@ -4,11 +4,11 @@
  */
 package Controller;
 
+import Model.And_puestos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ButtonGroup;
 import Model.Datos;
-import View.And_puestos;
 import View.Cambio_de_clase_de_vuelo_viiew;
 import View.Elegir_clase_view;
 import View.Elegir_puestos_view;
@@ -34,9 +34,10 @@ public class Elegir_clase_controller implements ActionListener{
     private ViewPrincipal vistaPrincipal;
     private Pagina_principal_administrador_view viewAdmin;
     private Inicio_usuario_view viewUsuario;
+    private Seleccion_de_Modificacion_de_vuelo_view modify;
 
     
-    public Elegir_clase_controller(Elegir_clase_view vista, Datos datos,Cambio_de_clase_de_vuelo_viiew cam_view,And_puestos pva,Seleccion_forma_de_pago_view modi_ticket_view, Usuario usuario, ViewPrincipal vistaPrincipal, Pagina_principal_administrador_view viewAdmin, Inicio_usuario_view viewUsuario){
+    public Elegir_clase_controller(Elegir_clase_view vista, Datos datos,Cambio_de_clase_de_vuelo_viiew cam_view,And_puestos pva,Seleccion_forma_de_pago_view modi_ticket_view, Usuario usuario, ViewPrincipal vistaPrincipal, Pagina_principal_administrador_view viewAdmin, Inicio_usuario_view viewUsuario,Seleccion_de_Modificacion_de_vuelo_view modify){
         this.modi_ticket_view = modi_ticket_view;
         this.elegir_clase_vista = cam_view;
         this.pva =pva;
@@ -47,6 +48,7 @@ public class Elegir_clase_controller implements ActionListener{
         this.vistaPrincipal = vistaPrincipal;
         this.viewAdmin = viewAdmin;
         this.viewUsuario = viewUsuario;
+        this.modify = modify;
         
         this.vista.siguiente.addActionListener( this);
         this.vista.volver.addActionListener(this);
@@ -105,7 +107,7 @@ public class Elegir_clase_controller implements ActionListener{
             vistaElegirPuestos.setVisible(true);
             
             
-            Elegir_puestos_controller controllerElegirPuestos = new Elegir_puestos_controller(vistaElegirPuestos, datos,pva,modi_ticket_view, usuario, vistaPrincipal, viewAdmin, viewUsuario);
+            Elegir_puestos_controller controllerElegirPuestos = new Elegir_puestos_controller(vistaElegirPuestos, datos,pva,modi_ticket_view, usuario, vistaPrincipal, viewAdmin, viewUsuario,modify);
             
         }
         

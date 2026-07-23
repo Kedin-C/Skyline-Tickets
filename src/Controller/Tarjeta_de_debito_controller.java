@@ -4,14 +4,21 @@
  */
 package Controller;
 
+import Model.And_puestos;
 import Model.Datos;
 import Model.DatosPago;
 import Model.DatosPagoDao;
+import Model.ReservasDao;
 import Model.Ticket;
 import Model.Ticket_dao;
+import Model.Usuario;
 import View.Confirmar_pago_view;
+import View.Inicio_usuario_view;
+import View.Pagina_principal_administrador_view;
+import View.Seleccion_de_Modificacion_de_vuelo_view;
 import View.Seleccion_forma_de_pago_view;
 import View.Tarjeta_de_debito_view;
+import View.ViewPrincipal;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,6 +36,8 @@ import javax.swing.KeyStroke;
 public class Tarjeta_de_debito_controller implements ActionListener{
     
     private Seleccion_forma_de_pago_view vista_atras;
+    private ViewPrincipal vistaPrincipal;
+    private Pagina_principal_administrador_view viewAdmin;
     private Tarjeta_de_debito_view vista;
     private Datos datos;
     private DatosPago datosPagar = new DatosPago();
@@ -37,13 +46,25 @@ public class Tarjeta_de_debito_controller implements ActionListener{
     private CreadorPDFTickets creador = new CreadorPDFTickets();
     private Correo_controller correo = new Correo_controller();
     private Ticket ticket;
+    private And_puestos pv;
+    private ReservasDao reservas_dao = new ReservasDao();
+    private Seleccion_de_Modificacion_de_vuelo_view view_modificar_ticket;
+    private Inicio_usuario_view viewUsuario;
+    private Usuario usuario;
     
-    public Tarjeta_de_debito_controller(Tarjeta_de_debito_view vista, Datos datos,Seleccion_forma_de_pago_view vista_atras, Ticket ticket){
+    
+    public Tarjeta_de_debito_controller(Tarjeta_de_debito_view vista, Datos datos,Seleccion_forma_de_pago_view vista_atras, Ticket ticket,And_puestos pv, Seleccion_de_Modificacion_de_vuelo_view view_modificar_ticket,ViewPrincipal vistaPrincipal,Pagina_principal_administrador_view viewAdmin,Inicio_usuario_view viewUsuario,Usuario usuario){
         
+        this.viewUsuario = viewUsuario;
         this.vista_atras = vista_atras;
         this.vista = vista;
         this.datos=datos;
         this.ticket = ticket;
+        this.pv = pv;
+        this.view_modificar_ticket = view_modificar_ticket;
+        this.vistaPrincipal = vistaPrincipal;
+        this.viewAdmin = viewAdmin;
+        this.usuario = usuario;
         
         
         this.vista.pagar.addActionListener(this);
@@ -118,6 +139,7 @@ public class Tarjeta_de_debito_controller implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         
         if(e.getSource() == vista.pagar){
+
             if(Validar()){
                 
                 
@@ -145,74 +167,93 @@ public class Tarjeta_de_debito_controller implements ActionListener{
                 }else if(datos.vista_pago == 2){
                     
                     datosPagarDao.enviarDatos(datosPagar);
+
+                    int id = ticketdao.codigoReserva(ticket.getId());
+                    String asiento = pv.getPuesto();
+
+                    reservas_dao.cambiarReserva(id, asiento);
+
+                    vista.setVisible(false);
+                    view_modificar_ticket.setVisible(true);
+                    view_modificar_ticket.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                    JOptionPane.showMessageDialog(viewAdmin, "Has cambiado con exito de clase de vuelo"+"\n"+"Verifica tu clase de vuelo actual");
                     
                 }else{
+
                     datos.subirDatos();
                     datos.ids();
                     datos.subirTicket();
+
+                    Confirmar_pago_view viewPago = new Confirmar_pago_view();
+                    Confirmar_pago_controller pago_cont = new Confirmar_pago_controller(viewPago, vistaPrincipal, viewAdmin, viewUsuario, usuario);
+
+                    ArrayList<Integer> lista = datos.id_pasajero;
+                    int id_pasajero = lista.get(0);
+
+                    int ticketp = ticketdao.obtenerCodTicket(id_pasajero);
+                    viewPago.lblNumeroTicket.setText("NUMERO DE TICKET: " + ticketp);
+                    String nombrep = ticketdao.obtenerNombrePasajero(id_pasajero);
+                    viewPago.lblNombrePasajero.setText("NOMBRE DEL PASAJERO: " + nombrep);
+                    String codVuelo = ticketdao.obtenerCodigoVuelo(id_pasajero);
+                    viewPago.lblReferenciaPago.setText("CÓDIGO DE VUELO: " + codVuelo);
+                    String origenp = ticketdao.obtenerOrigen(id_pasajero);
+                    viewPago.lblOrigen.setText(origenp);
+                    String destinop = ticketdao.obtenerDestino(id_pasajero);
+                    viewPago.lblDestino.setText(destinop);
+                    String fechap = ticketdao.obtenerFechaVuelo(id_pasajero);
+                    viewPago.lblFechaIda.setText("FECHA: " + fechap);
+
+                    if (datos.getFechaRegreso() != null) {
+                        viewPago.lblFlechaVuelta.setVisible(true);
+                        viewPago.lblFechaVuelta.setVisible(true);
+                        String fechaida = ticketdao.obtenerFechaVuelo(id_pasajero);
+                        viewPago.lblFechaIda.setText("FECHA IDA: " + fechaida);
+                        String fechavuelta = datos.getFechaRegreso();
+                        viewPago.lblFechaVuelta.setText("FECHA REGRESO: " + fechavuelta);
+                    }
+
+                    vista.setVisible(false);
+                    viewPago.setVisible(true);
+                    viewPago.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                    new Thread(() -> {
+                        try {
+                            Thread.sleep(4000);
+
+                            ArrayList<Integer> listaPasajeros = datos.id_pasajero;
+
+                            for (int idPasajero : listaPasajeros) {
+                                // Obtener datos desde el DAO
+                                String nombre = ticketdao.obtenerNombrePasajero(idPasajero);
+                                String documento = ticketdao.obtenerDocumento(idPasajero);
+                                String vuelo = ticketdao.obtenerCodigoVuelo(idPasajero);
+                                String origen = ticketdao.obtenerOrigen(idPasajero);
+                                String destino = ticketdao.obtenerDestino(idPasajero);
+                                String fechat = ticketdao.obtenerFechaVuelo(idPasajero);
+                                String asiento = ticketdao.obtenerAsiento(idPasajero);
+                                double costo = ticketdao.obtenerCosto(idPasajero);
+                                String codigoReserva = ticketdao.obtenerCodigoReserva(idPasajero);
+                                String correoDestino = ticketdao.obtenerCorreoPasajero(idPasajero);
+                                int ticket = ticketdao.obtenerCodTicket(idPasajero);
+
+                                // Generar PDF para este pasajero
+                                File pdf = creador.generarTicket(
+                                        nombre, documento, vuelo, origen, destino,
+                                        fechat, asiento, costo, codigoReserva, ticket
+                                );
+
+                                // Enviar correo con el PDF adjunto
+                                correo.enviarCorreoConAdjunto(correoDestino, pdf);
+
+                                JOptionPane.showMessageDialog(null, "Se te envio a tu correo electronico el PDF de tu ticket");
+                            }
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(null, e.toString(),
+                                    "Error al generar y/o enviar pdf: " + ex.getMessage(), JOptionPane.ERROR_MESSAGE);
+                        }
+                    }).start();
                 }
                 
-                Confirmar_pago_view viewPago = new Confirmar_pago_view();
                 
-                ArrayList<Integer> lista = datos.id_pasajero;
-                int id_pasajero = lista.get(0);
-        
-                int ticketp = ticketdao.obtenerCodTicket(id_pasajero);
-                viewPago.lblNumeroTicket.setText("NUMERO DE TICKET: " + ticketp);
-                String nombrep = ticketdao.obtenerNombrePasajero(id_pasajero);
-                viewPago.lblNombrePasajero.setText("NOMBRE DEL PASAJERO: "+nombrep);
-                String codVuelo = ticketdao.obtenerCodigoVuelo(id_pasajero);
-                viewPago.lblReferenciaPago.setText("CÓDIGO DE VUELO: "+codVuelo);
-                String origenp = ticketdao.obtenerOrigen(id_pasajero);
-                viewPago.lblOrigen.setText(origenp);
-                String destinop = ticketdao.obtenerDestino(id_pasajero);
-                viewPago.lblDestino.setText(destinop);
-                String fechap = ticketdao.obtenerFechaVuelo(id_pasajero);
-                viewPago.lblFechaIda.setText(fechap);
-        
-//              if(viewVuelo.vuelo_regreso.isSelected()){
-//            
-//              }
-
-                vista.setVisible(false);
-                viewPago.setVisible(true);
-                viewPago.setExtendedState(JFrame.MAXIMIZED_BOTH);
-                
-                new Thread(() -> {
-                    try {
-                        Thread.sleep(4000);
-                        
-                        
-                        ArrayList<Integer> listaPasajeros = datos.id_pasajero;
-                        
-                        for (int idPasajero : listaPasajeros) {
-                            // Obtener datos desde el DAO
-                            String nombre = ticketdao.obtenerNombrePasajero(idPasajero);
-                            String documento = ticketdao.obtenerDocumento(idPasajero);
-                            String vuelo = ticketdao.obtenerCodigoVuelo(idPasajero);
-                            String origen = ticketdao.obtenerOrigen(idPasajero);
-                            String destino = ticketdao.obtenerDestino(idPasajero);
-                           String fechat = ticketdao.obtenerFechaVuelo(idPasajero);
-                           String asiento = ticketdao.obtenerAsiento(idPasajero);
-                           double costo = ticketdao.obtenerCosto(idPasajero);
-                           String codigoReserva = ticketdao.obtenerCodigoReserva(idPasajero);
-                           String correoDestino = ticketdao.obtenerCorreoPasajero(idPasajero);
-                           int ticketP =ticketdao.obtenerCodTicket(idPasajero);
-                           
-                          // Generar PDF para este pasajero
-                            File pdf = creador.generarTicket(
-                               nombre, documento, vuelo, origen, destino,
-                               fechat, asiento, costo, codigoReserva,ticketP
-                           );
-
-                           // Enviar correo con el PDF adjunto
-                         correo.enviarCorreoConAdjunto(correoDestino, pdf);
-                        }
-                    } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(null, e.toString(),
-                        "Error al generar y/o enviar pdf: " + ex.getMessage(), JOptionPane.ERROR_MESSAGE);
-                    }
-                }).start();
             }
         }
         

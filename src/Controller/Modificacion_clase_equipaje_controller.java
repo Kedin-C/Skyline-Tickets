@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import Model.Datos;
 import Model.Seleccion_equipaje_extra_dao;
 import Model.Ticket;
 import View.Agregar_equipaje_extra_view;
@@ -29,12 +30,13 @@ public class Modificacion_clase_equipaje_controller implements ActionListener {
     private Interfaz_cambio_clase_controller clase_cont;
     private Seleccion_equipaje_extra_dao dao_agg;
     private Ticket ticket;
+    private Datos datos;
     
 
     
     
     
-    public Modificacion_clase_equipaje_controller(Seleccion_de_Modificacion_de_vuelo_view vista_seleccion_clase_equipaje,Cambio_de_clase_de_vuelo_viiew vista_seleccion_clase,Agregar_equipaje_extra_view vista_agg_equipaje,Seleccion_de_vuelo_usuarioNoregistrado_view vista_atras,Ticket ticket,Interfaz_cambio_clase_controller clase_cont, Seleccion_equipaje_extra_dao dao_agg,Seleccion_de_vuelo_usuarioRegistrado_view vista_registrado){
+    public Modificacion_clase_equipaje_controller(Seleccion_de_Modificacion_de_vuelo_view vista_seleccion_clase_equipaje,Cambio_de_clase_de_vuelo_viiew vista_seleccion_clase,Agregar_equipaje_extra_view vista_agg_equipaje,Seleccion_de_vuelo_usuarioNoregistrado_view vista_atras,Ticket ticket,Interfaz_cambio_clase_controller clase_cont, Seleccion_equipaje_extra_dao dao_agg,Seleccion_de_vuelo_usuarioRegistrado_view vista_registrado,Datos datos){
     this.vista = vista_seleccion_clase_equipaje;
     this.vista_seleccion_clase = vista_seleccion_clase;
     this.vista_agg_equipaje = vista_agg_equipaje;
@@ -43,6 +45,7 @@ public class Modificacion_clase_equipaje_controller implements ActionListener {
     this.ticket = ticket;
     this.dao_agg = dao_agg;
     this.vista_registrado = vista_registrado;
+    this.datos = datos;
     
     vista_seleccion_clase_equipaje.Clase_vuelo.addActionListener(this);
     vista_seleccion_clase_equipaje.Equipaje.addActionListener(this);
@@ -60,7 +63,7 @@ public class Modificacion_clase_equipaje_controller implements ActionListener {
         
         if(e.getSource() == vista.Clase_vuelo){
             vista.setVisible(false);
-            
+            datos.vista_pago = 2;
 
             clase_cont.ClasesDeVueloDisponibles(ticket.getId());
             vista_seleccion_clase.setVisible(true);
@@ -71,6 +74,7 @@ public class Modificacion_clase_equipaje_controller implements ActionListener {
         if(e.getSource() == vista.Equipaje){
             vista.setVisible(false);
             
+            datos.vista_pago = 1;
             vista_agg_equipaje.Vaciar_clase();
             vista_agg_equipaje.setClaseActual(dao_agg.ClaseDeVueloActual(ticket.getId()));
             vista_agg_equipaje.setVisible(true);

@@ -177,8 +177,9 @@ public class ReservasDao {
             
             ps = con.prepareStatement(sql);
             
-            ps.setInt(1, id);
-            ps.setString(2, asiento);
+            ps.setString(1, asiento);
+            ps.setInt(2, id);
+            
             
             ps.executeUpdate();
         }catch(Exception ex){
@@ -198,5 +199,8 @@ public class ReservasDao {
             }
         }
     }
+    
+    
+    
     
 }

@@ -12,7 +12,7 @@ import javax.swing.JButton;
 import Model.Datos;
 import Model.Reservas;
 import Model.ReservasDao;
-import View.And_puestos;
+import Model.And_puestos;
 import View.Datos_y_pago_view;
 import View.Elegir_puestos_view;
 import View.Seleccion_de_Modificacion_de_vuelo_view;
@@ -37,6 +37,8 @@ public class Elegir_puestos_controller implements ActionListener{
     private ViewPrincipal vistaPrincipal;
     private Pagina_principal_administrador_view viewAdmin;
     private Inicio_usuario_view viewUsuario;
+    private Seleccion_de_Modificacion_de_vuelo_view modify;
+    
     
     int filas = 0;
     int columnas = 0;
@@ -48,7 +50,7 @@ public class Elegir_puestos_controller implements ActionListener{
     ArrayList<String> ocupados = new ArrayList<>();
     ArrayList<String> claseActual = new ArrayList<>();
         
-    public Elegir_puestos_controller(Elegir_puestos_view vista, Datos datos,And_puestos pva,Seleccion_forma_de_pago_view modi_ticket_view, Usuario usuario, ViewPrincipal vistaPrincipal, Pagina_principal_administrador_view viewAdmin, Inicio_usuario_view viewUsuario){
+    public Elegir_puestos_controller(Elegir_puestos_view vista, Datos datos,And_puestos pva,Seleccion_forma_de_pago_view modi_ticket_view, Usuario usuario, ViewPrincipal vistaPrincipal, Pagina_principal_administrador_view viewAdmin, Inicio_usuario_view viewUsuario,Seleccion_de_Modificacion_de_vuelo_view modify){
         
         this.modi_ticket_view = modi_ticket_view;
         this.pva = pva;
@@ -58,6 +60,7 @@ public class Elegir_puestos_controller implements ActionListener{
         this.vistaPrincipal = vistaPrincipal;
         this.viewAdmin = viewAdmin;
         this.viewUsuario = viewUsuario;
+        this.modify = modify;
         
         this.vista.aleatorio.addActionListener(this);
         this.vista.siguiente.addActionListener(this);
@@ -121,6 +124,7 @@ public class Elegir_puestos_controller implements ActionListener{
 
                             //Cambiar el color del botón seleccionado
                             botonPresionado.setBackground(Color.red);
+                            
                         
                         }
                     }
@@ -163,12 +167,13 @@ public class Elegir_puestos_controller implements ActionListener{
                         vista.torre1[f][c].setEnabled(false);
 
                         JButton botonPresionado = vista.torre1[f][c];
+                         
 
                         //Cambiar el color del botón seleccionado
                         botonPresionado.setBackground(Color.decode("#037FB9"));
                         
                         String nombrebtn = botonPresionado.getText();
-                        
+                        pva.setPuesto(nombrebtn);
                         codigoAsiento.add(nombrebtn);
                         
                         if(datos.getClaseVuelo() == 1){
@@ -195,11 +200,13 @@ public class Elegir_puestos_controller implements ActionListener{
                         vista.torre2[f][c].setEnabled(false);
                         
                         JButton botonPresionado = vista.torre2[f][c];
+                         JOptionPane.showMessageDialog(null, vista.torre1[f][c].getText());
 
                         //Cambiar el color del botón seleccionado
                         botonPresionado.setBackground(Color.decode("#037FB9"));
                         
                         String nombrebtn = botonPresionado.getText();
+                        pva.setPuesto(nombrebtn);
                         
                         codigoAsiento.add(nombrebtn);
                         if(datos.getClaseVuelo() == 1){
@@ -227,7 +234,7 @@ public class Elegir_puestos_controller implements ActionListener{
                 
                 vista.setVisible(false);
                 vistaDatosyPago.setVisible(true);
-                Datos_y_pago_controller controllerDatosPago = new Datos_y_pago_controller(vistaDatosyPago, datos, usuario, vistaPrincipal, viewAdmin, viewUsuario);
+                Datos_y_pago_controller controllerDatosPago = new Datos_y_pago_controller(vistaDatosyPago, datos, usuario, vistaPrincipal, viewAdmin, viewUsuario,pva,modify);
 
                 JOptionPane.showMessageDialog(vista, "Los puestos elegidos son: " + datos.getCodigoAsiento());
                 

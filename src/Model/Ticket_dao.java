@@ -487,6 +487,25 @@ public class Ticket_dao {
             }
         }
    }
+   
+   public int codigoReserva(int id_ticket){
+        int reserva = 0;
+        String sql = "SELECT id_reserva FROM tickets WHERE codigo_ticket = ?";
+        try {
+            con = conectar.getConection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id_ticket);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                reserva = rs.getInt("id_reserva");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString(),
+                "Error de consulta: " + e.getMessage(), JOptionPane.ERROR_MESSAGE);
+        }
+        
+        return reserva;
+    }
 }
 
 
