@@ -38,13 +38,13 @@ public class Buscar_vuelos_view extends Interfaz_vista_abtractas{
                 "Cancún", "Ciudad de México", "Curitiba", "Fortaleza", "Guadalajara",
                 "Lima", "Medellín", "Monterrey", "Panamá", "Porto Alegre",
                 "Quito", "Recife", "Río de Janeiro", "Salvador de Bahía",
-                "San José de Costa Rica", "Santiago de Chile", "São Paulo"},
+                "Ciudad de Panama", "Santiago de Chile", "São Paulo"},
             lista_destino[]={
                 "", "Barranquilla", "Bogotá", "Brasilia", "Buenos Aires", "Cali",
                 "Cancún", "Ciudad de México", "Curitiba", "Fortaleza", "Guadalajara",
                 "Lima", "Medellín", "Monterrey", "Panamá", "Porto Alegre",
                 "Quito", "Recife", "Río de Janeiro", "Salvador de Bahía",
-                "San José de Costa Rica", "Santiago de Chile", "São Paulo"},
+                "Ciudad de Panama", "Santiago de Chile", "São Paulo"},
             
             lista_horario[]={"", 
                 "00:00:00 - 03:00:00", "03:00:00 - 06:00:00", "06:00:00 - 09:00:00",
