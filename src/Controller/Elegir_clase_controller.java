@@ -104,6 +104,7 @@ public class Elegir_clase_controller implements ActionListener{
             datos.setTotalPagar(preciosTickets);
             
             vista.setVisible(false);
+            this.vistaElegirPuestos = new Elegir_puestos_view();
             vistaElegirPuestos.setVisible(true);
             
             

@@ -26,11 +26,11 @@ import javax.swing.JOptionPane;
 
 public class Elegir_puestos_controller implements ActionListener{
     
-    Reservas reserva = new Reservas();
-    ReservasDao reservadao = new ReservasDao();
-    Elegir_puestos_view vista = new Elegir_puestos_view();
-    Datos datos = new Datos();
-    Datos_y_pago_view vistaDatosyPago = new Datos_y_pago_view();
+    private Reservas reserva = new Reservas();
+    private ReservasDao reservadao = new ReservasDao();
+    private Elegir_puestos_view vista = new Elegir_puestos_view();
+    private Datos datos = new Datos();
+    private Datos_y_pago_view vistaDatosyPago = new Datos_y_pago_view();
     private And_puestos pva;
     private Seleccion_forma_de_pago_view modi_ticket_view;
     private Usuario usuario;
