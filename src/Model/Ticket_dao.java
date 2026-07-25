@@ -375,6 +375,8 @@ public class Ticket_dao {
         }
         return reserva;
     }
+
+    
          
     public void enviarDatos(int id_pago, int id_pasajero, int id_reserva, int equipaje_extra, String tipo_vuelo){
         
