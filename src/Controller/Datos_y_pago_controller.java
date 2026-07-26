@@ -36,7 +36,7 @@ public class Datos_y_pago_controller implements ActionListener{
     
     DatosPersonales datosPersonales = new DatosPersonales();
     DatosPersonalesDao datosPersonalesdao = new DatosPersonalesDao();
-    Datos_y_pago_view vista = new Datos_y_pago_view();
+    Datos_y_pago_view vista;
     Datos datos;
     
     Ticket ticket = new Ticket();
@@ -65,6 +65,7 @@ public class Datos_y_pago_controller implements ActionListener{
         this.viewAdmin = viewAdmin;
         this.viewUsuario = viewUsuario;
         
+
         this.n=1;
         
         this.vista.siguiente.addActionListener(this);
@@ -187,6 +188,8 @@ public class Datos_y_pago_controller implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         
+       
+        
         if(e.getSource() == vista.siguiente){
             
             if(validarDatos()){
@@ -217,6 +220,7 @@ public class Datos_y_pago_controller implements ActionListener{
         if (e.getSource() == vista.credito) {
             if(validarDatos()){
                 vista.setVisible(false);
+                
                 viewTarjetaCredito.setVisible(true);
                 Seleccion_forma_de_pago_view selec_pago = new Seleccion_forma_de_pago_view();
                 Tarjeta_de_credito_controller controllerTarjetaCredito = new Tarjeta_de_credito_controller(viewTarjetaCredito, datos,selec_pago, ticket, usuario, vistaPrincipal, viewAdmin, viewUsuario,pv,modify);
