@@ -35,16 +35,14 @@ public class Buscar_vuelos_view extends Interfaz_vista_abtractas{
     private JLabel lugar_origen,lugar_destino,fecha_ida,fecha_regreso,horario;
             private String lista_origen[]={
                 "", "Barranquilla", "Bogotá", "Brasilia", "Buenos Aires", "Cali",
-                "Cancún", "Ciudad de México", "Curitiba", "Fortaleza", "Guadalajara",
-                "Lima", "Medellín", "Monterrey", "Panamá", "Porto Alegre",
-                "Quito", "Recife", "Río de Janeiro", "Salvador de Bahía",
-                "Ciudad de Panama", "Santiago de Chile", "São Paulo"},
+                "Cancún", "Ciudad de México","Ciudad de Panama", "Curitiba", "Fortaleza", "Guadalajara",
+                "Lima", "Medellín", "Monterrey", "Porto Alegre",
+                "Quito", "Recife", "Río de Janeiro", "Salvador de Bahía", "Santiago de Chile", "São Paulo"},
             lista_destino[]={
                 "", "Barranquilla", "Bogotá", "Brasilia", "Buenos Aires", "Cali",
-                "Cancún", "Ciudad de México", "Curitiba", "Fortaleza", "Guadalajara",
-                "Lima", "Medellín", "Monterrey", "Panamá", "Porto Alegre",
-                "Quito", "Recife", "Río de Janeiro", "Salvador de Bahía",
-                "Ciudad de Panama", "Santiago de Chile", "São Paulo"},
+                "Cancún", "Ciudad de México","Ciudad de Panama", "Curitiba", "Fortaleza", "Guadalajara",
+                "Lima", "Medellín", "Monterrey", "Porto Alegre",
+                "Quito", "Recife", "Río de Janeiro", "Salvador de Bahía", "Santiago de Chile", "São Paulo"},
             
             lista_horario[]={"", 
                 "00:00:00 - 03:00:00", "03:00:00 - 06:00:00", "06:00:00 - 09:00:00",

@@ -13,6 +13,7 @@ import Model.DatosPersonales;
 import Model.DatosPersonalesDao;
 import Model.Ticket;
 import Model.Usuario;
+import View.Buscar_vuelos_view;
 import View.Datos_y_pago_view;
 import View.Inicio_usuario_view;
 import View.Pagina_principal_administrador_view;
@@ -32,6 +33,8 @@ import java.util.Date;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 
+
+
 public class Datos_y_pago_controller implements ActionListener{
     
     DatosPersonales datosPersonales = new DatosPersonales();
@@ -49,13 +52,16 @@ public class Datos_y_pago_controller implements ActionListener{
     private Inicio_usuario_view viewUsuario;
     private And_puestos pv;
     private Seleccion_de_Modificacion_de_vuelo_view modify;
+    private Buscar_vuelos_view buscar;
+    
+
     
     
     int n;
     
     ArrayList<DatosPersonales> datosPasajeros = new ArrayList<>();
     
-    public Datos_y_pago_controller(Datos_y_pago_view vista, Datos datos, Usuario usuario, ViewPrincipal vistaPrincipal, Pagina_principal_administrador_view viewAdmin, Inicio_usuario_view viewUsuario,And_puestos pv,Seleccion_de_Modificacion_de_vuelo_view modify){
+    public Datos_y_pago_controller(Datos_y_pago_view vista, Datos datos, Usuario usuario, ViewPrincipal vistaPrincipal, Pagina_principal_administrador_view viewAdmin, Inicio_usuario_view viewUsuario,And_puestos pv,Seleccion_de_Modificacion_de_vuelo_view modify,Buscar_vuelos_view buscar){
         
         this.modify = modify;
         this.datos=datos;
@@ -64,6 +70,7 @@ public class Datos_y_pago_controller implements ActionListener{
         this.vistaPrincipal = vistaPrincipal;
         this.viewAdmin = viewAdmin;
         this.viewUsuario = viewUsuario;
+        this.buscar = buscar;
         
         this.n=1;
         
@@ -215,11 +222,11 @@ public class Datos_y_pago_controller implements ActionListener{
         }
         
         if (e.getSource() == vista.credito) {
-            if(validarDatos()){
+            if (validarDatos()) {
                 vista.setVisible(false);
                 viewTarjetaCredito.setVisible(true);
                 Seleccion_forma_de_pago_view selec_pago = new Seleccion_forma_de_pago_view();
-                Tarjeta_de_credito_controller controllerTarjetaCredito = new Tarjeta_de_credito_controller(viewTarjetaCredito, datos,selec_pago, ticket, usuario, vistaPrincipal, viewAdmin, viewUsuario,pv,modify);
+                Tarjeta_de_credito_controller controllerTarjetaCredito = new Tarjeta_de_credito_controller(viewTarjetaCredito, datos,selec_pago, ticket, usuario, vistaPrincipal, viewAdmin, viewUsuario,pv,modify,buscar);
                 
                 datos.setDatosPersonales(datosPasajeros);
                 
