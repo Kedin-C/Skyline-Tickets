@@ -24,7 +24,7 @@ import javax.swing.JOptionPane;
 public class Elegir_clase_controller implements ActionListener{
     
     Elegir_clase_view vista = new Elegir_clase_view();
-    Datos datos = new Datos();
+    Datos datos = Datos.getInstance();
     private Elegir_puestos_view vistaElegirPuestos;
     private Cambio_de_clase_de_vuelo_viiew cam_clas_view ;
     private And_puestos pva;

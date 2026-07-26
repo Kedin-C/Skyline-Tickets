@@ -154,12 +154,50 @@ public class Correo_controller {
 
             // Enviar
             Transport.send(correo);
-            System.out.println("Correo enviado correctamente con el ticket adjunto.");
 
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Error al enviar el correo: " + e.getMessage());
         }
+    }
+    
+    public void enviarCorreoConAdjuntos(String destinatario, File archivoAdjunto1, File archivoAdjunto2) {
+        try {
+            Session sesion = crearSesion();
+
+            MimeMessage correo = new MimeMessage(sesion);
+            correo.setFrom(new InternetAddress(correoRemitente));
+            correo.setRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));
+            correo.setSubject("Tickets de los Vuelos");
+
+            // Parte de texto
+            MimeBodyPart texto = new MimeBodyPart();
+            texto.setText("Estimado pasajero,\nAdjunto encontrará sus tickets de los vuelos en PDF.");
+
+            // Parte del adjunto
+            MimeBodyPart adjunto1 = new MimeBodyPart();
+            adjunto1.attachFile(archivoAdjunto1);
+            
+            MimeBodyPart adjunto2 = new MimeBodyPart();
+            adjunto2.attachFile(archivoAdjunto2);
+
+            // Combinar partes
+            Multipart multipart = new MimeMultipart();
+            multipart.addBodyPart(texto);
+            multipart.addBodyPart(adjunto1);
+            multipart.addBodyPart(adjunto2);
+
+            correo.setContent(multipart);
+
+            // Enviar
+            Transport.send(correo);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error al enviar el correo: " + e.getMessage());
+        }
+        
+        
     }
 
 }

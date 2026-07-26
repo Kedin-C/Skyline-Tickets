@@ -29,7 +29,7 @@ public class Elegir_puestos_controller implements ActionListener{
     private Reservas reserva = new Reservas();
     private ReservasDao reservadao = new ReservasDao();
     private Elegir_puestos_view vista = new Elegir_puestos_view();
-    private Datos datos = new Datos();
+    private Datos datos = Datos.getInstance();
     private Datos_y_pago_view vistaDatosyPago = new Datos_y_pago_view();
     private And_puestos pva;
     private Seleccion_forma_de_pago_view modi_ticket_view;
@@ -62,6 +62,9 @@ public class Elegir_puestos_controller implements ActionListener{
         this.viewAdmin = viewAdmin;
         this.viewUsuario = viewUsuario;
         this.modify = modify;
+
+        Model.Vistas_globales.datosYPago = this.vistaDatosyPago;
+        Model.Vistas_globales.elegirPuestosController = this;
         
         
         this.vista.aleatorio.addActionListener(this);
