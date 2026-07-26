@@ -75,7 +75,8 @@ public class Skyline_Tickets {
         Inicio_usuario_view pagina_usuario = new Inicio_usuario_view();
         Usuario usuario = new Usuario();
         Sesion_usuario sesion_usuario = new Sesion_usuario();
-
+        
+        
         //vistas
         
         Seleccion_de_vuelo_usuarioRegistrado_view select_vuelo = new Seleccion_de_vuelo_usuarioRegistrado_view();
@@ -105,8 +106,8 @@ public class Skyline_Tickets {
         //clases
         Ticket ticket = new Ticket();
         Datos datos = new Datos();
-        And_puestos puv = new And_puestos();
-
+        And_puestos puv =  new And_puestos();
+        
         //dao
         Seleccion_vuelo_usuario_no_registrado_dao dao_modificacion_vuelo = new Seleccion_vuelo_usuario_no_registrado_dao();
         Seleccion_modificacion_clase_de_vuelo_dao dao_modificacion_clase_vuelo = new Seleccion_modificacion_clase_de_vuelo_dao();

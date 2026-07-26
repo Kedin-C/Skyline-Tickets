@@ -25,7 +25,7 @@ public class Elegir_clase_controller implements ActionListener{
     
     Elegir_clase_view vista = new Elegir_clase_view();
     Datos datos = new Datos();
-    Elegir_puestos_view vistaElegirPuestos = new Elegir_puestos_view();
+    private Elegir_puestos_view vistaElegirPuestos;
     private Cambio_de_clase_de_vuelo_viiew cam_clas_view ;
     private And_puestos pva;
     private Seleccion_forma_de_pago_view modi_ticket_view ;
@@ -35,6 +35,7 @@ public class Elegir_clase_controller implements ActionListener{
     private Pagina_principal_administrador_view viewAdmin;
     private Inicio_usuario_view viewUsuario;
     private Seleccion_de_Modificacion_de_vuelo_view modify;
+    private Elegir_puestos_controller controllerElegirPuestos;
 
     
     public Elegir_clase_controller(Elegir_clase_view vista, Datos datos,Cambio_de_clase_de_vuelo_viiew cam_view,And_puestos pva,Seleccion_forma_de_pago_view modi_ticket_view, Usuario usuario, ViewPrincipal vistaPrincipal, Pagina_principal_administrador_view viewAdmin, Inicio_usuario_view viewUsuario,Seleccion_de_Modificacion_de_vuelo_view modify){
@@ -49,7 +50,7 @@ public class Elegir_clase_controller implements ActionListener{
         this.viewAdmin = viewAdmin;
         this.viewUsuario = viewUsuario;
         this.modify = modify;
-        
+        this.vistaElegirPuestos = new Elegir_puestos_view();;
         this.vista.siguiente.addActionListener( this);
         this.vista.volver.addActionListener(this);
         
@@ -67,12 +68,15 @@ public class Elegir_clase_controller implements ActionListener{
         
         this.vista.economica.setSelected(true);
     }
+    
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
         
         if(e.getSource() == vista.siguiente){
-
+            
             if(vista.economica.isSelected()){
                 datos.setClaseVuelo(1);
                 datos.setTotalPagar(datos.getTotalPagar()+180000);
@@ -103,21 +107,27 @@ public class Elegir_clase_controller implements ActionListener{
             double preciosTickets = datos.getTotalPagar()*datos.getNumeroTickets();
             datos.setTotalPagar(preciosTickets);
             
-            vista.setVisible(false);
+            vista.dispose();
+            
             vistaElegirPuestos.setVisible(true);
             
+            if(controllerElegirPuestos == null)
+                controllerElegirPuestos = new Elegir_puestos_controller(vistaElegirPuestos, datos,pva,modi_ticket_view, usuario, vistaPrincipal, viewAdmin, viewUsuario,modify);
+            else
+                controllerElegirPuestos.setAsientos();
             
-            Elegir_puestos_controller controllerElegirPuestos = new Elegir_puestos_controller(vistaElegirPuestos, datos,pva,modi_ticket_view, usuario, vistaPrincipal, viewAdmin, viewUsuario,modify);
+            
+           
             
         }
         
         if(e.getSource() == vistaElegirPuestos.volver){
-            if(pva.getNumero() == 1){
-            vista.setVisible(true);
-            vistaElegirPuestos.setVisible(false);
-            }else if(pva.getNumero() == 2){
             
-                vistaElegirPuestos.setVisible(false);
+            vista.setVisible(true);
+            vistaElegirPuestos.dispose();
+            if(pva.getNumero() == 2){
+            
+                vistaElegirPuestos.dispose();
                 
                 cam_clas_view.setVisible(true);
                 cam_clas_view.setExtendedState(JFrame.MAXIMIZED_BOTH);

@@ -45,7 +45,7 @@ public class Buscar_vuelos_controller implements ActionListener{
     Buscar_vuelos_view vista = new Buscar_vuelos_view();
     DefaultTableModel modelo = new DefaultTableModel();
     Datos datos = new Datos();
-    private Elegir_clase_view vistaElegirClase;
+    private Elegir_clase_view vistaElegirClase ;
     private Historial_vuelos_view historial_vista;
     public String origen, destino, hora1, hora2;
     public Date fechaIda, fechaRegreso;
@@ -70,7 +70,7 @@ public class Buscar_vuelos_controller implements ActionListener{
         this.vistaPrincipal = vistaPrincipal;
         this.viewAdmin = viewAdmin;
         this.viewUsuario = viewUsuario;
-        this.vistaElegirClase = vistaElegirClase;
+        this. vistaElegirClase = vistaElegirClase;
         
         this.vista = vista;
         this.datos = datos;
@@ -167,9 +167,9 @@ public class Buscar_vuelos_controller implements ActionListener{
             historial_vista.setExtendedState(JFrame.MAXIMIZED_BOTH);
             }
         }
-
-        if (e.getSource() == vista.siguiente) {
-
+        
+        if(e.getSource() == vista.siguiente){
+            
             pva.setNumero(1);
             int filaVuelo = vista.tabla.getSelectedRow();
             
@@ -187,14 +187,14 @@ public class Buscar_vuelos_controller implements ActionListener{
             double precio = Double.parseDouble(vista.tabla.getValueAt(filaVuelo, 6).toString());
             datos.setCodigoVuelo(id);
             datos.setTotalPagar(precio);
-
-            if (vista.vuelo_ida.isSelected()) {
-                datos.setTipoVuelo("IDA");
-            } else {
-
-                validarRegreso();
-                datos.setTipoVuelo("IDA_VUELTA");
-
+            
+            if(vista.vuelo_ida.isSelected()){
+                datos.setTipoVuelo("Vuelo de ida");
+            }else{
+                
+                //validarRegreso();
+                datos.setTipoVuelo("Vuelo de ida y vuelta");
+                
                 SimpleDateFormat formateadorRegreso = new SimpleDateFormat("yyyy-MM-dd");
                 //aplicando el metodo que deja la fecha tal cual en el campo de fecha regreso
                 String fechaRegreso = formateadorRegreso.format(vista.elegir_fecha_regreso.getDate());
@@ -211,8 +211,47 @@ public class Buscar_vuelos_controller implements ActionListener{
                vista.listar_destino.getSelectedIndex() > 0 &&
                vista.elegir_fecha_ida.getDate() != null){
 
-                validarRegreso();
-                getListar(vista.tabla);
+                if(vista.vuelo_regreso.isSelected()){
+            if(vista.elegir_fecha_regreso.getDate() != null){
+
+                fechaIda = vista.elegir_fecha_ida.getDate();
+
+
+                fechaRegreso = vista.elegir_fecha_regreso.getDate();
+                //para que la fecha quede bien 
+                SimpleDateFormat formateadorRegreso = new SimpleDateFormat("yyyy-MM-dd");
+                //aplicando el metodo que deja la fecha tal cual en el campo de fecha regreso
+                String fechaExacta2 = formateadorRegreso.format(fechaRegreso);
+
+                
+                if(fechaRegreso.after(fechaIda)){
+                    datos.setFechaRegreso(fechaExacta2);
+                }else{
+                    JOptionPane.showMessageDialog(vista,
+                        "La fecha de regreso no puede ser antes que la fecha de ida", "Fecha incoherente", JOptionPane.WARNING_MESSAGE);
+                    
+                    limpiarTabla();
+                    
+                }
+            }else {
+                JOptionPane.showMessageDialog(vista,
+                        "Debes elegir una fecha de regreso", "Fecha obligatoria", JOptionPane.WARNING_MESSAGE);
+               
+                limpiarTabla();
+                
+            }
+ 
+        }
+                
+                
+                limpiarTabla();
+
+                if (vista.listar_horario.getSelectedIndex() == 0) {
+                    getListar(vista.tabla);
+                } else {
+                    getListarHorario(vista.tabla);
+                }
+                
             
             }else {
                 JOptionPane.showMessageDialog(vista, 
@@ -351,48 +390,5 @@ public class Buscar_vuelos_controller implements ActionListener{
     }
     
 
-    private void validarRegreso(){
-        
-        int puntos = 2;
-        if(vista.vuelo_regreso.isSelected()){
-            if(vista.elegir_fecha_regreso.getDate() != null){
-
-                fechaIda = vista.elegir_fecha_ida.getDate();
-
-
-                fechaRegreso = vista.elegir_fecha_regreso.getDate();
-                //para que la fecha quede bien 
-                SimpleDateFormat formateadorRegreso = new SimpleDateFormat("yyyy-MM-dd");
-                //aplicando el metodo que deja la fecha tal cual en el campo de fecha regreso
-                String fechaExacta2 = formateadorRegreso.format(fechaRegreso);
-
-
-                if(fechaRegreso.after(fechaIda)){
-                    datos.setFechaRegreso(fechaExacta2);
-                }else{
-                    JOptionPane.showMessageDialog(vista,
-                        "La fecha de regreso no puede ser antes que la fecha de ida", "Fecha incoherente", JOptionPane.WARNING_MESSAGE);
-                    puntos--;
-                    limpiarTabla();
-                    
-                }
-            }else {
-                JOptionPane.showMessageDialog(vista,
-                        "Debes elegir una fecha de regreso", "Fecha obligatoria", JOptionPane.WARNING_MESSAGE);
-                puntos--;
-                limpiarTabla();
-                
-            }
-            
-                limpiarTabla();
-                if (vista.listar_horario.getSelectedIndex() == 0) {
-                    getListar(vista.tabla);
-                } else {
-                    getListarHorario(vista.tabla);
-                
-            }
-            
-        }
-    }
     
 }
