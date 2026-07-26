@@ -221,7 +221,7 @@ public class Tarjeta_de_credito_controller implements ActionListener {
 
                             Thread.sleep(4000);
 
-                            if (buscar.elegir_fecha_regreso.getDate() == null) {
+                            if (buscar.elegir_fecha_regreso.getDate() != null) {
 
                                 ArrayList<Integer> listaPasajeros = datos.id_pasajero;
 
@@ -267,7 +267,8 @@ public class Tarjeta_de_credito_controller implements ActionListener {
                                     String codigoReserva = ticketdao.obtenerCodigoReserva(idPasajero);
                                     String correoDestino = ticketdao.obtenerCorreoPasajero(idPasajero);
                                     int ticket = ticketdao.obtenerCodTicket(idPasajero);
-                                    String fechaRegreso = datos.getFechaRegreso();
+                                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                                    String fechaRegreso = sdf.format(buscar.elegir_fecha_regreso.getDate());
 
                                     // Generar PDF para este pasajero
                                     File pdf1 = creador.generarTicket(

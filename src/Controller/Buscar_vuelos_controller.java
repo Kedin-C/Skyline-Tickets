@@ -44,7 +44,7 @@ public class Buscar_vuelos_controller implements ActionListener {
     VuelosDao vuelodao = new VuelosDao();
     Buscar_vuelos_view vista = new Buscar_vuelos_view();
     DefaultTableModel modelo = new DefaultTableModel();
-    Datos datos = new Datos();
+    Datos datos = Datos.getInstance();
     private Elegir_clase_view vistaElegirClase;
     private Historial_vuelos_view historial_vista;
     public String origen, destino, hora1, hora2;
@@ -168,7 +168,6 @@ public class Buscar_vuelos_controller implements ActionListener {
         }
 
         if (e.getSource() == vista.siguiente) {
-
             pva.setNumero(1);
             int filaVuelo = vista.tabla.getSelectedRow();
 
@@ -188,11 +187,11 @@ public class Buscar_vuelos_controller implements ActionListener {
             datos.setTotalPagar(precio);
 
             if (vista.vuelo_ida.isSelected()) {
-                datos.setTipoVuelo("IDA");
+                datos.setTipoVuelo("Vuelo de ida");
             } else {
 
                 validarRegreso();
-                datos.setTipoVuelo("IDA_VUELTA");
+                datos.setTipoVuelo("Vuelo de ida y vuelta");
 
                 SimpleDateFormat formateadorRegreso = new SimpleDateFormat("yyyy-MM-dd");
                 //aplicando el metodo que deja la fecha tal cual en el campo de fecha regreso

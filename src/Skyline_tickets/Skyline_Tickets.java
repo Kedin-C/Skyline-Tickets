@@ -77,7 +77,6 @@ public class Skyline_Tickets {
         Sesion_usuario sesion_usuario = new Sesion_usuario();
 
         //vistas
-        
         Seleccion_de_vuelo_usuarioRegistrado_view select_vuelo = new Seleccion_de_vuelo_usuarioRegistrado_view();
         Seleccion_de_vuelo_usuarioNoregistrado_view select_vuelo_nor = new Seleccion_de_vuelo_usuarioNoregistrado_view();
         Seleccion_de_Modificacion_de_vuelo_view modificacion = new Seleccion_de_Modificacion_de_vuelo_view();
@@ -91,6 +90,7 @@ public class Skyline_Tickets {
         Menu_principal_view menu = new Menu_principal_view();
         Apartado_reportes_menu_view apart_reportes_menu = new Apartado_reportes_menu_view();
         Buscar_vuelos_view buscar_v = new Buscar_vuelos_view();
+        Model.Vistas_globales.buscarVuelos = buscar_v;
         Informacion_personal_view info_personal = new Informacion_personal_view();
         Apartado_reportes_operacionales_view apart_reportes_opera = new Apartado_reportes_operacionales_view();
         Apartado_reportes_financieros_view apart_reportes_finan = new Apartado_reportes_financieros_view();
@@ -100,11 +100,12 @@ public class Skyline_Tickets {
         Historial_vuelos_view historial_vuelos = new Historial_vuelos_view();
         Elegir_puestos_view puestos_vista = new Elegir_puestos_view();
         Elegir_clase_view elegir_clase_vista = new Elegir_clase_view();
+        Model.Vistas_globales.elegirClase = elegir_clase_vista;
         Confirmar_pago_view conf_pago_view = new Confirmar_pago_view();
 
         //clases
         Ticket ticket = new Ticket();
-        Datos datos = new Datos();
+        Datos datos = Datos.getInstance();
         And_puestos puv = new And_puestos();
 
         //dao

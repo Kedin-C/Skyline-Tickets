@@ -30,7 +30,7 @@ public class Elegir_puestos_controller implements ActionListener{
     Reservas reserva = new Reservas();
     ReservasDao reservadao = new ReservasDao();
     Elegir_puestos_view vista = new Elegir_puestos_view();
-    Datos datos = new Datos();
+    Datos datos = Datos.getInstance();
     Datos_y_pago_view vistaDatosyPago = new Datos_y_pago_view();
     private And_puestos pva;
     private Seleccion_forma_de_pago_view modi_ticket_view;
@@ -64,6 +64,9 @@ public class Elegir_puestos_controller implements ActionListener{
         this.viewUsuario = viewUsuario;
         this.modify = modify;
         this.buscar = buscar;
+
+        Model.Vistas_globales.datosYPago = this.vistaDatosyPago;
+        Model.Vistas_globales.elegirPuestosController = this;
         
         this.vista.aleatorio.addActionListener(this);
         this.vista.siguiente.addActionListener(this);
@@ -158,6 +161,24 @@ public class Elegir_puestos_controller implements ActionListener{
     }
 
     
+    public void reset() {
+        for (String asiento : codigoAsiento) {
+            for (int f = 0; f < vista.torre1.length; f++) {
+                for (int c = 0; c < vista.torre1[f].length; c++) {
+                    if (vista.torre1[f][c] != null && asiento.equals(vista.torre1[f][c].getText())) {
+                        vista.torre1[f][c].setEnabled(true);
+                        vista.torre1[f][c].setBackground(null);
+                    }
+                    if (vista.torre2[f][c] != null && asiento.equals(vista.torre2[f][c].getText())) {
+                        vista.torre2[f][c].setEnabled(true);
+                        vista.torre2[f][c].setBackground(null);
+                    }
+                }
+            }
+        }
+        codigoAsiento.clear();
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
