@@ -19,7 +19,6 @@ import View.Seleccion_de_Modificacion_de_vuelo_view;
 import View.Seleccion_forma_de_pago_view;
 import javax.swing.JFrame;
 import Model.Usuario;
-import View.Buscar_vuelos_view;
 import View.Inicio_usuario_view;
 import View.Pagina_principal_administrador_view;
 import View.ViewPrincipal;
@@ -30,7 +29,7 @@ public class Elegir_puestos_controller implements ActionListener{
     Reservas reserva = new Reservas();
     ReservasDao reservadao = new ReservasDao();
     Elegir_puestos_view vista = new Elegir_puestos_view();
-    Datos datos = Datos.getInstance();
+    Datos datos = new Datos();
     Datos_y_pago_view vistaDatosyPago = new Datos_y_pago_view();
     private And_puestos pva;
     private Seleccion_forma_de_pago_view modi_ticket_view;
@@ -39,7 +38,6 @@ public class Elegir_puestos_controller implements ActionListener{
     private Pagina_principal_administrador_view viewAdmin;
     private Inicio_usuario_view viewUsuario;
     private Seleccion_de_Modificacion_de_vuelo_view modify;
-    private Buscar_vuelos_view buscar;
     
     
     int filas = 0;
@@ -52,7 +50,7 @@ public class Elegir_puestos_controller implements ActionListener{
     ArrayList<String> ocupados = new ArrayList<>();
     ArrayList<String> claseActual = new ArrayList<>();
         
-    public Elegir_puestos_controller(Elegir_puestos_view vista, Datos datos,And_puestos pva,Seleccion_forma_de_pago_view modi_ticket_view, Usuario usuario, ViewPrincipal vistaPrincipal, Pagina_principal_administrador_view viewAdmin, Inicio_usuario_view viewUsuario,Seleccion_de_Modificacion_de_vuelo_view modify,Buscar_vuelos_view buscar){
+    public Elegir_puestos_controller(Elegir_puestos_view vista, Datos datos,And_puestos pva,Seleccion_forma_de_pago_view modi_ticket_view, Usuario usuario, ViewPrincipal vistaPrincipal, Pagina_principal_administrador_view viewAdmin, Inicio_usuario_view viewUsuario,Seleccion_de_Modificacion_de_vuelo_view modify){
         
         this.modi_ticket_view = modi_ticket_view;
         this.pva = pva;
@@ -63,10 +61,6 @@ public class Elegir_puestos_controller implements ActionListener{
         this.viewAdmin = viewAdmin;
         this.viewUsuario = viewUsuario;
         this.modify = modify;
-        this.buscar = buscar;
-
-        Model.Vistas_globales.datosYPago = this.vistaDatosyPago;
-        Model.Vistas_globales.elegirPuestosController = this;
         
         this.vista.aleatorio.addActionListener(this);
         this.vista.siguiente.addActionListener(this);
@@ -161,24 +155,6 @@ public class Elegir_puestos_controller implements ActionListener{
     }
 
     
-    public void reset() {
-        for (String asiento : codigoAsiento) {
-            for (int f = 0; f < vista.torre1.length; f++) {
-                for (int c = 0; c < vista.torre1[f].length; c++) {
-                    if (vista.torre1[f][c] != null && asiento.equals(vista.torre1[f][c].getText())) {
-                        vista.torre1[f][c].setEnabled(true);
-                        vista.torre1[f][c].setBackground(null);
-                    }
-                    if (vista.torre2[f][c] != null && asiento.equals(vista.torre2[f][c].getText())) {
-                        vista.torre2[f][c].setEnabled(true);
-                        vista.torre2[f][c].setBackground(null);
-                    }
-                }
-            }
-        }
-        codigoAsiento.clear();
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -258,7 +234,7 @@ public class Elegir_puestos_controller implements ActionListener{
                 
                 vista.setVisible(false);
                 vistaDatosyPago.setVisible(true);
-                Datos_y_pago_controller controllerDatosPago = new Datos_y_pago_controller(vistaDatosyPago, datos, usuario, vistaPrincipal, viewAdmin, viewUsuario,pva,modify,buscar);
+                Datos_y_pago_controller controllerDatosPago = new Datos_y_pago_controller(vistaDatosyPago, datos, usuario, vistaPrincipal, viewAdmin, viewUsuario,pva,modify);
 
                 JOptionPane.showMessageDialog(vista, "Los puestos elegidos son: " + datos.getCodigoAsiento());
                 

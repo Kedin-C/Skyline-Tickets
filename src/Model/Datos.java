@@ -30,15 +30,6 @@ public class Datos {
     public Datos(){
         
     }
-    
-    private static Datos instancia;
-
-    public static Datos getInstance() {
-        if (instancia == null) {
-            instancia = new Datos();
-        }
-        return instancia;
-    }
 
     public void setCodigoVuelo(int codigoVuelo) {
         this.codigoVuelo = codigoVuelo;
@@ -162,24 +153,6 @@ public class Datos {
         
     }
     
-    public void reset(){
-        this.codigoVuelo = 0;
-        this.numeroTickets = 0;
-        this.equipajeExtra = 0;
-        this.claseVuelo = 0;
-        this.totalPagar = 0;
-        this.tipoVuelo = null;
-        this.fechaRegreso = null;
-        this.codigoAsiento = null;
-        this.datosPersonales = null;
-        this.datosPago = null;
-        this.elegidos = 1;
-        this.vista_pago = 0;
-        this.id_pago = 0;
-        this.id_pasajero.clear();
-        this.id_reserva.clear();
-    }
-
     public void subirDatosT(){
         for(int i=0; i < datosPersonales.size(); i++){
                     

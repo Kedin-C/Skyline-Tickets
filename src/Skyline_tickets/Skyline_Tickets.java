@@ -68,14 +68,15 @@ import View.Recuperar_contraseña_view;
 public class Skyline_Tickets {
 
     public static void main(String[] args) {
-
+        
         //vistas principales
         ViewPrincipal vista_principal = new ViewPrincipal();
         Pagina_principal_administrador_view pagina_admin = new Pagina_principal_administrador_view();
         Inicio_usuario_view pagina_usuario = new Inicio_usuario_view();
         Usuario usuario = new Usuario();
         Sesion_usuario sesion_usuario = new Sesion_usuario();
-
+        
+        
         //vistas
         Seleccion_de_vuelo_usuarioRegistrado_view select_vuelo = new Seleccion_de_vuelo_usuarioRegistrado_view();
         Seleccion_de_vuelo_usuarioNoregistrado_view select_vuelo_nor = new Seleccion_de_vuelo_usuarioNoregistrado_view();
@@ -88,11 +89,10 @@ public class Skyline_Tickets {
         Transferencia_view transferencia = new Transferencia_view();
         Registro_view registro_view = new Registro_view();
         Menu_principal_view menu = new Menu_principal_view();
-        Apartado_reportes_menu_view apart_reportes_menu = new Apartado_reportes_menu_view();
+        Apartado_reportes_menu_view apart_reportes_menu =  new Apartado_reportes_menu_view();
         Buscar_vuelos_view buscar_v = new Buscar_vuelos_view();
-        Model.Vistas_globales.buscarVuelos = buscar_v;
         Informacion_personal_view info_personal = new Informacion_personal_view();
-        Apartado_reportes_operacionales_view apart_reportes_opera = new Apartado_reportes_operacionales_view();
+        Apartado_reportes_operacionales_view  apart_reportes_opera = new Apartado_reportes_operacionales_view();
         Apartado_reportes_financieros_view apart_reportes_finan = new Apartado_reportes_financieros_view();
         Login_view loginV = new Login_view();
         Recuperar_contraseña_view recu_con = new Recuperar_contraseña_view();
@@ -100,49 +100,49 @@ public class Skyline_Tickets {
         Historial_vuelos_view historial_vuelos = new Historial_vuelos_view();
         Elegir_puestos_view puestos_vista = new Elegir_puestos_view();
         Elegir_clase_view elegir_clase_vista = new Elegir_clase_view();
-        Model.Vistas_globales.elegirClase = elegir_clase_vista;
         Confirmar_pago_view conf_pago_view = new Confirmar_pago_view();
-
+        
         //clases
         Ticket ticket = new Ticket();
-        Datos datos = Datos.getInstance();
-        And_puestos puv = new And_puestos();
-
+        Datos datos = new Datos();
+        And_puestos puv =  new And_puestos();
+        
         //dao
         Seleccion_vuelo_usuario_no_registrado_dao dao_modificacion_vuelo = new Seleccion_vuelo_usuario_no_registrado_dao();
         Seleccion_modificacion_clase_de_vuelo_dao dao_modificacion_clase_vuelo = new Seleccion_modificacion_clase_de_vuelo_dao();
         Seleccion_equipaje_extra_dao dao_equipaje_extra = new Seleccion_equipaje_extra_dao();
         Reportes_financieros_dao dao_repo_finan = new Reportes_financieros_dao();
         Reportes_operativos_dao dao_repo_ope = new Reportes_operativos_dao();
-
+        
+        
         //controladores
-        Interfaz_equipaje_controller interfaz2 = new Interfaz_equipaje_controller(modificacion, bodega, dao_equipaje_extra, ticket, forma_pago_vista, datos);
-        Interfaz_cambio_clase_controller interfaz3 = new Interfaz_cambio_clase_controller(modificacion, clase, dao_modificacion_clase_vuelo, ticket, forma_pago_vista, puestos_vista, datos, elegir_clase_vista, puv);
-        Modificacion_clase_equipaje_controller interfaz1 = new Modificacion_clase_equipaje_controller(modificacion, clase, bodega, select_vuelo_nor, ticket, interfaz3, dao_equipaje_extra, select_vuelo, datos);
-        Seleccion_modificacion_usuario_no_registrado_controller interfaz = new Seleccion_modificacion_usuario_no_registrado_controller(dao_modificacion_vuelo, select_vuelo_nor, modificacion, interfaz1, ticket, vista_principal);
+        Interfaz_equipaje_controller interfaz2 = new Interfaz_equipaje_controller(modificacion,bodega,dao_equipaje_extra,ticket,forma_pago_vista,datos);
+        Interfaz_cambio_clase_controller interfaz3 = new Interfaz_cambio_clase_controller(modificacion,clase,dao_modificacion_clase_vuelo,ticket,forma_pago_vista,puestos_vista,datos,elegir_clase_vista,puv);
+        Modificacion_clase_equipaje_controller interfaz1 = new Modificacion_clase_equipaje_controller(modificacion,clase,bodega,select_vuelo_nor,ticket,interfaz3,dao_equipaje_extra,select_vuelo,datos);
+        Seleccion_modificacion_usuario_no_registrado_controller interfaz = new Seleccion_modificacion_usuario_no_registrado_controller(dao_modificacion_vuelo,select_vuelo_nor,modificacion,interfaz1,ticket,vista_principal);
         Seleccion_forma_pago_controller forma_pago_controlador = new Seleccion_forma_pago_controller(forma_pago_vista, clase, bodega, credito, debito, transferencia, datos, puestos_vista, elegir_clase_vista);
-        Tarjeta_de_credito_controller credito_cont = new Tarjeta_de_credito_controller(credito, datos, forma_pago_vista, ticket, usuario, vista_principal, pagina_admin, pagina_usuario, puv, modificacion,buscar_v);
-        Tarjeta_de_debito_controller debito_cont = new Tarjeta_de_debito_controller(debito, datos, forma_pago_vista, ticket, puv, modificacion, vista_principal, pagina_admin, pagina_usuario, usuario);
-        Transferencia_controller transferencia_cont = new Transferencia_controller(transferencia, datos, forma_pago_vista, usuario, vista_principal, pagina_admin, pagina_usuario);
-        Login_controller login_cont = new Login_controller(loginV, vista_principal, usuario, registro_view, pagina_admin, pagina_usuario, sesion_usuario, menu, recu_con);
-        Registro_controller registro_cont = new Registro_controller(registro_view, menu, loginV);
-        Buscar_vuelos_controller buscar_v_cont = new Buscar_vuelos_controller(buscar_v, datos, vista_principal, pagina_admin, pagina_usuario, historial_vuelos, puv, forma_pago_vista, clase, usuario, vista_principal, pagina_admin, pagina_usuario, elegir_clase_vista);
-        Historial_vuelos_controller historial_cont = new Historial_vuelos_controller(historial_vuelos, pagina_admin, pagina_usuario, usuario, buscar_v, buscar_v_cont);
-        Pagina_principal_administrador_controller_2 pagina_admin_cont = new Pagina_principal_administrador_controller_2(pagina_admin, apart_reportes_menu, select_vuelo, buscar_v, ticket, usuario, vista_principal, historial_vuelos, historial_cont);
-        Informacion_personal_controller info_per_cont = new Informacion_personal_controller(info_personal, pagina_usuario, sesion_usuario);
-        Inicio_usuario_controller pagina_usuario_cont = new Inicio_usuario_controller(pagina_usuario, select_vuelo, buscar_v, info_personal, ticket, usuario, info_per_cont, sesion_usuario, vista_principal, historial_vuelos, historial_cont);
-        Seleccion_modificacion_vuelo_usuario_controlador cont_select_vuelo_registrado = new Seleccion_modificacion_vuelo_usuario_controlador(select_vuelo, usuario, ticket, pagina_admin, pagina_admin_cont, pagina_usuario, pagina_usuario_cont, modificacion);
-        Apartado_menu_reportes_Controller menu_cont = new Apartado_menu_reportes_Controller(apart_reportes_menu, apart_reportes_opera, apart_reportes_finan, pagina_admin);
-        Reportes_financieros_controller repo_finan_cont = new Reportes_financieros_controller(apart_reportes_finan, dao_repo_finan, apart_reportes_menu);
-        Reportes_operativos_controller repo_ope_cont = new Reportes_operativos_controller(apart_reportes_opera, dao_repo_ope, apart_reportes_menu);
-        Menu_principal_controller menu_prin_cont = new Menu_principal_controller(vista_principal, loginV, registro_view, menu);
-        Elegir_puestos_controller puestos_cont = new Elegir_puestos_controller(puestos_vista, datos, puv, forma_pago_vista, usuario, vista_principal, pagina_admin, pagina_usuario, modificacion,buscar_v);
-        Elegir_clase_controller elegir_clase_cont = new Elegir_clase_controller(elegir_clase_vista, datos, clase, puv, forma_pago_vista, usuario, vista_principal, pagina_admin, pagina_usuario, modificacion,buscar_v);
-
-        Pagina_principal_controller pagina_princ_cont = new Pagina_principal_controller(vista_principal, select_vuelo_nor, buscar_v, menu);
-
+        Tarjeta_de_credito_controller credito_cont = new Tarjeta_de_credito_controller(credito, datos, forma_pago_vista, ticket, usuario, vista_principal, pagina_admin, pagina_usuario,puv,modificacion);        
+        Tarjeta_de_debito_controller debito_cont = new Tarjeta_de_debito_controller(debito,datos,forma_pago_vista,ticket,puv,modificacion,vista_principal,pagina_admin,pagina_usuario,usuario);
+        Transferencia_controller transferencia_cont = new Transferencia_controller(transferencia,datos,forma_pago_vista, usuario, vista_principal, pagina_admin, pagina_usuario);
+        Login_controller login_cont = new Login_controller(loginV,vista_principal,usuario,registro_view,pagina_admin,pagina_usuario,sesion_usuario,menu,recu_con);
+        Registro_controller registro_cont = new Registro_controller(registro_view,menu,loginV); 
+        Buscar_vuelos_controller buscar_v_cont = new Buscar_vuelos_controller(buscar_v,datos,vista_principal,pagina_admin,pagina_usuario,historial_vuelos,puv,forma_pago_vista,clase,usuario,vista_principal,pagina_admin,pagina_usuario,elegir_clase_vista);
+        Historial_vuelos_controller historial_cont =  new Historial_vuelos_controller(historial_vuelos,pagina_admin,pagina_usuario,usuario,buscar_v,buscar_v_cont);
+        Pagina_principal_administrador_controller_2 pagina_admin_cont = new Pagina_principal_administrador_controller_2(pagina_admin,apart_reportes_menu,select_vuelo,buscar_v,ticket,usuario,vista_principal,historial_vuelos,historial_cont);
+        Informacion_personal_controller info_per_cont = new Informacion_personal_controller(info_personal,pagina_usuario,sesion_usuario);
+        Inicio_usuario_controller pagina_usuario_cont = new Inicio_usuario_controller(pagina_usuario,select_vuelo,buscar_v,info_personal,ticket,usuario,info_per_cont,sesion_usuario,vista_principal,historial_vuelos,historial_cont);
+        Seleccion_modificacion_vuelo_usuario_controlador cont_select_vuelo_registrado = new Seleccion_modificacion_vuelo_usuario_controlador(select_vuelo,usuario,ticket,pagina_admin,pagina_admin_cont,pagina_usuario,pagina_usuario_cont,modificacion);
+        Apartado_menu_reportes_Controller menu_cont =  new Apartado_menu_reportes_Controller(apart_reportes_menu,apart_reportes_opera,apart_reportes_finan,pagina_admin);
+        Reportes_financieros_controller repo_finan_cont = new Reportes_financieros_controller(apart_reportes_finan,dao_repo_finan,apart_reportes_menu);
+        Reportes_operativos_controller repo_ope_cont = new Reportes_operativos_controller(apart_reportes_opera,dao_repo_ope,apart_reportes_menu);
+        Menu_principal_controller menu_prin_cont = new Menu_principal_controller(vista_principal,loginV,registro_view,menu);
+        Elegir_puestos_controller puestos_cont = new Elegir_puestos_controller(puestos_vista,datos,puv,forma_pago_vista,usuario,vista_principal,pagina_admin,pagina_usuario,modificacion);
+        Elegir_clase_controller elegir_clase_cont = new Elegir_clase_controller(elegir_clase_vista,datos,clase,puv,forma_pago_vista,usuario,vista_principal,pagina_admin,pagina_usuario,modificacion);
+        
+        Pagina_principal_controller pagina_princ_cont = new Pagina_principal_controller(vista_principal,select_vuelo_nor,buscar_v,menu);
+        
         String ruta = System.getProperty("user.home") + "\\Documents\\Ticket.pdf";
         System.out.println(ruta);
     }
-
+    
 }

@@ -177,77 +177,38 @@ public class Transferencia_controller implements ActionListener{
                 new Thread(() -> {
                     try {
                         Thread.sleep(4000);
+                        
+                        
+                        ArrayList<Integer> listaPasajeros = datos.id_pasajero;
+                        
+                        for (int idPasajero : listaPasajeros) {
+                            // Obtener datos desde el DAO
+                            String nombre = ticketdao.obtenerNombrePasajero(idPasajero);
+                            String documento = ticketdao.obtenerDocumento(idPasajero);
+                            String vuelo = ticketdao.obtenerCodigoVuelo(idPasajero);
+                            String origen = ticketdao.obtenerOrigen(idPasajero);
+                            String destino = ticketdao.obtenerDestino(idPasajero);
+                           String fechat = ticketdao.obtenerFechaVuelo(idPasajero);
+                           String asiento = ticketdao.obtenerAsiento(idPasajero);
+                           double costo = ticketdao.obtenerCosto(idPasajero);
+                           String codigoReserva = ticketdao.obtenerCodigoReserva(idPasajero);
+                           String correoDestino = ticketdao.obtenerCorreoPasajero(idPasajero);
+                           int ticket = ticketdao.obtenerCodTicket(idPasajero);
+                           
+                          // Generar PDF para este pasajero
+                            File pdf = creador.generarTicket(
+                               nombre, documento, vuelo, origen, destino,
+                               fechat, asiento, costo, codigoReserva, ticket
+                           );
 
-                        if (Model.Vistas_globales.buscarVuelos != null
-                                && Model.Vistas_globales.buscarVuelos.elegir_fecha_regreso.getDate() != null) {
-
-                            ArrayList<Integer> listaPasajeros = datos.id_pasajero;
-                            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
-                            String fechaRegreso = sdf.format(Model.Vistas_globales.buscarVuelos.elegir_fecha_regreso.getDate());
-
-                            for (int idPasajero : listaPasajeros) {
-                                // Obtener datos desde el DAO
-                                String nombre = ticketdao.obtenerNombrePasajero(idPasajero);
-                                String documento = ticketdao.obtenerDocumento(idPasajero);
-                                String vuelo = ticketdao.obtenerCodigoVuelo(idPasajero);
-                                String origen = ticketdao.obtenerOrigen(idPasajero);
-                                String destino = ticketdao.obtenerDestino(idPasajero);
-                                String fechat = ticketdao.obtenerFechaVuelo(idPasajero);
-                                String asiento = ticketdao.obtenerAsiento(idPasajero);
-                                double costo = ticketdao.obtenerCosto(idPasajero);
-                                String codigoReserva = ticketdao.obtenerCodigoReserva(idPasajero);
-                                String correoDestino = ticketdao.obtenerCorreoPasajero(idPasajero);
-                                int ticket = ticketdao.obtenerCodTicket(idPasajero);
-
-                                // Generar PDF de ida y de vuelta
-                                File pdf1 = creador.generarTicket(
-                                        nombre, documento, vuelo, origen, destino,
-                                        fechat, asiento, costo, codigoReserva, ticket
-                                );
-
-                                File pdf2 = creador.generarTicket(
-                                        nombre, documento, vuelo, destino, origen,
-                                        fechaRegreso, asiento, costo, codigoReserva, ticket
-                                );
-
-                                // Enviar correo con los 2 PDF adjuntos
-                                correo.enviarCorreoConAdjuntos(correoDestino, pdf1, pdf2);
-
-                                JOptionPane.showMessageDialog(null, "Se te envio a tu correo electronico los PDFs de tus tickets");
-                            }
-                        } else {
-                            ArrayList<Integer> listaPasajeros = datos.id_pasajero;
-
-                            for (int idPasajero : listaPasajeros) {
-                                // Obtener datos desde el DAO
-                                String nombre = ticketdao.obtenerNombrePasajero(idPasajero);
-                                String documento = ticketdao.obtenerDocumento(idPasajero);
-                                String vuelo = ticketdao.obtenerCodigoVuelo(idPasajero);
-                                String origen = ticketdao.obtenerOrigen(idPasajero);
-                                String destino = ticketdao.obtenerDestino(idPasajero);
-                                String fechat = ticketdao.obtenerFechaVuelo(idPasajero);
-                                String asiento = ticketdao.obtenerAsiento(idPasajero);
-                                double costo = ticketdao.obtenerCosto(idPasajero);
-                                String codigoReserva = ticketdao.obtenerCodigoReserva(idPasajero);
-                                String correoDestino = ticketdao.obtenerCorreoPasajero(idPasajero);
-                                int ticket = ticketdao.obtenerCodTicket(idPasajero);
-
-                                // Generar PDF para este pasajero
-                                File pdf = creador.generarTicket(
-                                        nombre, documento, vuelo, origen, destino,
-                                        fechat, asiento, costo, codigoReserva, ticket
-                                );
-
-                                // Enviar correo con el PDF adjunto
-                                correo.enviarCorreoConAdjunto(correoDestino, pdf);
-
-                                JOptionPane.showMessageDialog(null, "Se te envio a tu correo electronico el PDF de tu ticket");
-                            }
+                           // Enviar correo con el PDF adjunto
+                         correo.enviarCorreoConAdjunto(correoDestino, pdf);
+                         
+                         JOptionPane.showMessageDialog(null, "Se te envio a tu correo electronico el PDF de tu ticket");
                         }
                     } catch (Exception ex) {
-                        ex.printStackTrace();
-                        JOptionPane.showMessageDialog(null, "Error al generar y/o enviar pdf: " + ex.getMessage(),
-                                "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, e.toString(),
+                        "Error al generar y/o enviar pdf: " + ex.getMessage(), JOptionPane.ERROR_MESSAGE);
                     }
                 }).start();
         } else if (e.getSource() == vista.nequi) {
@@ -302,77 +263,38 @@ public class Transferencia_controller implements ActionListener{
                 new Thread(() -> {
                     try {
                         Thread.sleep(4000);
+                        
+                        
+                        ArrayList<Integer> listaPasajeros = datos.id_pasajero;
+                        
+                        for (int idPasajero : listaPasajeros) {
+                            // Obtener datos desde el DAO
+                            String nombre = ticketdao.obtenerNombrePasajero(idPasajero);
+                            String documento = ticketdao.obtenerDocumento(idPasajero);
+                            String vuelo = ticketdao.obtenerCodigoVuelo(idPasajero);
+                            String origen = ticketdao.obtenerOrigen(idPasajero);
+                            String destino = ticketdao.obtenerDestino(idPasajero);
+                           String fechat = ticketdao.obtenerFechaVuelo(idPasajero);
+                           String asiento = ticketdao.obtenerAsiento(idPasajero);
+                           double costo = ticketdao.obtenerCosto(idPasajero);
+                           String codigoReserva = ticketdao.obtenerCodigoReserva(idPasajero);
+                           String correoDestino = ticketdao.obtenerCorreoPasajero(idPasajero);
+                           int ticket = ticketdao.obtenerCodTicket(idPasajero);
+                           
+                          // Generar PDF para este pasajero
+                            File pdf = creador.generarTicket(
+                               nombre, documento, vuelo, origen, destino,
+                               fechat, asiento, costo, codigoReserva, ticket
+                           );
 
-                        if (Model.Vistas_globales.buscarVuelos != null
-                                && Model.Vistas_globales.buscarVuelos.elegir_fecha_regreso.getDate() != null) {
-
-                            ArrayList<Integer> listaPasajeros = datos.id_pasajero;
-                            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
-                            String fechaRegreso = sdf.format(Model.Vistas_globales.buscarVuelos.elegir_fecha_regreso.getDate());
-
-                            for (int idPasajero : listaPasajeros) {
-                                // Obtener datos desde el DAO
-                                String nombre = ticketdao.obtenerNombrePasajero(idPasajero);
-                                String documento = ticketdao.obtenerDocumento(idPasajero);
-                                String vuelo = ticketdao.obtenerCodigoVuelo(idPasajero);
-                                String origen = ticketdao.obtenerOrigen(idPasajero);
-                                String destino = ticketdao.obtenerDestino(idPasajero);
-                                String fechat = ticketdao.obtenerFechaVuelo(idPasajero);
-                                String asiento = ticketdao.obtenerAsiento(idPasajero);
-                                double costo = ticketdao.obtenerCosto(idPasajero);
-                                String codigoReserva = ticketdao.obtenerCodigoReserva(idPasajero);
-                                String correoDestino = ticketdao.obtenerCorreoPasajero(idPasajero);
-                                int ticket = ticketdao.obtenerCodTicket(idPasajero);
-
-                                // Generar PDF de ida y de vuelta
-                                File pdf1 = creador.generarTicket(
-                                        nombre, documento, vuelo, origen, destino,
-                                        fechat, asiento, costo, codigoReserva, ticket
-                                );
-
-                                File pdf2 = creador.generarTicket(
-                                        nombre, documento, vuelo, destino, origen,
-                                        fechaRegreso, asiento, costo, codigoReserva, ticket
-                                );
-
-                                // Enviar correo con los 2 PDF adjuntos
-                                correo.enviarCorreoConAdjuntos(correoDestino, pdf1, pdf2);
-
-                                JOptionPane.showMessageDialog(null, "Se te envio a tu correo electronico los PDFs de tus tickets");
-                            }
-                        } else {
-                            ArrayList<Integer> listaPasajeros = datos.id_pasajero;
-
-                            for (int idPasajero : listaPasajeros) {
-                                // Obtener datos desde el DAO
-                                String nombre = ticketdao.obtenerNombrePasajero(idPasajero);
-                                String documento = ticketdao.obtenerDocumento(idPasajero);
-                                String vuelo = ticketdao.obtenerCodigoVuelo(idPasajero);
-                                String origen = ticketdao.obtenerOrigen(idPasajero);
-                                String destino = ticketdao.obtenerDestino(idPasajero);
-                                String fechat = ticketdao.obtenerFechaVuelo(idPasajero);
-                                String asiento = ticketdao.obtenerAsiento(idPasajero);
-                                double costo = ticketdao.obtenerCosto(idPasajero);
-                                String codigoReserva = ticketdao.obtenerCodigoReserva(idPasajero);
-                                String correoDestino = ticketdao.obtenerCorreoPasajero(idPasajero);
-                                int ticket = ticketdao.obtenerCodTicket(idPasajero);
-
-                                // Generar PDF para este pasajero
-                                File pdf = creador.generarTicket(
-                                        nombre, documento, vuelo, origen, destino,
-                                        fechat, asiento, costo, codigoReserva, ticket
-                                );
-
-                                // Enviar correo con el PDF adjunto
-                                correo.enviarCorreoConAdjunto(correoDestino, pdf);
-
-                                JOptionPane.showMessageDialog(null, "Se te envio a tu correo electronico el PDF de tu ticket");
-                            }
+                           // Enviar correo con el PDF adjunto
+                         correo.enviarCorreoConAdjunto(correoDestino, pdf);
+                         
+                         JOptionPane.showMessageDialog(null, "Se te envio a tu correo electronico el PDF de tu ticket");
                         }
                     } catch (Exception ex) {
-                        ex.printStackTrace();
-                        JOptionPane.showMessageDialog(null, "Error al generar y/o enviar pdf: " + ex.getMessage(),
-                                "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, e.toString(),
+                        "Error al generar y/o enviar pdf: " + ex.getMessage(), JOptionPane.ERROR_MESSAGE);
                     }
                 }).start();
         } else if (e.getSource() == vista.paypal) {
@@ -427,77 +349,38 @@ public class Transferencia_controller implements ActionListener{
                 new Thread(() -> {
                     try {
                         Thread.sleep(4000);
+                        
+                        
+                        ArrayList<Integer> listaPasajeros = datos.id_pasajero;
+                        
+                        for (int idPasajero : listaPasajeros) {
+                            // Obtener datos desde el DAO
+                            String nombre = ticketdao.obtenerNombrePasajero(idPasajero);
+                            String documento = ticketdao.obtenerDocumento(idPasajero);
+                            String vuelo = ticketdao.obtenerCodigoVuelo(idPasajero);
+                            String origen = ticketdao.obtenerOrigen(idPasajero);
+                            String destino = ticketdao.obtenerDestino(idPasajero);
+                           String fechat = ticketdao.obtenerFechaVuelo(idPasajero);
+                           String asiento = ticketdao.obtenerAsiento(idPasajero);
+                           double costo = ticketdao.obtenerCosto(idPasajero);
+                           String codigoReserva = ticketdao.obtenerCodigoReserva(idPasajero);
+                           String correoDestino = ticketdao.obtenerCorreoPasajero(idPasajero);
+                           int ticket = ticketdao.obtenerCodTicket(idPasajero);
+                           
+                          // Generar PDF para este pasajero
+                            File pdf = creador.generarTicket(
+                               nombre, documento, vuelo, origen, destino,
+                               fechat, asiento, costo, codigoReserva, ticket
+                           );
 
-                        if (Model.Vistas_globales.buscarVuelos != null
-                                && Model.Vistas_globales.buscarVuelos.elegir_fecha_regreso.getDate() != null) {
-
-                            ArrayList<Integer> listaPasajeros = datos.id_pasajero;
-                            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
-                            String fechaRegreso = sdf.format(Model.Vistas_globales.buscarVuelos.elegir_fecha_regreso.getDate());
-
-                            for (int idPasajero : listaPasajeros) {
-                                // Obtener datos desde el DAO
-                                String nombre = ticketdao.obtenerNombrePasajero(idPasajero);
-                                String documento = ticketdao.obtenerDocumento(idPasajero);
-                                String vuelo = ticketdao.obtenerCodigoVuelo(idPasajero);
-                                String origen = ticketdao.obtenerOrigen(idPasajero);
-                                String destino = ticketdao.obtenerDestino(idPasajero);
-                                String fechat = ticketdao.obtenerFechaVuelo(idPasajero);
-                                String asiento = ticketdao.obtenerAsiento(idPasajero);
-                                double costo = ticketdao.obtenerCosto(idPasajero);
-                                String codigoReserva = ticketdao.obtenerCodigoReserva(idPasajero);
-                                String correoDestino = ticketdao.obtenerCorreoPasajero(idPasajero);
-                                int ticket = ticketdao.obtenerCodTicket(idPasajero);
-
-                                // Generar PDF de ida y de vuelta
-                                File pdf1 = creador.generarTicket(
-                                        nombre, documento, vuelo, origen, destino,
-                                        fechat, asiento, costo, codigoReserva, ticket
-                                );
-
-                                File pdf2 = creador.generarTicket(
-                                        nombre, documento, vuelo, destino, origen,
-                                        fechaRegreso, asiento, costo, codigoReserva, ticket
-                                );
-
-                                // Enviar correo con los 2 PDF adjuntos
-                                correo.enviarCorreoConAdjuntos(correoDestino, pdf1, pdf2);
-
-                                JOptionPane.showMessageDialog(null, "Se te envio a tu correo electronico los PDFs de tus tickets");
-                            }
-                        } else {
-                            ArrayList<Integer> listaPasajeros = datos.id_pasajero;
-
-                            for (int idPasajero : listaPasajeros) {
-                                // Obtener datos desde el DAO
-                                String nombre = ticketdao.obtenerNombrePasajero(idPasajero);
-                                String documento = ticketdao.obtenerDocumento(idPasajero);
-                                String vuelo = ticketdao.obtenerCodigoVuelo(idPasajero);
-                                String origen = ticketdao.obtenerOrigen(idPasajero);
-                                String destino = ticketdao.obtenerDestino(idPasajero);
-                                String fechat = ticketdao.obtenerFechaVuelo(idPasajero);
-                                String asiento = ticketdao.obtenerAsiento(idPasajero);
-                                double costo = ticketdao.obtenerCosto(idPasajero);
-                                String codigoReserva = ticketdao.obtenerCodigoReserva(idPasajero);
-                                String correoDestino = ticketdao.obtenerCorreoPasajero(idPasajero);
-                                int ticket = ticketdao.obtenerCodTicket(idPasajero);
-
-                                // Generar PDF para este pasajero
-                                File pdf = creador.generarTicket(
-                                        nombre, documento, vuelo, origen, destino,
-                                        fechat, asiento, costo, codigoReserva, ticket
-                                );
-
-                                // Enviar correo con el PDF adjunto
-                                correo.enviarCorreoConAdjunto(correoDestino, pdf);
-
-                                JOptionPane.showMessageDialog(null, "Se te envio a tu correo electronico el PDF de tu ticket");
-                            }
+                           // Enviar correo con el PDF adjunto
+                         correo.enviarCorreoConAdjunto(correoDestino, pdf);
+                         
+                         JOptionPane.showMessageDialog(null, "Se te envio a tu correo electronico el PDF de tu ticket");
                         }
                     } catch (Exception ex) {
-                        ex.printStackTrace();
-                        JOptionPane.showMessageDialog(null, "Error al generar y/o enviar pdf: " + ex.getMessage(),
-                                "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, e.toString(),
+                        "Error al generar y/o enviar pdf: " + ex.getMessage(), JOptionPane.ERROR_MESSAGE);
                     }
                 }).start();
         }

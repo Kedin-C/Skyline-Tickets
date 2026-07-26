@@ -16,19 +16,15 @@ import View.Seleccion_de_Modificacion_de_vuelo_view;
 import View.Seleccion_forma_de_pago_view;
 import javax.swing.JFrame;
 import Model.Usuario;
-import View.Buscar_vuelos_view;
 import View.Inicio_usuario_view;
 import View.Pagina_principal_administrador_view;
 import View.ViewPrincipal;
-import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
-
-
 
 public class Elegir_clase_controller implements ActionListener{
     
     Elegir_clase_view vista = new Elegir_clase_view();
-    Datos datos = Datos.getInstance();
+    Datos datos = new Datos();
     Elegir_puestos_view vistaElegirPuestos = new Elegir_puestos_view();
     private Cambio_de_clase_de_vuelo_viiew cam_clas_view ;
     private And_puestos pva;
@@ -39,9 +35,9 @@ public class Elegir_clase_controller implements ActionListener{
     private Pagina_principal_administrador_view viewAdmin;
     private Inicio_usuario_view viewUsuario;
     private Seleccion_de_Modificacion_de_vuelo_view modify;
-    private Buscar_vuelos_view buscar;
+
     
-    public Elegir_clase_controller(Elegir_clase_view vista, Datos datos,Cambio_de_clase_de_vuelo_viiew cam_view,And_puestos pva,Seleccion_forma_de_pago_view modi_ticket_view, Usuario usuario, ViewPrincipal vistaPrincipal, Pagina_principal_administrador_view viewAdmin, Inicio_usuario_view viewUsuario,Seleccion_de_Modificacion_de_vuelo_view modify,Buscar_vuelos_view buscar){
+    public Elegir_clase_controller(Elegir_clase_view vista, Datos datos,Cambio_de_clase_de_vuelo_viiew cam_view,And_puestos pva,Seleccion_forma_de_pago_view modi_ticket_view, Usuario usuario, ViewPrincipal vistaPrincipal, Pagina_principal_administrador_view viewAdmin, Inicio_usuario_view viewUsuario,Seleccion_de_Modificacion_de_vuelo_view modify){
         this.modi_ticket_view = modi_ticket_view;
         this.elegir_clase_vista = cam_view;
         this.pva =pva;
@@ -53,7 +49,6 @@ public class Elegir_clase_controller implements ActionListener{
         this.viewAdmin = viewAdmin;
         this.viewUsuario = viewUsuario;
         this.modify = modify;
-        this.buscar = buscar;
         
         this.vista.siguiente.addActionListener( this);
         this.vista.volver.addActionListener(this);
@@ -77,6 +72,7 @@ public class Elegir_clase_controller implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         
         if(e.getSource() == vista.siguiente){
+
             if(vista.economica.isSelected()){
                 datos.setClaseVuelo(1);
                 datos.setTotalPagar(datos.getTotalPagar()+180000);
@@ -111,7 +107,7 @@ public class Elegir_clase_controller implements ActionListener{
             vistaElegirPuestos.setVisible(true);
             
             
-            Elegir_puestos_controller controllerElegirPuestos = new Elegir_puestos_controller(vistaElegirPuestos, datos,pva,modi_ticket_view, usuario, vistaPrincipal, viewAdmin, viewUsuario,modify,buscar);
+            Elegir_puestos_controller controllerElegirPuestos = new Elegir_puestos_controller(vistaElegirPuestos, datos,pva,modi_ticket_view, usuario, vistaPrincipal, viewAdmin, viewUsuario,modify);
             
         }
         

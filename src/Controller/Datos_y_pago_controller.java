@@ -13,7 +13,6 @@ import Model.DatosPersonales;
 import Model.DatosPersonalesDao;
 import Model.Ticket;
 import Model.Usuario;
-import View.Buscar_vuelos_view;
 import View.Datos_y_pago_view;
 import View.Inicio_usuario_view;
 import View.Pagina_principal_administrador_view;
@@ -33,13 +32,11 @@ import java.util.Date;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 
-
-
 public class Datos_y_pago_controller implements ActionListener{
     
     DatosPersonales datosPersonales = new DatosPersonales();
     DatosPersonalesDao datosPersonalesdao = new DatosPersonalesDao();
-    Datos_y_pago_view vista;
+    Datos_y_pago_view vista = new Datos_y_pago_view();
     Datos datos;
     
     Ticket ticket = new Ticket();
@@ -52,16 +49,13 @@ public class Datos_y_pago_controller implements ActionListener{
     private Inicio_usuario_view viewUsuario;
     private And_puestos pv;
     private Seleccion_de_Modificacion_de_vuelo_view modify;
-    private Buscar_vuelos_view buscar;
-    
-
     
     
     int n;
     
     ArrayList<DatosPersonales> datosPasajeros = new ArrayList<>();
     
-    public Datos_y_pago_controller(Datos_y_pago_view vista, Datos datos, Usuario usuario, ViewPrincipal vistaPrincipal, Pagina_principal_administrador_view viewAdmin, Inicio_usuario_view viewUsuario,And_puestos pv,Seleccion_de_Modificacion_de_vuelo_view modify,Buscar_vuelos_view buscar){
+    public Datos_y_pago_controller(Datos_y_pago_view vista, Datos datos, Usuario usuario, ViewPrincipal vistaPrincipal, Pagina_principal_administrador_view viewAdmin, Inicio_usuario_view viewUsuario,And_puestos pv,Seleccion_de_Modificacion_de_vuelo_view modify){
         
         this.modify = modify;
         this.datos=datos;
@@ -70,9 +64,7 @@ public class Datos_y_pago_controller implements ActionListener{
         this.vistaPrincipal = vistaPrincipal;
         this.viewAdmin = viewAdmin;
         this.viewUsuario = viewUsuario;
-        this.buscar = buscar;
         
-
         this.n=1;
         
         this.vista.siguiente.addActionListener(this);
@@ -195,8 +187,6 @@ public class Datos_y_pago_controller implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         
-       
-        
         if(e.getSource() == vista.siguiente){
             
             if(validarDatos()){
@@ -225,12 +215,11 @@ public class Datos_y_pago_controller implements ActionListener{
         }
         
         if (e.getSource() == vista.credito) {
-            if (validarDatos()) {
+            if(validarDatos()){
                 vista.setVisible(false);
-                
                 viewTarjetaCredito.setVisible(true);
                 Seleccion_forma_de_pago_view selec_pago = new Seleccion_forma_de_pago_view();
-                Tarjeta_de_credito_controller controllerTarjetaCredito = new Tarjeta_de_credito_controller(viewTarjetaCredito, datos,selec_pago, ticket, usuario, vistaPrincipal, viewAdmin, viewUsuario,pv,modify,buscar);
+                Tarjeta_de_credito_controller controllerTarjetaCredito = new Tarjeta_de_credito_controller(viewTarjetaCredito, datos,selec_pago, ticket, usuario, vistaPrincipal, viewAdmin, viewUsuario,pv,modify);
                 
                 datos.setDatosPersonales(datosPasajeros);
                 
@@ -241,6 +230,7 @@ public class Datos_y_pago_controller implements ActionListener{
                 vista.setVisible(false);
                 viewTerjetaDebito.setVisible(true);
                 Seleccion_forma_de_pago_view selec_pago = new Seleccion_forma_de_pago_view();
+                
                 Tarjeta_de_debito_controller controllerTerjetaDebito = new Tarjeta_de_debito_controller(viewTerjetaDebito, datos,selec_pago, ticket,pv,modify,vistaPrincipal,viewAdmin,viewUsuario,usuario);
                 
                 datos.setDatosPersonales(datosPasajeros);
