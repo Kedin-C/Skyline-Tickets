@@ -250,11 +250,13 @@ public class Datos_y_pago_view extends Interfaz_vista_abtractas{
         elegir_fecha.setFont(fuenteGrande);
         
         
-        
+        this.setVisible(false);
         this.setSize(550, 800);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
+    
+    
     
 }
