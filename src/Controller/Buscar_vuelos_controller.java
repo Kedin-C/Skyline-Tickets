@@ -187,11 +187,10 @@ public class Buscar_vuelos_controller implements ActionListener {
             datos.setTotalPagar(precio);
 
             if (vista.vuelo_ida.isSelected()) {
-                datos.setTipoVuelo("Vuelo de ida");
+                datos.setTipoVuelo("IDA");
             } else {
-
                 validarRegreso();
-                datos.setTipoVuelo("Vuelo de ida y vuelta");
+                datos.setTipoVuelo("IDA_VUELTA");
 
                 SimpleDateFormat formateadorRegreso = new SimpleDateFormat("yyyy-MM-dd");
                 //aplicando el metodo que deja la fecha tal cual en el campo de fecha regreso
