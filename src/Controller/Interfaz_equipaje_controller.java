@@ -61,7 +61,7 @@ public class Interfaz_equipaje_controller implements ActionListener{
         }
         
         if(e.getSource() == vista_agg_equipaje.agregar){
-            if(vista_agg_equipaje.getEquipaje_estado() < 5)
+            if(vista_agg_equipaje.getEquipaje_estado() < 20)
             vista_agg_equipaje.setEquipaje_agregar();
             else
              JOptionPane.showMessageDialog(vista_agg_equipaje, "ya llegaste al limite de equipaje de bodega que se puede agregar");

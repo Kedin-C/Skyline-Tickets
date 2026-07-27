@@ -90,7 +90,7 @@ public class Agregar_equipaje_extra_view extends Interfaz_vista_abtractas{
         
         contador = new JLabel(Integer.toString(contador_num));
         text_actual = new JLabel("CLASE DE VUELO ACTUAL");
-        text_cont = new JLabel("NUMERO DE EQUIPAJE DE BODEGA SELECCIONADO");
+        text_cont = new JLabel("CANTIDAD DE KG DE EQUIPAJE DE BODEGA");
         
         
         dist1_panel1.setBorder(new EmptyBorder(60,20,10,400));
