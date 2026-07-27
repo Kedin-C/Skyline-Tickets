@@ -92,8 +92,9 @@ public class Seleccion_vuelo_usuario_no_registrado_dao {
                     JOptionPane.showMessageDialog(null, e.toString());
                 }
             }
-        return r;
+        
     }
+        return r;
     }
 
     public int confir_documento(String var){
@@ -155,8 +156,9 @@ public class Seleccion_vuelo_usuario_no_registrado_dao {
                     JOptionPane.showMessageDialog(null, e.toString());
                 }
             }
-        return r;
+        
     }
+        return r;
     }
 
     public int confir_ejecucion(int ticket, String nom, String doc, String corr) {

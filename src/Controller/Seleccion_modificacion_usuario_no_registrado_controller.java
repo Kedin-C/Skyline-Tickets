@@ -118,20 +118,20 @@ public class Seleccion_modificacion_usuario_no_registrado_controller implements 
             int cuatro = dao.confir_correo(correo);
             int definitivo = dao.confir_ejecucion(ticket, nombre, documento, correo);
 
-            if (uno != 1) {
+            if (uno < 1) {
 
                 JOptionPane.showMessageDialog(vista, "El codigo de ticket no esta registrado en el sistema");
             }
 
-            if (dos != 1) {
+            if (dos < 1) {
                 JOptionPane.showMessageDialog(vista, "El nombre no esta registrado en el sistema");
             }
 
-            if (tres != 1) {
+            if (tres < 1) {
                 JOptionPane.showMessageDialog(vista, "El documento no esta registrado en el sistema");
             }
 
-            if (cuatro != 1) {
+            if (cuatro < 1) {
                 JOptionPane.showMessageDialog(vista, "el correo electronico no esta registrado en el sistema");
             }
             if (definitivo == 1) {
