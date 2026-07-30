@@ -55,7 +55,7 @@ public class Registro_view extends JFrame {
         jnombre = new JLabel("Nombre*");
         japellido = new JLabel("Apellido*");
         jcorreo = new JLabel("Correo*");
-        jdocumento = new JLabel("Numero documento");
+        jdocumento = new JLabel("Numero documento*");
         jcontraseña = new JLabel("Contraseña*");
         jconfirmar = new JLabel("Confirmar contraseña*");
 

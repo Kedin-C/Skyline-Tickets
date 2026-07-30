@@ -78,7 +78,7 @@ public class Registro_controller implements ActionListener {
             if (!validarDocumento(documento)) {
                 JOptionPane.showMessageDialog(
                         null,
-                        "El número de documento debe contener solo números y tener entre 8 y 17 dígitos.");
+                        "El número de documento debe contener solo números, no puede iniciar en 0 y debe tener entre 8 y 18 dígitos.");
                 return;
             }
             
@@ -181,10 +181,7 @@ public class Registro_controller implements ActionListener {
         if (documento == null || documento.isEmpty()) {
             return false;
         }
-        if (!documento.matches("[0-9]+")) {
-            return false;
-        }
-        return documento.length() >= 8 && documento.length() <= 17;
+        return documento.matches("^[1-9][0-9]{7,17}$");
     }
 
     
