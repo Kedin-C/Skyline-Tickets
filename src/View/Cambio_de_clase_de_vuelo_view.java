@@ -22,7 +22,7 @@ import javax.swing.border.EmptyBorder;
  *
  * @author david
  */
-public class Cambio_de_clase_de_vuelo_viiew extends Interfaz_vista_abtractas {
+public class Cambio_de_clase_de_vuelo_view extends Interfaz_vista_abtractas {
 
     private final Container contenedor;
     private final JPanel panel1, panel2;
@@ -55,7 +55,7 @@ public class Cambio_de_clase_de_vuelo_viiew extends Interfaz_vista_abtractas {
     
     private int clase_seleccionada;
 
-    public Cambio_de_clase_de_vuelo_viiew() {
+    public Cambio_de_clase_de_vuelo_view() {
         
         super("Seleccion cambio de clase de vuelo");
 

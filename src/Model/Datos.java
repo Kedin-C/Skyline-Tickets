@@ -179,40 +179,4 @@ public class Datos {
         this.id_pasajero.clear();
         this.id_reserva.clear();
     }
-
-    public void subirDatosT(){
-        for(int i=0; i < datosPersonales.size(); i++){
-                    
-            datosPersonalesDao.enviarDatos(datosPersonales.get(i));
-        }
-        
-        for(int index = 0; index < codigoAsiento.size(); index++){
-            datosReservaDao.enviarDatos(codigoAsiento.get(index), codigoVuelo);
-        }
-    }
-    
-    public void idsT(){
-        for(int i=0; i < datosPersonales.size(); i++){
-                    
-            id_pasajero.add(datosPersonalesDao.idPasajero(datosPersonales.get(i)));
-        }
-        
-//        id_pago = datosPagoDao.idPago(datosPago);
-        
-        for(int index = 0; index < codigoAsiento.size(); index++){
-            id_reserva.add(datosReservaDao.idReservas(codigoAsiento.get(index),codigoVuelo));
-        }
-
-    }
-    
-    public void subirTicketT(){
-        if(id_pasajero.size() > 0 && id_reserva.size() > 0){ 
-            for(int i = 0; i < numeroTickets; i++){
-                ticket.enviarDatost(id_pasajero.get(i), id_reserva.get(i), equipajeExtra, tipoVuelo);
-            }
-        }else{
-            JOptionPane.showMessageDialog(null, "No se pudo enviar el ticket a la base de datos");
-        }
-        
-    }
 }

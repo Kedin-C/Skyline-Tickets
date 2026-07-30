@@ -23,7 +23,7 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import Model.Datos;
 import Model.And_puestos;
-import View.Cambio_de_clase_de_vuelo_viiew;
+import View.Cambio_de_clase_de_vuelo_view;
 import Model.Usuario;
 import View.Elegir_clase_view;
 import View.Elegir_puestos_view;
@@ -51,13 +51,13 @@ public class Buscar_vuelos_controller implements ActionListener {
     public Date fechaIda, fechaRegreso;
     private And_puestos pva;
     private Seleccion_forma_de_pago_view forma_pago_vista;
-    private Cambio_de_clase_de_vuelo_viiew cambio_vuelo;
+    private Cambio_de_clase_de_vuelo_view cambio_vuelo;
     private Usuario usuario;
     private ViewPrincipal vistaPrincipal;
     private Pagina_principal_administrador_view viewAdmin;
     private Inicio_usuario_view viewUsuario;
 
-    public Buscar_vuelos_controller(Buscar_vuelos_view vista, Datos datos, ViewPrincipal principal, Pagina_principal_administrador_view pagina_admin, Inicio_usuario_view pagina_usuario, Historial_vuelos_view historial_vista, And_puestos pva, Seleccion_forma_de_pago_view forma_pago_vista, Cambio_de_clase_de_vuelo_viiew cambio_vuelo, Usuario usuario, ViewPrincipal vistaPrincipal, Pagina_principal_administrador_view viewAdmin, Inicio_usuario_view viewUsuario, Elegir_clase_view vistaElegirClase) {
+    public Buscar_vuelos_controller(Buscar_vuelos_view vista, Datos datos, ViewPrincipal principal, Pagina_principal_administrador_view pagina_admin, Inicio_usuario_view pagina_usuario, Historial_vuelos_view historial_vista, And_puestos pva, Seleccion_forma_de_pago_view forma_pago_vista, Cambio_de_clase_de_vuelo_view cambio_vuelo, Usuario usuario, ViewPrincipal vistaPrincipal, Pagina_principal_administrador_view viewAdmin, Inicio_usuario_view viewUsuario, Elegir_clase_view vistaElegirClase) {
 
         this.forma_pago_vista = forma_pago_vista;
         this.principal = principal;

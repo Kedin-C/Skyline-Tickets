@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ButtonGroup;
 import Model.Datos;
-import View.Cambio_de_clase_de_vuelo_viiew;
+import View.Cambio_de_clase_de_vuelo_view;
 import View.Elegir_clase_view;
 import View.Elegir_puestos_view;
 import View.Seleccion_de_Modificacion_de_vuelo_view;
@@ -26,10 +26,10 @@ public class Elegir_clase_controller implements ActionListener{
     Elegir_clase_view vista = new Elegir_clase_view();
     Datos datos = Datos.getInstance();
     private Elegir_puestos_view vistaElegirPuestos;
-    private Cambio_de_clase_de_vuelo_viiew cam_clas_view ;
+    private Cambio_de_clase_de_vuelo_view cam_clas_view ;
     private And_puestos pva;
     private Seleccion_forma_de_pago_view modi_ticket_view ;
-    private Cambio_de_clase_de_vuelo_viiew elegir_clase_vista;
+    private Cambio_de_clase_de_vuelo_view elegir_clase_vista;
     private Usuario usuario;
     private ViewPrincipal vistaPrincipal;
     private Pagina_principal_administrador_view viewAdmin;
@@ -38,7 +38,7 @@ public class Elegir_clase_controller implements ActionListener{
     private Elegir_puestos_controller controllerElegirPuestos;
 
     
-    public Elegir_clase_controller(Elegir_clase_view vista, Datos datos,Cambio_de_clase_de_vuelo_viiew cam_view,And_puestos pva,Seleccion_forma_de_pago_view modi_ticket_view, Usuario usuario, ViewPrincipal vistaPrincipal, Pagina_principal_administrador_view viewAdmin, Inicio_usuario_view viewUsuario,Seleccion_de_Modificacion_de_vuelo_view modify){
+    public Elegir_clase_controller(Elegir_clase_view vista, Datos datos,Cambio_de_clase_de_vuelo_view cam_view,And_puestos pva,Seleccion_forma_de_pago_view modi_ticket_view, Usuario usuario, ViewPrincipal vistaPrincipal, Pagina_principal_administrador_view viewAdmin, Inicio_usuario_view viewUsuario,Seleccion_de_Modificacion_de_vuelo_view modify){
         this.modi_ticket_view = modi_ticket_view;
         this.elegir_clase_vista = cam_view;
         this.pva =pva;

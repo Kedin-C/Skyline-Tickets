@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import java.sql.Date;
 
 public class DatosPagoDao {
     
@@ -52,21 +51,16 @@ public class DatosPagoDao {
         }
     }
     
-    //AND cvv = ? AND nombre_titular = ? AND fecha_vencimiento = ? 
+    //WHERE numero_cuenta = ? AND cvv = ? AND nombre_titular = ? AND fecha_vencimiento = ? 
     public int idPago(DatosPago pago){
         
         ArrayList<Integer> ids = new ArrayList();
         int id=-1;
-        String sql = "SELECT id_pago FROM datos_pago WHERE numero_cuenta = ? ORDER BY id_pago DESC LIMIT 1";
+        String sql = "SELECT MAX(id_pago) AS id_pago FROM datos_pago";
         
         try{
             con = Conexion.getObject().getConection();
             ps=con.prepareStatement(sql);
-        
-            ps.setString(1, pago.getNumero_tarjeta());
-//            ps.setInt(2, pago.getCvv());
-//            ps.setString(3, pago.getNombre_titular());
-//            ps.setDate(4, Date.valueOf(pago.getFecha_vencimiento()));
             
             rs=ps.executeQuery();
             
