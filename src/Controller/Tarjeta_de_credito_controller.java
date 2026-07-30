@@ -12,7 +12,6 @@ import Model.ReservasDao;
 import Model.Ticket;
 import Model.Ticket_dao;
 import Model.Usuario;
-import View.Buscar_vuelos_view;
 import View.Confirmar_pago_view;
 import View.Inicio_usuario_view;
 import View.Pagina_principal_administrador_view;
@@ -153,6 +152,8 @@ public class Tarjeta_de_credito_controller implements ActionListener {
                 datosPagar.setNombre_titular(vista.nombre_titular.getText());
 
                 datosPagar.setTotal(datos.getTotalPagar());
+                
+                datosPagar.setMedioPago("credito");
 
                 datos.setDatosPago(datosPagar);
 

@@ -19,8 +19,8 @@ public class DatosPagoDao {
     ResultSet rs;
     
     public void enviarDatos(DatosPago pago){
-        String sql = "INSERT INTO datos_pago (numero_cuenta, cvv, nombre_titular, fecha_vencimiento, total) "
-                + "VALUES (?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO datos_pago (numero_cuenta, cvv, nombre_titular, fecha_vencimiento, total, medio_pago) "
+                + "VALUES (?, ?, ?, ?, ?, ?);";
         try{
             con = Conexion.getObject().getConection();
             ps=con.prepareStatement(sql);
@@ -30,6 +30,7 @@ public class DatosPagoDao {
             ps.setString(3, pago.getNombre_titular());
             ps.setString(4, pago.getFecha_vencimiento());
             ps.setDouble(5, pago.getTotal());
+            ps.setString(6, pago.getMedioPago());
         
             ps.executeUpdate();
             
@@ -51,21 +52,21 @@ public class DatosPagoDao {
         }
     }
     
-    
+    //AND cvv = ? AND nombre_titular = ? AND fecha_vencimiento = ? 
     public int idPago(DatosPago pago){
         
         ArrayList<Integer> ids = new ArrayList();
         int id=-1;
-        String sql = "SELECT id_pago FROM datos_pago WHERE numero_cuenta = ? AND cvv = ? AND nombre_titular = ? AND fecha_vencimiento = ? ORDER BY id_pago DESC LIMIT 1";
+        String sql = "SELECT id_pago FROM datos_pago WHERE numero_cuenta = ? ORDER BY id_pago DESC LIMIT 1";
         
         try{
             con = Conexion.getObject().getConection();
             ps=con.prepareStatement(sql);
         
             ps.setString(1, pago.getNumero_tarjeta());
-            ps.setInt(2, pago.getCvv());
-            ps.setString(3, pago.getNombre_titular());
-            ps.setDate(4, Date.valueOf(pago.getFecha_vencimiento()));
+//            ps.setInt(2, pago.getCvv());
+//            ps.setString(3, pago.getNombre_titular());
+//            ps.setDate(4, Date.valueOf(pago.getFecha_vencimiento()));
             
             rs=ps.executeQuery();
             

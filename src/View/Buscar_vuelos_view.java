@@ -24,7 +24,6 @@ import java.awt.Font;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
-import javax.swing.JFrame;
 
 public class Buscar_vuelos_view extends Interfaz_vista_abtractas{
     

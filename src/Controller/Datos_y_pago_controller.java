@@ -146,16 +146,17 @@ public class Datos_y_pago_controller implements ActionListener{
         //Desactivar el comando de "Pegar" (Ctrl + V)
         this.vista.numeroTel.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), "none");
         
-//        this.vista.correo.addKeyListener(new KeyAdapter() {
-//            @Override
-//            public void keyTyped(KeyEvent e) {
-//                if (!Character.isDigit(e.getKeyChar()) && e.getKeyChar() != '@'){
-//                    e.consume();
-//                }
-//            }
-//        });
-//        
-//        this.vista.correo.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), "none");
+        this.vista.correo.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                if (!Character.isLetter(e.getKeyChar()) && !Character.isDigit(e.getKeyChar()) && e.getKeyChar() != '@' && e.getKeyChar() != '.'
+                        && e.getKeyChar() != '+' && e.getKeyChar() != '-' && e.getKeyChar() != '_'){
+                    e.consume();
+                }
+            }
+        });
+        
+        this.vista.correo.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), "none");
         
         //Para que no pueda ingresar al campo de fecha
         JTextField editorFecha = (JTextField) this.vista.elegir_fecha.getDateEditor().getUiComponent();
@@ -369,7 +370,7 @@ public class Datos_y_pago_controller implements ActionListener{
             puntos++;
         }else{
             JOptionPane.showMessageDialog(vista,
-                                "Tu correo no es valido revisa que tu correo tenga \n'@' y termine en '.co' o '.com' y tenga el servidor Ej:(@gmail.com)", "Correo", JOptionPane.WARNING_MESSAGE);
+                                "Tu correo no es valido revisa que tu correo tenga \n'@', termine en '.co' o '.com', tenga el servidor Ej:(@gmail.com)\ny cumpla con 4 caracters antes del '@'", "Correo", JOptionPane.WARNING_MESSAGE);
         }
         
         if(tipo_documento > 3){
@@ -446,7 +447,7 @@ public class Datos_y_pago_controller implements ActionListener{
         int puntos = 0;
         for(int i = texto.length()-1; i >= 0; i--){
             char letra = texto.charAt(i);
-            if(letra == '@'){
+            if(letra == '@' && i >= 3 ){
                 dominio = texto.substring(i, texto.length());
                 puntos++;
                 

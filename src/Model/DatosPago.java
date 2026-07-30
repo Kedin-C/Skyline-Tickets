@@ -6,20 +6,21 @@ package Model;
 
 public class DatosPago {
     private int id, cvv;
-    private String numero_tarjeta, nombre_titular, fecha_vencimiento;
+    private String numero_tarjeta, nombre_titular, fecha_vencimiento, medio_pago;
     private double total;
     
     public DatosPago(){
     
     }
     
-    public DatosPago(int id, int cvv, String numeto_tarjeta, String nombre_titular, String fecha_vencimiento, double total){
+    public DatosPago(int id, int cvv, String numeto_tarjeta, String nombre_titular, String fecha_vencimiento, double total, String medio_pago){
         this.id = id;
         this.cvv = cvv;
         this.numero_tarjeta = numeto_tarjeta;
         this.nombre_titular = nombre_titular;
         this.fecha_vencimiento = fecha_vencimiento;
         this.total = total;
+        this.medio_pago = medio_pago;
     }
 
     public void setId(int id) {
@@ -46,6 +47,9 @@ public class DatosPago {
         this.total=total;
     }
     
+    public void setMedioPago(String medio_pago){
+        this.medio_pago = medio_pago;
+    }
     
     
     public int getId() {
@@ -67,16 +71,21 @@ public class DatosPago {
     public String getFecha_vencimiento() {
         return fecha_vencimiento;
     }
+    
     public double getTotal(){
         return total;
+    }
+    
+    public String getMedioPago(){
+        return this.medio_pago;
     }
 
     
     
     @Override
     public String toString() {
-        return "DatosPago{" + "id=" + id + ", cvv=" + cvv + ", numeto_tarjeta=" + numero_tarjeta + ", nombre_titular=" + nombre_titular + ", fecha_vencimiento=" + fecha_vencimiento + ", total=" + total +'}';
-    }
+        return "DatosPago{" + "id=" + id + ", cvv=" + cvv + ", numeto_tarjeta=" + numero_tarjeta + ", nombre_titular=" + nombre_titular + ", fecha_vencimiento=" + fecha_vencimiento + ", total=" + total +", medio_pago="+ medio_pago +'}';
+    } 
     
     
 

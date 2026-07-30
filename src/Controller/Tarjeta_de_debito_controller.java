@@ -157,6 +157,8 @@ public class Tarjeta_de_debito_controller implements ActionListener{
                 
                 datosPagar.setTotal(datos.getTotalPagar());
                 
+                datosPagar.setMedioPago("debito");
+                
                 datos.setDatosPago(datosPagar);
                 
                 if(datos.vista_pago == 1){

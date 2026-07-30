@@ -23,6 +23,7 @@ public class Datos {
     private ReservasDao datosReservaDao = new ReservasDao();
     private Ticket_dao ticket = new Ticket_dao();
     
+    private static Datos instancia;
     
     public ArrayList<Integer> id_pasajero = new ArrayList<>();
     public ArrayList<Integer> id_reserva = new ArrayList<>();
@@ -31,7 +32,6 @@ public class Datos {
         
     }
     
-    private static Datos instancia;
 
     public static Datos getInstance() {
         if (instancia == null) {
