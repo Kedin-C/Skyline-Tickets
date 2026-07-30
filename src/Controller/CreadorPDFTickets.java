@@ -30,7 +30,7 @@ public class CreadorPDFTickets {
     
     public File generarTicket(String nombrePasajero, String documento, String vuelo,
                               String origen, String destino, String fecha, String asiento,
-                              double costo, String codigoReserva,int ticket) {
+                              double costo, String codigoReserva,int ticket, int clase, int equipaje) {
         
         File archivo = null;
         try {
@@ -60,7 +60,19 @@ public class CreadorPDFTickets {
             document.add(new Paragraph("Origen: " + origen));
             document.add(new Paragraph("Destino: " + destino));
             document.add(new Paragraph("Fecha: " + fecha));
-            document.add(new Paragraph("Asiento: " + asiento + "\n"));
+            document.add(new Paragraph("Asiento: " + asiento));
+            String nombreClase = "";
+            if(clase == 1){
+                nombreClase = "Clase Económica";
+            }else if(clase == 1){
+                nombreClase = "Clase Ejecutiva";
+            }else if(clase == 1){
+                nombreClase = "Primera Clase";
+            }
+            document.add(new Paragraph("Clase: " + nombreClase +"\n"));
+            if(equipaje > 0){
+                document.add(new Paragraph("Equipaje Extra en Bodega: " + equipaje + "KG" +"\n"));
+            }
 
             // Costo
             Font costoFont = new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD, BaseColor.DARK_GRAY);

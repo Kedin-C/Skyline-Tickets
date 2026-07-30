@@ -84,15 +84,15 @@ public class Skyline_Tickets {
         Agregar_equipaje_extra_view bodega = new Agregar_equipaje_extra_view();
         Seleccion_forma_de_pago_view forma_pago_vista = new Seleccion_forma_de_pago_view();
         Tarjeta_de_credito_view credito = new Tarjeta_de_credito_view();
-        Model.Vistas_globales.tarjetaCredito = credito;
+        View.Vistas_globales.tarjetaCredito = credito;
         Tarjeta_de_debito_view debito = new Tarjeta_de_debito_view();
-        Model.Vistas_globales.tarjetaDebito = debito;
+        View.Vistas_globales.tarjetaDebito = debito;
         Transferencia_view transferencia = new Transferencia_view();
         Registro_view registro_view = new Registro_view();
         Menu_principal_view menu = new Menu_principal_view();
         Apartado_reportes_menu_view apart_reportes_menu = new Apartado_reportes_menu_view();
         Buscar_vuelos_view buscar_v = new Buscar_vuelos_view();
-        Model.Vistas_globales.buscarVuelos = buscar_v;
+        View.Vistas_globales.buscarVuelos = buscar_v;
         Informacion_personal_view info_personal = new Informacion_personal_view();
         Apartado_reportes_operacionales_view apart_reportes_opera = new Apartado_reportes_operacionales_view();
         Apartado_reportes_financieros_view apart_reportes_finan = new Apartado_reportes_financieros_view();
@@ -102,7 +102,7 @@ public class Skyline_Tickets {
         Historial_vuelos_view historial_vuelos = new Historial_vuelos_view();
         Elegir_puestos_view puestos_vista = new Elegir_puestos_view();
         Elegir_clase_view elegir_clase_vista = new Elegir_clase_view();
-        Model.Vistas_globales.elegirClase = elegir_clase_vista;
+        View.Vistas_globales.elegirClase = elegir_clase_vista;
         Confirmar_pago_view conf_pago_view = new Confirmar_pago_view();
 
         //clases

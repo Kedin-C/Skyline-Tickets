@@ -58,7 +58,6 @@ public class Correo_controller {
 
  
     private void enviarCorreo() {
-         System.out.println("===== ENTRÓ A enviarCorreo() =====");
 
         try {
 

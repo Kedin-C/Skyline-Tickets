@@ -6,7 +6,7 @@ package Controller;
 
 import Model.Datos;
 import Model.Usuario;
-import Model.Vistas_globales;
+import View.Vistas_globales;
 import View.Confirmar_pago_view;
 import View.Inicio_usuario_view;
 import View.Pagina_principal_administrador_view;

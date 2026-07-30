@@ -63,8 +63,8 @@ public class Elegir_puestos_controller implements ActionListener{
         this.viewUsuario = viewUsuario;
         this.modify = modify;
 
-        Model.Vistas_globales.datosYPago = this.vistaDatosyPago;
-        Model.Vistas_globales.elegirPuestosController = this;
+        View.Vistas_globales.datosYPago = this.vistaDatosyPago;
+        View.Vistas_globales.elegirPuestosController = this;
         
         
         this.vista.aleatorio.addActionListener(this);

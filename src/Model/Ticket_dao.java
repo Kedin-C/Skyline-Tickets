@@ -357,6 +357,48 @@ public class Ticket_dao {
         }
         return costo;
     }
+    
+    public int obtenerClase(int idPasajero) {
+        int clase = 0;
+        String sql = "SELECT a.codigo_clase " +
+                        "FROM tickets t " +
+                        "JOIN reservas r ON t.id_reserva = r.id " +
+                        "JOIN asientos a ON r.codigo_asiento = a.codigo_asiento " +
+                        "WHERE t.id_pasajero = ?";
+        try {
+            con = conectar.getConection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, idPasajero);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                clase = rs.getInt("codigo_clase");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString(),
+                "Error de consulta: " + e.getMessage(), JOptionPane.ERROR_MESSAGE);
+        }
+        return clase;
+    }
+    
+    public int obtenerEquiExtra(int idPasajero) {
+        int Equi = 0;
+        String sql = "SELECT equipaje_extra FROM tickets WHERE id_pasajero = ?";
+        try {
+            con = conectar.getConection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, idPasajero);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                Equi = rs.getInt("equipaje_extra");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString(),
+                "Error de consulta: " + e.getMessage(), JOptionPane.ERROR_MESSAGE);
+        }
+        return Equi;
+    }
+    
+    
 
     public String obtenerCodigoReserva(int idPasajero) {
         String reserva = null;

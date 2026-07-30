@@ -1,4 +1,4 @@
-package Model;
+package View;
 
 import Controller.Elegir_puestos_controller;
 import View.Buscar_vuelos_view;
