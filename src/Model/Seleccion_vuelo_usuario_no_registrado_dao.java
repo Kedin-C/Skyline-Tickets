@@ -66,13 +66,13 @@ public class Seleccion_vuelo_usuario_no_registrado_dao {
 
     public int confir_nombre(String nom) {
         int r = 0;
-        String sql = " select Count(*) from datos_pasajero WHERE nombre = ? ";
+        String sql = " select Count(*) from datos_pasajero WHERE CONCAT(TRIM(nombre), ' ', TRIM(apellido)) = ? ";
         try {
             
 
             con = conectar.getConection();
             ps = con.prepareStatement(sql);
-            ps.setString(1,nom );
+            ps.setString(1,nom.trim() );
             rs = ps.executeQuery();
 
             if(rs.next())
@@ -164,12 +164,14 @@ public class Seleccion_vuelo_usuario_no_registrado_dao {
     public int confir_ejecucion(int ticket, String nom, String doc, String corr) {
         int r = 0;
         try {
-            String sql = "SELECT COUNT(*) FROM datos_pasajero INNER JOIN Tickets ON datos_pasajero.id = Tickets.id_pasajero WHERE datos_pasajero.nombre = ? AND datos_pasajero.numero_documento = ? AND datos_pasajero.correo = ? AND Tickets.codigo_ticket = ?";
+            String sql = "SELECT COUNT(*) FROM datos_pasajero INNER JOIN Tickets ON datos_pasajero.id = Tickets.id_pasajero "
+                    + "WHERE CONCAT(TRIM(datos_pasajero.nombre), ' ', TRIM(datos_pasajero.apellido)) = ? "
+                    + "AND datos_pasajero.numero_documento = ? AND datos_pasajero.correo = ? AND Tickets.codigo_ticket = ?";
 
             con = conectar.getConection();
             ps = con.prepareStatement(sql);
            
-            ps.setString(1, nom);
+            ps.setString(1, nom.trim());
             ps.setString(2, doc);
             ps.setString(3, corr);
             ps.setInt(4, ticket);

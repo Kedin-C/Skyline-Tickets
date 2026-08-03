@@ -156,6 +156,10 @@ public class Confirmar_pago_view extends Interfaz_vista_abtractas{
         panelDatos.add(Box.createVerticalStrut(10));
         panelDatos.add(lblReferenciaPago);
         panelDatos.add(Box.createVerticalStrut(10));
+        panelDatos.add(lblFechaIda);
+        panelDatos.add(Box.createVerticalStrut(10));
+        panelDatos.add(lblFechaVuelta);
+        panelDatos.add(Box.createVerticalStrut(10));
         panelDatos.add(lblClase);
         panelDatos.add(Box.createVerticalStrut(10));
         panelDatos.add(lblEquipaje);

@@ -109,8 +109,9 @@ public class Transferencia_controller implements ActionListener{
                     viewPago.lblDestino.setText(destinop);
                     String fechap = ticketdao.obtenerFechaVuelo(id_pasajero);
                     viewPago.lblFechaIda.setText("FECHA: " + fechap);
+                    mostrarClaseEquipajeCosto(viewPago, id_pasajero);
 
-                    if (ticketdao.obtenerFechaRegreso(id_pasajero).equals("IDA_VUELTA")) {
+                    if ("IDA_VUELTA".equals(ticketdao.obtenerTipoVuelo(id_pasajero))) {
                         viewPago.lblMensaje.setText("SE HA REALIZADO CON EXITO AGREGAR EQUIPAJE EXTRA EN AMBOS VUELOS");
                         viewPago.lblFlechaVuelta.setVisible(true);
                         viewPago.lblFechaVuelta.setVisible(true);
@@ -164,8 +165,9 @@ public class Transferencia_controller implements ActionListener{
                     viewPago.lblDestino.setText(destinop);
                     String fechap = ticketdao.obtenerFechaVuelo(id_pasajero);
                     viewPago.lblFechaIda.setText("FECHA: " + fechap);
+                    mostrarClaseEquipajeCosto(viewPago, id_pasajero);
 
-                    if (ticketdao.obtenerFechaRegreso(id_pasajero).equals("IDA_VUELTA")) {
+                    if ("IDA_VUELTA".equals(ticketdao.obtenerTipoVuelo(id_pasajero))) {
                         viewPago.lblMensaje.setText("SE HA REALIZADO CON EXITO LA MODIFICACIÓN DE LA CLASE EN AMBOS VUELOS");
                         viewPago.lblFlechaVuelta.setVisible(true);
                         viewPago.lblFechaVuelta.setVisible(true);
@@ -211,8 +213,9 @@ public class Transferencia_controller implements ActionListener{
                     viewPago.lblDestino.setText(destinop);
                     String fechap = ticketdao.obtenerFechaVuelo(id_pasajero);
                     viewPago.lblFechaIda.setText("FECHA: " + fechap);
+                    mostrarClaseEquipajeCosto(viewPago, id_pasajero);
 
-                    if (ticketdao.obtenerFechaRegreso(id_pasajero).equals("IDA_VUELTA")) {
+                    if ("IDA_VUELTA".equals(ticketdao.obtenerTipoVuelo(id_pasajero))) {
                         viewPago.lblFlechaVuelta.setVisible(true);
                         viewPago.lblFechaVuelta.setVisible(true);
                         String fechaida = ticketdao.obtenerFechaVuelo(id_pasajero);
@@ -261,8 +264,9 @@ public class Transferencia_controller implements ActionListener{
                     viewPago.lblDestino.setText(destinop);
                     String fechap = ticketdao.obtenerFechaVuelo(id_pasajero);
                     viewPago.lblFechaIda.setText("FECHA: " + fechap);
+                    mostrarClaseEquipajeCosto(viewPago, id_pasajero);
 
-                    if (ticketdao.obtenerFechaRegreso(id_pasajero).equals("IDA_VUELTA")) {
+                    if ("IDA_VUELTA".equals(ticketdao.obtenerTipoVuelo(id_pasajero))) {
                         viewPago.lblMensaje.setText("SE HA REALIZADO CON EXITO AGREGAR EQUIPAJE EXTRA EN AMBOS VUELOS");
                         viewPago.lblFlechaVuelta.setVisible(true);
                         viewPago.lblFechaVuelta.setVisible(true);
@@ -316,8 +320,9 @@ public class Transferencia_controller implements ActionListener{
                     viewPago.lblDestino.setText(destinop);
                     String fechap = ticketdao.obtenerFechaVuelo(id_pasajero);
                     viewPago.lblFechaIda.setText("FECHA: " + fechap);
+                    mostrarClaseEquipajeCosto(viewPago, id_pasajero);
 
-                    if (ticketdao.obtenerFechaRegreso(id_pasajero).equals("IDA_VUELTA")) {
+                    if ("IDA_VUELTA".equals(ticketdao.obtenerTipoVuelo(id_pasajero))) {
                         viewPago.lblMensaje.setText("SE HA REALIZADO CON EXITO LA MODIFICACIÓN DE LA CLASE EN AMBOS VUELOS");
                         viewPago.lblFlechaVuelta.setVisible(true);
                         viewPago.lblFechaVuelta.setVisible(true);
@@ -363,8 +368,9 @@ public class Transferencia_controller implements ActionListener{
                     viewPago.lblDestino.setText(destinop);
                     String fechap = ticketdao.obtenerFechaVuelo(id_pasajero);
                     viewPago.lblFechaIda.setText("FECHA: " + fechap);
+                    mostrarClaseEquipajeCosto(viewPago, id_pasajero);
 
-                    if (ticketdao.obtenerFechaRegreso(id_pasajero).equals("IDA_VUELTA")) {
+                    if ("IDA_VUELTA".equals(ticketdao.obtenerTipoVuelo(id_pasajero))) {
                         viewPago.lblFlechaVuelta.setVisible(true);
                         viewPago.lblFechaVuelta.setVisible(true);
                         String fechaida = ticketdao.obtenerFechaVuelo(id_pasajero);
@@ -413,8 +419,9 @@ public class Transferencia_controller implements ActionListener{
                     viewPago.lblDestino.setText(destinop);
                     String fechap = ticketdao.obtenerFechaVuelo(id_pasajero);
                     viewPago.lblFechaIda.setText("FECHA: " + fechap);
+                    mostrarClaseEquipajeCosto(viewPago, id_pasajero);
 
-                    if (ticketdao.obtenerFechaRegreso(id_pasajero).equals("IDA_VUELTA")) {
+                    if ("IDA_VUELTA".equals(ticketdao.obtenerTipoVuelo(id_pasajero))) {
                         viewPago.lblMensaje.setText("SE HA REALIZADO CON EXITO AGREGAR EQUIPAJE EXTRA EN AMBOS VUELOS");
                         viewPago.lblFlechaVuelta.setVisible(true);
                         viewPago.lblFechaVuelta.setVisible(true);
@@ -468,8 +475,9 @@ public class Transferencia_controller implements ActionListener{
                     viewPago.lblDestino.setText(destinop);
                     String fechap = ticketdao.obtenerFechaVuelo(id_pasajero);
                     viewPago.lblFechaIda.setText("FECHA: " + fechap);
+                    mostrarClaseEquipajeCosto(viewPago, id_pasajero);
 
-                    if (ticketdao.obtenerFechaRegreso(id_pasajero).equals("IDA_VUELTA")) {
+                    if ("IDA_VUELTA".equals(ticketdao.obtenerTipoVuelo(id_pasajero))) {
                         viewPago.lblMensaje.setText("SE HA REALIZADO CON EXITO LA MODIFICACIÓN DE LA CLASE EN AMBOS VUELOS");
                         viewPago.lblFlechaVuelta.setVisible(true);
                         viewPago.lblFechaVuelta.setVisible(true);
@@ -515,8 +523,9 @@ public class Transferencia_controller implements ActionListener{
                     viewPago.lblDestino.setText(destinop);
                     String fechap = ticketdao.obtenerFechaVuelo(id_pasajero);
                     viewPago.lblFechaIda.setText("FECHA: " + fechap);
+                    mostrarClaseEquipajeCosto(viewPago, id_pasajero);
 
-                    if (ticketdao.obtenerFechaRegreso(id_pasajero).equals("IDA_VUELTA")) {
+                    if ("IDA_VUELTA".equals(ticketdao.obtenerTipoVuelo(id_pasajero))) {
                         viewPago.lblFlechaVuelta.setVisible(true);
                         viewPago.lblFechaVuelta.setVisible(true);
                         String fechaida = ticketdao.obtenerFechaVuelo(id_pasajero);
@@ -533,6 +542,34 @@ public class Transferencia_controller implements ActionListener{
                 }
         }
 
+    }
+
+    private void mostrarClaseEquipajeCosto(Confirmar_pago_view viewPago, int id_pasajero) {
+        int clase = ticketdao.obtenerClase(id_pasajero);
+        int equipaje = ticketdao.obtenerEquiExtra(id_pasajero);
+        double costo = ticketdao.obtenerCosto(id_pasajero);
+
+        String nombreClase = "";
+        double costoClase = 0;
+        if (clase == 1) {
+            nombreClase = "Clase Economica";
+        } else if (clase == 2) {
+            nombreClase = "Clase Ejecutiva";
+            costoClase = 250000.0;
+        } else if (clase == 3) {
+            nombreClase = "Primera Clase";
+            costoClase = 400000.0;
+        }
+        viewPago.lblClase.setText("CLASE: " + nombreClase);
+
+        if (equipaje > 0) {
+            viewPago.lblEquipaje.setText("EQUIPAJE EXTRA: " + equipaje + " KG");
+        } else {
+            viewPago.lblEquipaje.setText("EQUIPAJE EXTRA: Ninguno");
+        }
+
+        double costoFinal = costoClase + (equipaje * 10000) + costo;
+        viewPago.lblCostoTotal.setText("COSTO FINAL: $" + String.format("%,.0f", costoFinal) + " COP");
     }
 
     private void envio_Ticket(ArrayList<Integer> listaPasajeros,int idPasajero1) {
