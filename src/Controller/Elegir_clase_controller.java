@@ -79,13 +79,12 @@ public class Elegir_clase_controller implements ActionListener{
             
             if(vista.economica.isSelected()){
                 datos.setClaseVuelo(1);
-                datos.setTotalPagar(datos.getTotalPagar()+180000);
             }else if(vista.ejecutiva.isSelected()){
                 datos.setClaseVuelo(2);
-                datos.setTotalPagar(datos.getTotalPagar()+450000);
+                datos.setTotalPagar(datos.getTotalPagar()+250000);
             }else{
                 datos.setClaseVuelo(3);
-                datos.setTotalPagar(datos.getTotalPagar()+850000);
+                datos.setTotalPagar(datos.getTotalPagar()+400000);
             }
             
             datos.setNumeroTickets(Integer.parseInt(vista.listarNumeros.getSelectedItem().toString()));

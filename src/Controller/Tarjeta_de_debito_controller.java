@@ -138,37 +138,77 @@ public class Tarjeta_de_debito_controller implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         
-        if(e.getSource() == vista.pagar){
+        if (e.getSource() == vista.pagar) {
+            if (Validar()) {
 
-            if(Validar()){
-                
-                
                 datosPagar.setNumero_tarjeta(vista.num_tarjeta.getText());
-                
+
                 SimpleDateFormat formateadorRegreso = new SimpleDateFormat("yyyy-MM-dd");
                 //aplicando el metodo que deja la fecha tal cual en el campo de fecha regreso
                 String fecha = formateadorRegreso.format(vista.fecha_ven.getDate());
-                
+
                 datosPagar.setFecha_vencimiento(fecha);
-                
+
                 datosPagar.setCvv(Integer.parseInt(vista.cvv.getText()));
-                
+
                 datosPagar.setNombre_titular(vista.nombre_titular.getText());
-                
+
                 datosPagar.setTotal(datos.getTotalPagar());
-                
-                datosPagar.setMedioPago("debito");
-                
+
+                datosPagar.setMedioPago("credito");
+
                 datos.setDatosPago(datosPagar);
-                
-                if(datos.vista_pago == 1){
-                    
+
+                if (datos.vista_pago == 1) {
+
                     datosPagarDao.enviarDatos(datosPagar);
                     ticketdao.modificarEquipaje(ticket.getId(), datos.getEquipajeExtra());
-                    envio_Ticket();
-                    
-                }else if(datos.vista_pago == 2){
-                    
+                    Confirmar_pago_view viewPago = new Confirmar_pago_view();
+                    Confirmar_pago_controller pago_cont = new Confirmar_pago_controller(viewPago, vistaPrincipal, viewAdmin, viewUsuario, usuario);
+
+                    final ArrayList<Integer> listaPasajeros;
+
+                    if (datos.id_pasajero != null && !datos.id_pasajero.isEmpty()) {
+                        // Caso compra: ya hay datos cargados, se usan tal cual
+                        listaPasajeros = datos.id_pasajero;
+                    } else {
+                        listaPasajeros = new ArrayList<>();
+                        listaPasajeros.add(ticket.getId_pasajero());
+                    }
+
+                    int id_pasajero = listaPasajeros.get(0);
+
+                    viewPago.lblMensaje.setText("SE HA REALIZADO CON EXITO AGREGAR EQUIPAJE EXTRA");
+                    int ticketp = ticketdao.obtenerCodTicket(id_pasajero);
+                    viewPago.lblNumeroTicket.setText("NUMERO DE TICKET: " + ticketp);
+                    String nombrep = ticketdao.obtenerNombrePasajero(id_pasajero);
+                    viewPago.lblNombrePasajero.setText("NOMBRE DEL PASAJERO: " + nombrep);
+                    String codVuelo = ticketdao.obtenerCodigoVuelo(id_pasajero);
+                    viewPago.lblReferenciaPago.setText("CÓDIGO DE VUELO: " + codVuelo);
+                    String origenp = ticketdao.obtenerOrigen(id_pasajero);
+                    viewPago.lblOrigen.setText(origenp);
+                    String destinop = ticketdao.obtenerDestino(id_pasajero);
+                    viewPago.lblDestino.setText(destinop);
+                    String fechap = ticketdao.obtenerFechaVuelo(id_pasajero);
+                    viewPago.lblFechaIda.setText("FECHA: " + fechap);
+
+                    if (ticketdao.obtenerTipoVuelo(id_pasajero).equals("IDA_VUELTA")) {
+                        viewPago.lblMensaje.setText("SE HA REALIZADO CON EXITO AGREGAR EQUIPAJE EXTRA EN AMBOS VUELOS");
+                        viewPago.lblFlechaVuelta.setVisible(true);
+                        viewPago.lblFechaVuelta.setVisible(true);
+                        String fechaida = ticketdao.obtenerFechaVuelo(id_pasajero);
+                        viewPago.lblFechaIda.setText("FECHA IDA: " + fechaida);
+                        String fechavuelta = datos.getFechaRegreso();
+                        viewPago.lblFechaVuelta.setText("FECHA REGRESO: " + fechavuelta);
+                    }
+
+                    vista.setVisible(false);
+                    viewPago.setVisible(true);
+                    viewPago.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                    envio_Ticket(listaPasajeros,id_pasajero);
+
+                } else if (datos.vista_pago == 2) {
+
                     datosPagarDao.enviarDatos(datosPagar);
 
                     int id = ticketdao.codigoReserva(ticket.getId());
@@ -177,19 +217,99 @@ public class Tarjeta_de_debito_controller implements ActionListener{
                     reservas_dao.cambiarReserva(id, asiento);
 
                     vista.setVisible(false);
-                    view_modificar_ticket.setVisible(true);
-                    view_modificar_ticket.setExtendedState(JFrame.MAXIMIZED_BOTH);
-                    JOptionPane.showMessageDialog(viewAdmin, "Has cambiado con exito de clase de vuelo"+"\n"+"Verifica tu clase de vuelo actual");
-                    envio_Ticket();
-                    
-                }else{
 
+                    
+                    Confirmar_pago_view viewPago = new Confirmar_pago_view();
+                    Confirmar_pago_controller pago_cont = new Confirmar_pago_controller(viewPago, vistaPrincipal, viewAdmin, viewUsuario, usuario);
+
+                    final ArrayList<Integer> listaPasajeros;
+
+                    if (datos.id_pasajero != null && !datos.id_pasajero.isEmpty()) {
+                        listaPasajeros = datos.id_pasajero;
+                    } else {
+                        listaPasajeros = new ArrayList<>();
+                        listaPasajeros.add(ticket.getId_pasajero());
+                    }
+
+                    int id_pasajero = listaPasajeros.get(0);
+
+                    viewPago.lblMensaje.setText("SE HA REALIZADO CON EXITO LA MODIFICACIÓN DE LA CLASE");
+                    int ticketp = ticketdao.obtenerCodTicket(id_pasajero);
+                    viewPago.lblNumeroTicket.setText("NUMERO DE TICKET: " + ticketp);
+                    String nombrep = ticketdao.obtenerNombrePasajero(id_pasajero);
+                    viewPago.lblNombrePasajero.setText("NOMBRE DEL PASAJERO: " + nombrep);
+                    String codVuelo = ticketdao.obtenerCodigoVuelo(id_pasajero);
+                    viewPago.lblReferenciaPago.setText("CÓDIGO DE VUELO: " + codVuelo);
+                    String origenp = ticketdao.obtenerOrigen(id_pasajero);
+                    viewPago.lblOrigen.setText(origenp);
+                    String destinop = ticketdao.obtenerDestino(id_pasajero);
+                    viewPago.lblDestino.setText(destinop);
+                    String fechap = ticketdao.obtenerFechaVuelo(id_pasajero);
+                    viewPago.lblFechaIda.setText("FECHA: " + fechap);
+
+                    if (ticketdao.obtenerTipoVuelo(id_pasajero).equals("IDA_VUELTA")) {
+                        viewPago.lblMensaje.setText("SE HA REALIZADO CON EXITO LA MODIFICACIÓN DE LA CLASE EN AMBOS VUELOS");
+                        viewPago.lblFlechaVuelta.setVisible(true);
+                        viewPago.lblFechaVuelta.setVisible(true);
+                        String fechaida = ticketdao.obtenerFechaVuelo(id_pasajero);
+                        viewPago.lblFechaIda.setText("FECHA IDA: " + fechaida);
+                        String fechavuelta = datos.getFechaRegreso();
+                        viewPago.lblFechaVuelta.setText("FECHA REGRESO: " + fechavuelta);
+                    }
+
+                    vista.setVisible(false);
+                    viewPago.setVisible(true);
+                    viewPago.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                    envio_Ticket(listaPasajeros,id_pasajero);
+
+                } else {
                     datos.subirDatos();
                     datos.ids();
                     datos.subirTicket();
-                    envio_Ticket();
+                    Confirmar_pago_view viewPago = new Confirmar_pago_view();
+                    Confirmar_pago_controller pago_cont = new Confirmar_pago_controller(viewPago, vistaPrincipal, viewAdmin, viewUsuario, usuario);
+
+                    final ArrayList<Integer> listaPasajeros;
+
+                    if (datos.id_pasajero != null && !datos.id_pasajero.isEmpty()) {
+                        // Caso compra: ya hay datos cargados, se usan tal cual
+                        listaPasajeros = datos.id_pasajero;
+                    } else {
+                        listaPasajeros = new ArrayList<>();
+                        listaPasajeros.add(ticket.getId_pasajero());
+                    }
+
+                    int id_pasajero = listaPasajeros.get(0);
+
+                    int ticketp = ticketdao.obtenerCodTicket(id_pasajero);
+                    viewPago.lblNumeroTicket.setText("NUMERO DE TICKET: " + ticketp);
+                    String nombrep = ticketdao.obtenerNombrePasajero(id_pasajero);
+                    viewPago.lblNombrePasajero.setText("NOMBRE DEL PASAJERO: " + nombrep);
+                    String codVuelo = ticketdao.obtenerCodigoVuelo(id_pasajero);
+                    viewPago.lblReferenciaPago.setText("CÓDIGO DE VUELO: " + codVuelo);
+                    String origenp = ticketdao.obtenerOrigen(id_pasajero);
+                    viewPago.lblOrigen.setText(origenp);
+                    String destinop = ticketdao.obtenerDestino(id_pasajero);
+                    viewPago.lblDestino.setText(destinop);
+                    String fechap = ticketdao.obtenerFechaVuelo(id_pasajero);
+                    viewPago.lblFechaIda.setText("FECHA: " + fechap);
+
+                    if (ticketdao.obtenerTipoVuelo(id_pasajero).equals("IDA_VUELTA")) {
+                        viewPago.lblFlechaVuelta.setVisible(true);
+                        viewPago.lblFechaVuelta.setVisible(true);
+                        String fechaida = ticketdao.obtenerFechaVuelo(id_pasajero);
+                        viewPago.lblFechaIda.setText("FECHA IDA: " + fechaida);
+                        String fechavuelta = datos.getFechaRegreso();
+                        viewPago.lblFechaVuelta.setText("FECHA REGRESO: " + fechavuelta);
+                    }
+
+                    vista.setVisible(false);
+                    viewPago.setVisible(true);
+                    viewPago.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                    envio_Ticket(listaPasajeros,id_pasajero);
+
                 }
-                
+
             }
         }
         
@@ -267,52 +387,20 @@ public class Tarjeta_de_debito_controller implements ActionListener{
         return resultado;
     }
     
-    private void envio_Ticket() {
-        Confirmar_pago_view viewPago = new Confirmar_pago_view();
-        Confirmar_pago_controller pago_cont = new Confirmar_pago_controller(viewPago, vistaPrincipal, viewAdmin, viewUsuario, usuario);
-
-        ArrayList<Integer> lista = datos.id_pasajero;
-        int id_pasajero = lista.get(0);
-
-        int ticketp = ticketdao.obtenerCodTicket(id_pasajero);
-        viewPago.lblNumeroTicket.setText("NUMERO DE TICKET: " + ticketp);
-        String nombrep = ticketdao.obtenerNombrePasajero(id_pasajero);
-        viewPago.lblNombrePasajero.setText("NOMBRE DEL PASAJERO: " + nombrep);
-        String codVuelo = ticketdao.obtenerCodigoVuelo(id_pasajero);
-        viewPago.lblReferenciaPago.setText("CÓDIGO DE VUELO: " + codVuelo);
-        String origenp = ticketdao.obtenerOrigen(id_pasajero);
-        viewPago.lblOrigen.setText(origenp);
-        String destinop = ticketdao.obtenerDestino(id_pasajero);
-        viewPago.lblDestino.setText(destinop);
-        String fechap = ticketdao.obtenerFechaVuelo(id_pasajero);
-        viewPago.lblFechaIda.setText("FECHA: " + fechap);
-
-        if (datos.getFechaRegreso() != null) {
-            viewPago.lblFlechaVuelta.setVisible(true);
-            viewPago.lblFechaVuelta.setVisible(true);
-            String fechaida = ticketdao.obtenerFechaVuelo(id_pasajero);
-            viewPago.lblFechaIda.setText("FECHA IDA: " + fechaida);
-            String fechavuelta = datos.getFechaRegreso();
-            viewPago.lblFechaVuelta.setText("FECHA REGRESO: " + fechavuelta);
-        }
-
-        vista.setVisible(false);
-        viewPago.setVisible(true);
-        viewPago.setExtendedState(JFrame.MAXIMIZED_BOTH);
+    private void envio_Ticket(ArrayList<Integer> listaPasajeros,int idPasajero1) {
+        
         new Thread(() -> {
             try {
 
                 Thread.sleep(4000);
+                String tipoVuelo = ticketdao.obtenerTipoVuelo(idPasajero1);
+                if (tipoVuelo.equals("IDA_VUELTA")) {
 
-                if (View.Vistas_globales.buscarVuelos != null
-                        && View.Vistas_globales.buscarVuelos.elegir_fecha_regreso.getDate() != null) {
-
-                    ArrayList<Integer> listaPasajeros = datos.id_pasajero;
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    String fechaRegreso = sdf.format(View.Vistas_globales.buscarVuelos.elegir_fecha_regreso.getDate());
+                    
+                    String fechaRegreso = ticketdao.obtenerFechaRegreso(idPasajero1);
 
                     for (int idPasajero : listaPasajeros) {
-                        // Obtener datos desde el DAO
+                        // Obtener datos desde el DAOD
                         String nombre = ticketdao.obtenerNombrePasajero(idPasajero);
                         String documento = ticketdao.obtenerDocumento(idPasajero);
                         String vuelo = ticketdao.obtenerCodigoVuelo(idPasajero);
@@ -346,8 +434,6 @@ public class Tarjeta_de_debito_controller implements ActionListener{
                         JOptionPane.showMessageDialog(null, "Se te envio a tu correo electronico los PDFs de tus tickets");
                     }
                 } else {
-                    ArrayList<Integer> listaPasajeros = datos.id_pasajero;
-
                     for (int idPasajero : listaPasajeros) {
                         // Obtener datos desde el DAO
                         String nombre = ticketdao.obtenerNombrePasajero(idPasajero);

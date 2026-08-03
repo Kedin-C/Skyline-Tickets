@@ -29,9 +29,11 @@ public class Confirmar_pago_view extends Interfaz_vista_abtractas{
     
     public Container contenedor;
     public JPanel panel1,panel2,panelFlechas,panelMensaje,panelVuelo,panelOrigen,panelDestino,
-            panelDatoslblNumeroTicket,panelCentro,panelWrapperCentro,panelInferior,panelDatos;
+            panelDatoslblNumeroTicket,panelCentro,panelWrapperCentro,panelInferior,panelDatos,
+            panelTipoVuelo;
     public JLabel lblMensaje,lblOrigen,lblDestino,lblNombrePasajero,lblReferenciaPago,lblFlechaIda,
-            lblFlechaVuelta,lblNumeroTicket,lblFechaIda,lblFechaVuelta;
+            lblFlechaVuelta,lblNumeroTicket,lblFechaIda,lblFechaVuelta,lblTipoVuelo,
+            lblClase,lblEquipaje,lblCostoTotal;
     public JButton volver;
 
     public Confirmar_pago_view() {
@@ -54,6 +56,16 @@ public class Confirmar_pago_view extends Interfaz_vista_abtractas{
         lblMensaje.setForeground(Color.WHITE);
         lblMensaje.setFont(new Font("Arial", Font.BOLD, 22));
         panelMensaje.add(lblMensaje, BorderLayout.CENTER);
+
+        // Panel tipo de vuelo
+        panelTipoVuelo = new JPanel(new BorderLayout());
+        panelTipoVuelo.setBackground(Color.WHITE);
+        panelTipoVuelo.setBorder(new EmptyBorder(10, 0, 20, 0));
+
+        lblTipoVuelo = new JLabel("", SwingConstants.CENTER);
+        lblTipoVuelo.setFont(new Font("Arial", Font.BOLD, 20));
+        lblTipoVuelo.setForeground(Color.decode("#037FB9"));
+        panelTipoVuelo.add(lblTipoVuelo, BorderLayout.CENTER);
 
         // Cajas de origen y destino
         panelVuelo = new JPanel(new GridBagLayout());
@@ -125,18 +137,39 @@ public class Confirmar_pago_view extends Interfaz_vista_abtractas{
         lblFechaVuelta.setAlignmentX(Component.CENTER_ALIGNMENT);
         lblFechaVuelta.setVisible(false);
 
+        // Nuevos labels para clase, equipaje y costo total
+        lblClase = new JLabel("", SwingConstants.CENTER);
+        lblClase.setFont(new Font("Arial", Font.PLAIN, 18));
+        lblClase.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        lblEquipaje = new JLabel("", SwingConstants.CENTER);
+        lblEquipaje.setFont(new Font("Arial", Font.PLAIN, 18));
+        lblEquipaje.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        lblCostoTotal = new JLabel("", SwingConstants.CENTER);
+        lblCostoTotal.setFont(new Font("Arial", Font.BOLD, 18));
+        lblCostoTotal.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         panelDatos.add(lblNumeroTicket);
         panelDatos.add(Box.createVerticalStrut(10));
         panelDatos.add(lblNombrePasajero);
         panelDatos.add(Box.createVerticalStrut(10));
         panelDatos.add(lblReferenciaPago);
+        panelDatos.add(Box.createVerticalStrut(10));
+        panelDatos.add(lblClase);
+        panelDatos.add(Box.createVerticalStrut(10));
+        panelDatos.add(lblEquipaje);
+        panelDatos.add(Box.createVerticalStrut(10));
+        panelDatos.add(lblCostoTotal);
 
         // Junta vuelo y datos en un solo bloque
         panelCentro = new JPanel();
         panelCentro.setLayout(new BoxLayout(panelCentro, BoxLayout.Y_AXIS));
         panelCentro.setBackground(Color.WHITE);
+        panelTipoVuelo.setAlignmentX(Component.CENTER_ALIGNMENT);
         panelVuelo.setAlignmentX(Component.CENTER_ALIGNMENT);
         panelDatos.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panelCentro.add(panelTipoVuelo);
         panelCentro.add(panelVuelo);
         panelCentro.add(Box.createVerticalStrut(20));
         panelCentro.add(panelDatos);
@@ -158,6 +191,4 @@ public class Confirmar_pago_view extends Interfaz_vista_abtractas{
         panel2.add(panelWrapperCentro, BorderLayout.CENTER);
         panel2.add(panelInferior, BorderLayout.SOUTH);
     }
-    
-    
 }

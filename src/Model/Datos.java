@@ -154,7 +154,7 @@ public class Datos {
     public void subirTicket(){
         if(id_pasajero.size() > 0 && id_reserva.size() > 0){ 
             for(int i = 0; i < numeroTickets; i++){
-                ticket.enviarDatos(id_pago, id_pasajero.get(i), id_reserva.get(i), equipajeExtra, tipoVuelo);
+                ticket.enviarDatos(id_pago, id_pasajero.get(i), id_reserva.get(i), equipajeExtra, tipoVuelo, fechaRegreso);
             }
         }else{
             JOptionPane.showMessageDialog(null, "No se pudo enviar el ticket a la base de datos");

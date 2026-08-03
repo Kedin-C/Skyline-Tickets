@@ -56,7 +56,8 @@ public class Datos_y_pago_controller implements ActionListener{
     ArrayList<DatosPersonales> datosPasajeros = new ArrayList<>();
     
     public Datos_y_pago_controller(Datos_y_pago_view vista, Datos datos, Usuario usuario, ViewPrincipal vistaPrincipal, Pagina_principal_administrador_view viewAdmin, Inicio_usuario_view viewUsuario,And_puestos pv,Seleccion_de_Modificacion_de_vuelo_view modify){
-        
+        String fecharegreso = datos.getFechaRegreso();
+        System.out.println(fecharegreso);
         this.modify = modify;
         this.datos=datos;
         this.vista=vista;
@@ -244,7 +245,7 @@ public class Datos_y_pago_controller implements ActionListener{
                 vista.setVisible(false);
                 viewTransferencia.setVisible(true);
                 Seleccion_forma_de_pago_view selec_pago = new Seleccion_forma_de_pago_view();
-                Transferencia_controller controllerTransferencia = new Transferencia_controller(viewTransferencia, datos,selec_pago, usuario, vistaPrincipal, viewAdmin, viewUsuario);
+                Transferencia_controller controllerTransferencia = new Transferencia_controller(viewTransferencia, datos,selec_pago, usuario, vistaPrincipal, viewAdmin, viewUsuario, ticket,pv);
                 datos.setDatosPersonales(datosPasajeros);
                 
             }

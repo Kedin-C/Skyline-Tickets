@@ -6,6 +6,7 @@ package Controller;
 
 import Model.Seleccion_vuelo_usuario_no_registrado_dao;
 import Model.Ticket;
+import Model.Ticket_dao;
 import View.Pagina_principal_administrador_view;
 import View.Seleccion_de_Modificacion_de_vuelo_view;
 import View.Seleccion_de_vuelo_usuarioNoregistrado_view;
@@ -28,6 +29,7 @@ public class Seleccion_modificacion_usuario_no_registrado_controller implements 
     private Seleccion_de_Modificacion_de_vuelo_view vista2;
     private Seleccion_vuelo_usuario_no_registrado_dao dao;
     private Ticket ticket;
+    private Ticket_dao ticketDao = new Ticket_dao();
 
 
     public Seleccion_modificacion_usuario_no_registrado_controller(Seleccion_vuelo_usuario_no_registrado_dao dao, Seleccion_de_vuelo_usuarioNoregistrado_view vista, Seleccion_de_Modificacion_de_vuelo_view vista2, Modificacion_clase_equipaje_controller controlador_equipaje, Ticket ticket, ViewPrincipal principal) {
@@ -66,7 +68,7 @@ public class Seleccion_modificacion_usuario_no_registrado_controller implements 
                         if (!vista.Nombre_usuario.getText().isEmpty()) {
 
                             if (!vista.Numero_documento.getText().isEmpty()) {
-                                if (vista.Numero_documento.getText().matches("^.{3,10}$")) {
+                                if (vista.Numero_documento.getText().matches("^[0-9A-Za-z .-]{8,17}$")) {
 
                                     if (!vista.Correo_electronico.getText().isEmpty()) {
                                         if (vista.Correo_electronico.getText().matches(verify_correo)) {
@@ -80,7 +82,7 @@ public class Seleccion_modificacion_usuario_no_registrado_controller implements 
                                         JOptionPane.showMessageDialog(vista, "El campo de correo electronico no puede estar vacio");
                                     }
                                 } else {
-                                    JOptionPane.showMessageDialog(vista, "El campo de documento debe tener minimo 3 caracteres y maximo 10");
+                                    JOptionPane.showMessageDialog(vista, "El campo de documento debe tener entre 8 y 17 caracteres (letras y numeros)");
                                 }
                             } else {
                                 JOptionPane.showMessageDialog(vista, "El campo de documento no puede estar vacio");
@@ -136,6 +138,7 @@ public class Seleccion_modificacion_usuario_no_registrado_controller implements 
             }
             if (definitivo == 1) {
                 this.ticket.setId(ticket);
+                this.ticket.setId_pasajero(ticketDao.obtenerIdPasajero(documento, ticket));
                 vista.setVisible(false);
                 vista2.setVisible(true);
                 vista2.setExtendedState(JFrame.MAXIMIZED_BOTH);

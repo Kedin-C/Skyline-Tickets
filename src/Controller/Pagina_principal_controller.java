@@ -51,7 +51,10 @@ public class Pagina_principal_controller implements ActionListener{
             vistaCV.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
             vistaCV.setPagina_anterior(1);
         }else if(e.getSource() == vista.clase){
-            
+            vistaCL.Codigo_ticket.setText("");
+            vistaCL.Correo_electronico.setText("");
+            vistaCL.Nombre_usuario.setText("");
+            vistaCL.Numero_documento.setText("");
             vista.setVisible(false);
             vistaCL.setVisible(true);
             vistaCL.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);

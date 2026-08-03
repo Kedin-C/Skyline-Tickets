@@ -72,13 +72,11 @@ public class Elegir_clase_view extends Interfaz_vista_abtractas{
         infoEconomica = new JTextArea("\t - Bolso de mano\n"
                 + "\t - Asientos cómodos\n"
                 + "\t - Sistema de entretenimiento\n");
-//                + "\t\t $ 180.000\n");
         infoEjecutiva = new JTextArea("\t - Bolso de mano\n"
                 + "\t - Morral\n"
                 + "\t - Asientos amplios con mayor espacio\n"
                 + "\t - Sistema de entretenimiento\n"
                 + "\t - Acceso a salas VIP\n");
-//                + "\t\t $ 450.000\n");
         infoPrimera = new JTextArea("\t - Bolso de mano\n"
                 + "\t - Morral\n"
                 + "\t - Bodega\n"
@@ -87,7 +85,6 @@ public class Elegir_clase_view extends Interfaz_vista_abtractas{
                 + "\t - Acceso a salas VIP\n"
                 + "\t - Salas VIP premium\n"
                 + "\t - Entretenimiento premium y conectividad\n");
-//                + "\t\t $ 850.000\n");
         
         economica.setFont(fuenteGrande);
         ejecutiva.setFont(fuenteGrande);
@@ -98,9 +95,9 @@ public class Elegir_clase_view extends Interfaz_vista_abtractas{
         infoEjecutiva.setEditable(false);
         infoPrimera.setEditable(false);
         
-        precioEconomica = new JLabel("$ 180.000", SwingConstants.CENTER);
-        precioEjecutiva = new JLabel("$ 450.000", SwingConstants.CENTER);
-        precioPrimera = new JLabel("$ 850.000", SwingConstants.CENTER);
+        precioEconomica = new JLabel("$0", SwingConstants.CENTER);
+        precioEjecutiva = new JLabel("$250.000", SwingConstants.CENTER);
+        precioPrimera = new JLabel("$400.000", SwingConstants.CENTER);
         
         Font fuentePrecio = new Font("Arial", Font.BOLD, 20);
         precioEconomica.setFont(fuentePrecio);

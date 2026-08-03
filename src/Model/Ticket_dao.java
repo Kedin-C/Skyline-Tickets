@@ -314,6 +314,26 @@ public class Ticket_dao {
         }
         return fecha;
     }
+    
+    public String obtenerFechaRegreso(int idPasajero) {
+        String fecharegreso = "";
+        String sql = "SELECT t.fecha_regreso " +
+                     "FROM tickets t " +
+                     "WHERE t.id_pasajero = ?";
+        try {
+            con = conectar.getConection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, idPasajero);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                fecharegreso = rs.getString("fecha_regreso");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString(),
+                "Error de consulta: " + e.getMessage(), JOptionPane.ERROR_MESSAGE);
+        }
+        return fecharegreso;
+    }
 
     public String obtenerAsiento(int idPasajero) {
         String asiento = null;
@@ -417,13 +437,31 @@ public class Ticket_dao {
         }
         return reserva;
     }
+    
+    public String obtenerTipoVuelo(int idPasajero) {
+        String tipoVuelo = "";
+        String sql = "SELECT t.tipo_vuelo FROM tickets t WHERE t.id_pasajero = ?";
+        try {
+            con = conectar.getConection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, idPasajero);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                tipoVuelo = rs.getString("tipo_vuelo");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString(),
+                "Error de consulta: " + e.getMessage(), JOptionPane.ERROR_MESSAGE);
+        }
+        return tipoVuelo;
+    }
 
     
          
-    public void enviarDatos(int id_pago, int id_pasajero, int id_reserva, int equipaje_extra, String tipo_vuelo){
+    public void enviarDatos(int id_pago, int id_pasajero, int id_reserva, int equipaje_extra, String tipo_vuelo, String fechaRegreso){
         
-        String sql = "INSERT INTO tickets (id_pago, id_pasajero, id_reserva, equipaje_extra, tipo_vuelo)"
-                + "VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO tickets (id_pago, id_pasajero, id_reserva, equipaje_extra, tipo_vuelo, fecha_regreso)"
+                + "VALUES (?, ?, ?, ?, ?, ?)";
         
         try{
             con = Conexion.getObject().getConection();
@@ -434,6 +472,7 @@ public class Ticket_dao {
             ps.setInt(3, id_reserva);
             ps.setInt(4, equipaje_extra);
             ps.setString(5, tipo_vuelo);
+            ps.setString(6, fechaRegreso);
             
             ps.executeUpdate();
         
@@ -456,7 +495,7 @@ public class Ticket_dao {
         
     }
     
-    public void enviarDatost(int id_pasajero, int id_reserva, int equipaje_extra, String tipo_vuelo){
+    public void enviarDatost(int id_pasajero, int id_reserva, int equipaje_extra, String tipo_vuelo, String fechaRegreso){
         
         String sql = "INSERT INTO tickets (id_pasajero, id_reserva, equipaje_extra, tipo_vuelo)"
                 + "VALUES (?, ?, ?, ?)";
@@ -567,6 +606,37 @@ public class Ticket_dao {
         }
    }
    
+   public int obtenerIdPasajero(String numeroDocumento, int codigoTicket) {
+        int idPasajero = 0;
+        String sql = "SELECT dp.id FROM datos_pasajero dp "
+                + "JOIN tickets t ON t.id_pasajero = dp.id "
+                + "WHERE dp.numero_documento = ? AND t.codigo_ticket = ?";
+        try {
+            con = conectar.getConection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, numeroDocumento);
+            ps.setInt(2, codigoTicket);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                idPasajero = rs.getInt("id");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString(),
+                "Error de consulta: " + e.getMessage(), JOptionPane.ERROR_MESSAGE);
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                    ps.close();
+                    rs.close();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, e.toString());
+                }
+            }
+        }
+        return idPasajero;
+    }
+
    public int codigoReserva(int id_ticket){
         int reserva = 0;
         String sql = "SELECT id_reserva FROM tickets WHERE codigo_ticket = ?";

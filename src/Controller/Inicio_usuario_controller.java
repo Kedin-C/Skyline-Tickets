@@ -138,6 +138,7 @@ public class Inicio_usuario_controller implements ActionListener {
             ticket.setDestino(tick.get(v).getDestino());
             ticket.setOrigen(tick.get(v).getOrigen());
             ticket.setTipo_vuelo(tick.get(v).getTipo_vuelo());
+            ticket.setId_pasajero(tdao.obtenerIdPasajero(usuario.getDocumento(), tick.get(v).getId()));
         }
 
     }
