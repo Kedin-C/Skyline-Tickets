@@ -155,20 +155,7 @@ public class Datos_y_pago_controller implements ActionListener{
         
         this.vista.correo.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), "none");
         
-        //Para que no pueda ingresar al campo de fecha
-        JTextField editorFecha = (JTextField) this.vista.elegir_fecha.getDateEditor().getUiComponent();
-        editorFecha.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                e.consume();
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-                // Bloquea y no deja entrar letras, números, Backspace y Suprimir
-                e.consume();
-            }
-        });
+        ((JTextField) this.vista.elegir_fecha.getDateEditor().getUiComponent()).setEditable(false);
         
         
         
@@ -333,10 +320,10 @@ public class Datos_y_pago_controller implements ActionListener{
                 
         int puntos = 0;
         
-        if(numDocumento.charAt(0) == '0'){
+        if(numDocumento.charAt(0) == '0' || numDocumento.charAt(0) == '-'){
             puntos--;
             JOptionPane.showMessageDialog(vista,
-                                "El numero de documento no puede empesar por 0", "Numero de documento invalido", JOptionPane.WARNING_MESSAGE);
+                                "El numero de documento no puede empesar por '0' solo letra o numero ", "Numero de documento invalido", JOptionPane.WARNING_MESSAGE);
         }
         if (numDocumento.length() <= 17){
             puntos++;

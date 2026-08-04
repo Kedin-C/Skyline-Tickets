@@ -18,16 +18,11 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
 import javax.swing.BorderFactory;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
-import javax.swing.JPopupMenu;
-import javax.swing.KeyStroke;
 
 public class Datos_y_pago_view extends Interfaz_vista_abtractas{
     

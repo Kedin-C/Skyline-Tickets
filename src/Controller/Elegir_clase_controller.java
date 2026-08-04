@@ -18,7 +18,6 @@ import Model.Usuario;
 import View.Inicio_usuario_view;
 import View.Pagina_principal_administrador_view;
 import View.ViewPrincipal;
-import javax.swing.JOptionPane;
 
 public class Elegir_clase_controller implements ActionListener{
     
@@ -109,10 +108,13 @@ public class Elegir_clase_controller implements ActionListener{
             
             vistaElegirPuestos.setVisible(true);
             
-            if(controllerElegirPuestos == null)
+            
+            if(controllerElegirPuestos == null){
                 controllerElegirPuestos = new Elegir_puestos_controller(vistaElegirPuestos, datos,pva,modi_ticket_view, usuario, vistaPrincipal, viewAdmin, viewUsuario,modify);
-            else
+            }else{
                 controllerElegirPuestos.setAsientos();
+                controllerElegirPuestos.codigoAsiento.clear();
+            }
             
             
            
