@@ -18,7 +18,12 @@ public class Panel_con_fondo_view extends JPanel{
     private Image imagenFondo;
 
     public Panel_con_fondo_view(String rutaImagen){
-        imagenFondo = new ImageIcon(getClass().getResource(rutaImagen)).getImage();
+        java.net.URL recurso = getClass().getResource(rutaImagen);
+        if (recurso == null) {
+            throw new RuntimeException("No se encontró la imagen de fondo en la ruta: " + rutaImagen
+                    + ". Verifica que el archivo exista dentro de src/Imagenes y haz un Clean and Build.");
+        }
+        imagenFondo = new ImageIcon(recurso).getImage();
     }
 
     @Override
