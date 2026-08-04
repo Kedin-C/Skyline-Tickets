@@ -247,9 +247,9 @@ private String text_ticket5_2;
     
     
     //ticket 1 modificaciones
-    vuelo_ida.setFont(new Font("Arial",Font.BOLD,15));
+    vuelo_ida.setFont(new Font("Arial",Font.BOLD,13));
     vuelo_ida.setForeground(Color.WHITE);
-    vuelo_vuelta.setFont(new Font("Arial",Font.BOLD,15));
+    vuelo_vuelta.setFont(new Font("Arial",Font.BOLD,13));
     vuelo_vuelta.setForeground(Color.WHITE);
     tipo.setBorder(new EmptyBorder(20,1,1,1));
     tipo.setFont(new Font("Arial",Font.BOLD,18));
@@ -259,9 +259,9 @@ private String text_ticket5_2;
     select1.setBackground(Color.WHITE);
     
     // ticket 2 modificaciones
-    vuelo_ida2.setFont(new Font("Arial",Font.BOLD,15));
+    vuelo_ida2.setFont(new Font("Arial",Font.BOLD,13));
     vuelo_ida2.setForeground(Color.WHITE);
-    vuelo_vuelta2.setFont(new Font("Arial",Font.BOLD,15));
+    vuelo_vuelta2.setFont(new Font("Arial",Font.BOLD,13));
     vuelo_vuelta2.setForeground(Color.WHITE);
     tipo2.setBorder(new EmptyBorder(20,1,1,1));
     tipo2.setFont(new Font("Arial",Font.BOLD,18));
@@ -271,9 +271,9 @@ private String text_ticket5_2;
     select2.setBackground(Color.WHITE);
     
     //ticket 3 modificaciones
-    vuelo_ida3.setFont(new Font("Arial",Font.BOLD,15));
+    vuelo_ida3.setFont(new Font("Arial",Font.BOLD,13));
     vuelo_ida3.setForeground(Color.WHITE);
-    vuelo_vuelta3.setFont(new Font("Arial",Font.BOLD,15));
+    vuelo_vuelta3.setFont(new Font("Arial",Font.BOLD,13));
     vuelo_vuelta3.setForeground(Color.WHITE);
     tipo3.setBorder(new EmptyBorder(20,1,1,1));
     tipo3.setFont(new Font("Arial",Font.BOLD,18));
@@ -283,9 +283,9 @@ private String text_ticket5_2;
     select3.setBackground(Color.WHITE);
     
     //ticket 4 modificaciones
-    vuelo_ida4.setFont(new Font("Arial",Font.BOLD,15));
+    vuelo_ida4.setFont(new Font("Arial",Font.BOLD,13));
     vuelo_ida4.setForeground(Color.WHITE);
-    vuelo_vuelta4.setFont(new Font("Arial",Font.BOLD,15));
+    vuelo_vuelta4.setFont(new Font("Arial",Font.BOLD,13));
     vuelo_vuelta4.setForeground(Color.WHITE);
     tipo4.setBorder(new EmptyBorder(20,1,1,1));
     tipo4.setFont(new Font("Arial",Font.BOLD,18));
@@ -295,9 +295,9 @@ private String text_ticket5_2;
     select4.setBackground(Color.WHITE);
     
     
-    vuelo_ida5.setFont(new Font("Arial",Font.BOLD,15));
+    vuelo_ida5.setFont(new Font("Arial",Font.BOLD,13));
     vuelo_ida5.setForeground(Color.WHITE);
-    vuelo_vuelta5.setFont(new Font("Arial",Font.BOLD,15));
+    vuelo_vuelta5.setFont(new Font("Arial",Font.BOLD,13));
     vuelo_vuelta5.setForeground(Color.WHITE);
     tipo5.setBorder(new EmptyBorder(20,1,1,1));
     tipo5.setFont(new Font("Arial",Font.BOLD,18));
