@@ -12,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import Model.Reportes_financieros_dao;
 import View.Apartado_reportes_menu_view;
 import View.Apartado_reportes_financieros_view;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -20,6 +21,8 @@ import javax.swing.JOptionPane;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
@@ -127,10 +130,16 @@ public class Reportes_financieros_controller implements ActionListener{
         DefaultCategoryDataset dataset = reportes.obtenerIngresosDatasetT(fechaInicio, fechaFin);
         chartIngresos = ChartFactory.createBarChart(
             "Ingresos (" + fechaInicio + " a " + fechaFin + ")",
-            "Mes",
-            "Monto",
-            dataset
+                "Mes",
+                "Monto",
+                dataset
         );
+        // Obtener el plot y el renderer
+        //CategoryPlot plot = chartIngresos.getCategoryPlot();
+        //BarRenderer renderer = (BarRenderer) plot.getRenderer();
+
+        // Cambiar el color de las barras (serie 0)
+        //renderer.setSeriesPaint(0, Color.BLUE);
         ChartPanel panel = new ChartPanel(chartIngresos);
         panel.setPreferredSize(new Dimension(400, 300));
         vista.panelIngresos.removeAll();

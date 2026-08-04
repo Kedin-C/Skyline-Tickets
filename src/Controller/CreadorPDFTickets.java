@@ -78,14 +78,14 @@ public class CreadorPDFTickets {
             }
             document.add(new Paragraph("Clase: " + nombreClase + costoClase + "\n"));
             if (equipaje > 0) {
-                double precioPorKg = 10000;
+                double precioPorKg = 4000;
                 double costoE = equipaje * precioPorKg;
 
                 document.add(new Paragraph("Equipaje Extra en Bodega: " + equipaje + " KG"));
                 document.add(new Paragraph("Costo de Equipaje Extra en Bodega: $" + String.format("%,.0f", costoE) + " COP"));
             }
 
-            double costoFinal = costoC + (equipaje * 10000) + costo;
+            double costoFinal = costoC + (equipaje * 4000) + costo;
 
             // Costo
             Font costoFont = new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD, BaseColor.DARK_GRAY);

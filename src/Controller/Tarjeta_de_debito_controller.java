@@ -169,7 +169,6 @@ public class Tarjeta_de_debito_controller implements ActionListener{
                     final ArrayList<Integer> listaPasajeros;
 
                     if (datos.id_pasajero != null && !datos.id_pasajero.isEmpty()) {
-                        // Caso compra: ya hay datos cargados, se usan tal cual
                         listaPasajeros = datos.id_pasajero;
                     } else {
                         listaPasajeros = new ArrayList<>();
@@ -426,10 +425,6 @@ public class Tarjeta_de_debito_controller implements ActionListener{
                 Thread.sleep(4000);
                 String tipoVuelo = ticketdao.obtenerTipoVuelo(idPasajero1);
                 if (tipoVuelo.equals("IDA_VUELTA")) {
-
-                    
-                    String fechaRegreso = ticketdao.obtenerFechaRegreso(idPasajero1);
-
                     for (int idPasajero : listaPasajeros) {
                         // Obtener datos desde el DAOD
                         String nombre = ticketdao.obtenerNombrePasajero(idPasajero);
@@ -445,6 +440,7 @@ public class Tarjeta_de_debito_controller implements ActionListener{
                         int ticket = ticketdao.obtenerCodTicket(idPasajero);
                         int clase = ticketdao.obtenerClase(idPasajero);
                         int equipaje = ticketdao.obtenerEquiExtra(idPasajero);
+                        String fechaRegreso = ticketdao.obtenerFechaRegreso(idPasajero1);
 
                         // Generar PDF de ida y de vuelta
                         File pdf1 = creador.generarTicket(
