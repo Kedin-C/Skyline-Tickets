@@ -117,7 +117,7 @@ public class Transferencia_controller implements ActionListener{
                         viewPago.lblFechaVuelta.setVisible(true);
                         String fechaida = ticketdao.obtenerFechaVuelo(id_pasajero);
                         viewPago.lblFechaIda.setText("FECHA IDA: " + fechaida);
-                        String fechavuelta = datos.getFechaRegreso();
+                        String fechavuelta = ticketdao.obtenerFechaRegreso(id_pasajero);
                         viewPago.lblFechaVuelta.setText("FECHA REGRESO: " + fechavuelta);
                     }
 
@@ -173,7 +173,7 @@ public class Transferencia_controller implements ActionListener{
                         viewPago.lblFechaVuelta.setVisible(true);
                         String fechaida = ticketdao.obtenerFechaVuelo(id_pasajero);
                         viewPago.lblFechaIda.setText("FECHA IDA: " + fechaida);
-                        String fechavuelta = datos.getFechaRegreso();
+                        String fechavuelta = ticketdao.obtenerFechaRegreso(id_pasajero);
                         viewPago.lblFechaVuelta.setText("FECHA REGRESO: " + fechavuelta);
                     }
 
@@ -220,7 +220,7 @@ public class Transferencia_controller implements ActionListener{
                         viewPago.lblFechaVuelta.setVisible(true);
                         String fechaida = ticketdao.obtenerFechaVuelo(id_pasajero);
                         viewPago.lblFechaIda.setText("FECHA IDA: " + fechaida);
-                        String fechavuelta = datos.getFechaRegreso();
+                        String fechavuelta = ticketdao.obtenerFechaRegreso(id_pasajero);
                         viewPago.lblFechaVuelta.setText("FECHA REGRESO: " + fechavuelta);
                     }
 
@@ -272,7 +272,7 @@ public class Transferencia_controller implements ActionListener{
                         viewPago.lblFechaVuelta.setVisible(true);
                         String fechaida = ticketdao.obtenerFechaVuelo(id_pasajero);
                         viewPago.lblFechaIda.setText("FECHA IDA: " + fechaida);
-                        String fechavuelta = datos.getFechaRegreso();
+                        String fechavuelta = ticketdao.obtenerFechaRegreso(id_pasajero);
                         viewPago.lblFechaVuelta.setText("FECHA REGRESO: " + fechavuelta);
                     }
 
@@ -328,7 +328,7 @@ public class Transferencia_controller implements ActionListener{
                         viewPago.lblFechaVuelta.setVisible(true);
                         String fechaida = ticketdao.obtenerFechaVuelo(id_pasajero);
                         viewPago.lblFechaIda.setText("FECHA IDA: " + fechaida);
-                        String fechavuelta = datos.getFechaRegreso();
+                        String fechavuelta = ticketdao.obtenerFechaRegreso(id_pasajero);
                         viewPago.lblFechaVuelta.setText("FECHA REGRESO: " + fechavuelta);
                     }
 
@@ -375,7 +375,7 @@ public class Transferencia_controller implements ActionListener{
                         viewPago.lblFechaVuelta.setVisible(true);
                         String fechaida = ticketdao.obtenerFechaVuelo(id_pasajero);
                         viewPago.lblFechaIda.setText("FECHA IDA: " + fechaida);
-                        String fechavuelta = datos.getFechaRegreso();
+                        String fechavuelta = ticketdao.obtenerFechaRegreso(id_pasajero);
                         viewPago.lblFechaVuelta.setText("FECHA REGRESO: " + fechavuelta);
                     }
 
@@ -427,7 +427,7 @@ public class Transferencia_controller implements ActionListener{
                         viewPago.lblFechaVuelta.setVisible(true);
                         String fechaida = ticketdao.obtenerFechaVuelo(id_pasajero);
                         viewPago.lblFechaIda.setText("FECHA IDA: " + fechaida);
-                        String fechavuelta = datos.getFechaRegreso();
+                        String fechavuelta = ticketdao.obtenerFechaRegreso(id_pasajero);
                         viewPago.lblFechaVuelta.setText("FECHA REGRESO: " + fechavuelta);
                     }
 
@@ -483,7 +483,7 @@ public class Transferencia_controller implements ActionListener{
                         viewPago.lblFechaVuelta.setVisible(true);
                         String fechaida = ticketdao.obtenerFechaVuelo(id_pasajero);
                         viewPago.lblFechaIda.setText("FECHA IDA: " + fechaida);
-                        String fechavuelta = datos.getFechaRegreso();
+                        String fechavuelta = ticketdao.obtenerFechaRegreso(id_pasajero);
                         viewPago.lblFechaVuelta.setText("FECHA REGRESO: " + fechavuelta);
                     }
 
@@ -530,7 +530,7 @@ public class Transferencia_controller implements ActionListener{
                         viewPago.lblFechaVuelta.setVisible(true);
                         String fechaida = ticketdao.obtenerFechaVuelo(id_pasajero);
                         viewPago.lblFechaIda.setText("FECHA IDA: " + fechaida);
-                        String fechavuelta = datos.getFechaRegreso();
+                        String fechavuelta = ticketdao.obtenerFechaRegreso(id_pasajero);
                         viewPago.lblFechaVuelta.setText("FECHA REGRESO: " + fechavuelta);
                     }
 
