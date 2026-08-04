@@ -125,7 +125,7 @@ public class Elegir_clase_controller implements ActionListener{
             vista.setVisible(true);
             vistaElegirPuestos.dispose();
             if(pva.getNumero() == 2){
-            
+                vista.setVisible(false);
                 vistaElegirPuestos.dispose();
                 
                 cam_clas_view.setVisible(true);
