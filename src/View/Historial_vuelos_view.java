@@ -119,8 +119,9 @@ public class Historial_vuelos_view extends Interfaz_vista_abtractas{
         cont_continuar.add(continuar);
         cont_volver.add(volver);
         
-        cont_boton.add(cont_continuar);
         cont_boton.add(cont_volver);
+        cont_boton.add(cont_continuar);
+        
         
         tablero_datos.add(scroll, BorderLayout.CENTER);
         cont_titulo.add(titulo);
