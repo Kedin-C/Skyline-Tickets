@@ -33,7 +33,6 @@ import javax.swing.KeyStroke;
 
 public class Datos_y_pago_controller implements ActionListener{
     
-    DatosPersonales datosPersonales = new DatosPersonales();
     DatosPersonalesDao datosPersonalesdao = new DatosPersonalesDao();
     Datos_y_pago_view vista = new Datos_y_pago_view();
     Datos datos;
@@ -156,20 +155,7 @@ public class Datos_y_pago_controller implements ActionListener{
         
         this.vista.correo.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), "none");
         
-        //Para que no pueda ingresar al campo de fecha
-        JTextField editorFecha = (JTextField) this.vista.elegir_fecha.getDateEditor().getUiComponent();
-        editorFecha.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                e.consume();
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-                // Bloquea y no deja entrar letras, números, Backspace y Suprimir
-                e.consume();
-            }
-        });
+        ((JTextField) this.vista.elegir_fecha.getDateEditor().getUiComponent()).setEditable(false);
         
         
         
@@ -294,6 +280,8 @@ public class Datos_y_pago_controller implements ActionListener{
     
     public void guardarDatos(){
         
+        DatosPersonales datosPersonales = new DatosPersonales();
+        
         String nombre, apellido, numDocumento, numTel, correo, sexo, nacionalidad, fechaNacimiento;
         int tipoDocumento;
 
@@ -332,10 +320,10 @@ public class Datos_y_pago_controller implements ActionListener{
                 
         int puntos = 0;
         
-        if(numDocumento.charAt(0) == '0'){
+        if(numDocumento.charAt(0) == '0' || numDocumento.charAt(0) == '-'){
             puntos--;
             JOptionPane.showMessageDialog(vista,
-                                "El numero de documento no puede empesar por 0", "Numero de documento invalido", JOptionPane.WARNING_MESSAGE);
+                                "El numero de documento no puede empesar por '0' solo letra o numero ", "Numero de documento invalido", JOptionPane.WARNING_MESSAGE);
         }
         if (numDocumento.length() <= 17){
             puntos++;
@@ -364,7 +352,7 @@ public class Datos_y_pago_controller implements ActionListener{
                                 "Un numero de celular sin codigo de pais Ej:(+57) debe tener 10 digitos", "Numero de telefonos invalido", JOptionPane.WARNING_MESSAGE);
         }
         
-        if(correoCorrecto(correo)){
+        if(correo.matches("^[A-Za-z0-9]+([._%+-]?[A-Za-z0-9]+)*@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")){
             puntos++;
         }else{
             JOptionPane.showMessageDialog(vista,

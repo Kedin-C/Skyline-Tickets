@@ -174,14 +174,14 @@ public class Registro_controller implements ActionListener {
         if (correo.contains(" ")) {
             return false;
         }
-        return correo.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$");
+        return correo.matches("^[A-Za-z0-9]+([._%+-]?[A-Za-z0-9]+)*@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$");
     }
 
     private boolean validarDocumento(String documento) {
         if (documento == null || documento.isEmpty()) {
             return false;
         }
-        return documento.matches("^[1-9][0-9]{7,17}$");
+         return documento.matches("^[A-Za-z0-9]{8,18}$");
     }
 
     
