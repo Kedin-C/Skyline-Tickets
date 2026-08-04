@@ -34,7 +34,6 @@ import javax.swing.KeyStroke;
 
 public class Datos_y_pago_controller implements ActionListener{
     
-    DatosPersonales datosPersonales = new DatosPersonales();
     DatosPersonalesDao datosPersonalesdao = new DatosPersonalesDao();
     Datos_y_pago_view vista = new Datos_y_pago_view();
     Datos datos;
@@ -294,6 +293,8 @@ public class Datos_y_pago_controller implements ActionListener{
     
     
     public void guardarDatos(){
+        
+        DatosPersonales datosPersonales = new DatosPersonales();
         
         String nombre, apellido, numDocumento, numTel, correo, sexo, nacionalidad, fechaNacimiento;
         int tipoDocumento;
