@@ -352,7 +352,7 @@ public class Datos_y_pago_controller implements ActionListener{
                                 "Un numero de celular sin codigo de pais Ej:(+57) debe tener 10 digitos", "Numero de telefonos invalido", JOptionPane.WARNING_MESSAGE);
         }
         
-        if(correoCorrecto(correo)){
+        if(correo.matches("^[A-Za-z0-9]+([._%+-]?[A-Za-z0-9]+)*@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")){
             puntos++;
         }else{
             JOptionPane.showMessageDialog(vista,
