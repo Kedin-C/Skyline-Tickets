@@ -4,7 +4,6 @@
  */
 package Controller;
 
-import Model.And_puestos;
 import Model.Datos;
 import Model.DatosPago;
 import Model.DatosPagoDao;
@@ -105,18 +104,8 @@ public class Tarjeta_de_debito_controller implements ActionListener{
             }
         });
         
-        //Desactivar el comando de "Pegar" (Ctrl + V)
-        this.vista.fecha_ven.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), "none");
-        
-        this.vista.cvv.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                if (!Character.isDigit(e.getKeyChar()))//Solo numeros
-                {
-                    e.consume();
-                }
-            }
-        });
+
+        ((JTextField) this.vista.fecha_ven.getDateEditor().getUiComponent()).setEditable(false);
         
         //Desactivar el comando de "Pegar" (Ctrl + V)
         this.vista.cvv.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), "none");

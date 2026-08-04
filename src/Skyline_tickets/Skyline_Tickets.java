@@ -55,7 +55,7 @@ import Controller.Reportes_financieros_controller;
 import Controller.Reportes_operativos_controller;
 import Model.Reportes_financieros_dao;
 import Model.Reportes_operativos_dao;
-import Model.And_puestos;
+import Controller.And_puestos;
 import View.Apartado_reportes_financieros_view;
 import View.Apartado_reportes_operacionales_view;
 import View.Elegir_clase_view;

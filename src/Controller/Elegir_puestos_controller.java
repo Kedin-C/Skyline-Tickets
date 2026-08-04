@@ -12,7 +12,6 @@ import javax.swing.JButton;
 import Model.Datos;
 import Model.Reservas;
 import Model.ReservasDao;
-import Model.And_puestos;
 import View.Datos_y_pago_view;
 import View.Elegir_puestos_view;
 import View.Seleccion_de_Modificacion_de_vuelo_view;
