@@ -32,7 +32,6 @@ public class Datos {
         
     }
     
-
     public static Datos getInstance() {
         if (instancia == null) {
             instancia = new Datos();
@@ -123,8 +122,7 @@ public class Datos {
     }
     
     public void subirDatos(){
-        for(int i=0; i < datosPersonales.size(); i++){
-                    
+        for(int i=0; i < datosPersonales.size(); i++){ 
             datosPersonalesDao.enviarDatos(datosPersonales.get(i));
         }
         

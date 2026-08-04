@@ -4,7 +4,6 @@
  */
 package Controller;
 
-import Model.And_puestos;
 import Model.Datos;
 import Model.DatosPago;
 import Model.DatosPagoDao;

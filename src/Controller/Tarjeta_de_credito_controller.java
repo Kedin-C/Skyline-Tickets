@@ -4,7 +4,6 @@
  */
 package Controller;
 
-import Model.And_puestos;
 import Model.Datos;
 import Model.DatosPago;
 import Model.DatosPagoDao;
@@ -88,22 +87,8 @@ public class Tarjeta_de_credito_controller implements ActionListener {
         this.vista.num_tarjeta.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), "none");
 
         //Para que no pueda ingresar al campo de fecha
-        JTextField editorFecha = (JTextField) this.vista.fecha_ven.getDateEditor().getUiComponent();
-        editorFecha.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                e.consume();
-            }
+        ((JTextField) this.vista.fecha_ven.getDateEditor().getUiComponent()).setEditable(false);
 
-            @Override
-            public void keyPressed(KeyEvent e) {
-                // Bloqueamos absolutamente todo: letras, números, Backspace y Suprimir
-                e.consume();
-            }
-        });
-
-        //Desactivar el comando de "Pegar" (Ctrl + V)
-        this.vista.fecha_ven.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), "none");
 
         this.vista.cvv.addKeyListener(new KeyAdapter() {
             @Override

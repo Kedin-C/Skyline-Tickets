@@ -22,7 +22,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import Model.Datos;
-import Model.And_puestos;
 import View.Cambio_de_clase_de_vuelo_view;
 import Model.Usuario;
 import View.Elegir_clase_view;
@@ -111,31 +110,9 @@ public class Buscar_vuelos_controller implements ActionListener {
         modeloColumnas.getColumn(0).setMaxWidth(0);
         modeloColumnas.getColumn(0).setResizable(false);
 
-        JTextField editorFecha1 = (JTextField) vista.elegir_fecha_ida.getDateEditor().getUiComponent();
-        editorFecha1.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                e.consume();
-            }
+        ((JTextField) vista.elegir_fecha_ida.getDateEditor().getUiComponent()).setEditable(false);
+        ((JTextField) vista.elegir_fecha_regreso.getDateEditor().getUiComponent()).setEditable(false);
 
-            @Override
-            public void keyPressed(KeyEvent e) {
-                e.consume();
-            }
-        });
-
-        JTextField editorFecha2 = (JTextField) vista.elegir_fecha_regreso.getDateEditor().getUiComponent();
-        editorFecha2.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                e.consume();
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-                e.consume();
-            }
-        });
     }
 
     @Override
