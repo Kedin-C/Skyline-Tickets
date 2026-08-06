@@ -155,6 +155,8 @@ public class Elegir_puestos_controller implements ActionListener{
         
         if(e.getSource() == vista.siguiente){
             
+            datos.setEscogerAsiento(0);
+            
             if(pva.getNumero() == 1){
             if(codigoAsiento.size() == datos.getNumeroTickets()){
                 datos.setCodigoAsiento(codigoAsiento);

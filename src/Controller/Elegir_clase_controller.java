@@ -75,7 +75,7 @@ public class Elegir_clase_controller implements ActionListener{
         
         if(e.getSource() == vista.siguiente){
             
-            datos.setTotalPagar(0); // se reinicia para que no se acumule si el usuario ya había pasado por aquí antes
+            
             
             if(vista.economica.isSelected()){
                 datos.setClaseVuelo(1);
