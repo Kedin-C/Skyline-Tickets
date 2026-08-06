@@ -476,11 +476,13 @@ private String text_ticket5_2;
                     panel2_dist1.add(panel2_dist1_5);
             }break;
             default:{
+                if(v > 5){
                     panel2_dist1.add(panel2_dist1_1);
                     panel2_dist1.add(panel2_dist1_2);
                     panel2_dist1.add(panel2_dist1_3);
                     panel2_dist1.add(panel2_dist1_4);
                     panel2_dist1.add(panel2_dist1_5);
+                }
             }break;
         }
         

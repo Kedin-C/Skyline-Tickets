@@ -9,7 +9,7 @@ import Controller.Buscar_vuelos_controller;
 import Controller.Elegir_clase_controller;
 import Controller.Elegir_puestos_controller;
 import Controller.Historial_vuelos_controller;
-import Controller.Informacion_personal_controller;
+import Controller.Informacion_personal_controller; 
 import Controller.Inicio_usuario_controller;
 import Controller.Interfaz_cambio_clase_controller;
 import Controller.Interfaz_equipaje_controller;

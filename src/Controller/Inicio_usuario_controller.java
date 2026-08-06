@@ -116,7 +116,7 @@ public class Inicio_usuario_controller implements ActionListener {
         int tickets = tdao.getTotalVuelos(usuario);
 
         List<Ticket> tick = tdao.getTotalVuelosList(usuario);
-
+        
         vistaCL.setTicketInfo(tick);
         vistaCL.SetVuelos(tickets);
 
