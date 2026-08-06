@@ -364,7 +364,7 @@ private String text_ticket5_2;
     dist2_cont.add(text2_panel2);
     dist2_cont.add(boton_panel2);
     
-     dist3_cont.add(img_panel3);
+    dist3_cont.add(img_panel3);
     dist3_cont.add(tipo_panel3);
     dist3_cont.add(text1_panel3);
     dist3_cont.add(text2_panel3);
@@ -475,7 +475,13 @@ private String text_ticket5_2;
                     panel2_dist1.add(panel2_dist1_4);
                     panel2_dist1.add(panel2_dist1_5);
             }break;
-            default:{}break;
+            default:{
+                    panel2_dist1.add(panel2_dist1_1);
+                    panel2_dist1.add(panel2_dist1_2);
+                    panel2_dist1.add(panel2_dist1_3);
+                    panel2_dist1.add(panel2_dist1_4);
+                    panel2_dist1.add(panel2_dist1_5);
+            }break;
         }
         
     }
