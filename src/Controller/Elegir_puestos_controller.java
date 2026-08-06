@@ -195,6 +195,8 @@ public class Elegir_puestos_controller implements ActionListener{
         
         if(e.getSource() == vista.aleatorio){
             
+            datos.setEscogerAsiento(0);
+            
             while(datos.elegidos <= datos.getNumeroTickets()){
                 
                 int fila = (int)(Math.random() * totalFilas);
@@ -258,6 +260,9 @@ public class Elegir_puestos_controller implements ActionListener{
             for (int c = 0; c < vista.torre1[f].length; c++) {
                 columnas++;
                 if (vista.torre1[f][c] != null) {
+                    // Se quita el listener antes de agregarlo de nuevo para evitar
+                    // que se acumulen listeners duplicados cada vez que se llama setAsientos()
+                    vista.torre1[f][c].removeActionListener(this);
                     vista.torre1[f][c].addActionListener(this);
                     vista.torre1[f][c].setEnabled(true);
                     vista.torre1[f][c].setBackground(null);
@@ -270,6 +275,7 @@ public class Elegir_puestos_controller implements ActionListener{
             for (int c = 0; c < vista.torre2[f].length; c++) {
                 
                 if (vista.torre2[f][c] != null) {
+                    vista.torre2[f][c].removeActionListener(this);
                     vista.torre2[f][c].addActionListener(this);
                     vista.torre2[f][c].setEnabled(true);
                     vista.torre2[f][c].setBackground(null);

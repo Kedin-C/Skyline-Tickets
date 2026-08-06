@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 
 public class Datos {
     
-    private int codigoVuelo, numeroTickets, equipajeExtra, claseVuelo;
+    private int codigoVuelo, numeroTickets, equipajeExtra, claseVuelo, escogerAsiento = 1;
     private double totalPagar = 0;
     private String tipoVuelo, fechaRegreso;
     private ArrayList<String> codigoAsiento;
@@ -78,8 +78,14 @@ public class Datos {
     public void setDatosPago(DatosPago datosPago) {
         this.datosPago = datosPago;
     }
-
     
+    public void setEscogerAsiento(int escogerAsiento){
+        this.escogerAsiento = escogerAsiento;
+    }
+
+    public int getEscogerAsiento(){
+        return escogerAsiento;
+    }
     
     public int getCodigoVuelo() {
         return codigoVuelo;

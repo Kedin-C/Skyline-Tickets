@@ -29,15 +29,15 @@ public class CreadorPDFTickets {
     
     
     public File generarTicket(String nombrePasajero, String documento, String vuelo,
-                              String origen, String destino, String fecha, String asiento,
-                              double costo, String codigoReserva,int ticket, int clase, int equipaje) {
-        
+            String origen, String destino, String fecha, String asiento,
+            double costo, String codigoReserva, int ticket, int clase, int equipaje, int escogerAsiento) {
+
         File archivo = null;
         try {
             Document document = new Document();
-            String nombreArchivo = "Ticket_"+nombrePasajero+"_"+origen+"_"+destino+".pdf";
+            String nombreArchivo = "Ticket_" + nombrePasajero + "_" + origen + "_" + destino + ".pdf";
             nombreArchivo = nombreArchivo.replaceAll("\\s+", "_");
-            archivo = new File("Ticket_"+nombreArchivo+".pdf");
+            archivo = new File("Ticket_" + nombreArchivo + ".pdf");
             PdfWriter.getInstance(document, new FileOutputStream(archivo));
             document.open();
 
@@ -64,7 +64,7 @@ public class CreadorPDFTickets {
             String nombreClase = "";
             String costoClase = "";
             double costoC = 0;
-            if(clase == 1){
+            if (clase == 1) {
                 nombreClase = "Clase Económica";
                 costoClase = " + $0 COP";
             } else if (clase == 2) {
@@ -85,7 +85,23 @@ public class CreadorPDFTickets {
                 document.add(new Paragraph("Costo de Equipaje Extra en Bodega: $" + String.format("%,.0f", costoE) + " COP"));
             }
 
-            double costoFinal = costoC + (equipaje * 4000) + costo;
+            double costoAsiento = 0;
+            if (escogerAsiento == 0) {
+                document.add(new Paragraph("Escogiste el o los asientos de forma aleatoria es sin costo"));
+            } else {
+
+                if (clase == 1) {
+                    costoAsiento = 30000.0;
+                } else if (clase == 2) {
+                    costoAsiento = 50000.0;
+                } else if (clase == 3) {
+                    costoAsiento = 80000.0;
+                }
+
+                document.add(new Paragraph("Costo de Asiento: $" + String.format("%,.0f", costoAsiento) + " COP"));
+            }
+
+            double costoFinal = costoC + (equipaje * 4000) + costo + costoAsiento;
 
             // Costo
             Font costoFont = new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD, BaseColor.DARK_GRAY);
@@ -107,5 +123,5 @@ public class CreadorPDFTickets {
         }
         return archivo;
     }
-    
+
 }
