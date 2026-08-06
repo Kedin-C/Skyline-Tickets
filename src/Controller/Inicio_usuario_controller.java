@@ -97,9 +97,10 @@ public class Inicio_usuario_controller implements ActionListener {
         }else if(e.getSource() == vista.historial){
             histo_cont.ResetRow();
             histo_cont.SetRow();
-            if(histo_vista.tabla.getRowCount() == -1){
+            if(getCant_t() == 0){
                 JOptionPane.showMessageDialog(vista, "No has comprado ningun vuelo desde que creaste la cuenta");
             }else{
+                
             vista.setVisible(false);
             
             histo_vista.setVista_anterior(1);

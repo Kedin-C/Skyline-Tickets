@@ -96,11 +96,16 @@ public class Pagina_principal_administrador_controller_2 implements ActionListen
         }else if(e.getSource() == vista.historial){
             histo_cont.ResetRow();
             histo_cont.SetRow();
-            vista.setVisible(false);
             
+            
+            if(getCant_t() > 0){
+            vista.setVisible(false);
             histo_vista.setVista_anterior(2);
             histo_vista.setVisible(true);
             histo_vista.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            }else{
+                JOptionPane.showMessageDialog(vista, "No has comprado ningun vuelo desde que creaste la cuenta");
+            }
         }
     }
     

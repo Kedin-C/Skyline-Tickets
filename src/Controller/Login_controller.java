@@ -64,7 +64,7 @@ public class Login_controller implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Contraseña incorrecta");
                 return;
             }
-            sesion_usu.setUsuario(usuario);
+            //sesion_usu.setUsuario(usuario);
             usu.setNombre(usuario.getNombre());
             usu.setApellido(usuario.getApellido());
             usu.setContraseña(usuario.getContraseña());
