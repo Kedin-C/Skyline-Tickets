@@ -9,7 +9,7 @@ import Controller.Buscar_vuelos_controller;
 import Controller.Elegir_clase_controller;
 import Controller.Elegir_puestos_controller;
 import Controller.Historial_vuelos_controller;
-import Controller.Informacion_personal_controller; 
+import Controller.Informacion_personal_controller;
 import Controller.Inicio_usuario_controller;
 import Controller.Interfaz_cambio_clase_controller;
 import Controller.Interfaz_equipaje_controller;
@@ -56,8 +56,10 @@ import Controller.Reportes_operativos_controller;
 import Model.Reportes_financieros_dao;
 import Model.Reportes_operativos_dao;
 import Controller.And_puestos;
+import Controller.Asignar_rol_controller;
 import View.Apartado_reportes_financieros_view;
 import View.Apartado_reportes_operacionales_view;
+import View.Asignar_rol_view;
 import View.Elegir_clase_view;
 import View.Elegir_puestos_view;
 import View.Confirmar_pago_view;
@@ -72,7 +74,7 @@ public class Skyline_Tickets {
         ViewPrincipal vista_principal = new ViewPrincipal();
         Pagina_principal_administrador_view pagina_admin = new Pagina_principal_administrador_view();
         Inicio_usuario_view pagina_usuario = new Inicio_usuario_view();
-        Usuario usuario = new Usuario();
+        Usuario usuario = Usuario.getInstanceD();
         Sesion_usuario sesion_usuario = new Sesion_usuario();
 
         //vistas
@@ -103,6 +105,7 @@ public class Skyline_Tickets {
         Elegir_clase_view elegir_clase_vista = new Elegir_clase_view();
         View.Vistas_globales.elegirClase = elegir_clase_vista;
         Confirmar_pago_view conf_pago_view = new Confirmar_pago_view();
+        Asignar_rol_view asig = new Asignar_rol_view();
 
         //clases
         Ticket ticket = new Ticket();
@@ -129,7 +132,8 @@ public class Skyline_Tickets {
         Registro_controller registro_cont = new Registro_controller(registro_view, menu, loginV);
         Buscar_vuelos_controller buscar_v_cont = new Buscar_vuelos_controller(buscar_v, datos, vista_principal, pagina_admin, pagina_usuario, historial_vuelos, puv, forma_pago_vista, clase, usuario, vista_principal, pagina_admin, pagina_usuario, elegir_clase_vista);
         Historial_vuelos_controller historial_cont = new Historial_vuelos_controller(historial_vuelos, pagina_admin, pagina_usuario, usuario, buscar_v, buscar_v_cont);
-        Pagina_principal_administrador_controller_2 pagina_admin_cont = new Pagina_principal_administrador_controller_2(pagina_admin, apart_reportes_menu, select_vuelo, buscar_v, ticket, usuario, vista_principal, historial_vuelos, historial_cont);
+        Asignar_rol_controller contro = new Asignar_rol_controller(pagina_admin,asig,usuario);
+        Pagina_principal_administrador_controller_2 pagina_admin_cont = new Pagina_principal_administrador_controller_2(pagina_admin, apart_reportes_menu, select_vuelo, buscar_v, ticket, usuario, vista_principal, historial_vuelos, historial_cont,asig,contro);
         Informacion_personal_controller info_per_cont = new Informacion_personal_controller(info_personal, pagina_usuario, sesion_usuario);
         Inicio_usuario_controller pagina_usuario_cont = new Inicio_usuario_controller(pagina_usuario, select_vuelo, buscar_v, info_personal, ticket, usuario, info_per_cont, sesion_usuario, vista_principal, historial_vuelos, historial_cont);
         Seleccion_modificacion_vuelo_usuario_controlador cont_select_vuelo_registrado = new Seleccion_modificacion_vuelo_usuario_controlador(select_vuelo, usuario, ticket, pagina_admin, pagina_admin_cont, pagina_usuario, pagina_usuario_cont, modificacion);
@@ -139,6 +143,7 @@ public class Skyline_Tickets {
         Menu_principal_controller menu_prin_cont = new Menu_principal_controller(vista_principal, loginV, registro_view, menu);
         Elegir_puestos_controller puestos_cont = new Elegir_puestos_controller(puestos_vista, datos, puv, forma_pago_vista, usuario, vista_principal, pagina_admin, pagina_usuario, modificacion);
         Elegir_clase_controller elegir_clase_cont = new Elegir_clase_controller(elegir_clase_vista, datos, clase, puv, forma_pago_vista, usuario, vista_principal, pagina_admin, pagina_usuario, modificacion);
+        
 
         Pagina_principal_controller pagina_princ_cont = new Pagina_principal_controller(vista_principal, select_vuelo_nor, buscar_v, menu);
 

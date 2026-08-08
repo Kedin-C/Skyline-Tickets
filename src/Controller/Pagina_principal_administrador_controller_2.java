@@ -8,6 +8,7 @@ import Model.Ticket;
 import Model.Ticket_dao;
 import Model.Usuario;
 import View.Apartado_reportes_menu_view;
+import View.Asignar_rol_view;
 import View.Pagina_principal_administrador_view;
 import View.Seleccion_de_vuelo_usuarioRegistrado_view;
 import View.Buscar_vuelos_view;
@@ -35,8 +36,10 @@ public class Pagina_principal_administrador_controller_2 implements ActionListen
     private Ticket_dao tdao = new Ticket_dao();
     private Historial_vuelos_view histo_vista;
     private Historial_vuelos_controller histo_cont;
+    private Asignar_rol_view asig;
+    private Asignar_rol_controller asig_cont;
 
-    public Pagina_principal_administrador_controller_2(Pagina_principal_administrador_view vista, Apartado_reportes_menu_view vistaRM, Seleccion_de_vuelo_usuarioRegistrado_view vistaCL,Buscar_vuelos_view vistaCV,Ticket ticket,Usuario usu,ViewPrincipal vista_prin,Historial_vuelos_view histo_vista,Historial_vuelos_controller histo_cont) {
+    public Pagina_principal_administrador_controller_2(Pagina_principal_administrador_view vista, Apartado_reportes_menu_view vistaRM, Seleccion_de_vuelo_usuarioRegistrado_view vistaCL,Buscar_vuelos_view vistaCV,Ticket ticket,Usuario usu,ViewPrincipal vista_prin,Historial_vuelos_view histo_vista,Historial_vuelos_controller histo_cont,Asignar_rol_view asig,Asignar_rol_controller asig_cont) {
         this.vista = vista;
         this.vistaRM=vistaRM;
         this.vistaCL = vistaCL;
@@ -44,6 +47,8 @@ public class Pagina_principal_administrador_controller_2 implements ActionListen
         this.vista_prin=vista_prin;
         this.histo_vista = histo_vista;
         this.histo_cont = histo_cont;
+        this.asig = asig;
+        this.asig_cont = asig_cont;
         
         
         this.vista.reportes.addActionListener(this);
@@ -51,6 +56,7 @@ public class Pagina_principal_administrador_controller_2 implements ActionListen
         this.vista.clase.addActionListener(this);
         this.vista.cerrarSesion.addActionListener(this);
         this.vista.historial.addActionListener(this);
+        this.vista.rol.addActionListener(this);
         
         
         this.ticket = ticket;
@@ -89,7 +95,7 @@ public class Pagina_principal_administrador_controller_2 implements ActionListen
                 JOptionPane.showMessageDialog(vista,"No tienes vuelos activos disponibles");
             } 
         }else if(e.getSource() == vista.cerrarSesion){
-            usuario.setRol(0);
+            usuario.limpiar();
             vista.setVisible(false);
             vista_prin.setVisible(true);
             vista_prin.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
@@ -106,6 +112,11 @@ public class Pagina_principal_administrador_controller_2 implements ActionListen
             }else{
                 JOptionPane.showMessageDialog(vista, "No has comprado ningun vuelo desde que creaste la cuenta");
             }
+        }else if(e.getSource() == vista.rol){
+            asig_cont.cargarTabla();
+            vista.setVisible(false);
+            asig.setVisible(true);
+            asig.setExtendedState(JFrame.MAXIMIZED_BOTH);
         }
     }
     

@@ -32,6 +32,7 @@ public class Login_controller implements ActionListener {
     private Usuario usu;
     private Sesion_usuario sesion_usu;
     private Recuperar_contraseña_view recuperarView;
+    
     public Login_controller(Login_view vista, ViewPrincipal principal, Usuario usuario, 
             Registro_view registro, Pagina_principal_administrador_view vista_admin, 
             Inicio_usuario_view vista_usuario, Sesion_usuario sesion_usu, Menu_principal_view menu, 

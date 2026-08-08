@@ -244,11 +244,9 @@ public class Buscar_vuelos_controller implements ActionListener {
             modelo.addRow(objeto);
         }
         vista.tabla.setModel(modelo);
-
         if (modelo.getRowCount() == 0) {
             JOptionPane.showMessageDialog(vista, "No encontramos resultados");
         }
-
     }
 
     public void getListarHistorial(JTable tabla) {

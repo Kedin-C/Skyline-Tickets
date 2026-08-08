@@ -22,19 +22,19 @@ import javax.swing.border.EmptyBorder;
  *
  * @author juans
  */
-public class Pagina_principal_administrador_view extends Interfaz_vista_abtractas{
+public class Pagina_principal_tecnico_view extends Interfaz_vista_abtractas{
     
             
     private Container contenedor;
     private JPanel panel1,panelboton,panelboton2,panelboton3,paneltitulo,panelbotones;
     private Panel_con_fondo_view panel2;
-    public JButton comprar,clase,reportes, cerrarSesion,historial,rol;
+    public JButton comprar,clase,inspeccion, cerrarSesion,historial;
     private JLabel titulo;
     private FlowLayout miflow;
     
-    public Pagina_principal_administrador_view(){
+    public Pagina_principal_tecnico_view(){
         
-        super("Pagina Principal");
+        super("Pagina Principal Tecnico");
         contenedor = super.getContenedor();
         panel1 = super.getPanel1();
         
@@ -43,11 +43,11 @@ public class Pagina_principal_administrador_view extends Interfaz_vista_abtracta
         panelbotones.setOpaque(false);
 
         // Configurar botones
-        reportes = new JButton("Reportes");
-        reportes.setBackground(Color.white);
-        reportes.setPreferredSize(new Dimension(200, 40));
-        reportes.setFont(new Font("Arial", Font.BOLD, 20));
-        reportes.setBorderPainted(false);
+        inspeccion = new JButton("Inspección Aviones");
+        inspeccion.setBackground(Color.white);
+        inspeccion.setPreferredSize(new Dimension(200, 40));
+        inspeccion.setFont(new Font("Arial", Font.BOLD, 20));
+        inspeccion.setBorderPainted(false);
         
         cerrarSesion = new JButton("Cerrar Sesión");
         cerrarSesion.setBackground(Color.white);
@@ -57,24 +57,16 @@ public class Pagina_principal_administrador_view extends Interfaz_vista_abtracta
         
         historial = new JButton("Historial de vuelos");
         historial.setBackground(Color.white);
-        historial.setPreferredSize(new Dimension(250, 40));
-        historial.setFont(new Font("Arial", Font.BOLD, 20));
+        historial.setPreferredSize(new Dimension(200, 40));
+        historial.setFont(new Font("Arial", Font.BOLD, 15));
         historial.setBorderPainted(false);
-
-        rol = new JButton("Asignar Rol");
-        rol.setBackground(Color.white);
-        rol.setPreferredSize(new Dimension(200, 40));
-        rol.setFont(new Font("Arial", Font.BOLD, 20));
-        rol.setBorderPainted(false);
 
         // Agregar ambos al mismo panel
         panelbotones.add(cerrarSesion);
         panelbotones.add(Box.createHorizontalStrut(20));
-        panelbotones.add(reportes);
+        panelbotones.add(inspeccion);
         panelbotones.add(Box.createHorizontalStrut(20));
         panelbotones.add(historial);
-        panelbotones.add(Box.createHorizontalStrut(20));
-        panelbotones.add(rol);
 
         // Añadir el panel completo al lado derecho del panel1
         panel1.add(panelbotones, BorderLayout.LINE_END);

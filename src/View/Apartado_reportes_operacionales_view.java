@@ -154,7 +154,7 @@ public class Apartado_reportes_operacionales_view extends Interfaz_vista_abtract
         scrollReportes = new JScrollPane(tabla);
         scrollReportes.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         panelReportes = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        scrollReportes.setPreferredSize(new Dimension(1600, 500)); 
+        scrollReportes.setPreferredSize(new Dimension(1600, 500));
         panelReportes.add(scrollReportes);
         
         //Panel central con los graficos y los reportes
