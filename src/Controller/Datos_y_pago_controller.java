@@ -69,10 +69,12 @@ public class Datos_y_pago_controller implements ActionListener{
         this.vista.credito.addActionListener(this);
         this.vista.debito.addActionListener(this);
         this.vista.pse.addActionListener(this);
+        this.vista.autocompletadobutton.addActionListener(this);
         
         this.viewTarjetaCredito.volver.addActionListener(this);
         this.viewTerjetaDebito.volver.addActionListener(this);
         this.viewTransferencia.volver.addActionListener(this);
+        
         
         if (this.datos.getNumeroTickets() == 1) {
             this.vista.siguiente.setEnabled(false);
@@ -232,6 +234,18 @@ public class Datos_y_pago_controller implements ActionListener{
                 datos.setDatosPersonales(datosPasajeros);
                 
             }
+        }
+        
+        if(e.getSource() == vista.autocompletadobutton){
+            
+            vista.nombrecampo.setText(usuario.getNombre());
+            vista.apellidocampo.setText(usuario.getApellido());
+            vista.numero_documento.setText(usuario.getDocumento());
+            vista.numeroTel.setText(usuario.getNumero_telefono());
+            vista.correo.setText(usuario.getCorreo());
+            vista.listar_documento.setSelectedIndex(3);
+            
+            
         }
         
         if(e.getSource() == this.viewTarjetaCredito.volver){
@@ -455,6 +469,18 @@ public class Datos_y_pago_controller implements ActionListener{
             return false;
         }
     
+    }
+    
+    public void limpiar(){
+                vista.nombrecampo.setText("");
+                vista.apellidocampo.setText("");
+                vista.listar_documento.setSelectedIndex(0);
+                vista.numero_documento.setText("");
+                vista.numeroTel.setText("");
+                vista.correo.setText("");
+                vista.listar_sexo.setSelectedIndex(0);
+                vista.listar_nacionalidad.setSelectedIndex(0);
+                vista.elegir_fecha.setDate(null);
     }
     
 }

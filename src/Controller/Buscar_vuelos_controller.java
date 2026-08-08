@@ -177,6 +177,7 @@ public class Buscar_vuelos_controller implements ActionListener {
 
             vista.setVisible(false);
             this.vistaElegirClase.setVisible(true);
+            limpiarTabla();
         }
 
         if (e.getSource() == vista.buscar_vuelos) {
@@ -320,6 +321,12 @@ public class Buscar_vuelos_controller implements ActionListener {
             modelo.removeRow(i);
             i = i - 1;
         }
+        
+        vista.listar_destino.setSelectedIndex(0);
+        vista.listar_horario.setSelectedIndex(0);
+        vista.listar_origen.setSelectedIndex(0);
+        vista.elegir_fecha_regreso.setDate(null);
+        vista.elegir_fecha_ida.setDate(null);
     }
 
     private void validarRegreso() {

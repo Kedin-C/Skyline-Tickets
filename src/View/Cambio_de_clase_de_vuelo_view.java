@@ -418,7 +418,55 @@ public class Cambio_de_clase_de_vuelo_view extends Interfaz_vista_abtractas {
     
     }
 
-    public void setClase_disponible2(int id) {
+  
+
+    public void setClase_actual(int id) {
+
+        
+        
+        switch (id) {
+
+            case 1: {
+                cont_clase_economica.add(cont_economi_imagen, BorderLayout.NORTH);
+                cont_clase_economica.add(cont_economi_texto);
+                cont_clase_economica.add(boton_Actual, BorderLayout.SOUTH);
+                this.distribucion1.add(panel_clase_economica);
+                break;
+            }
+
+            case 2: {
+                cont_clase_ejecutiva.add(cont_ejecutiva_imagen2, BorderLayout.NORTH);
+                cont_clase_ejecutiva.add(cont_ejecutiva_texto2);
+                cont_clase_ejecutiva.add(boton_Actual, BorderLayout.SOUTH); 
+                this.distribucion1.add(panel_clase_ejecutiva);
+                break;
+            }
+
+            case 3: {
+                cont_primera_clase.add(cont_primera_imagen3, BorderLayout.NORTH);
+                cont_primera_clase.add(cont_primera_texto3);
+                cont_primera_clase.add(boton_Actual, BorderLayout.SOUTH);
+                this.distribucion1.add(panel_primera_clase);
+                break;
+            }
+
+            default: {
+                cont_clase_economica.add(cont_economi_imagen, BorderLayout.NORTH);
+                cont_clase_economica.add(cont_economi_texto);
+                cont_clase_economica.add(boton_Actual, BorderLayout.SOUTH);
+                this.distribucion1.add(panel_clase_economica);
+                break;
+            }
+            
+            
+
+        }
+        
+        
+
+    }
+    
+      public void setClase_disponible2(int id) {
         
         
 
@@ -467,7 +515,7 @@ public class Cambio_de_clase_de_vuelo_view extends Interfaz_vista_abtractas {
 
             case 1: {
                 cont_clase_economica.add(cont_economi_imagen, BorderLayout.NORTH);
-        cont_clase_economica.add(cont_economi_texto);
+                cont_clase_economica.add(cont_economi_texto);
                 cont_clase_economica.add(boton_Actual, BorderLayout.SOUTH);
                 this.distribucion2.add(panel_clase_economica);
                 break;
@@ -491,57 +539,13 @@ public class Cambio_de_clase_de_vuelo_view extends Interfaz_vista_abtractas {
 
             default: {
                 cont_clase_economica.add(cont_economi_imagen, BorderLayout.NORTH);
-        cont_clase_economica.add(cont_economi_texto);
+                cont_clase_economica.add(cont_economi_texto);
                 cont_clase_economica.add(boton_Actual, BorderLayout.SOUTH);
                 this.distribucion2.add(panel_clase_economica);
                 break;
             }
 
         }
-    }
-
-    public void setClase_actual(int id) {
-
-        
-        
-        switch (id) {
-
-            case 1: {
-                cont_clase_economica.add(cont_economi_imagen, BorderLayout.NORTH);
-                cont_clase_economica.add(cont_economi_texto);
-                cont_clase_economica.add(boton_Actual, BorderLayout.SOUTH);
-                this.distribucion1.add(panel_clase_economica);
-                break;
-            }
-
-            case 2: {
-                cont_clase_ejecutiva.add(cont_ejecutiva_imagen2, BorderLayout.NORTH);
-                cont_clase_ejecutiva.add(cont_ejecutiva_texto2);
-                cont_clase_ejecutiva.add(boton_Actual, BorderLayout.SOUTH); 
-                this.distribucion1.add(panel_clase_ejecutiva);
-                break;
-            }
-
-            case 3: {
-                cont_primera_clase.add(cont_primera_imagen3, BorderLayout.NORTH);
-                cont_primera_clase.add(cont_primera_texto3);
-                cont_primera_clase.add(boton_Actual, BorderLayout.SOUTH);
-                this.distribucion1.add(panel_primera_clase);
-                break;
-            }
-
-            default: {
-                cont_clase_economica.add(cont_economi_imagen, BorderLayout.NORTH);
-                cont_clase_economica.add(cont_economi_texto);
-                cont_clase_economica.add(boton_Actual, BorderLayout.SOUTH);
-                this.distribucion1.add(panel_clase_economica);
-                break;
-            }
-            
-            
-
-        }
-
     }
     
     public void remove(){

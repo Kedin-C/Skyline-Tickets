@@ -166,6 +166,10 @@ public class Elegir_puestos_controller implements ActionListener{
                 vistaDatosyPago.setVisible(true);
                    if(datosypago == null)
                     datosypago = new Datos_y_pago_controller(vistaDatosyPago, datos, usuario, vistaPrincipal, viewAdmin, viewUsuario,pva,modify);
+                    datosypago.limpiar();
+                        if(usuario != null){
+                            vistaDatosyPago.setButtonAutoComplete();
+                        }
                    else
                        vistaDatosyPago.setVisible(true);
                 JOptionPane.showMessageDialog(vista, "Los puestos elegidos son: " + datos.getCodigoAsiento());
