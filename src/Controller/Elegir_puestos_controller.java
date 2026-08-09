@@ -159,14 +159,14 @@ public class Elegir_puestos_controller implements ActionListener {
                     } else {
                         vistaDatosyPago.setVisible(true);
                     };
-                    
-                        if (usuario.getIdUsuario() != 0){
+                    datosypago.limpiar();
+                        if (usuario.getRol() != 0){
                             vistaDatosyPago.setButtonAutoComplete();
                         }else{
                             vistaDatosyPago.resetButtonAutoComplete();
                         }
                     
-                    datosypago.limpiar();
+                    
                     JOptionPane.showMessageDialog(vista, "Los puestos elegidos son: " + datos.getCodigoAsiento());
 
                     if (datos.getNumeroTickets() > 1) {

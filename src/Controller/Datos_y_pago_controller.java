@@ -211,6 +211,9 @@ public class Datos_y_pago_controller implements ActionListener{
                 datos.setDatosPersonales(datosPasajeros);
                 
             }
+            
+            
+            
         }
         if (e.getSource() == vista.debito) {
             if(validarDatos()){
