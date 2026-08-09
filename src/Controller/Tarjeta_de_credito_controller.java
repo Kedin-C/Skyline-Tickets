@@ -4,6 +4,8 @@
  */
 package Controller;
 
+import Model.Codigo_descuento;
+import Model.Codigo_descuentoDao;
 import Model.Datos;
 import Model.DatosPago;
 import Model.DatosPagoDao;
@@ -50,6 +52,8 @@ public class Tarjeta_de_credito_controller implements ActionListener {
     private And_puestos pv;
     private ReservasDao reservas_dao = new ReservasDao();
     private Seleccion_de_Modificacion_de_vuelo_view view_modificar_ticket;
+    private Codigo_descuentoDao descuentoDao = new Codigo_descuentoDao();
+    private Codigo_descuento codigoDes = new Codigo_descuento();
 
     public Tarjeta_de_credito_controller(Tarjeta_de_credito_view vista, Datos datos, Seleccion_forma_de_pago_view vista_atras, Ticket ticket, Usuario usuario, ViewPrincipal vistaPrincipal, Pagina_principal_administrador_view viewAdmin, Inicio_usuario_view viewUsuario, And_puestos pv, Seleccion_de_Modificacion_de_vuelo_view view_modificar_ticket) {
 
@@ -123,7 +127,7 @@ public class Tarjeta_de_credito_controller implements ActionListener {
 
         if (e.getSource() == vista.pagar) {
             if (Validar()) {
-
+                double porcentaje = 0;
                 datosPagar.setNumero_tarjeta(vista.num_tarjeta.getText());
 
                 SimpleDateFormat formateadorRegreso = new SimpleDateFormat("yyyy-MM-dd");
@@ -135,8 +139,24 @@ public class Tarjeta_de_credito_controller implements ActionListener {
                 datosPagar.setCvv(Integer.parseInt(vista.cvv.getText()));
 
                 datosPagar.setNombre_titular(vista.nombre_titular.getText());
-
-                datosPagar.setTotal(datos.getTotalPagar());
+                
+                if(!vista.codigoDescuento.getText().isBlank()){
+                    codigoDes = descuentoDao.aplicarCodigo(vista.codigoDescuento.getText());
+                    porcentaje = codigoDes.getPorcentajeDescuento();
+                    porcentaje /= 100;
+                    descuentoDao.codigoUsado(vista.codigoDescuento.getText());
+                    
+                    if(!codigoDes.isUsado()){
+                        double aplicarDes = datos.getTotalPagar() * porcentaje; 
+                        datosPagar.setTotal(datos.getTotalPagar() - aplicarDes);
+                    }else{
+                        JOptionPane.showMessageDialog(null, "No se pudo aplicar tu codigo de descuento");
+                        datosPagar.setTotal(datos.getTotalPagar());
+                    }
+                    
+                }else{
+                    datosPagar.setTotal(datos.getTotalPagar());
+                }
 
                 datosPagar.setMedioPago("credito");
 
@@ -331,6 +351,7 @@ public class Tarjeta_de_credito_controller implements ActionListener {
         int clase = ticketdao.obtenerClase(id_pasajero);
         int equipaje = ticketdao.obtenerEquiExtra(id_pasajero);
         double costo = ticketdao.obtenerCosto(id_pasajero);
+        
 
         if ("IDA_VUELTA".equals(ticketdao.obtenerTipoVuelo(id_pasajero))) {
             viewPago.lblFlechaVuelta.setVisible(true);
