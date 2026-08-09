@@ -245,6 +245,12 @@ public class Datos_y_pago_controller implements ActionListener{
             vista.correo.setText(usuario.getCorreo());
             vista.listar_documento.setSelectedIndex(3);
             
+            if("Masculino".equals(usuario.getSexo())){
+            vista.listar_sexo.setSelectedIndex(1);
+            }
+            if("Femenino".equals(usuario.getSexo())){
+            vista.listar_sexo.setSelectedIndex(2);
+            }
             
         }
         

@@ -262,4 +262,9 @@ public class Datos_y_pago_view extends Interfaz_vista_abtractas{
         datosTorre2.add(autocompletadobutton);
     }
     
+    public void resetButtonAutoComplete(){
+        datosTorre2.remove(autocompletado);
+        datosTorre2.remove(autocompletadobutton);
+    }
+    
 }
