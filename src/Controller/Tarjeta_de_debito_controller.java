@@ -329,7 +329,8 @@ public class Tarjeta_de_debito_controller implements ActionListener{
         viewPago.lblFechaIda.setText("FECHA: " + fechap);
         int clase = ticketdao.obtenerClase(id_pasajero);
         int equipaje = ticketdao.obtenerEquiExtra(id_pasajero);
-        double costo = ticketdao.obtenerCosto(id_pasajero);
+        double total = datos.getDatosPago().getTotal();
+        int totalTickets = datos.getNumeroTickets();
 
         if ("IDA_VUELTA".equals(ticketdao.obtenerTipoVuelo(id_pasajero))) {
             viewPago.lblFlechaVuelta.setVisible(true);
@@ -374,10 +375,18 @@ public class Tarjeta_de_debito_controller implements ActionListener{
 
             viewPago.lblAsiento.setText("Cobro Asiento: " + String.format("%,.0f", costoAsiento) + " COP");
         }
+        
+        double costoFinal = 0;
+        if(totalTickets > 0){
+            costoFinal = total / totalTickets;
+            
+            viewPago.lblCostoTotal.setText("COSTO FINAL INDIVIDUAL POR PERSONA: $" + String.format("%,.0f", costoFinal) + " COP");
+        }else{
+            costoFinal = total;
+            
+            viewPago.lblCostoTotal.setText("COSTO FINAL: $" + String.format("%,.0f", costoFinal) + " COP");
+        }
 
-
-        double costoFinal = costoClase + (equipaje * 4000) + costo + costoAsiento;
-        viewPago.lblCostoTotal.setText("COSTO FINAL: $" + String.format("%,.0f", costoFinal) + " COP");
     }
 
     private void envio_Ticket(ArrayList<Integer> listaPasajeros,int idPasajero1) {
@@ -397,7 +406,6 @@ public class Tarjeta_de_debito_controller implements ActionListener{
                         String destino = ticketdao.obtenerDestino(idPasajero);
                         String fechat = ticketdao.obtenerFechaVuelo(idPasajero);
                         String asiento = ticketdao.obtenerAsiento(idPasajero);
-                        double costo = ticketdao.obtenerCosto(idPasajero);
                         String codigoReserva = ticketdao.obtenerCodigoReserva(idPasajero);
                         String correoDestino = ticketdao.obtenerCorreoPasajero(idPasajero);
                         int ticket = ticketdao.obtenerCodTicket(idPasajero);
@@ -405,18 +413,20 @@ public class Tarjeta_de_debito_controller implements ActionListener{
                         int equipaje = ticketdao.obtenerEquiExtra(idPasajero);
                         String fechaRegreso = ticketdao.obtenerFechaRegreso(idPasajero1);
                         int escogerAsiento = datos.getEscogerAsiento();
+                        double total = datos.getDatosPago().getTotal();
+                        int totalTickets = datos.getNumeroTickets();
 
                         // Generar PDF de ida y de vuelta
                         File pdf1 = creador.generarTicket(
                                 nombre, documento, vuelo, origen, destino,
-                                fechat, asiento, costo, codigoReserva, ticket,
-                                clase, equipaje, escogerAsiento
+                                fechat, asiento, total, codigoReserva, ticket,
+                                clase, equipaje, escogerAsiento, totalTickets
                         );
 
                         File pdf2 = creador.generarTicket(
                                 nombre, documento, vuelo, destino, origen,
-                                fechaRegreso, asiento, costo, codigoReserva, ticket,
-                                clase, equipaje, escogerAsiento
+                                fechaRegreso, asiento, total, codigoReserva, ticket,
+                                clase, equipaje, escogerAsiento, totalTickets
                         );
 
                         // Enviar correo con los 2 PDF adjuntos
@@ -434,19 +444,20 @@ public class Tarjeta_de_debito_controller implements ActionListener{
                         String destino = ticketdao.obtenerDestino(idPasajero);
                         String fechat = ticketdao.obtenerFechaVuelo(idPasajero);
                         String asiento = ticketdao.obtenerAsiento(idPasajero);
-                        double costo = ticketdao.obtenerCosto(idPasajero);
                         String codigoReserva = ticketdao.obtenerCodigoReserva(idPasajero);
                         String correoDestino = ticketdao.obtenerCorreoPasajero(idPasajero);
                         int ticket = ticketdao.obtenerCodTicket(idPasajero);
                         int clase = ticketdao.obtenerClase(idPasajero);
                         int equipaje = ticketdao.obtenerEquiExtra(idPasajero);
                         int escogerAsiento = datos.getEscogerAsiento();
+                        double total = datos.getDatosPago().getTotal();
+                        int totalTickets = datos.getNumeroTickets();
 
                         // Generar PDF para este pasajero
                         File pdf = creador.generarTicket(
                                 nombre, documento, vuelo, origen, destino,
-                                fechat, asiento, costo, codigoReserva, ticket,
-                                clase, equipaje, escogerAsiento
+                                fechat, asiento, total, codigoReserva, ticket,
+                                clase, equipaje, escogerAsiento, totalTickets
                         );
 
                         // Enviar correo con el PDF adjunto

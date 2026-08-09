@@ -142,7 +142,7 @@ public class Elegir_puestos_controller implements ActionListener {
 
         if (e.getSource() == vista.siguiente) {
 
-            datos.setEscogerAsiento(0);
+            datos.setEscogerAsiento(1);
 
             if (pva.getNumero() == 1) {
                 if (codigoAsiento.size() == datos.getNumeroTickets()) {
@@ -151,22 +151,20 @@ public class Elegir_puestos_controller implements ActionListener {
                     vista.dispose();
 
                     vistaDatosyPago.setVisible(true);
-                    
-                    
+
                     if (datosypago == null) {
                         datosypago = new Datos_y_pago_controller(vistaDatosyPago, datos, usuario, vistaPrincipal, viewAdmin, viewUsuario, pva, modify);
-                        
+
                     } else {
                         vistaDatosyPago.setVisible(true);
-                    };
+                    }
                     datosypago.limpiar();
-                        if (usuario.getRol() != 0){
-                            vistaDatosyPago.setButtonAutoComplete();
-                        }else{
-                            vistaDatosyPago.resetButtonAutoComplete();
-                        }
-                    
-                    
+                    if (usuario.getRol() != 0) {
+                        vistaDatosyPago.setButtonAutoComplete();
+                    } else {
+                        vistaDatosyPago.resetButtonAutoComplete();
+                    }
+
                     JOptionPane.showMessageDialog(vista, "Los puestos elegidos son: " + datos.getCodigoAsiento());
 
                     if (datos.getNumeroTickets() > 1) {

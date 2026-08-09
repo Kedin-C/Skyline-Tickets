@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 
 public class Datos {
     
-    private int codigoVuelo, numeroTickets, equipajeExtra, claseVuelo, escogerAsiento = 1;
+    private int codigoVuelo, numeroTickets, equipajeExtra, claseVuelo, escogerAsiento = 0;
     private double totalPagar = 0;
     private String tipoVuelo, fechaRegreso;
     private ArrayList<String> codigoAsiento;
