@@ -57,6 +57,7 @@ public class Registro_controller implements ActionListener {
             String apellido = vista.getTxApellido().getText();
             String correo = vista.getTxCorreo().getText();
             String documento = vista.getNdocumento().getText();
+            int codigoTipoDocumento = vista.getCodigoTipoDocumentoSeleccionado();
             String contraseña = vista.getTxContraseña().getText();
             String confirmar = vista.getTxConfirmar().getText();
             
@@ -122,6 +123,7 @@ public class Registro_controller implements ActionListener {
             usuario.setApellido(apellido);
             usuario.setCorreo(correo);
             usuario.setDocumento(documento);
+            usuario.setCodigo_tipo_documento(codigoTipoDocumento);
             usuario.setContraseña(hash);
             usuario.setRol(2);
 

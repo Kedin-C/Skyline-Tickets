@@ -20,6 +20,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -31,9 +32,10 @@ public class Registro_view extends JFrame {
     private Container contenedor;
     public JButton b1, btnVolver;
     public JPanel mipanel1, mipanel2, mipanel3;
-    public JLabel jnombre, japellido, jcorreo, jcontraseña, jconfirmar,logo, jdocumento;
+    public JLabel jnombre, japellido, jcorreo, jcontraseña, jconfirmar,logo, jdocumento, jmicombo;
     public JTextField txNombre, txApellido, txCorreo, ndocumento;
     public JPasswordField txContraseña, txConfirmar;
+    public JComboBox micombo;
 
     public Registro_view() {
 
@@ -50,11 +52,12 @@ public class Registro_view extends JFrame {
 
         mipanel3 = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 5));
         mipanel3.setBackground(Color.WHITE);
-        mipanel3.setMaximumSize(new Dimension(350, 310));
+        mipanel3.setMaximumSize(new Dimension(350, 370));
 
         jnombre = new JLabel("Nombre*");
         japellido = new JLabel("Apellido*");
         jcorreo = new JLabel("Correo*");
+        jmicombo = new JLabel("Tipo Documento*");
         jdocumento = new JLabel("Numero documento*");
         jcontraseña = new JLabel("Contraseña*");
         jconfirmar = new JLabel("Confirmar contraseña*");
@@ -65,6 +68,14 @@ public class Registro_view extends JFrame {
         ndocumento = new JTextField();
         txContraseña = new JPasswordField();
         txConfirmar = new JPasswordField();
+        micombo = new JComboBox();
+        
+        micombo.addItem("Registro Civil de Nacimiento");
+        micombo.addItem("Tarjeta de Identidad ");
+        micombo.addItem("Cedula de ciudadania");
+        micombo.addItem("Cedula de extranjeria");
+        micombo.addItem("Pasaporte vigente");
+        micombo.addItem("Permiso por proteccion temporal");
 
         txNombre.setPreferredSize(new Dimension(350, 25));
         txApellido.setPreferredSize(new Dimension(350, 25));
@@ -72,6 +83,8 @@ public class Registro_view extends JFrame {
         txContraseña.setPreferredSize(new Dimension(350, 25));
         txConfirmar.setPreferredSize(new Dimension(350, 25));
         ndocumento.setPreferredSize(new Dimension(350, 25));
+        micombo.setPreferredSize(new Dimension(350, 25));
+        
 
         b1 = new JButton("REGISTRARSE");
         btnVolver = new JButton("VOLVER");
@@ -96,8 +109,12 @@ public class Registro_view extends JFrame {
         mipanel3.add(jcorreo);
         mipanel3.add(txCorreo);
         
+        mipanel3.add(jmicombo);
+        mipanel3.add(micombo);
+        
         mipanel3.add(jdocumento);
         mipanel3.add(ndocumento);
+        
 
         mipanel3.add(jcontraseña);
         mipanel3.add(txContraseña);
@@ -105,11 +122,11 @@ public class Registro_view extends JFrame {
         mipanel3.add(jconfirmar);
         mipanel3.add(txConfirmar);
 
-        mipanel2.add(Box.createVerticalStrut(25));
-        mipanel2.add(logo);
         mipanel2.add(Box.createVerticalStrut(10));
+        mipanel2.add(logo);
+        mipanel2.add(Box.createVerticalStrut(5));
         mipanel2.add(mipanel3);
-        mipanel2.add(Box.createVerticalStrut(15));
+        mipanel2.add(Box.createVerticalStrut(10));
         mipanel2.add(b1);
 
         b1.setBackground(new Color(3, 127, 185));
@@ -128,11 +145,11 @@ public class Registro_view extends JFrame {
         panelInferior.setBackground(new Color(3, 127, 185));
         panelInferior.add(btnVolver);
 
-        JPanel panelCentro = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 70));
+        JPanel panelCentro = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 20));
         panelCentro.setBackground(new Color(3, 127, 185));
         panelCentro.add(mipanel2);
 
-        mipanel2.setPreferredSize(new Dimension(500, 700));
+        mipanel2.setPreferredSize(new Dimension(500, 2000));
 
         mipanel1.add(panelCentro, BorderLayout.CENTER);
         mipanel1.add(panelInferior, BorderLayout.SOUTH);
@@ -173,5 +190,14 @@ public class Registro_view extends JFrame {
     
     public JTextField getNdocumento() {
     return ndocumento;
+    }
+
+    public JComboBox getMicombo() {
+        return micombo;
+    }
+
+    
+    public int getCodigoTipoDocumentoSeleccionado() {
+        return micombo.getSelectedIndex() + 1;
     }
 }
