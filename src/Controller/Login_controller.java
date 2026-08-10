@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-   package Controller;
+package Controller;
 /**
  *
  * @author Nikob
@@ -11,7 +11,9 @@ import Model.UsuarioDao;
 import Model.Sesion_usuario;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import Model.Usuario;
 import View.Inicio_usuario_view;
 import View.Login_view;
@@ -21,6 +23,7 @@ import View.Recuperar_contraseña_view;
 import View.Registro_view;
 import View.ViewPrincipal;
 import javax.swing.JFrame;
+
 public class Login_controller implements ActionListener {
     private Login_view vista;
     private UsuarioDao dao;
@@ -50,6 +53,8 @@ public class Login_controller implements ActionListener {
         this.vista.getB1().addActionListener(this);
         this.vista.getB2().addActionListener(this);
         this.vista.getBtnVolver().addActionListener(this);
+
+        configurarToggle(this.vista.getTxContraseña(), this.vista.getBtnVerContraseña());
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -103,5 +108,19 @@ public class Login_controller implements ActionListener {
             menu.setVisible(true);
             menu.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         }
+    }
+
+    
+    private void configurarToggle(JPasswordField campo, JButton boton) {
+        final char echoOriginal = campo.getEchoChar();
+        boton.addActionListener(e -> {
+            if (campo.getEchoChar() == 0) {
+                campo.setEchoChar(echoOriginal);
+                boton.setText("Ver");
+            } else {
+                campo.setEchoChar((char) 0);
+                boton.setText("Ocultar");
+            }
+        });
     }
 }

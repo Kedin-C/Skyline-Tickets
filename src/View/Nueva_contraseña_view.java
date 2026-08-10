@@ -8,7 +8,6 @@ package View;
  *
  * @author Nikob
  */
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -17,6 +16,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Insets;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -36,6 +36,8 @@ public class Nueva_contraseña_view extends JFrame {
     JLabel logo, lblTitulo, lblNueva, lblConfirmar;
     JPasswordField txNuevaContraseña, txConfirmarContraseña;
 
+    private JButton btnVerNueva, btnVerConfirmar;
+
     public Nueva_contraseña_view() {
         super("Cambio de contraseña");
         contenedor = getContentPane();
@@ -51,7 +53,7 @@ public class Nueva_contraseña_view extends JFrame {
         mipanel3 = new JPanel();
         mipanel3.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 5));
         mipanel3.setBackground(Color.WHITE);
-        mipanel3.setMaximumSize(new Dimension(350, 130));
+        mipanel3.setMaximumSize(new Dimension(380, 130));
 
         ImageIcon imagen = new ImageIcon(getClass()
                 .getResource("/imagenes/Skylinelogo.png"));
@@ -71,10 +73,22 @@ public class Nueva_contraseña_view extends JFrame {
         lblConfirmar.setFont(new Font("Arial", Font.BOLD, 14));
 
         txNuevaContraseña = new JPasswordField();
-        txNuevaContraseña.setPreferredSize(new Dimension(350, 30));
+        txNuevaContraseña.setPreferredSize(new Dimension(300, 30));
 
         txConfirmarContraseña = new JPasswordField();
-        txConfirmarContraseña.setPreferredSize(new Dimension(350, 30));
+        txConfirmarContraseña.setPreferredSize(new Dimension(300, 30));
+
+        btnVerNueva = new JButton("Ver");
+        btnVerNueva.setPreferredSize(new Dimension(60, 30));
+        btnVerNueva.setMargin(new Insets(0, 0, 0, 0));
+        btnVerNueva.setFocusPainted(false);
+        btnVerNueva.setFont(new Font("Arial", Font.PLAIN, 11));
+
+        btnVerConfirmar = new JButton("Ver");
+        btnVerConfirmar.setPreferredSize(new Dimension(60, 30));
+        btnVerConfirmar.setMargin(new Insets(0, 0, 0, 0));
+        btnVerConfirmar.setFocusPainted(false);
+        btnVerConfirmar.setFont(new Font("Arial", Font.PLAIN, 11));
 
         b1 = new JButton("Confirmar");
         b1.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -84,7 +98,6 @@ public class Nueva_contraseña_view extends JFrame {
         b1.setFocusPainted(false);
         b1.setFont(new Font("Arial", Font.BOLD, 16));
 
-        // Botón "Volver" con el mismo estilo/tamaño/posición que en Registro_view
         b2 = new JButton("VOLVER");
         b2.setBackground(Color.WHITE);
         b2.setForeground(new Color(3, 127, 185));
@@ -93,10 +106,10 @@ public class Nueva_contraseña_view extends JFrame {
         b2.setPreferredSize(new Dimension(130, 45));
 
         mipanel3.add(lblNueva);
-        mipanel3.add(txNuevaContraseña);
+        mipanel3.add(crearPanelConToggle(txNuevaContraseña, btnVerNueva));
         mipanel3.add(Box.createVerticalStrut(8));
         mipanel3.add(lblConfirmar);
-        mipanel3.add(txConfirmarContraseña);
+        mipanel3.add(crearPanelConToggle(txConfirmarContraseña, btnVerConfirmar));
 
         mipanel2.add(Box.createVerticalStrut(30));
         mipanel2.add(logo);
@@ -125,6 +138,14 @@ public class Nueva_contraseña_view extends JFrame {
         setVisible(true);
     }
 
+    private JPanel crearPanelConToggle(JPasswordField campo, JButton boton) {
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
+        panel.setBackground(Color.WHITE);
+        panel.add(campo);
+        panel.add(boton);
+        return panel;
+    }
+
     public JButton getB1() {
         return b1;
     }
@@ -133,11 +154,19 @@ public class Nueva_contraseña_view extends JFrame {
         return b2;
     }
 
-    public JTextField getTxNuevaContraseña() {
+    public JPasswordField getTxNuevaContraseña() {
         return txNuevaContraseña;
     }
 
-    public JTextField getTxConfirmarContraseña() {
+    public JPasswordField getTxConfirmarContraseña() {
         return txConfirmarContraseña;
+    }
+
+    public JButton getBtnVerNueva() {
+        return btnVerNueva;
+    }
+
+    public JButton getBtnVerConfirmar() {
+        return btnVerConfirmar;
     }
 }

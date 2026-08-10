@@ -16,6 +16,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Insets;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -37,6 +38,8 @@ public class Registro_view extends JFrame {
     public JPasswordField txContraseña, txConfirmar;
     public JComboBox micombo;
 
+    private JButton btnVerContraseña, btnVerConfirmar;
+
     public Registro_view() {
 
         super("Registro");
@@ -52,7 +55,7 @@ public class Registro_view extends JFrame {
 
         mipanel3 = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 5));
         mipanel3.setBackground(Color.WHITE);
-        mipanel3.setMaximumSize(new Dimension(350, 370));
+        mipanel3.setMaximumSize(new Dimension(380, 370));
 
         jnombre = new JLabel("Nombre*");
         japellido = new JLabel("Apellido*");
@@ -80,11 +83,23 @@ public class Registro_view extends JFrame {
         txNombre.setPreferredSize(new Dimension(350, 25));
         txApellido.setPreferredSize(new Dimension(350, 25));
         txCorreo.setPreferredSize(new Dimension(350, 25));
-        txContraseña.setPreferredSize(new Dimension(350, 25));
-        txConfirmar.setPreferredSize(new Dimension(350, 25));
+        txContraseña.setPreferredSize(new Dimension(300, 25));
+        txConfirmar.setPreferredSize(new Dimension(300, 25));
         ndocumento.setPreferredSize(new Dimension(350, 25));
         micombo.setPreferredSize(new Dimension(350, 25));
+
         
+        btnVerContraseña = new JButton("Ver");
+        btnVerContraseña.setPreferredSize(new Dimension(60, 25));
+        btnVerContraseña.setMargin(new Insets(0, 0, 0, 0));
+        btnVerContraseña.setFocusPainted(false);
+        btnVerContraseña.setFont(new Font("Arial", Font.PLAIN, 11));
+
+        btnVerConfirmar = new JButton("Ver");
+        btnVerConfirmar.setPreferredSize(new Dimension(60, 25));
+        btnVerConfirmar.setMargin(new Insets(0, 0, 0, 0));
+        btnVerConfirmar.setFocusPainted(false);
+        btnVerConfirmar.setFont(new Font("Arial", Font.PLAIN, 11));
 
         b1 = new JButton("REGISTRARSE");
         btnVolver = new JButton("VOLVER");
@@ -117,10 +132,10 @@ public class Registro_view extends JFrame {
         
 
         mipanel3.add(jcontraseña);
-        mipanel3.add(txContraseña);
+        mipanel3.add(crearPanelConToggle(txContraseña, btnVerContraseña));
 
         mipanel3.add(jconfirmar);
-        mipanel3.add(txConfirmar);
+        mipanel3.add(crearPanelConToggle(txConfirmar, btnVerConfirmar));
 
         mipanel2.add(Box.createVerticalStrut(10));
         mipanel2.add(logo);
@@ -160,6 +175,15 @@ public class Registro_view extends JFrame {
         
     }
 
+    
+    private JPanel crearPanelConToggle(JPasswordField campo, JButton boton) {
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
+        panel.setBackground(Color.WHITE);
+        panel.add(campo);
+        panel.add(boton);
+        return panel;
+    }
+
     public JButton getB1() {
         return b1;
     }
@@ -180,11 +204,11 @@ public class Registro_view extends JFrame {
         return txCorreo;
     }
 
-    public JTextField getTxContraseña() {
+    public JPasswordField getTxContraseña() {
         return txContraseña;
     }
 
-    public JTextField getTxConfirmar() {
+    public JPasswordField getTxConfirmar() {
         return txConfirmar;
     }
     
@@ -194,6 +218,14 @@ public class Registro_view extends JFrame {
 
     public JComboBox getMicombo() {
         return micombo;
+    }
+
+    public JButton getBtnVerContraseña() {
+        return btnVerContraseña;
+    }
+
+    public JButton getBtnVerConfirmar() {
+        return btnVerConfirmar;
     }
 
     

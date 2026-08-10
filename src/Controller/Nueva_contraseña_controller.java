@@ -1,11 +1,19 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
+
 package Controller;
 /**
  *
  * @author Nikob
  */
 import Model.UsuarioDao;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
+import javax.swing.JPasswordField;
 import View.Nueva_contraseña_view;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 
@@ -15,13 +23,7 @@ public class Nueva_contraseña_controller {
     private String correo;
     private JFrame vistaDestino;
 
-    /**
-     * @param view Vista de "nueva contraseña"
-     * @param correo Correo del usuario al que se le cambia la contraseña
-     * @param vistaDestino Vista a la que se debe volver al terminar (Login_view si viene de
-     *                     "olvidé mi contraseña", o Inicio_usuario_view si viene del perfil
-     *                     estando ya logueado)
-     */
+    
     public Nueva_contraseña_controller(Nueva_contraseña_view view, String correo, JFrame vistaDestino) {
         this.view = view;
         this.correo = correo;
@@ -36,6 +38,9 @@ public class Nueva_contraseña_controller {
             view.dispose();
             volverAVistaDestino();
         });
+
+        configurarToggle(view.getTxNuevaContraseña(), view.getBtnVerNueva());
+        configurarToggle(view.getTxConfirmarContraseña(), view.getBtnVerConfirmar());
     }
 
     private void confirmarCambio() {
@@ -74,5 +79,19 @@ public class Nueva_contraseña_controller {
 
     private String hashearContraseña(String contraseña) {
         return BCrypt.withDefaults().hashToString(12, contraseña.toCharArray());
+    }
+
+    
+    private void configurarToggle(JPasswordField campo, JButton boton) {
+        final char echoOriginal = campo.getEchoChar();
+        boton.addActionListener(e -> {
+            if (campo.getEchoChar() == 0) {
+                campo.setEchoChar(echoOriginal);
+                boton.setText("Ver");
+            } else {
+                campo.setEchoChar((char) 0);
+                boton.setText("Ocultar");
+            }
+        });
     }
 }

@@ -13,7 +13,9 @@ import Model.Codigo_descuento;
 import Controller.Codigo_descuento_controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import Model.Usuario;
 import View.Login_view;
 import View.Menu_principal_view;
@@ -38,6 +40,9 @@ public class Registro_controller implements ActionListener {
         this.menu = menu;
         vista.getB1().addActionListener(this);
         vista.getBtnVolver().addActionListener(this);
+
+        configurarToggle(vista.getTxContraseña(), vista.getBtnVerContraseña());
+        configurarToggle(vista.getTxConfirmar(), vista.getBtnVerConfirmar());
         
         vista.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         vista.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -163,6 +168,18 @@ public class Registro_controller implements ActionListener {
     }
 
     
+    private void configurarToggle(JPasswordField campo, JButton boton) {
+        final char echoOriginal = campo.getEchoChar();
+        boton.addActionListener(e -> {
+            if (campo.getEchoChar() == 0) {
+                campo.setEchoChar(echoOriginal);
+                boton.setText("Ver");
+            } else {
+                campo.setEchoChar((char) 0);
+                boton.setText("Ocultar");
+            }
+        });
+    }
 
     
     private boolean validarNombreApellido(String texto) {
