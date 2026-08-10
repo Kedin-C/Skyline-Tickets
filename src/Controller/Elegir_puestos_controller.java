@@ -100,7 +100,7 @@ public class Elegir_puestos_controller implements ActionListener {
                         } else {
                             datos.setTotalPagar(datos.getTotalPagar() + 80000);
                         }
-
+                        datos.setTotalFinal(datos.getTotalPagar());
                         datos.elegidos++;
                     } else {
                         return;
@@ -132,6 +132,7 @@ public class Elegir_puestos_controller implements ActionListener {
                         } else {
                             datos.setTotalPagar(datos.getTotalPagar() + 80000);
                         }
+                        datos.setTotalFinal(datos.getTotalPagar());
                         datos.elegidos++;
                     } else {
                         return;
@@ -142,7 +143,7 @@ public class Elegir_puestos_controller implements ActionListener {
 
         if (e.getSource() == vista.siguiente) {
 
-            datos.setEscogerAsiento(0);
+            datos.setEscogerAsiento(1);
 
             if (pva.getNumero() == 1) {
                 if (codigoAsiento.size() == datos.getNumeroTickets()) {
@@ -151,22 +152,20 @@ public class Elegir_puestos_controller implements ActionListener {
                     vista.dispose();
 
                     vistaDatosyPago.setVisible(true);
-                    
-                    
+
                     if (datosypago == null) {
                         datosypago = new Datos_y_pago_controller(vistaDatosyPago, datos, usuario, vistaPrincipal, viewAdmin, viewUsuario, pva, modify);
-                        
+
                     } else {
                         vistaDatosyPago.setVisible(true);
-                    };
+                    }
                     datosypago.limpiar();
-                        if (usuario.getRol() != 0){
-                            vistaDatosyPago.setButtonAutoComplete();
-                        }else{
-                            vistaDatosyPago.resetButtonAutoComplete();
-                        }
-                    
-                    
+                    if (usuario.getRol() != 0) {
+                        vistaDatosyPago.setButtonAutoComplete();
+                    } else {
+                        vistaDatosyPago.resetButtonAutoComplete();
+                    }
+
                     JOptionPane.showMessageDialog(vista, "Los puestos elegidos son: " + datos.getCodigoAsiento());
 
                     if (datos.getNumeroTickets() > 1) {
@@ -196,8 +195,6 @@ public class Elegir_puestos_controller implements ActionListener {
 
         if (e.getSource() == vista.aleatorio) {
 
-            datos.setEscogerAsiento(0);
-
             while (datos.elegidos <= datos.getNumeroTickets()) {
 
                 int fila = (int) (Math.random() * totalFilas);
@@ -215,6 +212,7 @@ public class Elegir_puestos_controller implements ActionListener {
                         } else {
                             datos.setTotalPagar(datos.getTotalPagar() - 80000);
                         }
+                        datos.setTotalFinal(datos.getTotalPagar());
                     } else {
                         continue;
                     }
@@ -230,6 +228,7 @@ public class Elegir_puestos_controller implements ActionListener {
                         } else {
                             datos.setTotalPagar(datos.getTotalPagar() - 80000);
                         }
+                        datos.setTotalFinal(datos.getTotalPagar());
                     } else {
                         continue;
                     }
@@ -237,6 +236,7 @@ public class Elegir_puestos_controller implements ActionListener {
             }
             
             vista.siguiente.doClick();
+            datos.setEscogerAsiento(0);
         }
 
         if (e.getSource() == vistaDatosyPago.volver) {

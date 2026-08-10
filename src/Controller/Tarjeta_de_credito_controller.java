@@ -54,6 +54,8 @@ public class Tarjeta_de_credito_controller implements ActionListener {
     private Seleccion_de_Modificacion_de_vuelo_view view_modificar_ticket;
     private Codigo_descuentoDao descuentoDao = new Codigo_descuentoDao();
     private Codigo_descuento codigoDes = new Codigo_descuento();
+    
+    
 
     public Tarjeta_de_credito_controller(Tarjeta_de_credito_view vista, Datos datos, Seleccion_forma_de_pago_view vista_atras, Ticket ticket, Usuario usuario, ViewPrincipal vistaPrincipal, Pagina_principal_administrador_view viewAdmin, Inicio_usuario_view viewUsuario, And_puestos pv, Seleccion_de_Modificacion_de_vuelo_view view_modificar_ticket) {
 
@@ -144,16 +146,16 @@ public class Tarjeta_de_credito_controller implements ActionListener {
                     codigoDes = descuentoDao.aplicarCodigo(vista.codigoDescuento.getText());
                     porcentaje = codigoDes.getPorcentajeDescuento();
                     porcentaje /= 100;
-                    descuentoDao.codigoUsado(vista.codigoDescuento.getText());
                     
-                    if(!codigoDes.isUsado()){
-                        double aplicarDes = datos.getTotalPagar() * porcentaje; 
+                    if (!codigoDes.isUsado()) {
+                        double aplicarDes = datos.getTotalPagar() * porcentaje;
                         datosPagar.setTotal(datos.getTotalPagar() - aplicarDes);
-                    }else{
+                        descuentoDao.codigoUsado(vista.codigoDescuento.getText());
+                    } else {
                         JOptionPane.showMessageDialog(null, "No se pudo aplicar tu codigo de descuento");
                         datosPagar.setTotal(datos.getTotalPagar());
                     }
-                    
+
                 }else{
                     datosPagar.setTotal(datos.getTotalPagar());
                 }
@@ -348,10 +350,12 @@ public class Tarjeta_de_credito_controller implements ActionListener {
         viewPago.lblDestino.setText(destinop);
         String fechap = ticketdao.obtenerFechaVuelo(id_pasajero);
         viewPago.lblFechaIda.setText("FECHA: " + fechap);
+        double costoVuelo = ticketdao.obtenerCosto(id_pasajero);
+        viewPago.lblcostoVuelo.setText("COSTO VUELO: $" + costoVuelo);
         int clase = ticketdao.obtenerClase(id_pasajero);
         int equipaje = ticketdao.obtenerEquiExtra(id_pasajero);
-        double costo = ticketdao.obtenerCosto(id_pasajero);
-        
+        double total = datos.getDatosPago().getTotal();
+        int totalTickets = datos.getNumeroTickets();
 
         if ("IDA_VUELTA".equals(ticketdao.obtenerTipoVuelo(id_pasajero))) {
             viewPago.lblFlechaVuelta.setVisible(true);
@@ -365,12 +369,12 @@ public class Tarjeta_de_credito_controller implements ActionListener {
         String nombreClase = "";
         double costoClase = 0;
         if (clase == 1) {
-            nombreClase = "Clase Economica";
+            nombreClase = "Clase Economica + $0";
         } else if (clase == 2) {
-            nombreClase = "Clase Ejecutiva";
+            nombreClase = "Clase Ejecutiva + $250.000";
             costoClase = 250000.0;
         } else if (clase == 3) {
-            nombreClase = "Primera Clase";
+            nombreClase = "Primera Clase + $400.000";
             costoClase = 400000.0;
         }
         viewPago.lblClase.setText("CLASE: " + nombreClase);
@@ -385,7 +389,6 @@ public class Tarjeta_de_credito_controller implements ActionListener {
         if (datos.getEscogerAsiento() == 0) {
             viewPago.lblAsiento.setText("Escogiste el o los asientos de forma aleatoria es sin costo");
         } else {
-            
             if (clase == 1) {
                 costoAsiento = 30000.0;
             } else if (clase == 2) {
@@ -396,14 +399,37 @@ public class Tarjeta_de_credito_controller implements ActionListener {
 
             viewPago.lblAsiento.setText("Cobro Asiento: " + String.format("%,.0f", costoAsiento) + " COP");
         }
+        
+        if (!vista.codigoDescuento.getText().isBlank() && !codigoDes.isUsado()) {
+//            double porcentaje = codigoDes.getPorcentajeDescuento() / 100.0;
+//            double aplicarDes = datos.getTotalPagar() * porcentaje;
+            double costoFinal;
 
+            if (totalTickets > 1) {
+                costoFinal = total / totalTickets;
+                viewPago.lblCostoTotal.setText("COSTO FINAL INDIVIDUAL POR PERSONA: $" + String.format("%,.0f", datos.getTotalFinal() / totalTickets) + " - " + codigoDes.getPorcentajeDescuento()
+                        + "%" + " = " + String.format("%,.0f", costoFinal) + " COP");
+            } else {
+                costoFinal = total;
+                viewPago.lblCostoTotal.setText("COSTO FINAL: $" + String.format("%,.0f", datos.getTotalFinal()) + " - " + codigoDes.getPorcentajeDescuento()
+                        + "%" + " = " + String.format("%,.0f", costoFinal) + " COP ");
+            }
 
-        double costoFinal = costoClase + (equipaje * 4000) + costo + costoAsiento;
-        viewPago.lblCostoTotal.setText("COSTO FINAL: $" + String.format("%,.0f", costoFinal) + " COP");
+        } else {
+            double costoFinal;
+            if (totalTickets > 1) {
+                costoFinal = total / totalTickets;
+                viewPago.lblCostoTotal.setText("COSTO FINAL INDIVIDUAL POR PERSONA: $" + String.format("%,.0f", costoFinal) + " COP");
+            } else {
+                costoFinal = total;
+                viewPago.lblCostoTotal.setText("COSTO FINAL: $" + String.format("%,.0f", costoFinal) + " COP");
+            }
+        }
+
     }
 
-    private void envio_Ticket(ArrayList<Integer> listaPasajeros,int idPasajero1) {
-        
+    private void envio_Ticket(ArrayList<Integer> listaPasajeros, int idPasajero1) {
+
         new Thread(() -> {
             try {
 
@@ -411,7 +437,7 @@ public class Tarjeta_de_credito_controller implements ActionListener {
                 String tipoVuelo = ticketdao.obtenerTipoVuelo(idPasajero1);
                 if (tipoVuelo.equals("IDA_VUELTA")) {
                     for (int idPasajero : listaPasajeros) {
-                        // Obtener datos desde el DAOD
+                        // Obtener datos desde el DAO
                         String nombre = ticketdao.obtenerNombrePasajero(idPasajero);
                         String documento = ticketdao.obtenerDocumento(idPasajero);
                         String vuelo = ticketdao.obtenerCodigoVuelo(idPasajero);
@@ -419,7 +445,6 @@ public class Tarjeta_de_credito_controller implements ActionListener {
                         String destino = ticketdao.obtenerDestino(idPasajero);
                         String fechat = ticketdao.obtenerFechaVuelo(idPasajero);
                         String asiento = ticketdao.obtenerAsiento(idPasajero);
-                        double costo = ticketdao.obtenerCosto(idPasajero);
                         String codigoReserva = ticketdao.obtenerCodigoReserva(idPasajero);
                         String correoDestino = ticketdao.obtenerCorreoPasajero(idPasajero);
                         int ticket = ticketdao.obtenerCodTicket(idPasajero);
@@ -427,18 +452,23 @@ public class Tarjeta_de_credito_controller implements ActionListener {
                         int equipaje = ticketdao.obtenerEquiExtra(idPasajero);
                         String fechaRegreso = ticketdao.obtenerFechaRegreso(idPasajero1);
                         int escogerAsiento = datos.getEscogerAsiento();
+                        double total = datos.getDatosPago().getTotal();
+                        int totalTickets = datos.getNumeroTickets();
+                        double costoVuelo = ticketdao.obtenerCosto(idPasajero);
 
                         // Generar PDF de ida y de vuelta
                         File pdf1 = creador.generarTicket(
                                 nombre, documento, vuelo, origen, destino,
-                                fechat, asiento, costo, codigoReserva, ticket,
-                                clase, equipaje, escogerAsiento
+                                fechat, asiento, total, codigoReserva, ticket,
+                                clase, equipaje, escogerAsiento, totalTickets,
+                                costoVuelo
                         );
 
                         File pdf2 = creador.generarTicket(
                                 nombre, documento, vuelo, destino, origen,
-                                fechaRegreso, asiento, costo, codigoReserva, ticket,
-                                clase, equipaje, escogerAsiento
+                                fechaRegreso, asiento, total, codigoReserva, ticket,
+                                clase, equipaje, escogerAsiento, totalTickets,
+                                costoVuelo
                         );
 
                         // Enviar correo con los 2 PDF adjuntos
@@ -456,19 +486,22 @@ public class Tarjeta_de_credito_controller implements ActionListener {
                         String destino = ticketdao.obtenerDestino(idPasajero);
                         String fechat = ticketdao.obtenerFechaVuelo(idPasajero);
                         String asiento = ticketdao.obtenerAsiento(idPasajero);
-                        double costo = ticketdao.obtenerCosto(idPasajero);
                         String codigoReserva = ticketdao.obtenerCodigoReserva(idPasajero);
                         String correoDestino = ticketdao.obtenerCorreoPasajero(idPasajero);
                         int ticket = ticketdao.obtenerCodTicket(idPasajero);
                         int clase = ticketdao.obtenerClase(idPasajero);
                         int equipaje = ticketdao.obtenerEquiExtra(idPasajero);
                         int escogerAsiento = datos.getEscogerAsiento();
+                        double total = datos.getDatosPago().getTotal();
+                        int totalTickets = datos.getNumeroTickets();
+                        double costoVuelo = ticketdao.obtenerCosto(idPasajero);
 
                         // Generar PDF para este pasajero
                         File pdf = creador.generarTicket(
                                 nombre, documento, vuelo, origen, destino,
-                                fechat, asiento, costo, codigoReserva, ticket,
-                                clase, equipaje, escogerAsiento
+                                fechat, asiento, total, codigoReserva, ticket,
+                                clase, equipaje, escogerAsiento, totalTickets,
+                                costoVuelo
                         );
 
                         // Enviar correo con el PDF adjunto
