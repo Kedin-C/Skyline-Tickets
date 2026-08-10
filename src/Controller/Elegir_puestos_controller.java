@@ -100,7 +100,7 @@ public class Elegir_puestos_controller implements ActionListener {
                         } else {
                             datos.setTotalPagar(datos.getTotalPagar() + 80000);
                         }
-
+                        datos.setTotalFinal(datos.getTotalPagar());
                         datos.elegidos++;
                     } else {
                         return;
@@ -132,6 +132,7 @@ public class Elegir_puestos_controller implements ActionListener {
                         } else {
                             datos.setTotalPagar(datos.getTotalPagar() + 80000);
                         }
+                        datos.setTotalFinal(datos.getTotalPagar());
                         datos.elegidos++;
                     } else {
                         return;
@@ -194,8 +195,6 @@ public class Elegir_puestos_controller implements ActionListener {
 
         if (e.getSource() == vista.aleatorio) {
 
-            datos.setEscogerAsiento(0);
-
             while (datos.elegidos <= datos.getNumeroTickets()) {
 
                 int fila = (int) (Math.random() * totalFilas);
@@ -213,6 +212,7 @@ public class Elegir_puestos_controller implements ActionListener {
                         } else {
                             datos.setTotalPagar(datos.getTotalPagar() - 80000);
                         }
+                        datos.setTotalFinal(datos.getTotalPagar());
                     } else {
                         continue;
                     }
@@ -228,6 +228,7 @@ public class Elegir_puestos_controller implements ActionListener {
                         } else {
                             datos.setTotalPagar(datos.getTotalPagar() - 80000);
                         }
+                        datos.setTotalFinal(datos.getTotalPagar());
                     } else {
                         continue;
                     }
@@ -235,6 +236,7 @@ public class Elegir_puestos_controller implements ActionListener {
             }
             
             vista.siguiente.doClick();
+            datos.setEscogerAsiento(0);
         }
 
         if (e.getSource() == vistaDatosyPago.volver) {

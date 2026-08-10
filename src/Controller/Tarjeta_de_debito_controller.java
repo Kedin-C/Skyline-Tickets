@@ -4,6 +4,8 @@
  */
 package Controller;
 
+import Model.Codigo_descuento;
+import Model.Codigo_descuentoDao;
 import Model.Datos;
 import Model.DatosPago;
 import Model.DatosPagoDao;
@@ -50,6 +52,8 @@ public class Tarjeta_de_debito_controller implements ActionListener{
     private Seleccion_de_Modificacion_de_vuelo_view view_modificar_ticket;
     private Inicio_usuario_view viewUsuario;
     private Usuario usuario;
+    private Codigo_descuentoDao descuentoDao = new Codigo_descuentoDao();
+    private Codigo_descuento codigoDes = new Codigo_descuento();
     
     
     public Tarjeta_de_debito_controller(Tarjeta_de_debito_view vista, Datos datos,Seleccion_forma_de_pago_view vista_atras, Ticket ticket,And_puestos pv, Seleccion_de_Modificacion_de_vuelo_view view_modificar_ticket,ViewPrincipal vistaPrincipal,Pagina_principal_administrador_view viewAdmin,Inicio_usuario_view viewUsuario,Usuario usuario){
@@ -129,7 +133,7 @@ public class Tarjeta_de_debito_controller implements ActionListener{
         
         if (e.getSource() == vista.pagar) {
             if (Validar()) {
-
+                double porcentaje = 0;
                 datosPagar.setNumero_tarjeta(vista.num_tarjeta.getText());
 
                 SimpleDateFormat formateadorRegreso = new SimpleDateFormat("yyyy-MM-dd");
@@ -141,8 +145,24 @@ public class Tarjeta_de_debito_controller implements ActionListener{
                 datosPagar.setCvv(Integer.parseInt(vista.cvv.getText()));
 
                 datosPagar.setNombre_titular(vista.nombre_titular.getText());
+                
+                if(!vista.codigoDescuento.getText().isBlank()){
+                    codigoDes = descuentoDao.aplicarCodigo(vista.codigoDescuento.getText());
+                    porcentaje = codigoDes.getPorcentajeDescuento();
+                    porcentaje /= 100;
+                    
+                    if (!codigoDes.isUsado()) {
+                        double aplicarDes = datos.getTotalPagar() * porcentaje;
+                        datosPagar.setTotal(datos.getTotalPagar() - aplicarDes);
+                        descuentoDao.codigoUsado(vista.codigoDescuento.getText());
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No se pudo aplicar tu codigo de descuento");
+                        datosPagar.setTotal(datos.getTotalPagar());
+                    }
 
-                datosPagar.setTotal(datos.getTotalPagar());
+                }else{
+                    datosPagar.setTotal(datos.getTotalPagar());
+                }
 
                 datosPagar.setMedioPago("credito");
 
@@ -158,6 +178,7 @@ public class Tarjeta_de_debito_controller implements ActionListener{
                     final ArrayList<Integer> listaPasajeros;
 
                     if (datos.id_pasajero != null && !datos.id_pasajero.isEmpty()) {
+                        // Caso compra: ya hay datos cargados, se usan tal cual
                         listaPasajeros = datos.id_pasajero;
                     } else {
                         listaPasajeros = new ArrayList<>();
@@ -227,8 +248,10 @@ public class Tarjeta_de_debito_controller implements ActionListener{
 
                     int id_pasajero = listaPasajeros.get(0);
 
+                    
                     mostrarInformacionPago(viewPago, id_pasajero);
 
+                    
 
                     vista.setVisible(false);
                     viewPago.setVisible(true);
@@ -376,15 +399,32 @@ public class Tarjeta_de_debito_controller implements ActionListener{
             viewPago.lblAsiento.setText("Cobro Asiento: " + String.format("%,.0f", costoAsiento) + " COP");
         }
         
-        double costoFinal = 0;
-        if(totalTickets > 0){
-            costoFinal = total / totalTickets;
-            
-            viewPago.lblCostoTotal.setText("COSTO FINAL INDIVIDUAL POR PERSONA: $" + String.format("%,.0f", costoFinal) + " COP");
-        }else{
-            costoFinal = total;
-            
-            viewPago.lblCostoTotal.setText("COSTO FINAL: $" + String.format("%,.0f", costoFinal) + " COP");
+        if (!vista.codigoDescuento.getText().isBlank() && !codigoDes.isUsado()) {
+            double porcentaje = codigoDes.getPorcentajeDescuento() / 100.0;
+            double aplicarDes = datos.getTotalPagar() * porcentaje;
+            double costoFinal;
+
+            if (totalTickets > 1) {
+                costoFinal = total / totalTickets;
+                double costosinDesc = ticketdao.obtenerCosto(id_pasajero) / totalTickets;
+                viewPago.lblCostoTotal.setText("COSTO FINAL INDIVIDUAL POR PERSONA: $" + String.format("%,.0f", costosinDesc) + " - " + codigoDes.getPorcentajeDescuento()
+                        + "%" + " = " + String.format("%,.0f", costoFinal) + " COP - ");
+            } else {
+                double costosinDesc = ticketdao.obtenerCosto(id_pasajero);
+                costoFinal = total;
+                viewPago.lblCostoTotal.setText("COSTO FINAL: $" + String.format("%,.0f", costosinDesc) + codigoDes.getPorcentajeDescuento()
+                        + "%" + " = " + String.format("%,.0f", costoFinal) + " COP - ");
+            }
+
+        } else {
+            double costoFinal;
+            if (totalTickets > 1) {
+                costoFinal = total / totalTickets;
+                viewPago.lblCostoTotal.setText("COSTO FINAL INDIVIDUAL POR PERSONA: $" + String.format("%,.0f", costoFinal) + " COP");
+            } else {
+                costoFinal = total;
+                viewPago.lblCostoTotal.setText("COSTO FINAL: $" + String.format("%,.0f", costoFinal) + " COP");
+            }
         }
 
     }
@@ -415,18 +455,21 @@ public class Tarjeta_de_debito_controller implements ActionListener{
                         int escogerAsiento = datos.getEscogerAsiento();
                         double total = datos.getDatosPago().getTotal();
                         int totalTickets = datos.getNumeroTickets();
+                        double costoVuelo = ticketdao.obtenerCosto(idPasajero);
 
                         // Generar PDF de ida y de vuelta
                         File pdf1 = creador.generarTicket(
                                 nombre, documento, vuelo, origen, destino,
                                 fechat, asiento, total, codigoReserva, ticket,
-                                clase, equipaje, escogerAsiento, totalTickets
+                                clase, equipaje, escogerAsiento, totalTickets,
+                                costoVuelo
                         );
 
                         File pdf2 = creador.generarTicket(
                                 nombre, documento, vuelo, destino, origen,
                                 fechaRegreso, asiento, total, codigoReserva, ticket,
-                                clase, equipaje, escogerAsiento, totalTickets
+                                clase, equipaje, escogerAsiento, totalTickets,
+                                costoVuelo
                         );
 
                         // Enviar correo con los 2 PDF adjuntos
@@ -452,12 +495,14 @@ public class Tarjeta_de_debito_controller implements ActionListener{
                         int escogerAsiento = datos.getEscogerAsiento();
                         double total = datos.getDatosPago().getTotal();
                         int totalTickets = datos.getNumeroTickets();
+                        double costoVuelo = ticketdao.obtenerCosto(idPasajero);
 
                         // Generar PDF para este pasajero
                         File pdf = creador.generarTicket(
                                 nombre, documento, vuelo, origen, destino,
                                 fechat, asiento, total, codigoReserva, ticket,
-                                clase, equipaje, escogerAsiento, totalTickets
+                                clase, equipaje, escogerAsiento, totalTickets,
+                                costoVuelo
                         );
 
                         // Enviar correo con el PDF adjunto

@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 public class Datos {
     
     private int codigoVuelo, numeroTickets, equipajeExtra, claseVuelo, escogerAsiento = 0;
-    private double totalPagar = 0;
+    private double totalPagar = 0, totalFinal = 0;
     private String tipoVuelo, fechaRegreso;
     private ArrayList<String> codigoAsiento;
     private ArrayList<DatosPersonales> datosPersonales;
@@ -37,6 +37,10 @@ public class Datos {
             instancia = new Datos();
         }
         return instancia;
+    }
+
+    public void setTotalFinal(double totalFinal) {
+        this.totalFinal = totalFinal;
     }
 
     public void setCodigoVuelo(int codigoVuelo) {
@@ -81,6 +85,10 @@ public class Datos {
     
     public void setEscogerAsiento(int escogerAsiento){
         this.escogerAsiento = escogerAsiento;
+    }
+
+    public double getTotalFinal() {
+        return totalFinal;
     }
 
     public int getEscogerAsiento(){

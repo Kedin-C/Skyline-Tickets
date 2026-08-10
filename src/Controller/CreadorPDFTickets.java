@@ -31,7 +31,7 @@ public class CreadorPDFTickets {
     public File generarTicket(String nombrePasajero, String documento, String vuelo,
             String origen, String destino, String fecha, String asiento,
             double total, String codigoReserva, int ticket, int clase, int equipaje, int escogerAsiento,
-            int totalT) {
+            int totalT, double costoVuelo) {
 
         File archivo = null;
         try {
@@ -62,6 +62,7 @@ public class CreadorPDFTickets {
             document.add(new Paragraph("Destino: " + destino));
             document.add(new Paragraph("Fecha: " + fecha));
             document.add(new Paragraph("Asiento: " + asiento));
+            document.add(new Paragraph("Vuelo Costo: $" + costoVuelo + " COP"));
             String nombreClase = "";
             String costoClase = "";
             double costoC = 0;
@@ -105,7 +106,7 @@ public class CreadorPDFTickets {
             // Costo
             Font costoFont = new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD, BaseColor.DARK_GRAY);
             double costoFinal = 0;
-            if (totalT > 0) {
+            if (totalT > 1) {
                 costoFinal = total / totalT;
 
                 document.add(new Paragraph("COSTO FINAL INDIVIDUAL POR PERSONA: $" + String.format("%,.0f", costoFinal) + " COP\n", costoFont));

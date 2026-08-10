@@ -449,18 +449,21 @@ public class Transferencia_controller implements ActionListener{
                         int escogerAsiento = datos.getEscogerAsiento();
                         double total = datos.getDatosPago().getTotal();
                         int totalTickets = datos.getNumeroTickets();
+                        double costoVuelo = ticketdao.obtenerCosto(idPasajero);
 
                         // Generar PDF de ida y de vuelta
                         File pdf1 = creador.generarTicket(
                                 nombre, documento, vuelo, origen, destino,
                                 fechat, asiento, total, codigoReserva, ticket,
-                                clase, equipaje, escogerAsiento, totalTickets
+                                clase, equipaje, escogerAsiento, totalTickets,
+                                costoVuelo
                         );
 
                         File pdf2 = creador.generarTicket(
                                 nombre, documento, vuelo, destino, origen,
                                 fechaRegreso, asiento, total, codigoReserva, ticket,
-                                clase, equipaje, escogerAsiento, totalTickets
+                                clase, equipaje, escogerAsiento, totalTickets,
+                                costoVuelo
                         );
 
                         // Enviar correo con los 2 PDF adjuntos
@@ -486,12 +489,14 @@ public class Transferencia_controller implements ActionListener{
                         int escogerAsiento = datos.getEscogerAsiento();
                         double total = datos.getDatosPago().getTotal();
                         int totalTickets = datos.getNumeroTickets();
+                        double costoVuelo = ticketdao.obtenerCosto(idPasajero);
 
                         // Generar PDF para este pasajero
                         File pdf = creador.generarTicket(
                                 nombre, documento, vuelo, origen, destino,
                                 fechat, asiento, total, codigoReserva, ticket,
-                                clase, equipaje, escogerAsiento, totalTickets
+                                clase, equipaje, escogerAsiento, totalTickets,
+                                costoVuelo
                         );
 
                         // Enviar correo con el PDF adjunto

@@ -168,10 +168,11 @@ public class Buscar_vuelos_controller implements ActionListener {
             } else {
                 validarRegreso();
                 datos.setTipoVuelo("IDA_VUELTA");
-
+                System.out.println(vista.elegir_fecha_regreso.getDate());
                 SimpleDateFormat formateadorRegreso = new SimpleDateFormat("yyyy-MM-dd");
                 //aplicando el metodo que deja la fecha tal cual en el campo de fecha regreso
                 String fechaRegreso = formateadorRegreso.format(vista.elegir_fecha_regreso.getDate());
+                System.out.println(vista.elegir_fecha_regreso.getDate() + "error en linea 173");
                 datos.setFechaRegreso(fechaRegreso);
             }
 
@@ -360,7 +361,7 @@ public class Buscar_vuelos_controller implements ActionListener {
 
             }
 
-            limpiarTabla();
+//            limpiarTabla();
             if (vista.listar_horario.getSelectedIndex() == 0) {
                 getListar(vista.tabla);
             } else {

@@ -32,7 +32,7 @@ public class Confirmar_pago_view extends Interfaz_vista_abtractas{
             panelDatoslblNumeroTicket,panelCentro,panelWrapperCentro,panelInferior,panelDatos,
             panelTipoVuelo;
     public JLabel lblMensaje,lblOrigen,lblDestino,lblNombrePasajero,lblReferenciaPago,lblFlechaIda,
-            lblFlechaVuelta,lblNumeroTicket,lblFechaIda,lblFechaVuelta,lblTipoVuelo,
+            lblFlechaVuelta,lblNumeroTicket,lblFechaIda,lblFechaVuelta,lblTipoVuelo,lblcostoVuelo,
             lblClase,lblEquipaje,lblAsiento,lblCostoTotal;
     public JButton volver;
 
@@ -136,7 +136,10 @@ public class Confirmar_pago_view extends Interfaz_vista_abtractas{
         lblFechaVuelta.setFont(new Font("Arial", Font.PLAIN, 18));
         lblFechaVuelta.setAlignmentX(Component.CENTER_ALIGNMENT);
         lblFechaVuelta.setVisible(false);
-
+        
+        lblcostoVuelo = new JLabel("", SwingConstants.CENTER);
+        lblcostoVuelo.setFont(new Font("Arial", Font.PLAIN, 18));
+        lblcostoVuelo.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         lblClase = new JLabel("", SwingConstants.CENTER);
         lblClase.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -163,6 +166,8 @@ public class Confirmar_pago_view extends Interfaz_vista_abtractas{
         panelDatos.add(lblFechaIda);
         panelDatos.add(Box.createVerticalStrut(10));
         panelDatos.add(lblFechaVuelta);
+        panelDatos.add(Box.createVerticalStrut(10));
+        panelDatos.add(lblcostoVuelo);
         panelDatos.add(Box.createVerticalStrut(10));
         panelDatos.add(lblClase);
         panelDatos.add(Box.createVerticalStrut(10));
