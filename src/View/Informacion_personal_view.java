@@ -53,8 +53,7 @@ public class Informacion_personal_view extends Interfaz_vista_abtractas {
         txtCorreo.setBackground(Color.decode("#D9D9D9"));
         txtCorreo.setFont(new Font("SansSerif", Font.PLAIN, 18));
         txtCorreo.setHorizontalAlignment(JTextField.CENTER);
-        txtCorreo.setMaximumSize(new Dimension(700, 50));
-        txtCorreo.setPreferredSize(new Dimension(700, 50));
+        txtCorreo.setPreferredSize(new Dimension(500, 50));
         txtCorreo.setAlignmentX(JTextField.CENTER_ALIGNMENT);
 
         panelForm.add(labelCorreo);

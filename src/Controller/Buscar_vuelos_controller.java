@@ -22,7 +22,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import Model.Datos;
-import Model.And_puestos;
 import View.Cambio_de_clase_de_vuelo_view;
 import Model.Usuario;
 import View.Elegir_clase_view;
@@ -111,31 +110,9 @@ public class Buscar_vuelos_controller implements ActionListener {
         modeloColumnas.getColumn(0).setMaxWidth(0);
         modeloColumnas.getColumn(0).setResizable(false);
 
-        JTextField editorFecha1 = (JTextField) vista.elegir_fecha_ida.getDateEditor().getUiComponent();
-        editorFecha1.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                e.consume();
-            }
+        ((JTextField) vista.elegir_fecha_ida.getDateEditor().getUiComponent()).setEditable(false);
+        ((JTextField) vista.elegir_fecha_regreso.getDateEditor().getUiComponent()).setEditable(false);
 
-            @Override
-            public void keyPressed(KeyEvent e) {
-                e.consume();
-            }
-        });
-
-        JTextField editorFecha2 = (JTextField) vista.elegir_fecha_regreso.getDateEditor().getUiComponent();
-        editorFecha2.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                e.consume();
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-                e.consume();
-            }
-        });
     }
 
     @Override
@@ -200,6 +177,7 @@ public class Buscar_vuelos_controller implements ActionListener {
 
             vista.setVisible(false);
             this.vistaElegirClase.setVisible(true);
+            limpiarTabla();
         }
 
         if (e.getSource() == vista.buscar_vuelos) {
@@ -267,11 +245,9 @@ public class Buscar_vuelos_controller implements ActionListener {
             modelo.addRow(objeto);
         }
         vista.tabla.setModel(modelo);
-
         if (modelo.getRowCount() == 0) {
             JOptionPane.showMessageDialog(vista, "No encontramos resultados");
         }
-
     }
 
     public void getListarHistorial(JTable tabla) {
@@ -345,6 +321,12 @@ public class Buscar_vuelos_controller implements ActionListener {
             modelo.removeRow(i);
             i = i - 1;
         }
+        
+        vista.listar_destino.setSelectedIndex(0);
+        vista.listar_horario.setSelectedIndex(0);
+        vista.listar_origen.setSelectedIndex(0);
+        vista.elegir_fecha_regreso.setDate(null);
+        vista.elegir_fecha_ida.setDate(null);
     }
 
     private void validarRegreso() {

@@ -19,7 +19,10 @@ public class DatosPagoDao {
     
     public void enviarDatos(DatosPago pago){
         String sql = "INSERT INTO datos_pago (numero_cuenta, cvv, nombre_titular, fecha_vencimiento, total, medio_pago) "
-                + "VALUES (?, ?, ?, ?, ?, ?);";
+           + "VALUES ("
+           + "CONCAT(REPEAT('*', LENGTH(?)-4), RIGHT(?, 4)), "
+           + "'***', "                                       
+           + "?, ?, ?, ?);";
         try{
             con = Conexion.getObject().getConection();
             ps=con.prepareStatement(sql);

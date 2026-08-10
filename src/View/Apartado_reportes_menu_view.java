@@ -15,6 +15,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 /**
  *
@@ -52,17 +53,15 @@ public class Apartado_reportes_menu_view extends Interfaz_vista_abtractas{
         
         //Panel de botones
         panelbotones = new JPanel(new GridLayout(1,2,100,100));
-        panelbotones.setBackground(Color.white);
         
         //Panel centrado
         panelcentro = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panelcentro.setBackground(Color.WHITE);
         panelcentro.add(panelbotones);
         
-        //Panel centrado
+        //Panel inferior
         panelInferior = new JPanel(new FlowLayout(FlowLayout.RIGHT, 60, 10));
-        panelInferior.setBackground(Color.white);
         panelInferior.add(volver);
+        panelInferior.setBorder(new EmptyBorder(400,0,0,0));
         
         //Agregar componentes
         panelbotones.add(Rfinanciero);

@@ -33,7 +33,7 @@ public class Seleccion_modificacion_vuelo_usuario_controlador implements ActionL
     Ticket_dao dao = new Ticket_dao();
     Ticket ticket;
     Usuario usua;
-    Usuario usu = new Usuario();
+//    Usuario usu = new Usuario();
 
     public Seleccion_modificacion_vuelo_usuario_controlador(Seleccion_de_vuelo_usuarioRegistrado_view vista, Usuario usu, Ticket ticket, Pagina_principal_administrador_view admin_view, Pagina_principal_administrador_controller_2 admin_view_cont, Inicio_usuario_view usuario_view, Inicio_usuario_controller usuario_view_cont, Seleccion_de_Modificacion_de_vuelo_view select_modificacion) {
         this.vista = vista;

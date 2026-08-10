@@ -25,5 +25,10 @@ public class Codigo_descuento {
     public void setPorcentajeDescuento(int porcentajeDescuento) { this.porcentajeDescuento = porcentajeDescuento; }
 
     public boolean isUsado() { return usado; }
-    public void setUsado(boolean usado) { this.usado = usado; }
+    public void setUsado(int uso) {
+        if(uso == 0) 
+            this.usado = false; 
+        else 
+            this.usado = true;
+    }
 }

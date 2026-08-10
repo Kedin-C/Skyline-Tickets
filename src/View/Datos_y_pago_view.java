@@ -18,21 +18,16 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
 import javax.swing.BorderFactory;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
-import javax.swing.JPopupMenu;
-import javax.swing.KeyStroke;
 
 public class Datos_y_pago_view extends Interfaz_vista_abtractas{
     
     private JPanel contenedor_principal, contenedor, siguiente_volver, datos, datosTorre1, datosTorre2, medio_pago, panel_precio;
-    private JLabel nombre, apellido, tipoDocumento, numeroDocumento, numeroTelefono, correoElectronico, nacionalidad, sexo, fechaNacimiento, precio;
+    private JLabel nombre, apellido, tipoDocumento, numeroDocumento, numeroTelefono, correoElectronico, nacionalidad, sexo, fechaNacimiento, precio,autocompletado ;
     private TitledBorder tituloDatos, tituloPago;
     private String listaDocumento[] = {"","Registro Civil de Nacimiento","Tarjeta de Identidad","Cédula de Ciudadanía",
             "Cédula de Extranjería","Pasaporte Vigente","Permiso por Protección Temporal"},
@@ -45,7 +40,7 @@ public class Datos_y_pago_view extends Interfaz_vista_abtractas{
                 "paraguayo", "peruano", "puertorriqueño",
                 "uruguayo", "venezolano"};
     public JComboBox listar_documento, listar_sexo, listar_nacionalidad;
-    public JButton volver, siguiente, credito, debito, pse;
+    public JButton volver, siguiente, credito, debito, pse,autocompletadobutton;
     public JTextField nombrecampo, apellidocampo, numero_documento, numeroTel, correo, precioTotal;
     public JDateChooser elegir_fecha;
     private SimpleDateFormat formatoFecha;
@@ -106,6 +101,7 @@ public class Datos_y_pago_view extends Interfaz_vista_abtractas{
         sexo = new JLabel("Sexo*");
         fechaNacimiento = new JLabel("Fecha Nacimiento*");
         precio = new JLabel("Precio total");
+        autocompletado = new JLabel("Auto completar");
         
         //campos y desplegables del formulario de datos
         nombrecampo = new JTextField(12);
@@ -114,6 +110,7 @@ public class Datos_y_pago_view extends Interfaz_vista_abtractas{
         numeroTel = new JTextField(12);
         correo = new JTextField(12);
         precioTotal = new JTextField(12);
+        autocompletadobutton = new JButton("Autocompletar");
         
         
         elegir_fecha = new JDateChooser();
@@ -148,8 +145,7 @@ public class Datos_y_pago_view extends Interfaz_vista_abtractas{
         datosTorre2.add(listar_sexo);
         datosTorre2.add(fechaNacimiento);
         datosTorre2.add(elegir_fecha);
-        datosTorre2.add(cajaInvisible);
-        datosTorre2.add(cajaInvisible);
+        
 
         
         
@@ -161,6 +157,7 @@ public class Datos_y_pago_view extends Interfaz_vista_abtractas{
         credito = new JButton("Targeta de credito");
         debito = new JButton("Targeta de debito"); 
         pse = new JButton("Transferencia");
+        
         
         Dimension tamaño = new Dimension(220, 60);
         
@@ -207,6 +204,8 @@ public class Datos_y_pago_view extends Interfaz_vista_abtractas{
         credito.setBackground(Color.decode("#037FB9"));
         debito.setBackground(Color.decode("#037FB9")); 
         pse.setBackground(Color.decode("#037FB9"));
+        autocompletadobutton.setBackground(Color.decode("#037FB9"));
+        autocompletadobutton.setForeground(Color.white);
         
         siguiente.setBackground(Color.decode("#037FB9"));
         
@@ -236,6 +235,7 @@ public class Datos_y_pago_view extends Interfaz_vista_abtractas{
         sexo.setFont(fuenteGrande);
         fechaNacimiento.setFont(fuenteGrande);
         precio.setFont(fuenteGrande);
+        autocompletado.setFont(fuenteGrande);
         
         nombrecampo.setFont(fuenteGrande);
         apellidocampo.setFont(fuenteGrande);
@@ -255,6 +255,16 @@ public class Datos_y_pago_view extends Interfaz_vista_abtractas{
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+    }
+    
+    public void setButtonAutoComplete(){
+        datosTorre2.add(autocompletado);
+        datosTorre2.add(autocompletadobutton);
+    }
+    
+    public void resetButtonAutoComplete(){
+        datosTorre2.remove(autocompletado);
+        datosTorre2.remove(autocompletadobutton);
     }
     
 }

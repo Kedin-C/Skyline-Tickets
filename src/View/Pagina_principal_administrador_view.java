@@ -28,7 +28,7 @@ public class Pagina_principal_administrador_view extends Interfaz_vista_abtracta
     private Container contenedor;
     private JPanel panel1,panelboton,panelboton2,panelboton3,paneltitulo,panelbotones;
     private Panel_con_fondo_view panel2;
-    public JButton comprar,clase,reportes, cerrarSesion,historial;
+    public JButton comprar,clase,reportes, cerrarSesion,historial,rol;
     private JLabel titulo;
     private FlowLayout miflow;
     
@@ -57,15 +57,15 @@ public class Pagina_principal_administrador_view extends Interfaz_vista_abtracta
         
         historial = new JButton("Historial de vuelos");
         historial.setBackground(Color.white);
-        historial.setPreferredSize(new Dimension(200, 40));
-        historial.setFont(new Font("Arial", Font.BOLD, 15));
+        historial.setPreferredSize(new Dimension(250, 40));
+        historial.setFont(new Font("Arial", Font.BOLD, 20));
         historial.setBorderPainted(false);
 
-//        rol = new JButton("Asignar Rol");
-//        rol.setBackground(Color.white);
-//        rol.setPreferredSize(new Dimension(200, 40));
-//        rol.setFont(new Font("Arial", Font.BOLD, 20));
-//        rol.setBorderPainted(false);
+        rol = new JButton("Asignar Rol");
+        rol.setBackground(Color.white);
+        rol.setPreferredSize(new Dimension(200, 40));
+        rol.setFont(new Font("Arial", Font.BOLD, 20));
+        rol.setBorderPainted(false);
 
         // Agregar ambos al mismo panel
         panelbotones.add(cerrarSesion);
@@ -73,7 +73,8 @@ public class Pagina_principal_administrador_view extends Interfaz_vista_abtracta
         panelbotones.add(reportes);
         panelbotones.add(Box.createHorizontalStrut(20));
         panelbotones.add(historial);
-//        panelbotones.add(rol);
+        panelbotones.add(Box.createHorizontalStrut(20));
+        panelbotones.add(rol);
 
         // Añadir el panel completo al lado derecho del panel1
         panel1.add(panelbotones, BorderLayout.LINE_END);

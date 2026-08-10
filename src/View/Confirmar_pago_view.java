@@ -33,7 +33,7 @@ public class Confirmar_pago_view extends Interfaz_vista_abtractas{
             panelTipoVuelo;
     public JLabel lblMensaje,lblOrigen,lblDestino,lblNombrePasajero,lblReferenciaPago,lblFlechaIda,
             lblFlechaVuelta,lblNumeroTicket,lblFechaIda,lblFechaVuelta,lblTipoVuelo,
-            lblClase,lblEquipaje,lblCostoTotal;
+            lblClase,lblEquipaje,lblAsiento,lblCostoTotal;
     public JButton volver;
 
     public Confirmar_pago_view() {
@@ -137,7 +137,7 @@ public class Confirmar_pago_view extends Interfaz_vista_abtractas{
         lblFechaVuelta.setAlignmentX(Component.CENTER_ALIGNMENT);
         lblFechaVuelta.setVisible(false);
 
-        // Nuevos labels para clase, equipaje y costo total
+        
         lblClase = new JLabel("", SwingConstants.CENTER);
         lblClase.setFont(new Font("Arial", Font.PLAIN, 18));
         lblClase.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -145,6 +145,10 @@ public class Confirmar_pago_view extends Interfaz_vista_abtractas{
         lblEquipaje = new JLabel("", SwingConstants.CENTER);
         lblEquipaje.setFont(new Font("Arial", Font.PLAIN, 18));
         lblEquipaje.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        lblAsiento = new JLabel("", SwingConstants.CENTER);
+        lblAsiento.setFont(new Font("Arial", Font.PLAIN, 18));
+        lblAsiento.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         lblCostoTotal = new JLabel("", SwingConstants.CENTER);
         lblCostoTotal.setFont(new Font("Arial", Font.BOLD, 18));
@@ -163,6 +167,8 @@ public class Confirmar_pago_view extends Interfaz_vista_abtractas{
         panelDatos.add(lblClase);
         panelDatos.add(Box.createVerticalStrut(10));
         panelDatos.add(lblEquipaje);
+        panelDatos.add(Box.createVerticalStrut(10));
+        panelDatos.add(lblAsiento);
         panelDatos.add(Box.createVerticalStrut(10));
         panelDatos.add(lblCostoTotal);
 

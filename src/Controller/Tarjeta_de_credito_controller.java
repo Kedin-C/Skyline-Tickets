@@ -4,7 +4,8 @@
  */
 package Controller;
 
-import Model.And_puestos;
+import Model.Codigo_descuento;
+import Model.Codigo_descuentoDao;
 import Model.Datos;
 import Model.DatosPago;
 import Model.DatosPagoDao;
@@ -51,6 +52,8 @@ public class Tarjeta_de_credito_controller implements ActionListener {
     private And_puestos pv;
     private ReservasDao reservas_dao = new ReservasDao();
     private Seleccion_de_Modificacion_de_vuelo_view view_modificar_ticket;
+    private Codigo_descuentoDao descuentoDao = new Codigo_descuentoDao();
+    private Codigo_descuento codigoDes = new Codigo_descuento();
 
     public Tarjeta_de_credito_controller(Tarjeta_de_credito_view vista, Datos datos, Seleccion_forma_de_pago_view vista_atras, Ticket ticket, Usuario usuario, ViewPrincipal vistaPrincipal, Pagina_principal_administrador_view viewAdmin, Inicio_usuario_view viewUsuario, And_puestos pv, Seleccion_de_Modificacion_de_vuelo_view view_modificar_ticket) {
 
@@ -88,22 +91,8 @@ public class Tarjeta_de_credito_controller implements ActionListener {
         this.vista.num_tarjeta.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), "none");
 
         //Para que no pueda ingresar al campo de fecha
-        JTextField editorFecha = (JTextField) this.vista.fecha_ven.getDateEditor().getUiComponent();
-        editorFecha.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                e.consume();
-            }
+        ((JTextField) this.vista.fecha_ven.getDateEditor().getUiComponent()).setEditable(false);
 
-            @Override
-            public void keyPressed(KeyEvent e) {
-                // Bloqueamos absolutamente todo: letras, números, Backspace y Suprimir
-                e.consume();
-            }
-        });
-
-        //Desactivar el comando de "Pegar" (Ctrl + V)
-        this.vista.fecha_ven.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), "none");
 
         this.vista.cvv.addKeyListener(new KeyAdapter() {
             @Override
@@ -138,7 +127,7 @@ public class Tarjeta_de_credito_controller implements ActionListener {
 
         if (e.getSource() == vista.pagar) {
             if (Validar()) {
-
+                double porcentaje = 0;
                 datosPagar.setNumero_tarjeta(vista.num_tarjeta.getText());
 
                 SimpleDateFormat formateadorRegreso = new SimpleDateFormat("yyyy-MM-dd");
@@ -150,8 +139,24 @@ public class Tarjeta_de_credito_controller implements ActionListener {
                 datosPagar.setCvv(Integer.parseInt(vista.cvv.getText()));
 
                 datosPagar.setNombre_titular(vista.nombre_titular.getText());
-
-                datosPagar.setTotal(datos.getTotalPagar());
+                
+                if(!vista.codigoDescuento.getText().isBlank()){
+                    codigoDes = descuentoDao.aplicarCodigo(vista.codigoDescuento.getText());
+                    porcentaje = codigoDes.getPorcentajeDescuento();
+                    porcentaje /= 100;
+                    descuentoDao.codigoUsado(vista.codigoDescuento.getText());
+                    
+                    if(!codigoDes.isUsado()){
+                        double aplicarDes = datos.getTotalPagar() * porcentaje; 
+                        datosPagar.setTotal(datos.getTotalPagar() - aplicarDes);
+                    }else{
+                        JOptionPane.showMessageDialog(null, "No se pudo aplicar tu codigo de descuento");
+                        datosPagar.setTotal(datos.getTotalPagar());
+                    }
+                    
+                }else{
+                    datosPagar.setTotal(datos.getTotalPagar());
+                }
 
                 datosPagar.setMedioPago("credito");
 
@@ -176,30 +181,8 @@ public class Tarjeta_de_credito_controller implements ActionListener {
 
                     int id_pasajero = listaPasajeros.get(0);
 
-                    viewPago.lblMensaje.setText("SE HA REALIZADO CON EXITO AGREGAR EQUIPAJE EXTRA");
-                    int ticketp = ticketdao.obtenerCodTicket(id_pasajero);
-                    viewPago.lblNumeroTicket.setText("NUMERO DE TICKET: " + ticketp);
-                    String nombrep = ticketdao.obtenerNombrePasajero(id_pasajero);
-                    viewPago.lblNombrePasajero.setText("NOMBRE DEL PASAJERO: " + nombrep);
-                    String codVuelo = ticketdao.obtenerCodigoVuelo(id_pasajero);
-                    viewPago.lblReferenciaPago.setText("CÓDIGO DE VUELO: " + codVuelo);
-                    String origenp = ticketdao.obtenerOrigen(id_pasajero);
-                    viewPago.lblOrigen.setText(origenp);
-                    String destinop = ticketdao.obtenerDestino(id_pasajero);
-                    viewPago.lblDestino.setText(destinop);
-                    String fechap = ticketdao.obtenerFechaVuelo(id_pasajero);
-                    viewPago.lblFechaIda.setText("FECHA: " + fechap);
-                    mostrarClaseEquipajeCosto(viewPago, id_pasajero);
+                    mostrarInformacionPago(viewPago, id_pasajero);
 
-                    if ("IDA_VUELTA".equals(ticketdao.obtenerTipoVuelo(id_pasajero))) {
-                        viewPago.lblMensaje.setText("SE HA REALIZADO CON EXITO AGREGAR EQUIPAJE EXTRA EN AMBOS VUELOS");
-                        viewPago.lblFlechaVuelta.setVisible(true);
-                        viewPago.lblFechaVuelta.setVisible(true);
-                        String fechaida = ticketdao.obtenerFechaVuelo(id_pasajero);
-                        viewPago.lblFechaIda.setText("FECHA IDA: " + fechaida);
-                        String fechavuelta = ticketdao.obtenerFechaRegreso(id_pasajero);
-                        viewPago.lblFechaVuelta.setText("FECHA REGRESO: " + fechavuelta);
-                    }
 
                     vista.setVisible(false);
                     viewPago.setVisible(true);
@@ -232,30 +215,8 @@ public class Tarjeta_de_credito_controller implements ActionListener {
 
                     int id_pasajero = listaPasajeros.get(0);
 
-                    viewPago.lblMensaje.setText("SE HA REALIZADO CON EXITO LA MODIFICACIÓN DE LA CLASE");
-                    int ticketp = ticketdao.obtenerCodTicket(id_pasajero);
-                    viewPago.lblNumeroTicket.setText("NUMERO DE TICKET: " + ticketp);
-                    String nombrep = ticketdao.obtenerNombrePasajero(id_pasajero);
-                    viewPago.lblNombrePasajero.setText("NOMBRE DEL PASAJERO: " + nombrep);
-                    String codVuelo = ticketdao.obtenerCodigoVuelo(id_pasajero);
-                    viewPago.lblReferenciaPago.setText("CÓDIGO DE VUELO: " + codVuelo);
-                    String origenp = ticketdao.obtenerOrigen(id_pasajero);
-                    viewPago.lblOrigen.setText(origenp);
-                    String destinop = ticketdao.obtenerDestino(id_pasajero);
-                    viewPago.lblDestino.setText(destinop);
-                    String fechap = ticketdao.obtenerFechaVuelo(id_pasajero);
-                    viewPago.lblFechaIda.setText("FECHA: " + fechap);
-                    mostrarClaseEquipajeCosto(viewPago, id_pasajero);
+                    mostrarInformacionPago(viewPago, id_pasajero);
 
-                    if ("IDA_VUELTA".equals(ticketdao.obtenerTipoVuelo(id_pasajero))) {
-                        viewPago.lblMensaje.setText("SE HA REALIZADO CON EXITO LA MODIFICACIÓN DE LA CLASE EN AMBOS VUELOS");
-                        viewPago.lblFlechaVuelta.setVisible(true);
-                        viewPago.lblFechaVuelta.setVisible(true);
-                        String fechaida = ticketdao.obtenerFechaVuelo(id_pasajero);
-                        viewPago.lblFechaIda.setText("FECHA IDA: " + fechaida);
-                        String fechavuelta = ticketdao.obtenerFechaRegreso(id_pasajero);
-                        viewPago.lblFechaVuelta.setText("FECHA REGRESO: " + fechavuelta);
-                    }
 
                     vista.setVisible(false);
                     viewPago.setVisible(true);
@@ -281,28 +242,10 @@ public class Tarjeta_de_credito_controller implements ActionListener {
 
                     int id_pasajero = listaPasajeros.get(0);
 
-                    int ticketp = ticketdao.obtenerCodTicket(id_pasajero);
-                    viewPago.lblNumeroTicket.setText("NUMERO DE TICKET: " + ticketp);
-                    String nombrep = ticketdao.obtenerNombrePasajero(id_pasajero);
-                    viewPago.lblNombrePasajero.setText("NOMBRE DEL PASAJERO: " + nombrep);
-                    String codVuelo = ticketdao.obtenerCodigoVuelo(id_pasajero);
-                    viewPago.lblReferenciaPago.setText("CÓDIGO DE VUELO: " + codVuelo);
-                    String origenp = ticketdao.obtenerOrigen(id_pasajero);
-                    viewPago.lblOrigen.setText(origenp);
-                    String destinop = ticketdao.obtenerDestino(id_pasajero);
-                    viewPago.lblDestino.setText(destinop);
-                    String fechap = ticketdao.obtenerFechaVuelo(id_pasajero);
-                    viewPago.lblFechaIda.setText("FECHA: " + fechap);
-                    mostrarClaseEquipajeCosto(viewPago, id_pasajero);
+                    
+                    mostrarInformacionPago(viewPago, id_pasajero);
 
-                    if ("IDA_VUELTA".equals(ticketdao.obtenerTipoVuelo(id_pasajero))) {
-                        viewPago.lblFlechaVuelta.setVisible(true);
-                        viewPago.lblFechaVuelta.setVisible(true);
-                        String fechaida = ticketdao.obtenerFechaVuelo(id_pasajero);
-                        viewPago.lblFechaIda.setText("FECHA IDA: " + fechaida);
-                        String fechavuelta = ticketdao.obtenerFechaRegreso(id_pasajero);
-                        viewPago.lblFechaVuelta.setText("FECHA REGRESO: " + fechavuelta);
-                    }
+                    
 
                     vista.setVisible(false);
                     viewPago.setVisible(true);
@@ -391,11 +334,33 @@ public class Tarjeta_de_credito_controller implements ActionListener {
         return resultado;
 
     }
-    
-    private void mostrarClaseEquipajeCosto(Confirmar_pago_view viewPago, int id_pasajero) {
+
+    private void mostrarInformacionPago(Confirmar_pago_view viewPago, int id_pasajero) {
+        int ticketp = ticketdao.obtenerCodTicket(id_pasajero);
+        viewPago.lblNumeroTicket.setText("NUMERO DE TICKET: " + ticketp);
+        String nombrep = ticketdao.obtenerNombrePasajero(id_pasajero);
+        viewPago.lblNombrePasajero.setText("NOMBRE DEL PASAJERO: " + nombrep);
+        String codVuelo = ticketdao.obtenerCodigoVuelo(id_pasajero);
+        viewPago.lblReferenciaPago.setText("CÓDIGO DE VUELO: " + codVuelo);
+        String origenp = ticketdao.obtenerOrigen(id_pasajero);
+        viewPago.lblOrigen.setText(origenp);
+        String destinop = ticketdao.obtenerDestino(id_pasajero);
+        viewPago.lblDestino.setText(destinop);
+        String fechap = ticketdao.obtenerFechaVuelo(id_pasajero);
+        viewPago.lblFechaIda.setText("FECHA: " + fechap);
         int clase = ticketdao.obtenerClase(id_pasajero);
         int equipaje = ticketdao.obtenerEquiExtra(id_pasajero);
         double costo = ticketdao.obtenerCosto(id_pasajero);
+        
+
+        if ("IDA_VUELTA".equals(ticketdao.obtenerTipoVuelo(id_pasajero))) {
+            viewPago.lblFlechaVuelta.setVisible(true);
+            viewPago.lblFechaVuelta.setVisible(true);
+            String fechaida = ticketdao.obtenerFechaVuelo(id_pasajero);
+            viewPago.lblFechaIda.setText("FECHA IDA: " + fechaida);
+            String fechavuelta = ticketdao.obtenerFechaRegreso(id_pasajero);
+            viewPago.lblFechaVuelta.setText("FECHA REGRESO: " + fechavuelta);
+        }
 
         String nombreClase = "";
         double costoClase = 0;
@@ -415,8 +380,25 @@ public class Tarjeta_de_credito_controller implements ActionListener {
         } else {
             viewPago.lblEquipaje.setText("EQUIPAJE EXTRA: Ninguno");
         }
+        
+        double costoAsiento = 0;
+        if (datos.getEscogerAsiento() == 0) {
+            viewPago.lblAsiento.setText("Escogiste el o los asientos de forma aleatoria es sin costo");
+        } else {
+            
+            if (clase == 1) {
+                costoAsiento = 30000.0;
+            } else if (clase == 2) {
+                costoAsiento = 50000.0;
+            } else if (clase == 3) {
+                costoAsiento = 80000.0;
+            }
 
-        double costoFinal = costoClase + (equipaje * 10000) + costo;
+            viewPago.lblAsiento.setText("Cobro Asiento: " + String.format("%,.0f", costoAsiento) + " COP");
+        }
+
+
+        double costoFinal = costoClase + (equipaje * 4000) + costo + costoAsiento;
         viewPago.lblCostoTotal.setText("COSTO FINAL: $" + String.format("%,.0f", costoFinal) + " COP");
     }
 
@@ -428,10 +410,6 @@ public class Tarjeta_de_credito_controller implements ActionListener {
                 Thread.sleep(4000);
                 String tipoVuelo = ticketdao.obtenerTipoVuelo(idPasajero1);
                 if (tipoVuelo.equals("IDA_VUELTA")) {
-
-                    
-                    String fechaRegreso = ticketdao.obtenerFechaRegreso(idPasajero1);
-
                     for (int idPasajero : listaPasajeros) {
                         // Obtener datos desde el DAOD
                         String nombre = ticketdao.obtenerNombrePasajero(idPasajero);
@@ -447,18 +425,20 @@ public class Tarjeta_de_credito_controller implements ActionListener {
                         int ticket = ticketdao.obtenerCodTicket(idPasajero);
                         int clase = ticketdao.obtenerClase(idPasajero);
                         int equipaje = ticketdao.obtenerEquiExtra(idPasajero);
+                        String fechaRegreso = ticketdao.obtenerFechaRegreso(idPasajero1);
+                        int escogerAsiento = datos.getEscogerAsiento();
 
                         // Generar PDF de ida y de vuelta
                         File pdf1 = creador.generarTicket(
                                 nombre, documento, vuelo, origen, destino,
                                 fechat, asiento, costo, codigoReserva, ticket,
-                                clase, equipaje
+                                clase, equipaje, escogerAsiento
                         );
 
                         File pdf2 = creador.generarTicket(
                                 nombre, documento, vuelo, destino, origen,
                                 fechaRegreso, asiento, costo, codigoReserva, ticket,
-                                clase, equipaje
+                                clase, equipaje, escogerAsiento
                         );
 
                         // Enviar correo con los 2 PDF adjuntos
@@ -482,12 +462,13 @@ public class Tarjeta_de_credito_controller implements ActionListener {
                         int ticket = ticketdao.obtenerCodTicket(idPasajero);
                         int clase = ticketdao.obtenerClase(idPasajero);
                         int equipaje = ticketdao.obtenerEquiExtra(idPasajero);
+                        int escogerAsiento = datos.getEscogerAsiento();
 
                         // Generar PDF para este pasajero
                         File pdf = creador.generarTicket(
                                 nombre, documento, vuelo, origen, destino,
                                 fechat, asiento, costo, codigoReserva, ticket,
-                                clase, equipaje
+                                clase, equipaje, escogerAsiento
                         );
 
                         // Enviar correo con el PDF adjunto

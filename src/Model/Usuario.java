@@ -21,6 +21,7 @@ public class Usuario {
     private int codigo_tipo_documento;
     private String numero_telefono;
     private String nationalidad, sexo, fecha_nacimiento;
+    private static Usuario instanciaD;
     
 
     public Usuario(int idUsuario, String nombre, String apellido, String correo, String contraseña, int rol, String documento, int codigo_tipo_documento, String numero_telefono, String nationalidad, String sexo, String fecha_nacimiento) {
@@ -40,7 +41,12 @@ public class Usuario {
 
    
     
-    
+    public static Usuario getInstanceD() {
+        if (instanciaD == null) {
+            instanciaD = new Usuario();
+        }
+        return instanciaD;
+    }
 
    
     
@@ -143,6 +149,21 @@ public class Usuario {
      @Override
     public String toString() {
         return "Usuario{" + "idUsuario=" + idUsuario + ", nombre=" + nombre + ", apellido=" + apellido + ", correo=" + correo + ", contrase\u00f1a=" + contraseña + ", rol=" + rol + ", documento=" + documento + ", codigo_tipo_documento=" + codigo_tipo_documento + ", numero_telefono=" + numero_telefono + ", nationalidad=" + nationalidad + ", sexo=" + sexo + ", fecha_nacimiento=" + fecha_nacimiento + '}';
+    }
+    
+    public void limpiar(){
+        this.idUsuario = 0;
+        this.nombre = "";
+        this.apellido = "";
+        this.correo = "";
+        this.contraseña = "";
+        this.rol = 0;
+        this.documento = "";
+        this.codigo_tipo_documento = 0;
+        this.numero_telefono = "";
+        this.nationalidad = "";
+        this.sexo = "";
+        this.fecha_nacimiento = "";
     }
     
 }

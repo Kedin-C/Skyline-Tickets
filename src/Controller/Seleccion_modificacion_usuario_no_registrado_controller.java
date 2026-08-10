@@ -57,7 +57,7 @@ public class Seleccion_modificacion_usuario_no_registrado_controller implements 
 
         if (e.getSource() == vista.continuar) {
 
-            String verify_correo = ".+@gmail\\.com$";
+            String verify_correo = "^[A-Za-z0-9]+([._%+-]?[A-Za-z0-9]+)*@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
 
             if (!vista.Codigo_ticket.getText().isEmpty() || !vista.Nombre_usuario.getText().isEmpty() || !vista.Numero_documento.getText().isEmpty() || !vista.Correo_electronico.getText().isEmpty()) {
 
@@ -126,7 +126,7 @@ public class Seleccion_modificacion_usuario_no_registrado_controller implements 
             }
 
             if (dos < 1) {
-                JOptionPane.showMessageDialog(vista, "El nombre no esta registrado en el sistema");
+                JOptionPane.showMessageDialog(vista, "El nombre y apellido no estan registrados en el sistema");
             }
 
             if (tres < 1) {

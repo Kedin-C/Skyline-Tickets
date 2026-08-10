@@ -57,6 +57,7 @@ public class Pagina_principal_controller implements ActionListener{
             vistaCL.Numero_documento.setText("");
             vista.setVisible(false);
             vistaCL.setVisible(true);
+            
             vistaCL.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         }else if(e.getSource() == vista.inicio){
             vista.setVisible(false);

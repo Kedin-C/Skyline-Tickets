@@ -4,7 +4,6 @@
  */
 package Controller;
 
-import Model.And_puestos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ButtonGroup;
@@ -19,7 +18,6 @@ import Model.Usuario;
 import View.Inicio_usuario_view;
 import View.Pagina_principal_administrador_view;
 import View.ViewPrincipal;
-import javax.swing.JOptionPane;
 
 public class Elegir_clase_controller implements ActionListener{
     
@@ -77,6 +75,8 @@ public class Elegir_clase_controller implements ActionListener{
         
         if(e.getSource() == vista.siguiente){
             
+            
+            
             if(vista.economica.isSelected()){
                 datos.setClaseVuelo(1);
             }else if(vista.ejecutiva.isSelected()){
@@ -110,10 +110,13 @@ public class Elegir_clase_controller implements ActionListener{
             
             vistaElegirPuestos.setVisible(true);
             
-            if(controllerElegirPuestos == null)
+            
+            if(controllerElegirPuestos == null){
                 controllerElegirPuestos = new Elegir_puestos_controller(vistaElegirPuestos, datos,pva,modi_ticket_view, usuario, vistaPrincipal, viewAdmin, viewUsuario,modify);
-            else
+            }else{
                 controllerElegirPuestos.setAsientos();
+                controllerElegirPuestos.codigoAsiento.clear();
+            }
             
             
            
@@ -125,7 +128,7 @@ public class Elegir_clase_controller implements ActionListener{
             vista.setVisible(true);
             vistaElegirPuestos.dispose();
             if(pva.getNumero() == 2){
-            
+                vista.setVisible(false);
                 vistaElegirPuestos.dispose();
                 
                 cam_clas_view.setVisible(true);
