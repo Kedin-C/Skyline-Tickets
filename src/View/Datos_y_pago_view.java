@@ -26,7 +26,7 @@ import javax.swing.JFrame;
 
 public class Datos_y_pago_view extends Interfaz_vista_abtractas{
     
-    private JPanel contenedor_principal, contenedor, siguiente_volver, datos, datosTorre1, datosTorre2, medio_pago, panel_precio;
+    private JPanel contenedor_principal, contenedor, siguiente_volver, datos, datosTorre1, datosTorre2, medio_pago, panel_precio, panel_desglose;
     private JLabel nombre, apellido, tipoDocumento, numeroDocumento, numeroTelefono, correoElectronico, nacionalidad, sexo, fechaNacimiento, precio,autocompletado ;
     private TitledBorder tituloDatos, tituloPago;
     private String listaDocumento[] = {"","Registro Civil de Nacimiento","Tarjeta de Identidad","Cédula de Ciudadanía",
@@ -44,6 +44,12 @@ public class Datos_y_pago_view extends Interfaz_vista_abtractas{
     public JTextField nombrecampo, apellidocampo, numero_documento, numeroTel, correo, precioTotal;
     public JDateChooser elegir_fecha;
     private SimpleDateFormat formatoFecha;
+    
+    // Labels del desglose de precio, ubicados justo arriba del total (precioTotal).
+    // El controlador (Datos_y_pago_controller) es quien actualiza su texto segun
+    // lo que el usuario haya escogido: vuelo, ida/vuelta, clase, equipaje, asientos y tickets.
+    public JLabel lblDesglosePrecioVuelo, lblDesgloseMultiplicadorVuelo, lblDesgloseClase,
+            lblDesgloseEquipaje, lblDesgloseAsientos, lblDesgloseTickets;
     
     
     public Datos_y_pago_view() {
@@ -175,6 +181,33 @@ public class Datos_y_pago_view extends Interfaz_vista_abtractas{
         precioTotal.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         precio.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        // --- Panel de desglose del precio, arriba del total ---
+        Font fuenteDesglose = new Font("Arial", Font.PLAIN, 13);
+        
+        panel_desglose = new JPanel();
+        panel_desglose.setLayout(new BoxLayout(panel_desglose, BoxLayout.Y_AXIS));
+        panel_desglose.setBorder(BorderFactory.createTitledBorder("Desglose del precio"));
+        panel_desglose.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        lblDesglosePrecioVuelo = new JLabel("Precio del vuelo: $0");
+        lblDesgloseMultiplicadorVuelo = new JLabel("Ida y vuelta: x2");
+        lblDesgloseClase = new JLabel("Clase: -");
+        lblDesgloseEquipaje = new JLabel("Equipaje extra: Ninguno");
+        lblDesgloseAsientos = new JLabel("Asientos escogidos: Ninguno");
+        lblDesgloseTickets = new JLabel("Cantidad de tickets: x1");
+        
+        JLabel[] labelsDesglose = {lblDesglosePrecioVuelo, lblDesgloseMultiplicadorVuelo, lblDesgloseClase,
+            lblDesgloseEquipaje, lblDesgloseAsientos, lblDesgloseTickets};
+        
+        for (JLabel etiqueta : labelsDesglose) {
+            etiqueta.setFont(fuenteDesglose);
+            etiqueta.setAlignmentX(Component.CENTER_ALIGNMENT);
+            panel_desglose.add(etiqueta);
+        }
+        
+        panel_precio.add(panel_desglose);
+        panel_precio.add(Box.createVerticalStrut(10));
         
         panel_precio.add(precio);
         panel_precio.add(Box.createVerticalStrut(5));

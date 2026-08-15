@@ -54,6 +54,37 @@ public class DatosPagoDao {
         }
     }
     
+    public void enviarDatosT(DatosPago pago){
+        String sql = "INSERT INTO datos_pago (total, medio_pago) "
+           + "VALUES ("                                      
+           + "?, ?);";
+        try{
+            con = Conexion.getObject().getConection();
+            ps=con.prepareStatement(sql);
+        
+            ps.setDouble(1, pago.getTotal());
+            ps.setString(2, pago.getMedioPago());
+        
+            ps.executeUpdate();
+            
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, 
+                    ex.toString(),
+                    "Error al guardar los datos del pago "+ex.getMessage(),
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }finally {
+            if (con != null) {
+                try {
+                    con.close();
+                    ps.close();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.toString());
+                }
+            }
+        }
+    }
+    
     //WHERE numero_cuenta = ? AND cvv = ? AND nombre_titular = ? AND fecha_vencimiento = ? 
     public int idPago(DatosPago pago){
         

@@ -41,7 +41,6 @@ public class Asignar_rol_view extends Interfaz_vista_abtractas{
     public JComboBox roles;
     private String listaRoles[] = {"Administrador","Tecnico","Usuario"};
     
-    public JScrollPane scrollReportes;
     public DefaultTableModel modelo;
     public JTable tabla;
     public JDialog modal;

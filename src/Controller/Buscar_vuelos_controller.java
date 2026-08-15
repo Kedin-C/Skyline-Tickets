@@ -162,6 +162,7 @@ public class Buscar_vuelos_controller implements ActionListener {
             double precio = Double.parseDouble(vista.tabla.getValueAt(filaVuelo, 6).toString());
             datos.setCodigoVuelo(id);
             datos.setTotalPagar(precio);
+            datos.setPrecioBase(precio);
 
             if (vista.vuelo_ida.isSelected()) {
                 datos.setTipoVuelo("IDA");
@@ -172,6 +173,8 @@ public class Buscar_vuelos_controller implements ActionListener {
                 //aplicando el metodo que deja la fecha tal cual en el campo de fecha regreso
                 String fechaRegreso = formateadorRegreso.format(vista.elegir_fecha_regreso.getDate());
                 datos.setFechaRegreso(fechaRegreso);
+                datos.setTotalPagar(precio * 2);
+                datos.setPrecioBase(precio * 2);
             }
 
             vista.setVisible(false);

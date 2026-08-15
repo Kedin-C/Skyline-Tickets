@@ -356,6 +356,7 @@ public class Tarjeta_de_credito_controller implements ActionListener {
         int equipaje = ticketdao.obtenerEquiExtra(id_pasajero);
         double total = datos.getDatosPago().getTotal();
         int totalTickets = datos.getNumeroTickets();
+        
 
         if ("IDA_VUELTA".equals(ticketdao.obtenerTipoVuelo(id_pasajero))) {
             viewPago.lblFlechaVuelta.setVisible(true);
@@ -452,7 +453,7 @@ public class Tarjeta_de_credito_controller implements ActionListener {
                         int equipaje = ticketdao.obtenerEquiExtra(idPasajero);
                         String fechaRegreso = ticketdao.obtenerFechaRegreso(idPasajero1);
                         int escogerAsiento = datos.getEscogerAsiento();
-                        double total = datos.getDatosPago().getTotal();
+                        double total = datos.getDatosPago().getTotal()/2;
                         int totalTickets = datos.getNumeroTickets();
                         double costoVuelo = ticketdao.obtenerCosto(idPasajero);
 

@@ -57,7 +57,6 @@ public class Transferencia_controller implements ActionListener{
         this.vista.bancolombia.addActionListener(this);
         this.vista.nequi.addActionListener(this);
         this.vista.paypal.addActionListener(this);
-        
     }
 
     @Override
@@ -72,10 +71,18 @@ public class Transferencia_controller implements ActionListener{
                 vista_atras.setExtendedState(JFrame.MAXIMIZED_BOTH);
             }
         } else if (e.getSource() == vista.bancolombia) {
+            datosPagar.setTotal(datos.getTotalPagar());
+            datosPagar.setMedioPago("Transferencia");
+            datos.setDatosPago(datosPagar);
 
             if (datos.vista_pago == 1) {
 
-                    datosPagarDao.enviarDatos(datosPagar);
+                    if(datosPagar.getNumero_tarjeta() != null){
+                        datosPagarDao.enviarDatos(datosPagar);
+                    }else{
+                        datosPagarDao.enviarDatosT(datosPagar);
+                    }
+                    
                     ticketdao.modificarEquipaje(ticket.getId(), datos.getEquipajeExtra());
                     Confirmar_pago_view viewPago = new Confirmar_pago_view();
                     Confirmar_pago_controller pago_cont = new Confirmar_pago_controller(viewPago, vistaPrincipal, viewAdmin, viewUsuario, usuario);
@@ -102,7 +109,11 @@ public class Transferencia_controller implements ActionListener{
 
                 } else if (datos.vista_pago == 2) {
 
-                    datosPagarDao.enviarDatos(datosPagar);
+                    if(datosPagar.getNumero_tarjeta() != null){
+                        datosPagarDao.enviarDatos(datosPagar);
+                    }else{
+                        datosPagarDao.enviarDatosT(datosPagar);
+                    }
 
                     int id = ticketdao.codigoReserva(ticket.getId());
                     String asiento = pv.getPuesto();
@@ -163,10 +174,17 @@ public class Transferencia_controller implements ActionListener{
 
                 }
         } else if (e.getSource() == vista.nequi) {
+            datosPagar.setTotal(datos.getTotalPagar());
+            datosPagar.setMedioPago("Transferencia");
+            datos.setDatosPago(datosPagar);
 
             if (datos.vista_pago == 1) {
 
-                    datosPagarDao.enviarDatos(datosPagar);
+                    if(datosPagar.getNumero_tarjeta() != null){
+                        datosPagarDao.enviarDatos(datosPagar);
+                    }else{
+                        datosPagarDao.enviarDatosT(datosPagar);
+                    }
                     ticketdao.modificarEquipaje(ticket.getId(), datos.getEquipajeExtra());
                     Confirmar_pago_view viewPago = new Confirmar_pago_view();
                     Confirmar_pago_controller pago_cont = new Confirmar_pago_controller(viewPago, vistaPrincipal, viewAdmin, viewUsuario, usuario);
@@ -193,7 +211,11 @@ public class Transferencia_controller implements ActionListener{
 
                 } else if (datos.vista_pago == 2) {
 
-                    datosPagarDao.enviarDatos(datosPagar);
+                    if(datosPagar.getNumero_tarjeta() != null){
+                        datosPagarDao.enviarDatos(datosPagar);
+                    }else{
+                        datosPagarDao.enviarDatosT(datosPagar);
+                    }
 
                     int id = ticketdao.codigoReserva(ticket.getId());
                     String asiento = pv.getPuesto();
@@ -254,10 +276,17 @@ public class Transferencia_controller implements ActionListener{
 
                 }
         } else if (e.getSource() == vista.paypal) {
+            datosPagar.setTotal(datos.getTotalPagar());
+            datosPagar.setMedioPago("Transferencia");
+            datos.setDatosPago(datosPagar);
 
             if (datos.vista_pago == 1) {
 
-                    datosPagarDao.enviarDatos(datosPagar);
+                    if(datosPagar.getNumero_tarjeta() != null){
+                        datosPagarDao.enviarDatos(datosPagar);
+                    }else{
+                        datosPagarDao.enviarDatosT(datosPagar);
+                    }
                     ticketdao.modificarEquipaje(ticket.getId(), datos.getEquipajeExtra());
                     Confirmar_pago_view viewPago = new Confirmar_pago_view();
                     Confirmar_pago_controller pago_cont = new Confirmar_pago_controller(viewPago, vistaPrincipal, viewAdmin, viewUsuario, usuario);
@@ -284,7 +313,11 @@ public class Transferencia_controller implements ActionListener{
 
                 } else if (datos.vista_pago == 2) {
 
-                    datosPagarDao.enviarDatos(datosPagar);
+                    if(datosPagar.getNumero_tarjeta() != null){
+                        datosPagarDao.enviarDatos(datosPagar);
+                    }else{
+                        datosPagarDao.enviarDatosT(datosPagar);
+                    }
 
                     int id = ticketdao.codigoReserva(ticket.getId());
                     String asiento = pv.getPuesto();
@@ -447,7 +480,7 @@ public class Transferencia_controller implements ActionListener{
                         int equipaje = ticketdao.obtenerEquiExtra(idPasajero);
                         String fechaRegreso = ticketdao.obtenerFechaRegreso(idPasajero1);
                         int escogerAsiento = datos.getEscogerAsiento();
-                        double total = datos.getDatosPago().getTotal();
+                        double total = datos.getDatosPago().getTotal()/2;
                         int totalTickets = datos.getNumeroTickets();
                         double costoVuelo = ticketdao.obtenerCosto(idPasajero);
 

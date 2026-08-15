@@ -79,6 +79,15 @@ public class Confirmar_pago_controller implements ActionListener{
                 Vistas_globales.datosYPago.listar_documento.setSelectedIndex(0);
                 Vistas_globales.datosYPago.listar_sexo.setSelectedIndex(0);
                 Vistas_globales.datosYPago.listar_nacionalidad.setSelectedIndex(0);
+                
+                // Limpiar tambien el desglose de precio para que no queden datos
+                // de la compra anterior visibles al iniciar una compra nueva.
+                Vistas_globales.datosYPago.lblDesglosePrecioVuelo.setText("Precio del vuelo: $0");
+                Vistas_globales.datosYPago.lblDesgloseMultiplicadorVuelo.setVisible(false);
+                Vistas_globales.datosYPago.lblDesgloseClase.setText("Clase: -");
+                Vistas_globales.datosYPago.lblDesgloseEquipaje.setText("Equipaje extra: Ninguno");
+                Vistas_globales.datosYPago.lblDesgloseAsientos.setText("Asientos escogidos: Ninguno");
+                Vistas_globales.datosYPago.lblDesgloseTickets.setText("Cantidad de tickets: x1");
             }
 
             // Limpiar los campos de la tarjeta de crédito

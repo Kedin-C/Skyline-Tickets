@@ -11,6 +11,8 @@ public class Datos {
     
     private int codigoVuelo, numeroTickets, equipajeExtra, claseVuelo, escogerAsiento = 0;
     private double totalPagar = 0, totalFinal = 0;
+    private double precioBase = 0;
+    private double costoAsientos = 0;
     private String tipoVuelo, fechaRegreso;
     private ArrayList<String> codigoAsiento;
     private ArrayList<DatosPersonales> datosPersonales;
@@ -61,6 +63,22 @@ public class Datos {
 
     public void setTotalPagar(double totalPagar) {
         this.totalPagar = totalPagar;
+    }
+
+    public void setPrecioBase(double precioBase) {
+        this.precioBase = precioBase;
+    }
+
+    public double getPrecioBase() {
+        return precioBase;
+    }
+
+    public void setCostoAsientos(double costoAsientos) {
+        this.costoAsientos = costoAsientos;
+    }
+
+    public double getCostoAsientos() {
+        return costoAsientos;
     }
 
     public void setTipoVuelo(String tipoVuelo) {
@@ -180,6 +198,8 @@ public class Datos {
         this.equipajeExtra = 0;
         this.claseVuelo = 0;
         this.totalPagar = 0;
+        this.precioBase = 0;
+        this.costoAsientos = 0;
         this.tipoVuelo = null;
         this.fechaRegreso = null;
         this.codigoAsiento = null;
