@@ -24,6 +24,7 @@ import View.ViewPrincipal;
 import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -323,7 +324,7 @@ public class Datos_y_pago_controller implements ActionListener{
             vista.numero_documento.setText(usuario.getDocumento());
             vista.numeroTel.setText(usuario.getNumero_telefono());
             vista.correo.setText(usuario.getCorreo());
-            vista.listar_documento.setSelectedIndex(3);
+            vista.listar_documento.setSelectedIndex(usuario.getCodigo_tipo_documento());
             
             if("Masculino".equals(usuario.getSexo())){
             vista.listar_sexo.setSelectedIndex(1);
@@ -332,6 +333,18 @@ public class Datos_y_pago_controller implements ActionListener{
             vista.listar_sexo.setSelectedIndex(2);
             }
             
+            vista.listar_nacionalidad.setSelectedItem(usuario.getNationalidad());
+          
+            try {
+                String fechaTexto = usuario.getFecha_nacimiento();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                Date fecha = sdf.parse(fechaTexto);
+
+                vista.elegir_fecha.setDate(fecha);
+            } catch (ParseException ec) {
+                ec.printStackTrace();
+            }
+  
         }
         
         if(e.getSource() == this.viewTarjetaCredito.volver){
