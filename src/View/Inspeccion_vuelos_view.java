@@ -92,6 +92,7 @@ public class Inspeccion_vuelos_view extends Interfaz_vista_abtractas{
         // Aplicar el renderer a todas las columnas
         for (int i = 0; i < tabla.getColumnCount(); i++) {
             tabla.getColumnModel().getColumn(i).setCellRenderer(centrado);
+            tabla.getColumnModel().getColumn(i).setCellRenderer(rendererFila);
         }
         
         
@@ -121,7 +122,28 @@ public class Inspeccion_vuelos_view extends Interfaz_vista_abtractas{
         panel2.add(panelAviones, BorderLayout.CENTER);
         panel2.add(panelInferior, BorderLayout.SOUTH);
     }
-    
-    
-    
+
+    DefaultTableCellRenderer rendererFila = new DefaultTableCellRenderer() {
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value,
+                boolean isSelected, boolean hasFocus,
+                int row, int column) {
+            Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+            setHorizontalAlignment(SwingConstants.CENTER);
+
+            Object estado = table.getValueAt(row, 4);
+
+            if ("Activo".equals(estado)) {
+                c.setBackground(new Color(144, 238, 144));
+            }else if("Inactivo".equals(estado)){
+                c.setBackground(new Color(255, 0, 0, 60)); 
+            }else{
+                c.setBackground(new Color(220, 220, 220)); 
+            }
+
+            return c;
+        }
+    };
+
 }

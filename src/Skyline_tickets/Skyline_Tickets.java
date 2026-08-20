@@ -156,7 +156,7 @@ public class Skyline_Tickets {
         Elegir_clase_controller elegir_clase_cont = new Elegir_clase_controller(elegir_clase_vista, datos, clase, puv, forma_pago_vista, usuario, vista_principal, pagina_admin, pagina_usuario, modificacion);
         Inspeccion_vuelos_controller inspec_cont = new Inspeccion_vuelos_controller(pagina_tecni,inspec,dao_inspec,check);
         Pagina_principal_tecnico_controller tecni_cont = new Pagina_principal_tecnico_controller(pagina_tecni,select_vuelo,buscar_v,ticket,usuario,historial_vuelos,historial_cont,inspec,inspec_cont);
-        CheckList_aviones_controller check_cont = new CheckList_aviones_controller(check,inspec,inspec_cont,dao_inspec);
+        CheckList_aviones_controller check_cont = new CheckList_aviones_controller(check,inspec,inspec_cont,dao_inspec,usuario);
         
 
         Pagina_principal_controller pagina_princ_cont = new Pagina_principal_controller(vista_principal, select_vuelo_nor, buscar_v, menu);
