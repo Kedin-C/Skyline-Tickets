@@ -32,13 +32,16 @@ public class Datos_y_pago_view extends Interfaz_vista_abtractas{
     private String listaDocumento[] = {"","Registro Civil de Nacimiento","Tarjeta de Identidad","Cédula de Ciudadanía",
             "Cédula de Extranjería","Pasaporte Vigente","Permiso por Protección Temporal"},
             listaSexo[] = {"","Masculino","Femenino"}, 
-            listaNacionalidad[] = {"","argentino", "boliviano", "brasileño",
-                "chileno", "colombiano", "costarricense",
-                "cubano", "dominicano", "ecuatoriano",
-                "salvadoreño", "guatemalteco", "hondureño",
-                "mexicano", "nicaragüense", "panameño",
-                "paraguayo", "peruano", "puertorriqueño",
-                "uruguayo", "venezolano"};
+            listaNacionalidad[] = {
+                "",
+                "Argentino", "Boliviano", "Brasileño",
+                "Chileno", "Colombiano", "Costarricense",
+                "Cubano", "Dominicano", "Ecuatoriano",
+                "Salvadoreño", "Guatemalteco", "Hondureño",
+                "Mexicano", "Nicaragüense", "Panameño",
+                "Paraguayo", "Peruano", "Puertorriqueño",
+                "Uruguayo", "Venezolano"
+            };
     public JComboBox listar_documento, listar_sexo, listar_nacionalidad;
     public JButton volver, siguiente, credito, debito, pse,autocompletadobutton;
     public JTextField nombrecampo, apellidocampo, numero_documento, numeroTel, correo, precioTotal;
