@@ -38,6 +38,8 @@ public class Elegir_puestos_controller implements ActionListener {
     private Inicio_usuario_view viewUsuario;
     private Seleccion_de_Modificacion_de_vuelo_view modify;
     private Datos_y_pago_controller datosypago;
+    private int totalPuestos = 0;
+    private boolean seleccionAleatoria = false;
 
     int filas = 0;
     int columnas = 0;
@@ -93,12 +95,34 @@ public class Elegir_puestos_controller implements ActionListener {
                         pva.setPuesto(nombrebtn);
                         codigoAsiento.add(nombrebtn);
 
-                        if (datos.getClaseVuelo() == 1) {
-                            datos.setTotalPagar(datos.getTotalPagar() + 30000);
-                        } else if (datos.getClaseVuelo() == 2) {
-                            datos.setTotalPagar(datos.getTotalPagar() + 50000);
-                        } else {
-                            datos.setTotalPagar(datos.getTotalPagar() + 80000);
+                        // La seleccion aleatoria (aleatorio -> doClick) no cobra el puesto.
+                        if (!seleccionAleatoria) {
+                            if (datos.getClaseVuelo() == 1) {
+                                if (datos.getFechaRegreso() == null) {
+                                    datos.setTotalPagar(datos.getTotalPagar() + 30000);
+                                    totalPuestos += 30000;
+                                } else {
+                                    datos.setTotalPagar(datos.getTotalPagar() + (30000 * 2));
+                                    totalPuestos += 60000;
+                                }
+                            } else if (datos.getClaseVuelo() == 2) {
+                                if (datos.getFechaRegreso() == null) {
+                                    datos.setTotalPagar(datos.getTotalPagar() + 50000);
+                                    totalPuestos += 50000;
+                                } else {
+                                    datos.setTotalPagar(datos.getTotalPagar() + (50000 * 2));
+                                    totalPuestos += 100000;
+                                }
+                            } else {
+                                if (datos.getFechaRegreso() == null) {
+                                    datos.setTotalPagar(datos.getTotalPagar() + 80000);
+                                    totalPuestos += 80000;
+                                } else {
+                                    datos.setTotalPagar(datos.getTotalPagar() + (80000 * 2));
+                                    totalPuestos += 160000;
+                                }
+                            }
+                            datos.setCostoAsientos(totalPuestos);
                         }
                         datos.setTotalFinal(datos.getTotalPagar());
                         datos.elegidos++;
@@ -125,12 +149,33 @@ public class Elegir_puestos_controller implements ActionListener {
                         pva.setPuesto(nombrebtn);
 
                         codigoAsiento.add(nombrebtn);
-                        if (datos.getClaseVuelo() == 1) {
-                            datos.setTotalPagar(datos.getTotalPagar() + 30000);
-                        } else if (datos.getClaseVuelo() == 2) {
-                            datos.setTotalPagar(datos.getTotalPagar() + 50000);
-                        } else {
-                            datos.setTotalPagar(datos.getTotalPagar() + 80000);
+                        if (!seleccionAleatoria) {
+                            if (datos.getClaseVuelo() == 1) {
+                                if (datos.getFechaRegreso() == null) {
+                                    datos.setTotalPagar(datos.getTotalPagar() + 30000);
+                                    totalPuestos += 30000;
+                                } else {
+                                    datos.setTotalPagar(datos.getTotalPagar() + (30000 * 2));
+                                    totalPuestos += 60000;
+                                }
+                            } else if (datos.getClaseVuelo() == 2) {
+                                if (datos.getFechaRegreso() == null) {
+                                    datos.setTotalPagar(datos.getTotalPagar() + 50000);
+                                    totalPuestos += 50000;
+                                } else {
+                                    datos.setTotalPagar(datos.getTotalPagar() + (50000 * 2));
+                                    totalPuestos += 100000;
+                                }
+                            } else {
+                                if (datos.getFechaRegreso() == null) {
+                                    datos.setTotalPagar(datos.getTotalPagar() + 80000);
+                                    totalPuestos += 80000;
+                                } else {
+                                    datos.setTotalPagar(datos.getTotalPagar() + (80000 * 2));
+                                    totalPuestos += 160000;
+                                }
+                            }
+                            datos.setCostoAsientos(totalPuestos);
                         }
                         datos.setTotalFinal(datos.getTotalPagar());
                         datos.elegidos++;
@@ -160,6 +205,7 @@ public class Elegir_puestos_controller implements ActionListener {
                         vistaDatosyPago.setVisible(true);
                     }
                     datosypago.limpiar();
+                    datosypago.actualizarPrecio();
                     if (usuario.getRol() != 0) {
                         vistaDatosyPago.setButtonAutoComplete();
                     } else {
@@ -191,9 +237,11 @@ public class Elegir_puestos_controller implements ActionListener {
                             "Debes elegir los puestos de los tickets que compraras", "Elegir puestos", JOptionPane.WARNING_MESSAGE);
                 }
             }
+            System.out.println(datos.getTotalPagar());
         }
 
         if (e.getSource() == vista.aleatorio) {
+            seleccionAleatoria = true;
 
             while (datos.elegidos <= datos.getNumeroTickets()) {
 
@@ -202,17 +250,8 @@ public class Elegir_puestos_controller implements ActionListener {
                 int torreAleatoria = (int) (Math.random() * 2);
 
                 if (torreAleatoria == 0) {
-
                     if (vista.torre1[fila][columna].isEnabled()) {
                         vista.torre1[fila][columna].doClick();
-                        if (datos.getClaseVuelo() == 1) {
-                            datos.setTotalPagar(datos.getTotalPagar() - 30000);
-                        } else if (datos.getClaseVuelo() == 2) {
-                            datos.setTotalPagar(datos.getTotalPagar() - 50000);
-                        } else {
-                            datos.setTotalPagar(datos.getTotalPagar() - 80000);
-                        }
-                        datos.setTotalFinal(datos.getTotalPagar());
                     } else {
                         continue;
                     }
@@ -221,29 +260,23 @@ public class Elegir_puestos_controller implements ActionListener {
                 if (torreAleatoria == 1) {
                     if (vista.torre2[fila][columna].isEnabled()) {
                         vista.torre2[fila][columna].doClick();
-                        if (datos.getClaseVuelo() == 1) {
-                            datos.setTotalPagar(datos.getTotalPagar() - 30000);
-                        } else if (datos.getClaseVuelo() == 2) {
-                            datos.setTotalPagar(datos.getTotalPagar() - 50000);
-                        } else {
-                            datos.setTotalPagar(datos.getTotalPagar() - 80000);
-                        }
-                        datos.setTotalFinal(datos.getTotalPagar());
                     } else {
                         continue;
                     }
                 }
             }
-            
+
+            seleccionAleatoria = false;
+
             vista.siguiente.doClick();
             datos.setEscogerAsiento(0);
         }
 
         if (e.getSource() == vistaDatosyPago.volver) {
             vista.setVisible(true);
-
+            datos.setTotalPagar(datos.getTotalPagar() - totalPuestos);
             vistaDatosyPago.dispose();
-
+            setAsientos();
         }
     }
 
@@ -251,14 +284,14 @@ public class Elegir_puestos_controller implements ActionListener {
 
         codigoAsiento.clear();
         datos.elegidos = 1;
+        totalPuestos = 0;
+        datos.setCostoAsientos(0);
 
         for (int f = 0; f < vista.torre1.length; f++) {
             filas++;
             for (int c = 0; c < vista.torre1[f].length; c++) {
                 columnas++;
                 if (vista.torre1[f][c] != null) {
-                    // Se quita el listener antes de agregarlo de nuevo para evitar
-                    // que se acumulen listeners duplicados cada vez que se llama setAsientos()
                     vista.torre1[f][c].removeActionListener(this);
                     vista.torre1[f][c].addActionListener(this);
                     vista.torre1[f][c].setEnabled(true);

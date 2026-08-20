@@ -72,8 +72,10 @@ public class UsuarioDao {
                     usuario.setNumero_telefono(rs.getString("numero_telefono"));
                     if(Integer.parseInt(rs.getString("id_rol")) == 1){
                         usuario.setRol(1);
-                    }else{
+                    }else if(Integer.parseInt(rs.getString("id_rol")) == 2){
                         usuario.setRol(2);
+                    }else{
+                        usuario.setRol(3);
                     }
                     return usuario;
                 }   

@@ -166,8 +166,85 @@ public class Datos_y_pago_controller implements ActionListener{
                                                         + "del pasajero ya que se validara esta\n"
                                                         + "informacion antes de subir al vuelo");
         
-        this.vista.precioTotal.setText(""+this.datos.getTotalPagar());
+        actualizarPrecio();
         
+    }
+    
+    public void actualizarPrecio(){
+        
+        boolean idaVuelta = datos.getFechaRegreso() != null;
+        int multiplicadorVuelta = idaVuelta ? 2 : 1;
+        int numeroTickets = datos.getNumeroTickets();
+        
+        double precioVueloUnitario = datos.getPrecioBase() / multiplicadorVuelta;
+        
+        String nombreClase;
+        double costoClaseUnitario = 0;
+        switch (datos.getClaseVuelo()) {
+            case 2:
+                nombreClase = "Ejecutiva";
+                costoClaseUnitario = 250000;
+                break;
+            case 3:
+                nombreClase = "Primera Clase";
+                costoClaseUnitario = 400000;
+                break;
+            default:
+                nombreClase = "Economica";
+                costoClaseUnitario = 0;
+                break;
+        }
+//        costoClaseUnitario *= multiplicadorVuelta;
+        
+        int equipajeKg = datos.getEquipajeExtra();
+        double costoEquipajeUnitario = 0;
+        if (equipajeKg == 15) {
+            costoEquipajeUnitario = 60000;
+        } else if (equipajeKg == 20) {
+            costoEquipajeUnitario = 80000;
+        } else if (equipajeKg == 25) {
+            costoEquipajeUnitario = 100000;
+        } else {
+            costoEquipajeUnitario = 0;
+        }
+//        costoEquipajeUnitario *= multiplicadorVuelta;
+        
+        int numeroAsientos = (datos.getCodigoAsiento() != null) ? datos.getCodigoAsiento().size() : 0;
+        double costoAsientosTotal = datos.getCostoAsientos();
+        
+        vista.lblDesglosePrecioVuelo.setText("Precio del vuelo (por persona): $" + String.format("%,.0f", precioVueloUnitario));
+        
+        vista.lblDesgloseMultiplicadorVuelo.setVisible(idaVuelta);
+        if (idaVuelta) {
+            vista.lblDesgloseMultiplicadorVuelo.setText("Ida y vuelta: x2");
+        }
+        
+        if (costoClaseUnitario > 0) {
+            vista.lblDesgloseClase.setText("Clase " + nombreClase + ": +$" + String.format("%,.0f", costoClaseUnitario));
+        } else {
+            vista.lblDesgloseClase.setText("Clase " + nombreClase + ": sin costo adicional");
+        }
+        
+        if (equipajeKg > 0) {
+            vista.lblDesgloseEquipaje.setText("Equipaje extra (" + equipajeKg + " KG): +$" + String.format("%,.0f", costoEquipajeUnitario));
+        } else {
+            vista.lblDesgloseEquipaje.setText("Equipaje extra: Ninguno");
+        }
+        
+        vista.lblDesgloseTickets.setText("Cantidad de tickets: x" + numeroTickets);
+        
+        if (numeroAsientos > 0) {
+            if (costoAsientosTotal > 0) {
+                vista.lblDesgloseAsientos.setText("Asientos escogidos (" + numeroAsientos + "): +$" + String.format("%,.0f", costoAsientosTotal));
+            } else {
+                vista.lblDesgloseAsientos.setText("Asientos escogidos (" + numeroAsientos + "): sin costo (seleccion aleatoria)");
+            }
+        } else {
+            vista.lblDesgloseAsientos.setText("Asientos escogidos: Ninguno");
+        }
+        
+        
+        this.vista.precioTotal.setText("$" + String.format("%,.0f", this.datos.getTotalPagar()));
     }
 
         

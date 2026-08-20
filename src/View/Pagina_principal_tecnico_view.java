@@ -45,7 +45,7 @@ public class Pagina_principal_tecnico_view extends Interfaz_vista_abtractas{
         // Configurar botones
         inspeccion = new JButton("Inspección Aviones");
         inspeccion.setBackground(Color.white);
-        inspeccion.setPreferredSize(new Dimension(200, 40));
+        inspeccion.setPreferredSize(new Dimension(250, 40));
         inspeccion.setFont(new Font("Arial", Font.BOLD, 20));
         inspeccion.setBorderPainted(false);
         
@@ -57,8 +57,8 @@ public class Pagina_principal_tecnico_view extends Interfaz_vista_abtractas{
         
         historial = new JButton("Historial de vuelos");
         historial.setBackground(Color.white);
-        historial.setPreferredSize(new Dimension(200, 40));
-        historial.setFont(new Font("Arial", Font.BOLD, 15));
+        historial.setPreferredSize(new Dimension(250, 40));
+        historial.setFont(new Font("Arial", Font.BOLD, 20));
         historial.setBorderPainted(false);
 
         // Agregar ambos al mismo panel

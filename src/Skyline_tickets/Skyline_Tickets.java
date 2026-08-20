@@ -57,13 +57,20 @@ import Model.Reportes_financieros_dao;
 import Model.Reportes_operativos_dao;
 import Controller.And_puestos;
 import Controller.Asignar_rol_controller;
+import Controller.CheckList_aviones_controller;
+import Controller.Inspeccion_vuelos_controller;
+import Controller.Pagina_principal_tecnico_controller;
+import Model.Inspeccion_avionesDao;
 import View.Apartado_reportes_financieros_view;
 import View.Apartado_reportes_operacionales_view;
 import View.Asignar_rol_view;
+import View.CheckList_aviones_view;
 import View.Elegir_clase_view;
 import View.Elegir_puestos_view;
 import View.Confirmar_pago_view;
 import View.Historial_vuelos_view;
+import View.Inspeccion_vuelos_view;
+import View.Pagina_principal_tecnico_view;
 import View.Recuperar_contraseña_view;
 
 public class Skyline_Tickets {
@@ -73,6 +80,7 @@ public class Skyline_Tickets {
         //vistas principales
         ViewPrincipal vista_principal = new ViewPrincipal();
         Pagina_principal_administrador_view pagina_admin = new Pagina_principal_administrador_view();
+        Pagina_principal_tecnico_view pagina_tecni = new Pagina_principal_tecnico_view();
         Inicio_usuario_view pagina_usuario = new Inicio_usuario_view();
         Usuario usuario = Usuario.getInstanceD();
         Sesion_usuario sesion_usuario = new Sesion_usuario();
@@ -106,6 +114,8 @@ public class Skyline_Tickets {
         View.Vistas_globales.elegirClase = elegir_clase_vista;
         Confirmar_pago_view conf_pago_view = new Confirmar_pago_view();
         Asignar_rol_view asig = new Asignar_rol_view();
+        Inspeccion_vuelos_view inspec = new Inspeccion_vuelos_view();
+        CheckList_aviones_view check = new CheckList_aviones_view();
 
         //clases
         Ticket ticket = new Ticket();
@@ -118,6 +128,7 @@ public class Skyline_Tickets {
         Seleccion_equipaje_extra_dao dao_equipaje_extra = new Seleccion_equipaje_extra_dao();
         Reportes_financieros_dao dao_repo_finan = new Reportes_financieros_dao();
         Reportes_operativos_dao dao_repo_ope = new Reportes_operativos_dao();
+        Inspeccion_avionesDao dao_inspec = new Inspeccion_avionesDao();
 
         //controladores
         Interfaz_equipaje_controller interfaz2 = new Interfaz_equipaje_controller(modificacion, bodega, dao_equipaje_extra, ticket, forma_pago_vista, datos);
@@ -128,7 +139,7 @@ public class Skyline_Tickets {
         Tarjeta_de_credito_controller credito_cont = new Tarjeta_de_credito_controller(credito, datos, forma_pago_vista, ticket, usuario, vista_principal, pagina_admin, pagina_usuario, puv, modificacion);
         Tarjeta_de_debito_controller debito_cont = new Tarjeta_de_debito_controller(debito, datos, forma_pago_vista, ticket, puv, modificacion, vista_principal, pagina_admin, pagina_usuario, usuario);
         Transferencia_controller transferencia_cont = new Transferencia_controller(transferencia, datos, forma_pago_vista, usuario, vista_principal, pagina_admin, pagina_usuario,ticket,puv);
-        Login_controller login_cont = new Login_controller(loginV, vista_principal, usuario, registro_view, pagina_admin, pagina_usuario, sesion_usuario, menu, recu_con);
+        Login_controller login_cont = new Login_controller(loginV, vista_principal, usuario, registro_view, pagina_admin, pagina_usuario, sesion_usuario, menu, recu_con,pagina_tecni);
         Registro_controller registro_cont = new Registro_controller(registro_view, menu, loginV);
         Buscar_vuelos_controller buscar_v_cont = new Buscar_vuelos_controller(buscar_v, datos, vista_principal, pagina_admin, pagina_usuario, historial_vuelos, puv, forma_pago_vista, clase, usuario, vista_principal, pagina_admin, pagina_usuario, elegir_clase_vista);
         Historial_vuelos_controller historial_cont = new Historial_vuelos_controller(historial_vuelos, pagina_admin, pagina_usuario, usuario, buscar_v, buscar_v_cont);
@@ -143,6 +154,9 @@ public class Skyline_Tickets {
         Menu_principal_controller menu_prin_cont = new Menu_principal_controller(vista_principal, loginV, registro_view, menu);
         Elegir_puestos_controller puestos_cont = new Elegir_puestos_controller(puestos_vista, datos, puv, forma_pago_vista, usuario, vista_principal, pagina_admin, pagina_usuario, modificacion);
         Elegir_clase_controller elegir_clase_cont = new Elegir_clase_controller(elegir_clase_vista, datos, clase, puv, forma_pago_vista, usuario, vista_principal, pagina_admin, pagina_usuario, modificacion);
+        Inspeccion_vuelos_controller inspec_cont = new Inspeccion_vuelos_controller(pagina_tecni,inspec,dao_inspec,check);
+        Pagina_principal_tecnico_controller tecni_cont = new Pagina_principal_tecnico_controller(pagina_tecni,select_vuelo,buscar_v,ticket,usuario,historial_vuelos,historial_cont,inspec,inspec_cont);
+        CheckList_aviones_controller check_cont = new CheckList_aviones_controller(check,inspec,inspec_cont,dao_inspec);
         
 
         Pagina_principal_controller pagina_princ_cont = new Pagina_principal_controller(vista_principal, select_vuelo_nor, buscar_v, menu);

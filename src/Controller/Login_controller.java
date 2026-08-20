@@ -19,6 +19,7 @@ import View.Inicio_usuario_view;
 import View.Login_view;
 import View.Menu_principal_view;
 import View.Pagina_principal_administrador_view;
+import View.Pagina_principal_tecnico_view;
 import View.Recuperar_contraseña_view;
 import View.Registro_view;
 import View.ViewPrincipal;
@@ -35,11 +36,12 @@ public class Login_controller implements ActionListener {
     private Usuario usu;
     private Sesion_usuario sesion_usu;
     private Recuperar_contraseña_view recuperarView;
+    private Pagina_principal_tecnico_view pagina_tecni;
     
     public Login_controller(Login_view vista, ViewPrincipal principal, Usuario usuario, 
             Registro_view registro, Pagina_principal_administrador_view vista_admin, 
             Inicio_usuario_view vista_usuario, Sesion_usuario sesion_usu, Menu_principal_view menu, 
-            Recuperar_contraseña_view recuperarView) {
+            Recuperar_contraseña_view recuperarView,Pagina_principal_tecnico_view pagina_tecni) {
         this.vista = vista;
         this.vista_admin = vista_admin;
         this.vista_usuario = vista_usuario;
@@ -50,6 +52,7 @@ public class Login_controller implements ActionListener {
         this.menu = menu;
         this.sesion_usu = sesion_usu;
         this.recuperarView = recuperarView;
+        this.pagina_tecni = pagina_tecni;
         this.vista.getB1().addActionListener(this);
         this.vista.getB2().addActionListener(this);
         this.vista.getBtnVolver().addActionListener(this);
@@ -91,10 +94,17 @@ public class Login_controller implements ActionListener {
                 vista_admin.setVisible(true);
                 vista_admin.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
                 vista.dispose();
-            } else {
+
+            }else if(usu.getRol() == 2){
                 //JOptionPane.showMessageDialog(null, "Ingreso como usuario");
+
                 vista_usuario.setVisible(true);
                 vista_usuario.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
+                vista.dispose();
+            }else{
+                //JOptionPane.showMessageDialog(null, "Ingreso como tecnico");
+                pagina_tecni.setVisible(true);
+                pagina_tecni.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
                 vista.dispose();
             }
         }

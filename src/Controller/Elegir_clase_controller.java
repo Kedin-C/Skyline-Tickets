@@ -48,7 +48,7 @@ public class Elegir_clase_controller implements ActionListener{
         this.viewAdmin = viewAdmin;
         this.viewUsuario = viewUsuario;
         this.modify = modify;
-        this.vistaElegirPuestos = new Elegir_puestos_view();;
+        this.vistaElegirPuestos = new Elegir_puestos_view();
         this.vista.siguiente.addActionListener( this);
         this.vista.volver.addActionListener(this);
         
@@ -75,31 +75,58 @@ public class Elegir_clase_controller implements ActionListener{
         
         if(e.getSource() == vista.siguiente){
             
-            
+            // Siempre partimos del precio base del vuelo (sin clase, equipaje ni puestos).
+            // Esto evita que, si el usuario entra y sale de esta pantalla varias veces,
+            // los cargos de clase/equipaje se sigan sumando sobre un total que ya los tenia.
+            datos.setTotalPagar(datos.getPrecioBase());
             
             if(vista.economica.isSelected()){
                 datos.setClaseVuelo(1);
             }else if(vista.ejecutiva.isSelected()){
                 datos.setClaseVuelo(2);
-                datos.setTotalPagar(datos.getTotalPagar()+250000);
+                if(datos.getFechaRegreso() == null){
+                    datos.setTotalPagar(datos.getTotalPagar()+250000);
+                }else{
+                    datos.setTotalPagar(datos.getTotalPagar()+(250000*2));
+                }
+                
             }else{
                 datos.setClaseVuelo(3);
-                datos.setTotalPagar(datos.getTotalPagar()+400000);
+                if(datos.getFechaRegreso() == null){
+                    datos.setTotalPagar(datos.getTotalPagar()+400000);
+                }else{
+                    datos.setTotalPagar(datos.getTotalPagar()+(400000*2));
+                }
             }
             
             datos.setNumeroTickets(Integer.parseInt(vista.listarNumeros.getSelectedItem().toString()));
             datos.elegidos = 1;
-            
-            if(vista.listarEquipaje.getSelectedIndex() > 0){
+
+            if (vista.listarEquipaje.getSelectedIndex() > 0) {
                 String tickets = vista.listarEquipaje.getSelectedItem().toString();
                 datos.setEquipajeExtra(Integer.parseInt(tickets.substring(0, 2)));
-                if(vista.listarEquipaje.getSelectedIndex() == 1){
-                    datos.setTotalPagar(datos.getTotalPagar()+60000);
-                }
-                if(vista.listarEquipaje.getSelectedIndex() == 2){
-                    datos.setTotalPagar(datos.getTotalPagar()+80000);
-                }else{
-                    datos.setTotalPagar(datos.getTotalPagar()+100000);
+                // Antes esto eran dos "if" independientes: al elegir el indice 1 (15 kilos)
+                // entraba al primer if (sumaba 60000) Y TAMBIEN al "else" del segundo if
+                // (sumaba 100000), cobrando de mas. Con "else if" solo se aplica UN cargo,
+                // segun la opcion de equipaje realmente seleccionada.
+                if (vista.listarEquipaje.getSelectedIndex() == 1) {
+                    if (datos.getFechaRegreso() == null) {
+                        datos.setTotalPagar(datos.getTotalPagar() + 60000);
+                    } else {
+                        datos.setTotalPagar(datos.getTotalPagar() + (60000 * 2));
+                    }
+                } else if (vista.listarEquipaje.getSelectedIndex() == 2) {
+                    if (datos.getFechaRegreso() == null) {
+                        datos.setTotalPagar(datos.getTotalPagar() + 80000);
+                    } else {
+                        datos.setTotalPagar(datos.getTotalPagar() + (80000 * 2));
+                    }
+                } else {
+                    if (datos.getFechaRegreso() == null) {
+                        datos.setTotalPagar(datos.getTotalPagar() + 100000);
+                    } else {
+                        datos.setTotalPagar(datos.getTotalPagar() + (100000 * 2));
+                    }
                 }
             }
             
@@ -119,12 +146,10 @@ public class Elegir_clase_controller implements ActionListener{
             }
             
             
-           
-            
         }
         
         if(e.getSource() == vistaElegirPuestos.volver){
-            
+            datos.setTotalPagar(datos.getPrecioBase());
             vista.setVisible(true);
             vistaElegirPuestos.dispose();
             if(pva.getNumero() == 2){

@@ -68,6 +68,7 @@ public class ViewPrincipal_controlador implements ActionListener{
     List<Ticket> tick = tdao.getTotalVuelosList(usuario);  
 
     s.setTicketInfo(tick);
+    s.Limpiar_Vuelos();
     s.SetVuelos(tickets);
             
     }

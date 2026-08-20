@@ -49,7 +49,7 @@ public class Historial_vuelos_controller implements ActionListener{
         
         vista.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE );
         
-        usu.setIdUsuario(7);
+//        usu.setIdUsuario(7);
         
         this.vista.continuar.addActionListener(this);
         this.vista.volver.addActionListener(this);

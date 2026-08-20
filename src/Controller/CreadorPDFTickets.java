@@ -109,11 +109,11 @@ public class CreadorPDFTickets {
             if (totalT > 1) {
                 costoFinal = total / totalT;
 
-                document.add(new Paragraph("COSTO FINAL INDIVIDUAL POR PERSONA: $" + String.format("%,.0f", costoFinal) + " COP\n", costoFont));
+                document.add(new Paragraph("COSTO FINAL TICKET: $" + String.format("%,.0f", costoFinal) + " COP\n", costoFont));
             } else {
                 costoFinal = total;
 
-                document.add(new Paragraph("COSTO FINAL: $" + String.format("%,.0f", costoFinal) + " COP\n", costoFont));
+                document.add(new Paragraph("COSTO FINAL TICKET: $" + String.format("%,.0f", costoFinal) + " COP\n", costoFont));
             }
 
             

@@ -44,7 +44,8 @@ public class Seleccion_modificacion_vuelo_usuario_controlador implements ActionL
         this.usuario_view = usuario_view;
         this.usuario_view_cont = usuario_view_cont;
         this.select_modificacion = select_modificacion;
-
+        this.vista.Limpiar_Vuelos();
+        this.vista.setTicketInfo(dao.getTotalVuelosList(usu));
         this.vista.SetVuelos(dao.getTotalVuelos(usu));
         this.vista.select1.addActionListener(this);
         this.vista.select2.addActionListener(this);
@@ -53,6 +54,7 @@ public class Seleccion_modificacion_vuelo_usuario_controlador implements ActionL
         this.vista.select5.addActionListener(this);
         this.vista.volver.addActionListener(this);
         this.vista.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
 
     }
 

@@ -35,7 +35,6 @@ public class Asignar_rol_controller implements ActionListener{
         this.view.volver.addActionListener(this);
         this.view.reasignar.addActionListener(this);
         this.view.btnAsignar.addActionListener(this);
-//        cargarTabla();
         
     }
     
