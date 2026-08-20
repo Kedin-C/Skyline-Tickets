@@ -24,6 +24,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import com.toedter.calendar.JDateChooser;
+import javax.swing.border.EmptyBorder;
 
 public class Informacion_personal_view extends Interfaz_vista_abtractas {
 
@@ -50,6 +51,7 @@ public class Informacion_personal_view extends Interfaz_vista_abtractas {
         JLabel titulo = new JLabel("Cambiar información personal:", SwingConstants.CENTER);
         titulo.setFont(new Font("SansSerif", Font.PLAIN, 24));
         titulo.setForeground(Color.WHITE);
+        titulo.setBorder(new EmptyBorder(0,0,0,180));
         getPanel1().add(titulo, BorderLayout.CENTER);
 
         JPanel panel2 = getPanel2();
@@ -226,13 +228,9 @@ public class Informacion_personal_view extends Interfaz_vista_abtractas {
         btnAceptar.setBackground(Color.decode("#037FB9"));
         btnAceptar.setForeground(Color.WHITE);
         btnAceptar.setFont(new Font("SansSerif", Font.BOLD, 16));
-        btnAceptar.setPreferredSize(new Dimension(160, 55));
+        btnAceptar.setPreferredSize(new Dimension(120,30));
 
-        btnVolver = new JButton("Volver");
-        btnVolver.setBackground(Color.decode("#037FB9"));
-        btnVolver.setForeground(Color.WHITE);
-        btnVolver.setFont(new Font("SansSerif", Font.BOLD, 16));
-        btnVolver.setPreferredSize(new Dimension(160, 55));
+        btnVolver = super.volver_2;
 
         panelBotones.add(btnAceptar);
         panelBotones.add(btnVolver);
