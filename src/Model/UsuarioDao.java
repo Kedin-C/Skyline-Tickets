@@ -145,8 +145,8 @@ public class UsuarioDao {
         }
     }
 
-    public boolean actualizarInformacionPersonal(int idUsuario, String correo, String documento, String sexo, String telefono) {
-        String sql = "UPDATE usuario SET correo_usuario = ?, numero_documento = ?, sexo = ?, numero_telefono = ? WHERE id_usuario = ?";
+    public boolean actualizarInformacionPersonal(int idUsuario, String correo, String documento, String sexo, String telefono, String fechaNacimiento, String nacionalidad) {
+        String sql = "UPDATE usuario SET correo_usuario = ?, numero_documento = ?, sexo = ?, numero_telefono = ?, fecha_nacimiento = ?, nacionalidad = ? WHERE id_usuario = ?";
         try {
             con = conexionBD.getConection();
             ps = con.prepareStatement(sql);
@@ -154,7 +154,15 @@ public class UsuarioDao {
             ps.setString(2, documento);
             ps.setString(3, sexo);
             ps.setString(4, telefono);
-            ps.setInt(5, idUsuario);
+
+            if (fechaNacimiento == null || fechaNacimiento.isEmpty()) {
+                ps.setNull(5, java.sql.Types.DATE);
+            } else {
+                ps.setString(5, fechaNacimiento);
+            }
+
+            ps.setString(6, nacionalidad);
+            ps.setInt(7, idUsuario);
             int filas = ps.executeUpdate();
             return filas > 0;
         } catch (Exception e) {

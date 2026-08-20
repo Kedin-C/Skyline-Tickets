@@ -16,6 +16,10 @@ import View.Inicio_usuario_view;
 import View.Nueva_contraseña_view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JFrame;
 
 public class Informacion_personal_controller implements ActionListener {
@@ -56,6 +60,25 @@ public class Informacion_personal_controller implements ActionListener {
         } else {
             vista.getCbSexo().setSelectedIndex(0); 
         }
+
+        String nacionalidad = usuarioActual.getNationalidad();
+        if (nacionalidad != null && !nacionalidad.isEmpty()) {
+            vista.getCbNacionalidad().setSelectedItem(nacionalidad);
+        } else {
+            vista.getCbNacionalidad().setSelectedIndex(0);
+        }
+
+        String fechaNacimiento = usuarioActual.getFecha_nacimiento();
+        if (fechaNacimiento != null && !fechaNacimiento.isEmpty()) {
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                vista.getDcFechaNacimiento().setDate(sdf.parse(fechaNacimiento));
+            } catch (ParseException ex) {
+                vista.getDcFechaNacimiento().setDate(null);
+            }
+        } else {
+            vista.getDcFechaNacimiento().setDate(null);
+        }
     }
 
     public void agregarEventos() {
@@ -79,6 +102,8 @@ public class Informacion_personal_controller implements ActionListener {
         String nuevoCorreo = vista.getTxtCorreo().getText().trim();
         String telefono = vista.getTxtTelefono().getText().trim();
         String sexoSeleccionado = (String) vista.getCbSexo().getSelectedItem();
+        String nacionalidadSeleccionada = (String) vista.getCbNacionalidad().getSelectedItem();
+        Date fechaNacimientoSeleccionada = vista.getDcFechaNacimiento().getDate();
 
         if (!nuevoCorreo.isEmpty() && !validarCorreo(nuevoCorreo)) {
             JOptionPane.showMessageDialog(vista, "Ingresa un correo válido.");
@@ -92,27 +117,58 @@ public class Informacion_personal_controller implements ActionListener {
             return;
         }
 
-        // Si el usuario dejó el combo en "Seleccionar", se guarda como vacío
-        String sexo = "Seleccionar".equals(sexoSeleccionado) ? "" : sexoSeleccionado;
+        if (!validarEdad(fechaNacimientoSeleccionada)) {
+            JOptionPane.showMessageDialog(
+                    vista,
+                    "La fecha de nacimiento debe corresponder a una edad entre 16 y 117 años.");
+            return;
+        }
 
-        // Si dejó el correo vacío, se conserva el correo actual en vez de borrarlo
+        
+        String sexo = "Seleccionar".equals(sexoSeleccionado) ? "" : sexoSeleccionado;
+        String nacionalidad = "Seleccionar".equals(nacionalidadSeleccionada) ? "" : nacionalidadSeleccionada;
+
+        
         String correoFinal = nuevoCorreo.isEmpty() ? usuarioActual.getCorreo() : nuevoCorreo;
 
-        // El documento no se modifica desde este formulario, solo se muestra
+        
         String documentoFinal = usuarioActual.getDocumento() != null ? usuarioActual.getDocumento() : "";
 
+        String fechaNacimientoFinal = fechaNacimientoSeleccionada != null
+                ? new SimpleDateFormat("yyyy-MM-dd").format(fechaNacimientoSeleccionada)
+                : "";
+
         boolean actualizado = usuarioDao.actualizarInformacionPersonal(
-                usuarioActual.getIdUsuario(), correoFinal, documentoFinal, sexo, telefono);
+                usuarioActual.getIdUsuario(), correoFinal, documentoFinal, sexo, telefono,
+                fechaNacimientoFinal, nacionalidad);
 
         if (actualizado) {
             usuarioActual.setCorreo(correoFinal);
             usuarioActual.setDocumento(documentoFinal);
             usuarioActual.setSexo(sexo);
             usuarioActual.setNumero_telefono(telefono);
+            usuarioActual.setFecha_nacimiento(fechaNacimientoFinal);
+            usuarioActual.setNationalidad(nacionalidad);
             JOptionPane.showMessageDialog(vista, "Información actualizada correctamente.");
         } else {
             JOptionPane.showMessageDialog(vista, "No se pudo actualizar la información.");
         }
+    }
+
+    
+    private boolean validarEdad(Date fechaNacimiento) {
+        if (fechaNacimiento == null) {
+            return true;
+        }
+        Calendar hoy = Calendar.getInstance();
+        Calendar nacimiento = Calendar.getInstance();
+        nacimiento.setTime(fechaNacimiento);
+
+        int edad = hoy.get(Calendar.YEAR) - nacimiento.get(Calendar.YEAR);
+        if (hoy.get(Calendar.DAY_OF_YEAR) < nacimiento.get(Calendar.DAY_OF_YEAR)) {
+            edad--;
+        }
+        return edad >= 16 && edad <= 117;
     }
 
     @Override
@@ -127,7 +183,7 @@ public class Informacion_personal_controller implements ActionListener {
         }
     }
 
-    //Valida que el teléfono tenga exactamente 10 dígitos, no inicie en 0 y no contenga espacios ni otros caracteres.
+    
      
     private boolean esTelefonoValido(String telefono) {
         return telefono.matches("^[1-9][0-9]{9}$");
