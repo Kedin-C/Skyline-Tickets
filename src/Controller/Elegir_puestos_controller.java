@@ -212,8 +212,6 @@ public class Elegir_puestos_controller implements ActionListener {
                         vistaDatosyPago.resetButtonAutoComplete();
                     }
 
-                    JOptionPane.showMessageDialog(vista, "Los puestos elegidos son: " + datos.getCodigoAsiento());
-
                     if (datos.getNumeroTickets() > 1) {
                         JOptionPane.showMessageDialog(vista, "Llena los datos de los " + datos.getNumeroTickets() + " tickets");
                     }
