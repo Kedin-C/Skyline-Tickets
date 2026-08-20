@@ -90,17 +90,19 @@ public class Login_controller implements ActionListener {
             this.sesion_usu.setUsuario(usu);
             JOptionPane.showMessageDialog(null, "Bienvenido " + usu.getNombre());
             if (usu.getRol() == 1) {
-                JOptionPane.showMessageDialog(null, "Ingreso como administrador");
+                //JOptionPane.showMessageDialog(null, "Ingreso como administrador");
                 vista_admin.setVisible(true);
                 vista_admin.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
                 vista.dispose();
+
             }else if(usu.getRol() == 2){
-                JOptionPane.showMessageDialog(null, "Ingreso como usuario");
+                //JOptionPane.showMessageDialog(null, "Ingreso como usuario");
+
                 vista_usuario.setVisible(true);
                 vista_usuario.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
                 vista.dispose();
             }else{
-                JOptionPane.showMessageDialog(null, "Ingreso como tecnico");
+                //JOptionPane.showMessageDialog(null, "Ingreso como tecnico");
                 pagina_tecni.setVisible(true);
                 pagina_tecni.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
                 vista.dispose();
