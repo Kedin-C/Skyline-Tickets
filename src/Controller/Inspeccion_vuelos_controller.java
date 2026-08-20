@@ -63,6 +63,14 @@ public class Inspeccion_vuelos_controller implements ActionListener{
                             JOptionPane.WARNING_MESSAGE
                     );
                     return;
+                }else if(estado.equals("Inactivo")){
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Por favor, seleccione un avion de la tabla que este por revisar.",
+                            "Avion Inactivo",
+                            JOptionPane.WARNING_MESSAGE
+                    );
+                    return;
                 } else {
                     view.setVisible(false);
                     String matricula = view.tabla.getValueAt(fila, 0).toString();

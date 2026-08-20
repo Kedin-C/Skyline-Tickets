@@ -16,10 +16,11 @@ import java.util.Date;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
@@ -33,12 +34,28 @@ public class CheckList_aviones_view extends Interfaz_vista_abtractas{
     private JPanel panel1,panel2,
     pnlInfoAvion, pnlRevisionExterior, pnlSistemasPropulsion, pnlInterioresSeguridad
     ,pnlDatosFinales, pnlBotones, pnlBotonVolver;
+    private JPanel pnlFuselaje, pnlAlerones, pnlTrenAterrizaje, pnlLlantas;
+    private JPanel pnlMotoresFugas, pnlNivelCombustible, pnlAspasTurbina;
+    private JPanel pnlEquipoEmergencia, pnlCabinaAsegurada, pnlCargaAsegurada;
     private JLabel lblTitulo,lblMatricula,lblMarca,lblModelo,blTecnico, lblFecha;
-    public JTextField txtMatricula, txtMarca, txtModelo, txtNombreTecnico;
+    private JLabel lblFuselaje, lblAlerones, lblTrenAterrizaje, lblLlantas;
+    private JLabel lblMotoresFugas, lblNivelCombustible, lblAspasTurbina;
+    private JLabel lblEquipoEmergencia, lblCabinaAsegurada, lblCargaAsegurada;
+    public JTextField txtMatricula, txtMarca, txtModelo, txtFirmaTecnico;
     private JDateChooser dcFecha;
-    public JCheckBox chkFuselaje, chkAlerones, chkTrenAterrizaje, chkLlantas;
-    public JCheckBox chkMotoresFugas, chkNivelCombustible, chkAspasTurbina;
-    public JCheckBox chkEquipoEmergencia, chkCabinaAsegurada, chkCargaAsegurada;
+    public JRadioButton rbFuselajeAplica, rbFuselajeNoAplica;
+    public JRadioButton rbAleronesAplica, rbAleronesNoAplica;
+    public JRadioButton rbTrenAterrizajeAplica, rbTrenAterrizajeNoAplica;
+    public JRadioButton rbLlantasAplica, rbLlantasNoAplica;
+    public JRadioButton rbMotoresFugasAplica, rbMotoresFugasNoAplica;
+    public JRadioButton rbNivelCombustibleAplica, rbNivelCombustibleNoAplica;
+    public JRadioButton rbAspasTurbinaAplica, rbAspasTurbinaNoAplica;
+    public JRadioButton rbEquipoEmergenciaAplica, rbEquipoEmergenciaNoAplica;
+    public JRadioButton rbCabinaAseguradaAplica, rbCabinaAseguradaNoAplica;
+    public JRadioButton rbCargaAseguradaAplica, rbCargaAseguradaNoAplica;
+    private ButtonGroup grupoFuselaje, grupoAlerones, grupoTrenAterrizaje, grupoLlantas;
+    private ButtonGroup grupoMotoresFugas, grupoNivelCombustible, grupoAspasTurbina;
+    private ButtonGroup grupoEquipoEmergencia, grupoCabinaAsegurada, grupoCargaAsegurada;
     public JButton btnRegistrarInspeccion, btnVolver;
     private TitledBorder borderInfo,borderExterior,borderSistemas,borderInteriores;
 
@@ -109,7 +126,7 @@ public class CheckList_aviones_view extends Interfaz_vista_abtractas{
         panel2.add(pnlInfoAvion);
         panel2.add(Box.createVerticalStrut(20));
         
-        pnlRevisionExterior = new JPanel(new GridLayout(2, 2, 10, 5)); // Rejilla para los checks
+        pnlRevisionExterior = new JPanel(new GridLayout(2, 2, 10, 5)); // Rejilla para las filas
         pnlRevisionExterior.setBackground(Color.WHITE);
         pnlRevisionExterior.setOpaque(false);
         
@@ -123,33 +140,117 @@ public class CheckList_aviones_view extends Interfaz_vista_abtractas{
         pnlRevisionExterior.setMaximumSize(new Dimension(1100, 180));
         pnlRevisionExterior.setAlignmentX(Component.CENTER_ALIGNMENT);
         
-        chkFuselaje = new JCheckBox("Fuselaje sin abolladuras ni corrosión");
-        chkFuselaje.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        chkFuselaje.setBackground(Color.WHITE);
-        chkFuselaje.setOpaque(false);
-        chkFuselaje.setFocusPainted(false);
-        pnlRevisionExterior.add(chkFuselaje);
+        pnlFuselaje = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
+        pnlFuselaje.setBackground(Color.WHITE);
+        pnlFuselaje.setOpaque(false);
+        
+        lblFuselaje = new JLabel("Fuselaje sin abolladuras ni corrosión");
+        lblFuselaje.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+        pnlFuselaje.add(lblFuselaje);
+        
+        rbFuselajeAplica = new JRadioButton("Aplica");
+        rbFuselajeAplica.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        rbFuselajeAplica.setBackground(Color.WHITE);
+        rbFuselajeAplica.setOpaque(false);
+        rbFuselajeAplica.setFocusPainted(false);
+        pnlFuselaje.add(rbFuselajeAplica);
+        
+        rbFuselajeNoAplica = new JRadioButton("No aplica");
+        rbFuselajeNoAplica.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        rbFuselajeNoAplica.setBackground(Color.WHITE);
+        rbFuselajeNoAplica.setOpaque(false);
+        rbFuselajeNoAplica.setFocusPainted(false);
+        pnlFuselaje.add(rbFuselajeNoAplica);
+        
+        grupoFuselaje = new ButtonGroup();
+        grupoFuselaje.add(rbFuselajeAplica);
+        grupoFuselaje.add(rbFuselajeNoAplica);
+        
+        pnlRevisionExterior.add(pnlFuselaje);
 
-        chkAlerones = new JCheckBox("Alerones y superficies de control funcionales");
-        chkAlerones.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        chkAlerones.setBackground(Color.WHITE);
-        chkAlerones.setOpaque(false);
-        chkAlerones.setFocusPainted(false);
-        pnlRevisionExterior.add(chkAlerones);
+        pnlAlerones = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
+        pnlAlerones.setBackground(Color.WHITE);
+        pnlAlerones.setOpaque(false);
+        
+        lblAlerones = new JLabel("Alerones y superficies de control funcionales");
+        lblAlerones.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+        pnlAlerones.add(lblAlerones);
+        
+        rbAleronesAplica = new JRadioButton("Aplica");
+        rbAleronesAplica.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        rbAleronesAplica.setBackground(Color.WHITE);
+        rbAleronesAplica.setOpaque(false);
+        rbAleronesAplica.setFocusPainted(false);
+        pnlAlerones.add(rbAleronesAplica);
+        
+        rbAleronesNoAplica = new JRadioButton("No aplica");
+        rbAleronesNoAplica.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        rbAleronesNoAplica.setBackground(Color.WHITE);
+        rbAleronesNoAplica.setOpaque(false);
+        rbAleronesNoAplica.setFocusPainted(false);
+        pnlAlerones.add(rbAleronesNoAplica);
+        
+        grupoAlerones = new ButtonGroup();
+        grupoAlerones.add(rbAleronesAplica);
+        grupoAlerones.add(rbAleronesNoAplica);
+        
+        pnlRevisionExterior.add(pnlAlerones);
 
-        chkTrenAterrizaje = new JCheckBox("Tren de aterrizaje sin daños");
-        chkTrenAterrizaje.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        chkTrenAterrizaje.setBackground(Color.WHITE);
-        chkTrenAterrizaje.setOpaque(false);
-        chkTrenAterrizaje.setFocusPainted(false);
-        pnlRevisionExterior.add(chkTrenAterrizaje);
+        pnlTrenAterrizaje = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
+        pnlTrenAterrizaje.setBackground(Color.WHITE);
+        pnlTrenAterrizaje.setOpaque(false);
+        
+        lblTrenAterrizaje = new JLabel("Tren de aterrizaje sin daños");
+        lblTrenAterrizaje.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+        pnlTrenAterrizaje.add(lblTrenAterrizaje);
+        
+        rbTrenAterrizajeAplica = new JRadioButton("Aplica");
+        rbTrenAterrizajeAplica.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        rbTrenAterrizajeAplica.setBackground(Color.WHITE);
+        rbTrenAterrizajeAplica.setOpaque(false);
+        rbTrenAterrizajeAplica.setFocusPainted(false);
+        pnlTrenAterrizaje.add(rbTrenAterrizajeAplica);
+        
+        rbTrenAterrizajeNoAplica = new JRadioButton("No aplica");
+        rbTrenAterrizajeNoAplica.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        rbTrenAterrizajeNoAplica.setBackground(Color.WHITE);
+        rbTrenAterrizajeNoAplica.setOpaque(false);
+        rbTrenAterrizajeNoAplica.setFocusPainted(false);
+        pnlTrenAterrizaje.add(rbTrenAterrizajeNoAplica);
+        
+        grupoTrenAterrizaje = new ButtonGroup();
+        grupoTrenAterrizaje.add(rbTrenAterrizajeAplica);
+        grupoTrenAterrizaje.add(rbTrenAterrizajeNoAplica);
+        
+        pnlRevisionExterior.add(pnlTrenAterrizaje);
 
-        chkLlantas = new JCheckBox("Llantas con presión y desgaste correctos");
-        chkLlantas.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        chkLlantas.setBackground(Color.WHITE);
-        chkLlantas.setOpaque(false);
-        chkLlantas.setFocusPainted(false);
-        pnlRevisionExterior.add(chkLlantas);
+        pnlLlantas = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
+        pnlLlantas.setBackground(Color.WHITE);
+        pnlLlantas.setOpaque(false);
+        
+        lblLlantas = new JLabel("Llantas con presión y desgaste correctos");
+        lblLlantas.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+        pnlLlantas.add(lblLlantas);
+        
+        rbLlantasAplica = new JRadioButton("Aplica");
+        rbLlantasAplica.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        rbLlantasAplica.setBackground(Color.WHITE);
+        rbLlantasAplica.setOpaque(false);
+        rbLlantasAplica.setFocusPainted(false);
+        pnlLlantas.add(rbLlantasAplica);
+        
+        rbLlantasNoAplica = new JRadioButton("No aplica");
+        rbLlantasNoAplica.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        rbLlantasNoAplica.setBackground(Color.WHITE);
+        rbLlantasNoAplica.setOpaque(false);
+        rbLlantasNoAplica.setFocusPainted(false);
+        pnlLlantas.add(rbLlantasNoAplica);
+        
+        grupoLlantas = new ButtonGroup();
+        grupoLlantas.add(rbLlantasAplica);
+        grupoLlantas.add(rbLlantasNoAplica);
+        
+        pnlRevisionExterior.add(pnlLlantas);
 
         panel2.add(pnlRevisionExterior);
         panel2.add(Box.createVerticalStrut(20));
@@ -168,26 +269,89 @@ public class CheckList_aviones_view extends Interfaz_vista_abtractas{
         pnlSistemasPropulsion.setMaximumSize(new Dimension(1100, 180));
         pnlSistemasPropulsion.setAlignmentX(Component.CENTER_ALIGNMENT);
         
-        chkMotoresFugas = new JCheckBox("Motores sin fugas de aceite");
-        chkMotoresFugas.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        chkMotoresFugas.setBackground(Color.WHITE);
-        chkMotoresFugas.setOpaque(false);
-        chkMotoresFugas.setFocusPainted(false);
-        pnlSistemasPropulsion.add(chkMotoresFugas);
+        pnlMotoresFugas = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
+        pnlMotoresFugas.setBackground(Color.WHITE);
+        pnlMotoresFugas.setOpaque(false);
+        
+        lblMotoresFugas = new JLabel("Motores sin fugas de aceite");
+        lblMotoresFugas.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+        pnlMotoresFugas.add(lblMotoresFugas);
+        
+        rbMotoresFugasAplica = new JRadioButton("Aplica");
+        rbMotoresFugasAplica.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        rbMotoresFugasAplica.setBackground(Color.WHITE);
+        rbMotoresFugasAplica.setOpaque(false);
+        rbMotoresFugasAplica.setFocusPainted(false);
+        pnlMotoresFugas.add(rbMotoresFugasAplica);
+        
+        rbMotoresFugasNoAplica = new JRadioButton("No aplica");
+        rbMotoresFugasNoAplica.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        rbMotoresFugasNoAplica.setBackground(Color.WHITE);
+        rbMotoresFugasNoAplica.setOpaque(false);
+        rbMotoresFugasNoAplica.setFocusPainted(false);
+        pnlMotoresFugas.add(rbMotoresFugasNoAplica);
+        
+        grupoMotoresFugas = new ButtonGroup();
+        grupoMotoresFugas.add(rbMotoresFugasAplica);
+        grupoMotoresFugas.add(rbMotoresFugasNoAplica);
+        
+        pnlSistemasPropulsion.add(pnlMotoresFugas);
 
-        chkNivelCombustible = new JCheckBox("Nivel de combustible verificado y tanqueado");
-        chkNivelCombustible.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        chkNivelCombustible.setBackground(Color.WHITE);
-        chkNivelCombustible.setOpaque(false);
-        chkNivelCombustible.setFocusPainted(false);
-        pnlSistemasPropulsion.add(chkNivelCombustible);
+        pnlNivelCombustible = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
+        pnlNivelCombustible.setBackground(Color.WHITE);
+        pnlNivelCombustible.setOpaque(false);
+        
+        lblNivelCombustible = new JLabel("Nivel de combustible verificado y tanqueado");
+        lblNivelCombustible.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+        pnlNivelCombustible.add(lblNivelCombustible);
+        
+        rbNivelCombustibleAplica = new JRadioButton("Aplica");
+        rbNivelCombustibleAplica.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        rbNivelCombustibleAplica.setBackground(Color.WHITE);
+        rbNivelCombustibleAplica.setOpaque(false);
+        rbNivelCombustibleAplica.setFocusPainted(false);
+        pnlNivelCombustible.add(rbNivelCombustibleAplica);
+        
+        rbNivelCombustibleNoAplica = new JRadioButton("No aplica");
+        rbNivelCombustibleNoAplica.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        rbNivelCombustibleNoAplica.setBackground(Color.WHITE);
+        rbNivelCombustibleNoAplica.setOpaque(false);
+        rbNivelCombustibleNoAplica.setFocusPainted(false);
+        pnlNivelCombustible.add(rbNivelCombustibleNoAplica);
+        
+        grupoNivelCombustible = new ButtonGroup();
+        grupoNivelCombustible.add(rbNivelCombustibleAplica);
+        grupoNivelCombustible.add(rbNivelCombustibleNoAplica);
+        
+        pnlSistemasPropulsion.add(pnlNivelCombustible);
 
-        chkAspasTurbina = new JCheckBox("Aspas de turbina sin daños visuales");
-        chkAspasTurbina.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        chkAspasTurbina.setBackground(Color.WHITE);
-        chkAspasTurbina.setOpaque(false);
-        chkAspasTurbina.setFocusPainted(false);
-        pnlSistemasPropulsion.add(chkAspasTurbina);
+        pnlAspasTurbina = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
+        pnlAspasTurbina.setBackground(Color.WHITE);
+        pnlAspasTurbina.setOpaque(false);
+        
+        lblAspasTurbina = new JLabel("Aspas de turbina sin daños visuales");
+        lblAspasTurbina.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+        pnlAspasTurbina.add(lblAspasTurbina);
+        
+        rbAspasTurbinaAplica = new JRadioButton("Aplica");
+        rbAspasTurbinaAplica.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        rbAspasTurbinaAplica.setBackground(Color.WHITE);
+        rbAspasTurbinaAplica.setOpaque(false);
+        rbAspasTurbinaAplica.setFocusPainted(false);
+        pnlAspasTurbina.add(rbAspasTurbinaAplica);
+        
+        rbAspasTurbinaNoAplica = new JRadioButton("No aplica");
+        rbAspasTurbinaNoAplica.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        rbAspasTurbinaNoAplica.setBackground(Color.WHITE);
+        rbAspasTurbinaNoAplica.setOpaque(false);
+        rbAspasTurbinaNoAplica.setFocusPainted(false);
+        pnlAspasTurbina.add(rbAspasTurbinaNoAplica);
+        
+        grupoAspasTurbina = new ButtonGroup();
+        grupoAspasTurbina.add(rbAspasTurbinaAplica);
+        grupoAspasTurbina.add(rbAspasTurbinaNoAplica);
+        
+        pnlSistemasPropulsion.add(pnlAspasTurbina);
         
         pnlSistemasPropulsion.add(new JLabel(""));
 
@@ -208,26 +372,89 @@ public class CheckList_aviones_view extends Interfaz_vista_abtractas{
         pnlInterioresSeguridad.setMaximumSize(new Dimension(1100, 180));
         pnlInterioresSeguridad.setAlignmentX(Component.CENTER_ALIGNMENT);
         
-        chkEquipoEmergencia = new JCheckBox("Equipo de emergencia a bordo (balsas, chalecos)");
-        chkEquipoEmergencia.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        chkEquipoEmergencia.setBackground(Color.WHITE);
-        chkEquipoEmergencia.setOpaque(false);
-        chkEquipoEmergencia.setFocusPainted(false);
-        pnlInterioresSeguridad.add(chkEquipoEmergencia);
+        pnlEquipoEmergencia = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
+        pnlEquipoEmergencia.setBackground(Color.WHITE);
+        pnlEquipoEmergencia.setOpaque(false);
+        
+        lblEquipoEmergencia = new JLabel("Equipo de emergencia a bordo (balsas, chalecos)");
+        lblEquipoEmergencia.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+        pnlEquipoEmergencia.add(lblEquipoEmergencia);
+        
+        rbEquipoEmergenciaAplica = new JRadioButton("Aplica");
+        rbEquipoEmergenciaAplica.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        rbEquipoEmergenciaAplica.setBackground(Color.WHITE);
+        rbEquipoEmergenciaAplica.setOpaque(false);
+        rbEquipoEmergenciaAplica.setFocusPainted(false);
+        pnlEquipoEmergencia.add(rbEquipoEmergenciaAplica);
+        
+        rbEquipoEmergenciaNoAplica = new JRadioButton("No aplica");
+        rbEquipoEmergenciaNoAplica.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        rbEquipoEmergenciaNoAplica.setBackground(Color.WHITE);
+        rbEquipoEmergenciaNoAplica.setOpaque(false);
+        rbEquipoEmergenciaNoAplica.setFocusPainted(false);
+        pnlEquipoEmergencia.add(rbEquipoEmergenciaNoAplica);
+        
+        grupoEquipoEmergencia = new ButtonGroup();
+        grupoEquipoEmergencia.add(rbEquipoEmergenciaAplica);
+        grupoEquipoEmergencia.add(rbEquipoEmergenciaNoAplica);
+        
+        pnlInterioresSeguridad.add(pnlEquipoEmergencia);
 
-        chkCabinaAsegurada = new JCheckBox("Cabina de pasajeros asegurada");
-        chkCabinaAsegurada.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        chkCabinaAsegurada.setBackground(Color.WHITE);
-        chkCabinaAsegurada.setOpaque(false);
-        chkCabinaAsegurada.setFocusPainted(false);
-        pnlInterioresSeguridad.add(chkCabinaAsegurada);
+        pnlCabinaAsegurada = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
+        pnlCabinaAsegurada.setBackground(Color.WHITE);
+        pnlCabinaAsegurada.setOpaque(false);
+        
+        lblCabinaAsegurada = new JLabel("Cabina de pasajeros asegurada");
+        lblCabinaAsegurada.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+        pnlCabinaAsegurada.add(lblCabinaAsegurada);
+        
+        rbCabinaAseguradaAplica = new JRadioButton("Aplica");
+        rbCabinaAseguradaAplica.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        rbCabinaAseguradaAplica.setBackground(Color.WHITE);
+        rbCabinaAseguradaAplica.setOpaque(false);
+        rbCabinaAseguradaAplica.setFocusPainted(false);
+        pnlCabinaAsegurada.add(rbCabinaAseguradaAplica);
+        
+        rbCabinaAseguradaNoAplica = new JRadioButton("No aplica");
+        rbCabinaAseguradaNoAplica.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        rbCabinaAseguradaNoAplica.setBackground(Color.WHITE);
+        rbCabinaAseguradaNoAplica.setOpaque(false);
+        rbCabinaAseguradaNoAplica.setFocusPainted(false);
+        pnlCabinaAsegurada.add(rbCabinaAseguradaNoAplica);
+        
+        grupoCabinaAsegurada = new ButtonGroup();
+        grupoCabinaAsegurada.add(rbCabinaAseguradaAplica);
+        grupoCabinaAsegurada.add(rbCabinaAseguradaNoAplica);
+        
+        pnlInterioresSeguridad.add(pnlCabinaAsegurada);
 
-        chkCargaAsegurada = new JCheckBox("Carga asegurada correctamente");
-        chkCargaAsegurada.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        chkCargaAsegurada.setBackground(Color.WHITE);
-        chkCargaAsegurada.setOpaque(false);
-        chkCargaAsegurada.setFocusPainted(false);
-        pnlInterioresSeguridad.add(chkCargaAsegurada);
+        pnlCargaAsegurada = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
+        pnlCargaAsegurada.setBackground(Color.WHITE);
+        pnlCargaAsegurada.setOpaque(false);
+        
+        lblCargaAsegurada = new JLabel("Carga asegurada correctamente");
+        lblCargaAsegurada.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+        pnlCargaAsegurada.add(lblCargaAsegurada);
+        
+        rbCargaAseguradaAplica = new JRadioButton("Aplica");
+        rbCargaAseguradaAplica.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        rbCargaAseguradaAplica.setBackground(Color.WHITE);
+        rbCargaAseguradaAplica.setOpaque(false);
+        rbCargaAseguradaAplica.setFocusPainted(false);
+        pnlCargaAsegurada.add(rbCargaAseguradaAplica);
+        
+        rbCargaAseguradaNoAplica = new JRadioButton("No aplica");
+        rbCargaAseguradaNoAplica.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        rbCargaAseguradaNoAplica.setBackground(Color.WHITE);
+        rbCargaAseguradaNoAplica.setOpaque(false);
+        rbCargaAseguradaNoAplica.setFocusPainted(false);
+        pnlCargaAsegurada.add(rbCargaAseguradaNoAplica);
+        
+        grupoCargaAsegurada = new ButtonGroup();
+        grupoCargaAsegurada.add(rbCargaAseguradaAplica);
+        grupoCargaAsegurada.add(rbCargaAseguradaNoAplica);
+        
+        pnlInterioresSeguridad.add(pnlCargaAsegurada);
         
         pnlInterioresSeguridad.add(new JLabel(""));
 
@@ -239,16 +466,16 @@ public class CheckList_aviones_view extends Interfaz_vista_abtractas{
         pnlDatosFinales.setOpaque(false);
 
         // Nombre del Inspector
-        blTecnico = new JLabel("Nombre del Tecnico:");
+        blTecnico = new JLabel("Firma del Tecnico:");
         blTecnico.setFont(new Font("Segoe UI", Font.BOLD, 16));
         pnlDatosFinales.add(blTecnico);
 
-        txtNombreTecnico = new JTextField(20);
-        txtNombreTecnico.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-        txtNombreTecnico.setPreferredSize(new Dimension(txtNombreTecnico.getPreferredSize().width, 25));
-        txtNombreTecnico.setEditable(true);
-        txtNombreTecnico.setBackground(Color.WHITE);
-        pnlDatosFinales.add(txtNombreTecnico);
+        txtFirmaTecnico = new JTextField(20);
+        txtFirmaTecnico.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        txtFirmaTecnico.setPreferredSize(new Dimension(txtFirmaTecnico.getPreferredSize().width, 25));
+        txtFirmaTecnico.setEditable(true);
+        txtFirmaTecnico.setBackground(Color.WHITE);
+        pnlDatosFinales.add(txtFirmaTecnico);
         
         lblFecha = new JLabel("Fecha:");
         lblFecha.setFont(new Font("Segoe UI", Font.BOLD, 16));
@@ -294,6 +521,5 @@ public class CheckList_aviones_view extends Interfaz_vista_abtractas{
         panel2.add(pnlBotonVolver);
         panel2.add(Box.createVerticalStrut(10));
     }
-    
     
 }

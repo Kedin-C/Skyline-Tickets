@@ -13,6 +13,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagLayout;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -21,11 +23,25 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import com.toedter.calendar.JDateChooser;
+import javax.swing.border.EmptyBorder;
 
 public class Informacion_personal_view extends Interfaz_vista_abtractas {
 
+    private static final String[] NACIONALIDADES = {
+        "Seleccionar", "Argentino", "Boliviano", "Brasileño",
+        "Chileno", "Colombiano", "Costarricense",
+        "Cubano", "Dominicano", "Ecuatoriano",
+        "Salvadoreño", "Guatemalteco", "Hondureño",
+        "Mexicano", "Nicaragüense", "Panameño",
+        "Paraguayo", "Peruano", "Puertorriqueño",
+        "Uruguayo", "Venezolano"
+    };
+
     public JTextField txtCorreo, txtApellido, txtNombre, txtDocumento, txtTelefono;
     public JComboBox<String> cbSexo;
+    public JComboBox<String> cbNacionalidad;
+    public JDateChooser dcFechaNacimiento;
     public JButton btnCambiarContrasena, btnVolver, btnAceptar;
 
     public Informacion_personal_view() {
@@ -35,6 +51,7 @@ public class Informacion_personal_view extends Interfaz_vista_abtractas {
         JLabel titulo = new JLabel("Cambiar información personal:", SwingConstants.CENTER);
         titulo.setFont(new Font("SansSerif", Font.PLAIN, 24));
         titulo.setForeground(Color.WHITE);
+        titulo.setBorder(new EmptyBorder(0,0,0,180));
         getPanel1().add(titulo, BorderLayout.CENTER);
 
         JPanel panel2 = getPanel2();
@@ -128,6 +145,50 @@ public class Informacion_personal_view extends Interfaz_vista_abtractas {
         panelForm.add(cbSexo);
         panelForm.add(javax.swing.Box.createVerticalStrut(25));
 
+
+        JLabel labelFechaNacimiento = new JLabel("Fecha de nacimiento", SwingConstants.CENTER);
+        labelFechaNacimiento.setFont(new Font("SansSerif", Font.PLAIN, 18));
+        labelFechaNacimiento.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+
+        dcFechaNacimiento = new JDateChooser();
+        dcFechaNacimiento.setDateFormatString("yyyy-MM-dd");
+        dcFechaNacimiento.setFont(new Font("SansSerif", Font.PLAIN, 18));
+        dcFechaNacimiento.setMaximumSize(new Dimension(500, 50));
+        dcFechaNacimiento.setPreferredSize(new Dimension(500, 50));
+        dcFechaNacimiento.setAlignmentX(JDateChooser.CENTER_ALIGNMENT);
+
+        // Edad permitida: mínimo 16 años, máximo 117 años
+        Calendar calFechaMasReciente = Calendar.getInstance();
+        calFechaMasReciente.add(Calendar.YEAR, -16);
+        Date fechaMasReciente = calFechaMasReciente.getTime();
+
+        Calendar calFechaMasAntigua = Calendar.getInstance();
+        calFechaMasAntigua.add(Calendar.YEAR, -117);
+        Date fechaMasAntigua = calFechaMasAntigua.getTime();
+
+        dcFechaNacimiento.setMaxSelectableDate(fechaMasReciente);
+        dcFechaNacimiento.setMinSelectableDate(fechaMasAntigua);
+
+        panelForm.add(labelFechaNacimiento);
+        panelForm.add(dcFechaNacimiento);
+        panelForm.add(javax.swing.Box.createVerticalStrut(25));
+
+
+        JLabel labelNacionalidad = new JLabel("Nacionalidad", SwingConstants.CENTER);
+        labelNacionalidad.setFont(new Font("SansSerif", Font.PLAIN, 18));
+        labelNacionalidad.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+
+        cbNacionalidad = new JComboBox<>(NACIONALIDADES);
+        cbNacionalidad.setBackground(Color.decode("#D9D9D9"));
+        cbNacionalidad.setFont(new Font("SansSerif", Font.PLAIN, 18));
+        cbNacionalidad.setMaximumSize(new Dimension(500, 50));
+        cbNacionalidad.setPreferredSize(new Dimension(500, 50));
+        cbNacionalidad.setAlignmentX(JTextField.CENTER_ALIGNMENT);
+
+        panelForm.add(labelNacionalidad);
+        panelForm.add(cbNacionalidad);
+        panelForm.add(javax.swing.Box.createVerticalStrut(25));
+
         
         JLabel labelTelefono = new JLabel("Número de teléfono", SwingConstants.CENTER);
         labelTelefono.setFont(new Font("SansSerif", Font.PLAIN, 18));
@@ -167,13 +228,9 @@ public class Informacion_personal_view extends Interfaz_vista_abtractas {
         btnAceptar.setBackground(Color.decode("#037FB9"));
         btnAceptar.setForeground(Color.WHITE);
         btnAceptar.setFont(new Font("SansSerif", Font.BOLD, 16));
-        btnAceptar.setPreferredSize(new Dimension(160, 55));
+        btnAceptar.setPreferredSize(new Dimension(120,30));
 
-        btnVolver = new JButton("Volver");
-        btnVolver.setBackground(Color.decode("#037FB9"));
-        btnVolver.setForeground(Color.WHITE);
-        btnVolver.setFont(new Font("SansSerif", Font.BOLD, 16));
-        btnVolver.setPreferredSize(new Dimension(160, 55));
+        btnVolver = super.volver_2;
 
         panelBotones.add(btnAceptar);
         panelBotones.add(btnVolver);
@@ -206,6 +263,14 @@ public class Informacion_personal_view extends Interfaz_vista_abtractas {
 
     public JComboBox<String> getCbSexo() {
         return cbSexo;
+    }
+
+    public JComboBox<String> getCbNacionalidad() {
+        return cbNacionalidad;
+    }
+
+    public JDateChooser getDcFechaNacimiento() {
+        return dcFechaNacimiento;
     }
 
     public JButton getBtnCambiarContrasena() {

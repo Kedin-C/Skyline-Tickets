@@ -613,11 +613,6 @@ if("IDA".equals(tipo_vuelo_ticket5)){
  
     public void Limpiar_Vuelos() {
         panel2_dist1.removeAll();
-        panel2_dist2.removeAll();
-        panel2_dist1.removeAll();
-        panel2_dist1.removeAll();
-        panel2_dist1.removeAll();
-
     }
     
         public int getPagina_anterior() {

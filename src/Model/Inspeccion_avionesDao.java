@@ -56,15 +56,22 @@ public class Inspeccion_avionesDao {
         return listarA;
     }
     
-    public void cambioEstado(String matricula){
-        String sql = "UPDATE aviones SET estado = 'Activo' WHERE matricula = ?";
+    /**
+     * Actualiza el estado del avión en la base de datos.
+     *
+     * @param matricula matrícula del avión a actualizar
+     * @param estado nuevo estado a registrar ("Activo" o "Inactivo")
+     */
+    public void cambioEstado(String matricula, String estado){
+        String sql = "UPDATE aviones SET estado = ? WHERE matricula = ?";
         try {
             con = conectar.getConection();
             ps = con.prepareStatement(sql);
-            ps.setString(1, matricula);
+            ps.setString(1, estado);
+            ps.setString(2, matricula);
             System.out.println(ps);
             ps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Se cambio de estado a Activo el avion.");
+            JOptionPane.showMessageDialog(null, "Se cambio el estado del avión a " + estado + ".");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.toString(), "Error de consulta" + e.getMessage(), JOptionPane.ERROR_MESSAGE);
         } finally {
